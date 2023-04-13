@@ -23,7 +23,6 @@
 
 /* Copyright holder(s) */
 #define COPYRIGHT_HOLDERS_FINAL "The Bitcoin Core developers"
-// Copyright (c) 2023-2023 The Koyotecoin Core developers
 
 /* Replacement for %s in copyright holders string */
 #define COPYRIGHT_HOLDERS_SUBSTITUTION "Koyotecoin Core"

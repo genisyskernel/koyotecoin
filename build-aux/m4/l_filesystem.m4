@@ -1,5 +1,5 @@
 dnl Copyright (c) 2022 The Bitcoin Core developers
-// Copyright (c) 2023-2023 The Koyotecoin Core developers
+dnl Copyright (c) 2023-2023 The Koyotecoin Core developers
 dnl Distributed under the MIT software license, see the accompanying
 dnl file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
