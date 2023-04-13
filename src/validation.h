@@ -1,13 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_VALIDATION_H
-#define BITCOIN_VALIDATION_H
+#ifndef KOYOTECOIN_VALIDATION_H
+#define KOYOTECOIN_VALIDATION_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/koyotecoin-config.h>
 #endif
 
 #include <arith_uint256.h>
@@ -151,7 +152,7 @@ struct MempoolAcceptResult {
     const std::optional<std::list<CTransactionRef>> m_replaced_transactions;
     /** Virtual size as used by the mempool, calculated using serialized size and sigops. */
     const std::optional<int64_t> m_vsize;
-    /** Raw base fees in satoshis. */
+    /** Raw base fees in howloshis. */
     const std::optional<CAmount> m_base_fees;
 
     // The following field is only present when m_result_type = ResultType::DIFFERENT_WITNESS
@@ -1084,4 +1085,4 @@ bool DeploymentEnabled(const ChainstateManager& chainman, DEP dep)
  */
 const AssumeutxoData* ExpectedAssumeutxo(const int height, const CChainParams& params);
 
-#endif // BITCOIN_VALIDATION_H
+#endif // KOYOTECOIN_VALIDATION_H

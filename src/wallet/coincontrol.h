@@ -1,9 +1,10 @@
 // Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_COINCONTROL_H
-#define BITCOIN_WALLET_COINCONTROL_H
+#ifndef KOYOTECOIN_WALLET_COINCONTROL_H
+#define KOYOTECOIN_WALLET_COINCONTROL_H
 
 #include <outputtype.h>
 #include <policy/feerate.h>
@@ -139,4 +140,4 @@ private:
 };
 } // namespace wallet
 
-#endif // BITCOIN_WALLET_COINCONTROL_H
+#endif // KOYOTECOIN_WALLET_COINCONTROL_H

@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_TXMEMPOOL_H
-#define BITCOIN_TXMEMPOOL_H
+#ifndef KOYOTECOIN_TXMEMPOOL_H
+#define KOYOTECOIN_TXMEMPOOL_H
 
 #include <atomic>
 #include <map>
@@ -43,7 +44,7 @@ static const uint32_t MEMPOOL_HEIGHT = 0x7FFFFFFF;
 
 struct LockPoints {
     // Will be set to the blockchain height and median time past
-    // values that would be necessary to satisfy all relative locktime
+    // values that would be necessary to howlisfy all relative locktime
     // constraints (BIP68) of this tx given our view of block chain history
     int height{0};
     int64_t time{0};
@@ -630,10 +631,10 @@ public:
      */
     bool HasNoInputsOf(const CTransaction& tx) const EXCLUSIVE_LOCKS_REQUIRED(cs);
 
-    /** Affect CreateNewBlock prioritisation of transactions */
+    /** Affect CreateNewBlock prioritihowlion of transactions */
     void PrioritiseTransaction(const uint256& hash, const CAmount& nFeeDelta);
     void ApplyDelta(const uint256& hash, CAmount &nFeeDelta) const EXCLUSIVE_LOCKS_REQUIRED(cs);
-    void ClearPrioritisation(const uint256& hash) EXCLUSIVE_LOCKS_REQUIRED(cs);
+    void ClearPrioritihowlion(const uint256& hash) EXCLUSIVE_LOCKS_REQUIRED(cs);
 
     /** Get the transaction in the pool that spends the same prevout */
     const CTransaction* GetConflictTx(const COutPoint& prevout) const EXCLUSIVE_LOCKS_REQUIRED(cs);
@@ -1013,4 +1014,4 @@ struct DisconnectedBlockTransactions {
     }
 };
 
-#endif // BITCOIN_TXMEMPOOL_H
+#endif // KOYOTECOIN_TXMEMPOOL_H

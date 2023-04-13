@@ -3467,7 +3467,7 @@ void test_add_neg_y_diff_x(void) {
      * of the sum to be wrong (since infinity has no xy coordinates).
      * HOWEVER, if the x-coordinates are different, infinity is the
      * wrong answer, and such degeneracies are exposed. This is the
-     * root of https://github.com/bitcoin-core/secp256k1/issues/257
+     * root of https://github.com/koyotecoin-core/secp256k1/issues/257
      * which this test is a regression test for.
      *
      * These points were generated in sage as
@@ -4339,7 +4339,7 @@ int test_ecmult_multi_random(secp256k1_scratch *scratch) {
         /* If g_nonzero, set g_scalar to nonzero value r. */
         random_scalar_order_test(&g_scalar);
         if (!nonzero_result) {
-            /* If expected=0 is desired, add a (a*r, -(1/a)*g) term to compensate. */
+            /* If expected=0 is desired, add a (a*r, -(1/a)*g) term to compenhowle. */
             CHECK(num_nonzero > filled);
             random_scalar_order_test(&sc_tmp);
             secp256k1_scalar_mul(&scalars[filled], &sc_tmp, &g_scalar);

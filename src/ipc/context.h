@@ -1,9 +1,10 @@
 // Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_IPC_CONTEXT_H
-#define BITCOIN_IPC_CONTEXT_H
+#ifndef KOYOTECOIN_IPC_CONTEXT_H
+#define KOYOTECOIN_IPC_CONTEXT_H
 
 namespace ipc {
 //! Context struct used to give IPC protocol implementations or implementation
@@ -16,4 +17,4 @@ struct Context
 };
 } // namespace ipc
 
-#endif // BITCOIN_IPC_CONTEXT_H
+#endif // KOYOTECOIN_IPC_CONTEXT_H

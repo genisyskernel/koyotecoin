@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test CSV soft fork activation.
@@ -50,7 +51,7 @@ from test_framework.script import (
     OP_CHECKSEQUENCEVERIFY,
     OP_DROP,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     softfork_active,
@@ -91,7 +92,7 @@ def all_rlt_txs(txs):
 CSV_ACTIVATION_HEIGHT = 432
 
 
-class BIP68_112_113Test(BitcoinTestFramework):
+class BIP68_112_113Test(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True
@@ -337,7 +338,7 @@ class BIP68_112_113Test(BitcoinTestFramework):
         self.log.info("Post-Soft Fork Tests.")
 
         self.log.info("BIP 113 tests")
-        # BIP 113 tests should now fail regardless of version number if nLockTime isn't satisfied by new rules
+        # BIP 113 tests should now fail regardless of version number if nLockTime isn't howlisfied by new rules
         bip113tx_v1.nLockTime = self.last_block_time - 600 * 5  # = MTP of prior block (not <) but < time put on current block
         self.miniwallet.sign_tx(bip113tx_v1)
         bip113tx_v2.nLockTime = self.last_block_time - 600 * 5  # = MTP of prior block (not <) but < time put on current block
@@ -424,7 +425,7 @@ class BIP68_112_113Test(BitcoinTestFramework):
         fail_txs += [tx['tx'] for tx in bip112txs_vary_OP_CSV_9_v1 if not tx['sdf']]
         for tx in fail_txs:
             self.send_blocks([self.create_test_block([tx])], success=False,
-                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not satisfied)')
+                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not howlisfied)')
 
         self.log.info("Test version 2 txs")
 
@@ -448,20 +449,20 @@ class BIP68_112_113Test(BitcoinTestFramework):
         fail_txs += [tx['tx'] for tx in bip112txs_vary_OP_CSV_9_v2 if not tx['sdf']]
         for tx in fail_txs:
             self.send_blocks([self.create_test_block([tx])], success=False,
-                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not satisfied)')
+                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not howlisfied)')
 
         # If SEQUENCE_LOCKTIME_DISABLE_FLAG is set in nSequence, tx should fail
         fail_txs = [tx['tx'] for tx in bip112txs_vary_nSequence_v2 if tx['sdf']]
         for tx in fail_txs:
             self.send_blocks([self.create_test_block([tx])], success=False,
-                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not satisfied)')
+                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not howlisfied)')
 
         # If sequencelock types mismatch, tx should fail
         fail_txs = [tx['tx'] for tx in bip112txs_vary_nSequence_v2 if not tx['sdf'] and tx['stf']]
         fail_txs += [tx['tx'] for tx in bip112txs_vary_OP_CSV_v2 if not tx['sdf'] and tx['stf']]
         for tx in fail_txs:
             self.send_blocks([self.create_test_block([tx])], success=False,
-                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not satisfied)')
+                             reject_reason='non-mandatory-script-verify-flag (Locktime requirement not howlisfied)')
 
         # Remaining txs should pass, just test masking works properly
         success_txs = [tx['tx'] for tx in bip112txs_vary_nSequence_v2 if not tx['sdf'] and not tx['stf']]

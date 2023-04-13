@@ -1,9 +1,10 @@
 // Copyright (c) 2014-2019 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CRYPTO_SHA512_H
-#define BITCOIN_CRYPTO_SHA512_H
+#ifndef KOYOTECOIN_CRYPTO_SHA512_H
+#define KOYOTECOIN_CRYPTO_SHA512_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -26,4 +27,4 @@ public:
     uint64_t Size() const { return bytes; }
 };
 
-#endif // BITCOIN_CRYPTO_SHA512_H
+#endif // KOYOTECOIN_CRYPTO_SHA512_H

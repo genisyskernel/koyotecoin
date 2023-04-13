@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test mempool limiting together/eviction with the wallet."""
@@ -7,7 +8,7 @@
 from decimal import Decimal
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -18,7 +19,7 @@ from test_framework.util import (
 from test_framework.wallet import MiniWallet
 
 
-class MempoolLimitTest(BitcoinTestFramework):
+class MempoolLimitTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 1
@@ -54,7 +55,7 @@ class MempoolLimitTest(BitcoinTestFramework):
         tx_to_be_evicted_id = miniwallet.send_self_transfer(from_node=node, fee_rate=relayfee)["txid"]
 
         # Increase the tx fee rate to give the subsequent transactions a higher priority in the mempool
-        # The tx has an approx. vsize of 65k, i.e. multiplying the previous fee rate (in sats/kvB)
+        # The tx has an approx. vsize of 65k, i.e. multiplying the previous fee rate (in howls/kvB)
         # by 130 should result in a fee that corresponds to 2x of that fee rate
         base_fee = relayfee * 130
 

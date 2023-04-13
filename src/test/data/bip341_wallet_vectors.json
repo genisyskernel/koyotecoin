@@ -228,39 +228,39 @@
                 "utxosSpent": [
                     {
                         "scriptPubKey": "512053a1f6e454df1aa2776a2814a721372d6258050de330b3c6d10ee8f4e0dda343",
-                        "amountSats": 420000000
+                        "amountHowls": 420000000
                     },
                     {
                         "scriptPubKey": "5120147c9c57132f6e7ecddba9800bb0c4449251c92a1e60371ee77557b6620f3ea3",
-                        "amountSats": 462000000
+                        "amountHowls": 462000000
                     },
                     {
                         "scriptPubKey": "76a914751e76e8199196d454941c45d1b3a323f1433bd688ac",
-                        "amountSats": 294000000
+                        "amountHowls": 294000000
                     },
                     {
                         "scriptPubKey": "5120e4d810fd50586274face62b8a807eb9719cef49c04177cc6b76a9a4251d5450e",
-                        "amountSats": 504000000
+                        "amountHowls": 504000000
                     },
                     {
                         "scriptPubKey": "512091b64d5324723a985170e4dc5a0f84c041804f2cd12660fa5dec09fc21783605",
-                        "amountSats": 630000000
+                        "amountHowls": 630000000
                     },
                     {
                         "scriptPubKey": "00147dd65592d0ab2fe0d0257d571abf032cd9db93dc",
-                        "amountSats": 378000000
+                        "amountHowls": 378000000
                     },
                     {
                         "scriptPubKey": "512075169f4001aa68f15bbed28b218df1d0a62cbbcf1188c6665110c293c907b831",
-                        "amountSats": 672000000
+                        "amountHowls": 672000000
                     },
                     {
                         "scriptPubKey": "5120712447206d7a5238acc7ff53fbe94a3b64539ad291c7cdbc490b7577e4b17df5",
-                        "amountSats": 546000000
+                        "amountHowls": 546000000
                     },
                     {
                         "scriptPubKey": "512077e30a5522dd9f894c3f8b8bd4c4b2cf82ca7da8a3ea6a239655c39c050ab220",
-                        "amountSats": 588000000
+                        "amountHowls": 588000000
                     }
                 ]
             },

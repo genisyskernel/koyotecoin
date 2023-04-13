@@ -1,13 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
  * Money parsing/formatting utilities.
  */
-#ifndef BITCOIN_UTIL_MONEYSTR_H
-#define BITCOIN_UTIL_MONEYSTR_H
+#ifndef KOYOTECOIN_UTIL_MONEYSTR_H
+#define KOYOTECOIN_UTIL_MONEYSTR_H
 
 #include <consensus/amount.h>
 
@@ -21,4 +22,4 @@ std::string FormatMoney(const CAmount n);
 /** Parse an amount denoted in full coins. E.g. "0.0034" supplied on the command line. **/
 std::optional<CAmount> ParseMoney(const std::string& str);
 
-#endif // BITCOIN_UTIL_MONEYSTR_H
+#endif // KOYOTECOIN_UTIL_MONEYSTR_H

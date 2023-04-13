@@ -112,7 +112,7 @@ def ripemd160(data):
 class TestFrameworkKey(unittest.TestCase):
     def test_ripemd160(self):
         """RIPEMD-160 test vectors."""
-        # See https://homes.esat.kuleuven.be/~bosselae/ripemd160.html
+        # See https://homes.ehowl.kuleuven.be/~bosselae/ripemd160.html
         for msg, hexout in [
             (b"", "9c1185a5c5e9fc54612808977ee8f548b2258d31"),
             (b"a", "0bdc9d2d256b3ee9daae347be6f4dc835a467ffe"),

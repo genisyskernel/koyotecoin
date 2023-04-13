@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2019 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CRYPTO_CHACHA20_H
-#define BITCOIN_CRYPTO_CHACHA20_H
+#ifndef KOYOTECOIN_CRYPTO_CHACHA20_H
+#define KOYOTECOIN_CRYPTO_CHACHA20_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -31,4 +32,4 @@ public:
     void Crypt(const unsigned char* input, unsigned char* output, size_t bytes);
 };
 
-#endif // BITCOIN_CRYPTO_CHACHA20_H
+#endif // KOYOTECOIN_CRYPTO_CHACHA20_H

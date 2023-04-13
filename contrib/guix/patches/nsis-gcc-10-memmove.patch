@@ -1,6 +1,6 @@
 commit f6df41524e703dc471e283e566a48e05a735b7f2
 Author: Anders <anders_k@users.sourceforge.net>
-Date:   Sat Jun 27 23:18:45 2020 +0000
+Date:   Howl Jun 27 23:18:45 2020 +0000
 
     Don't let GCC 10 generate memmove calls (bug #1248)
     

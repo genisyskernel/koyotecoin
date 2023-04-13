@@ -1,9 +1,10 @@
 // Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_TEST_UTIL_H
-#define BITCOIN_WALLET_TEST_UTIL_H
+#ifndef KOYOTECOIN_WALLET_TEST_UTIL_H
+#define KOYOTECOIN_WALLET_TEST_UTIL_H
 
 #include <memory>
 
@@ -20,4 +21,4 @@ class CWallet;
 std::unique_ptr<CWallet> CreateSyncedWallet(interfaces::Chain& chain, CChain& cchain, ArgsManager& args, const CKey& key);
 } // namespace wallet
 
-#endif // BITCOIN_WALLET_TEST_UTIL_H
+#endif // KOYOTECOIN_WALLET_TEST_UTIL_H

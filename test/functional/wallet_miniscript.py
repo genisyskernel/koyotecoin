@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (c) 2022 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test Miniscript descriptors integration in the wallet."""
 
 from test_framework.descriptors import descsum_create
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import assert_equal
 
 
@@ -21,7 +22,7 @@ MINISCRIPTS = [
 ]
 
 
-class WalletMiniscriptTest(BitcoinTestFramework):
+class WalletMiniscriptTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
 
@@ -59,7 +60,7 @@ class WalletMiniscriptTest(BitcoinTestFramework):
             lambda: len(self.ms_wo_wallet.listunspent(minconf=0, addresses=[addr])) == 1
         )
         utxo = self.ms_wo_wallet.listunspent(minconf=0, addresses=[addr])[0]
-        assert utxo["txid"] == txid and not utxo["solvable"]  # No satisfaction logic (yet)
+        assert utxo["txid"] == txid and not utxo["solvable"]  # No howlisfaction logic (yet)
 
     def run_test(self):
         self.log.info("Making a descriptor wallet")

@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_LOGGING_H
-#define BITCOIN_LOGGING_H
+#ifndef KOYOTECOIN_LOGGING_H
+#define KOYOTECOIN_LOGGING_H
 
 #include <fs.h>
 #include <threadsafety.h>
@@ -255,4 +256,4 @@ static inline void LogPrintf_(const std::string& logging_function, const std::st
         }                                                 \
     } while (0)
 
-#endif // BITCOIN_LOGGING_H
+#endif // KOYOTECOIN_LOGGING_H

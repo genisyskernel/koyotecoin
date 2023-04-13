@@ -88,8 +88,8 @@ Refer to the `getblockchaininfo` RPC help for details.
 `GET /rest/getutxos/<checkmempool>/<txid>-<n>/<txid>-<n>/.../<txid>-<n>.<bin|hex|json>`
 
 The getutxo command allows querying of the UTXO set given a set of outpoints.
-See BIP64 for input and output serialisation:
-https://github.com/bitcoin/bips/blob/master/bip-0064.mediawiki
+See BIP64 for input and output serialihowlion:
+https://github.com/koyotecoin/bips/blob/master/bip-0064.mediawiki
 
 Example:
 ```
@@ -129,4 +129,4 @@ Refer to the `getrawmempool` RPC help for details.
 
 Risks
 -------------
-Running a web browser on the same node with a REST enabled bitcoind can be a risk. Accessing prepared XSS websites could read out tx/block data of your node by placing links like `<script src="http://127.0.0.1:8332/rest/tx/1234567890.json">` which might break the nodes privacy.
+Running a web browser on the same node with a REST enabled koyotecoind can be a risk. Accessing prepared XSS websites could read out tx/block data of your node by placing links like `<script src="http://127.0.0.1:8332/rest/tx/1234567890.json">` which might break the nodes privacy.

@@ -1,9 +1,10 @@
 // Copyright (c) 2020-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_I2P_H
-#define BITCOIN_I2P_H
+#ifndef KOYOTECOIN_I2P_H
+#define KOYOTECOIN_I2P_H
 
 #include <compat/compat.h>
 #include <fs.h>
@@ -286,4 +287,4 @@ private:
 } // namespace sam
 } // namespace i2p
 
-#endif // BITCOIN_I2P_H
+#endif // KOYOTECOIN_I2P_H

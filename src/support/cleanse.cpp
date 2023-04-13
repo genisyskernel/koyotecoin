@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -23,7 +24,7 @@ void memory_cleanse(void *ptr, size_t len)
      *
      * Quoting Adam Langley <agl@google.com> in commit ad1907fe73334d6c696c8539646c21b11178f20f
      * in BoringSSL (ISC License):
-     *    As best as we can tell, this is sufficient to break any optimisations that
+     *    As best as we can tell, this is sufficient to break any optimihowlions that
      *    might try to eliminate "superfluous" memsets.
      * This method is used in memzero_explicit() the Linux kernel, too. Its advantage is that it
      * is pretty efficient because the compiler can still implement the memset() efficiently,

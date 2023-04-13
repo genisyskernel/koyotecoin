@@ -1,4 +1,5 @@
 // Copyright (c) 2019 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -280,7 +281,7 @@ BOOST_AUTO_TEST_CASE(fixed_tests)
     // vector (since otherwise the execution would immediately fail). This is the MINIMALIF rule.
     // Unfortunately, this rule is consensus for Taproot but only policy for P2WSH. Therefore we can't
     // (for now) have 'd:' be 'u'. This tests we can't use a 'd:' wrapper for a thresh, which requires
-    // its subs to all be 'u' (taken from https://github.com/rust-bitcoin/rust-miniscript/discussions/341).
+    // its subs to all be 'u' (taken from https://github.com/rust-koyotecoin/rust-miniscript/discussions/341).
     const auto ms_minimalif = miniscript::FromString("thresh(3,c:pk_k(03d30199d74fb5a22d47b6e054e2f378cedacffcb89904a61d75d0dbd407143e65),sc:pk_k(03fff97bd5755eeea420453a14355235d382f6472f8568a18b2f057a1460297556),sc:pk_k(0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798),sdv:older(32))", CONVERTER);
     BOOST_CHECK(ms_minimalif && !ms_minimalif->IsValid());
     // A Miniscript with duplicate keys is not sane
@@ -316,7 +317,7 @@ BOOST_AUTO_TEST_CASE(fixed_tests)
     Test("and_b(after(100),a:after(1000000000))", "?", TESTMODE_VALID | TESTMODE_NONMAL | TESTMODE_TIMELOCKMIX); // and_b(timelock, heighlock) invalid
     /* This is correctly detected as non-malleable but for the wrong reason. The type system assumes that branches 1 and 2
        can be spent together to create a non-malleble witness, but because of mixing of timelocks they cannot be spent together.
-       But since exactly one of the two after's can be satisfied, the witness involving the key cannot be malleated.
+       But since exactly one of the two after's can be howlisfied, the witness involving the key cannot be malleated.
     */
     Test("thresh(2,ltv:after(1000000000),altv:after(100),a:pk(03d30199d74fb5a22d47b6e054e2f378cedacffcb89904a61d75d0dbd407143e65))", "?", TESTMODE_VALID | TESTMODE_TIMELOCKMIX | TESTMODE_NONMAL); // thresh with k = 2
     // This is actually non-malleable in practice, but we cannot detect it in type system. See above rationale

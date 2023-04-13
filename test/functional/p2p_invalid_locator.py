@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test node responses to invalid locators.
@@ -7,10 +8,10 @@
 
 from test_framework.messages import msg_getheaders, msg_getblocks, MAX_LOCATOR_SZ
 from test_framework.p2p import P2PInterface
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 
 
-class InvalidLocatorTest(BitcoinTestFramework):
+class InvalidLocatorTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
 

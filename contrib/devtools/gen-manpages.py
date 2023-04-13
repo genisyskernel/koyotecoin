@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2022 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 import os
@@ -8,12 +9,12 @@ import sys
 import tempfile
 
 BINARIES = [
-'src/bitcoind',
-'src/bitcoin-cli',
-'src/bitcoin-tx',
-'src/bitcoin-wallet',
-'src/bitcoin-util',
-'src/qt/bitcoin-qt',
+'src/koyotecoind',
+'src/koyotecoin-cli',
+'src/koyotecoin-tx',
+'src/koyotecoin-wallet',
+'src/koyotecoin-util',
+'src/qt/koyotecoin-qt',
 ]
 
 # Paths to external utilities.

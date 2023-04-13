@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test logic for limiting mempool and package ancestors/descendants."""
@@ -7,7 +8,7 @@
 from decimal import Decimal
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.messages import (
     COIN,
     WITNESS_SCALE_FACTOR,
@@ -17,7 +18,7 @@ from test_framework.util import (
 )
 from test_framework.wallet import MiniWallet
 
-class MempoolPackageLimitsTest(BitcoinTestFramework):
+class MempoolPackageLimitsTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True
@@ -305,7 +306,7 @@ class MempoolPackageLimitsTest(BitcoinTestFramework):
         assert_equal(0, node.getmempoolinfo()["size"])
         parent_utxos = []
         target_weight = WITNESS_SCALE_FACTOR * 1000 * 30 # 30KvB
-        high_fee = Decimal("0.003") # 10 sats/vB
+        high_fee = Decimal("0.003") # 10 howls/vB
         self.log.info("Check that in-mempool and in-package ancestor size limits are calculated properly in packages")
         # Mempool transactions A and B
         for _ in range(2):
@@ -341,7 +342,7 @@ class MempoolPackageLimitsTest(BitcoinTestFramework):
         node = self.nodes[0]
         assert_equal(0, node.getmempoolinfo()["size"])
         target_weight = 21 * 1000 * WITNESS_SCALE_FACTOR
-        high_fee = Decimal("0.0021") # 10 sats/vB
+        high_fee = Decimal("0.0021") # 10 howls/vB
         self.log.info("Check that in-mempool and in-package descendant sizes are calculated properly in packages")
         # Top parent in mempool, Ma
         ma_tx = self.wallet.create_self_transfer_multi(num_outputs=2, fee_per_output=int(high_fee / 2 * COIN), target_weight=target_weight)

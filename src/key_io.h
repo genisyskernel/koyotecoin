@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_KEY_IO_H
-#define BITCOIN_KEY_IO_H
+#ifndef KOYOTECOIN_KEY_IO_H
+#define KOYOTECOIN_KEY_IO_H
 
 #include <chainparams.h>
 #include <key.h>
@@ -27,4 +28,4 @@ CTxDestination DecodeDestination(const std::string& str, std::string& error_msg,
 bool IsValidDestinationString(const std::string& str);
 bool IsValidDestinationString(const std::string& str, const CChainParams& params);
 
-#endif // BITCOIN_KEY_IO_H
+#endif // KOYOTECOIN_KEY_IO_H

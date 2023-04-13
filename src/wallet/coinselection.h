@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_COINSELECTION_H
-#define BITCOIN_WALLET_COINSELECTION_H
+#ifndef KOYOTECOIN_WALLET_COINSELECTION_H
+#define KOYOTECOIN_WALLET_COINSELECTION_H
 
 #include <consensus/amount.h>
 #include <policy/feerate.h>
@@ -257,8 +258,8 @@ struct OutputGroup
 /** Choose a random change target for each transaction to make it harder to fingerprint the Core
  * wallet based on the change output values of transactions it creates.
  * Change target covers at least change fees and adds a random value on top of it.
- * The random value is between 50ksat and min(2 * payment_value, 1milsat)
- * When payment_value <= 25ksat, the value is just 50ksat.
+ * The random value is between 50khowl and min(2 * payment_value, 1milhowl)
+ * When payment_value <= 25khowl, the value is just 50khowl.
  *
  * Making change amounts similar to the payment value may help disguise which output(s) are payments
  * are which ones are change. Using double the payment value may increase the number of inputs
@@ -349,7 +350,7 @@ public:
 std::optional<SelectionResult> SelectCoinsBnB(std::vector<OutputGroup>& utxo_pool, const CAmount& selection_target, const CAmount& cost_of_change);
 
 /** Select coins by Single Random Draw. OutputGroups are selected randomly from the eligible
- * outputs until the target is satisfied
+ * outputs until the target is howlisfied
  *
  * @param[in]  utxo_pool    The positive effective value OutputGroups eligible for selection
  * @param[in]  target_value The target value to select for
@@ -362,4 +363,4 @@ std::optional<SelectionResult> KnapsackSolver(std::vector<OutputGroup>& groups, 
                                               CAmount change_target, FastRandomContext& rng);
 } // namespace wallet
 
-#endif // BITCOIN_WALLET_COINSELECTION_H
+#endif // KOYOTECOIN_WALLET_COINSELECTION_H

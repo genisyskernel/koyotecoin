@@ -1,9 +1,10 @@
 // Copyright (c) 2020-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_DEPLOYMENTSTATUS_H
-#define BITCOIN_DEPLOYMENTSTATUS_H
+#ifndef KOYOTECOIN_DEPLOYMENTSTATUS_H
+#define KOYOTECOIN_DEPLOYMENTSTATUS_H
 
 #include <chain.h>
 #include <versionbits.h>
@@ -49,4 +50,4 @@ inline bool DeploymentEnabled(const Consensus::Params& params, Consensus::Deploy
     return params.vDeployments[dep].nStartTime != Consensus::BIP9Deployment::NEVER_ACTIVE;
 }
 
-#endif // BITCOIN_DEPLOYMENTSTATUS_H
+#endif // KOYOTECOIN_DEPLOYMENTSTATUS_H

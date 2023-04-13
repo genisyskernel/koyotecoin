@@ -1,4 +1,5 @@
 // Copyright (c) 2019-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 //
@@ -24,7 +25,7 @@
 BOOST_FIXTURE_TEST_SUITE(system_tests, BasicTestingSetup)
 
 // At least one test is required (in case ENABLE_EXTERNAL_SIGNER is not defined).
-// Workaround for https://github.com/bitcoin/bitcoin/issues/19128
+// Workaround for https://github.com/koyotecoin/koyotecoin/issues/19128
 BOOST_AUTO_TEST_CASE(dummy)
 {
     BOOST_CHECK(true);

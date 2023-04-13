@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test fee estimation code."""
@@ -11,13 +12,13 @@ import random
 from test_framework.messages import (
     COIN,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
     assert_greater_than_or_equal,
     assert_raises_rpc_error,
-    satoshi_round,
+    howloshi_round,
 )
 from test_framework.wallet import MiniWallet
 
@@ -37,7 +38,7 @@ def small_txpuzzle_randfee(
     # Exponentially distributed from 1-128 * fee_increment
     rand_fee = float(fee_increment) * (1.1892 ** random.randint(0, 28))
     # Total fee ranges from min_fee to min_fee + 127*fee_increment
-    fee = min_fee - fee_increment + satoshi_round(rand_fee)
+    fee = min_fee - fee_increment + howloshi_round(rand_fee)
     utxos_to_spend = []
     total_in = Decimal("0.00000000")
     while total_in <= (amount + fee) and len(conflist) > 0:
@@ -116,7 +117,7 @@ def check_estimates(node, fees_seen):
 
 
 def send_tx(wallet, node, utxo, feerate):
-    """Broadcast a 1in-1out transaction with a specific input and feerate (sat/vb)."""
+    """Broadcast a 1in-1out transaction with a specific input and feerate (howl/vb)."""
     return wallet.send_self_transfer(
         from_node=node,
         utxo_to_spend=utxo,
@@ -124,7 +125,7 @@ def send_tx(wallet, node, utxo, feerate):
     )['txid']
 
 
-class EstimateFeeTest(BitcoinTestFramework):
+class EstimateFeeTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 3
         # Force fSendTrickle to true (via whitelist.noban)
@@ -234,7 +235,7 @@ class EstimateFeeTest(BitcoinTestFramework):
         # The broadcaster and block producer
         node = self.nodes[0]
         miner = self.nodes[1]
-        # In sat/vb
+        # In howl/vb
         low_feerate = 1
         high_feerate = 10
         # Cache the utxos of which to replace the spender after it failed to get

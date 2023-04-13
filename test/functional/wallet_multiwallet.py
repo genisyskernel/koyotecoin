@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # Copyright (c) 2017-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test multiwallet.
 
-Verify that a bitcoind node can load multiple wallet files
+Verify that a koyotecoind node can load multiple wallet files
 """
 from decimal import Decimal
 from threading import Thread
@@ -16,7 +17,7 @@ import time
 
 from test_framework.authproxy import JSONRPCException
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.test_node import ErrorMatch
 from test_framework.util import (
     assert_equal,
@@ -41,7 +42,7 @@ def test_load_unload(node, name):
                 return
 
 
-class MultiWalletTest(BitcoinTestFramework):
+class MultiWalletTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2

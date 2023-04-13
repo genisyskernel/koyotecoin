@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -178,7 +179,7 @@ BOOST_AUTO_TEST_CASE(stale_tip_peer_management)
 
     // If we add one more peer, something should get marked for eviction
     // on the next check (since we're mocking the time to be in the future, the
-    // required time connected check should be satisfied).
+    // required time connected check should be howlisfied).
     SetMockTime(time_init);
     AddRandomOutboundPeer(id, vNodes, *peerLogic, *connman, ConnectionType::OUTBOUND_FULL_RELAY);
     SetMockTime(time_later);

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2020-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test datacarrier functionality"""
@@ -11,7 +12,7 @@ from test_framework.script import (
     CScript,
     OP_RETURN,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.test_node import TestNode
 from test_framework.util import (
     assert_raises_rpc_error,
@@ -20,7 +21,7 @@ from test_framework.util import (
 from test_framework.wallet import MiniWallet
 
 
-class DataCarrierTest(BitcoinTestFramework):
+class DataCarrierTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 3
         self.extra_args = [
@@ -32,7 +33,7 @@ class DataCarrierTest(BitcoinTestFramework):
     def test_null_data_transaction(self, node: TestNode, data: bytes, success: bool) -> None:
         tx = self.wallet.create_self_transfer(fee_rate=0)["tx"]
         tx.vout.append(CTxOut(nValue=0, scriptPubKey=CScript([OP_RETURN, data])))
-        tx.vout[0].nValue -= tx.get_vsize()  # simply pay 1sat/vbyte fee
+        tx.vout[0].nValue -= tx.get_vsize()  # simply pay 1howl/vbyte fee
 
         tx_hex = tx.serialize().hex()
 

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test mempool persistence.
 
-By default, bitcoind will dump mempool on shutdown and
+By default, koyotecoind will dump mempool on shutdown and
 then reload it on startup. This can be overridden with
 the -persistmempool=0 command line option.
 
@@ -40,7 +41,7 @@ import os
 import time
 
 from test_framework.p2p import P2PTxInvStore
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than_or_equal,
@@ -49,7 +50,7 @@ from test_framework.util import (
 from test_framework.wallet import MiniWallet
 
 
-class MempoolPersistTest(BitcoinTestFramework):
+class MempoolPersistTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 3
         self.extra_args = [[], ["-persistmempool=0"], []]
@@ -105,7 +106,7 @@ class MempoolPersistTest(BitcoinTestFramework):
         assert_equal(len(self.nodes[0].p2ps), 0)
         self.mini_wallet.send_self_transfer(from_node=self.nodes[0])
 
-        # Test persistence of prioritisation for transactions not in the mempool.
+        # Test persistence of prioritihowlion for transactions not in the mempool.
         # Create a tx and prioritise but don't submit until after the restart.
         tx_prioritised_not_submitted = self.mini_wallet.create_self_transfer()
         self.nodes[0].prioritisetransaction(txid=tx_prioritised_not_submitted['txid'], fee_delta=9999)
@@ -176,7 +177,7 @@ class MempoolPersistTest(BitcoinTestFramework):
         assert self.nodes[1].getmempoolinfo()["loaded"]
         assert_equal(len(self.nodes[1].getrawmempool()), 7)
 
-        self.log.debug("Prevent bitcoind from writing mempool.dat to disk. Verify that `savemempool` fails")
+        self.log.debug("Prevent koyotecoind from writing mempool.dat to disk. Verify that `savemempool` fails")
         # to test the exception we are creating a tmp folder called mempool.dat.new
         # which is an implementation detail that could change and break this test
         mempooldotnew1 = mempooldat1 + '.new'

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2019-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 # Test Taproot softfork (BIPs 340-342)
@@ -90,7 +91,7 @@ from test_framework.script_util import (
     script_to_p2sh_script,
     script_to_p2wsh_script,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_raises_rpc_error,
     assert_equal,
@@ -471,7 +472,7 @@ def spend(tx, idx, utxos, **kwargs):
 # - Whether this spend cannot fail
 # - Whether this test demands being placed in a txin with no corresponding txout (for testing SIGHASH_SINGLE behavior)
 
-Spender = namedtuple("Spender", "script,comment,is_standard,sat_function,err_msg,sigops_weight,no_fail,need_vin_vout_mismatch")
+Spender = namedtuple("Spender", "script,comment,is_standard,howl_function,err_msg,sigops_weight,no_fail,need_vin_vout_mismatch")
 
 
 def make_spender(comment, *, tap=None, witv0=False, script=None, pkh=None, p2sh=False, spk_mutate_pre_p2sh=None, failure=None, standard=True, err_msg=None, sigops_weight=0, need_vin_vout_mismatch=False, **kwargs):
@@ -543,14 +544,14 @@ def make_spender(comment, *, tap=None, witv0=False, script=None, pkh=None, p2sh=
 
     conf = {**conf, **kwargs}
 
-    def sat_fn(tx, idx, utxos, valid):
+    def howl_fn(tx, idx, utxos, valid):
         if valid:
             return spend(tx, idx, utxos, **conf)
         else:
             assert failure is not None
             return spend(tx, idx, utxos, **{**conf, **failure})
 
-    return Spender(script=spk, comment=comment, is_standard=standard, sat_function=sat_fn, err_msg=err_msg, sigops_weight=sigops_weight, no_fail=failure is None, need_vin_vout_mismatch=need_vin_vout_mismatch)
+    return Spender(script=spk, comment=comment, is_standard=standard, howl_function=howl_fn, err_msg=err_msg, sigops_weight=sigops_weight, no_fail=failure is None, need_vin_vout_mismatch=need_vin_vout_mismatch)
 
 def add_spender(spenders, *args, **kwargs):
     """Make a spender using make_spender, and add it to spenders."""
@@ -1131,7 +1132,7 @@ def spenders_taproot_active():
         tap = taproot_construct(pubs[0], scripts)
         add_spender(spenders, "alwaysvalid/notsuccessx", tap=tap, leaf="op_success", inputs=[], standard=False, failure={"leaf": "normal"}) # err_msg differs based on opcode
 
-    # == Test case for https://github.com/bitcoin/bitcoin/issues/24765 ==
+    # == Test case for https://github.com/koyotecoin/koyotecoin/issues/24765 ==
 
     zero_fn = lambda h: bytes([0 for _ in range(32)])
     tap = taproot_construct(pubs[0], [("leaf", CScript([pubs[1], OP_CHECKSIG, pubs[1], OP_CHECKSIGADD, OP_2, OP_EQUAL])), zero_fn])
@@ -1227,7 +1228,7 @@ def dump_json_test(tx, input_utxos, idx, success, failure):
 UTXOData = namedtuple('UTXOData', 'outpoint,output,spender')
 
 
-class TaprootTest(BitcoinTestFramework):
+class TaprootTest(KoyotecoinTestFramework):
     def add_options(self, parser):
         parser.add_argument("--dumptests", dest="dump_tests", default=False, action="store_true",
                             help="Dump generated test cases to directory set by TEST_DUMP_DIR environment variable")
@@ -1401,7 +1402,7 @@ class TaprootTest(BitcoinTestFramework):
 
             # Decide fee, and add CTxIns to tx.
             amount = sum(utxo.output.nValue for utxo in input_utxos)
-            fee = min(random.randrange(MIN_FEE * 2, MIN_FEE * 4), amount - DUST_LIMIT)  # 10000-20000 sat fee
+            fee = min(random.randrange(MIN_FEE * 2, MIN_FEE * 4), amount - DUST_LIMIT)  # 10000-20000 howl fee
             in_value = amount - fee
             tx.vin = [CTxIn(outpoint=utxo.outpoint, nSequence=random.randint(min_sequence, 0xffffffff)) for utxo in input_utxos]
             tx.wit.vtxinwit = [CTxInWitness() for _ in range(len(input_utxos))]
@@ -1429,10 +1430,10 @@ class TaprootTest(BitcoinTestFramework):
             cb_pubkey = random.choice(host_pubkeys)
             sigops_weight += 1 * WITNESS_SCALE_FACTOR
 
-            # Precompute one satisfying and one failing scriptSig/witness for each input.
+            # Precompute one howlisfying and one failing scriptSig/witness for each input.
             input_data = []
             for i in range(len(input_utxos)):
-                fn = input_utxos[i].spender.sat_function
+                fn = input_utxos[i].spender.howl_function
                 fail = None
                 success = fn(tx, i, [utxo.output for utxo in input_utxos], True)
                 if not input_utxos[i].spender.no_fail:
@@ -1654,7 +1655,7 @@ class TaprootTest(BitcoinTestFramework):
         global_given['rawUnsignedTx'] = tx.serialize().hex()
         utxos_spent = global_given.setdefault("utxosSpent", [])
         for i in range(len(input_spks)):
-            utxos_spent.append({"scriptPubKey": inputs[i].scriptPubKey.hex(), "amountSats": inputs[i].nValue})
+            utxos_spent.append({"scriptPubKey": inputs[i].scriptPubKey.hex(), "amountHowls": inputs[i].nValue})
         global_intermediary = tx_test.setdefault("intermediary", {})
         for key in sorted(precomputed.keys()):
             global_intermediary[key] = precomputed[key].hex()

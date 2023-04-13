@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2014-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test descendant package tracking carve-out allowing one final transaction in
@@ -10,7 +11,7 @@
 from test_framework.messages import (
     DEFAULT_ANCESTOR_LIMIT,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -18,7 +19,7 @@ from test_framework.util import (
 from test_framework.wallet import MiniWallet
 
 
-class MempoolPackagesTest(BitcoinTestFramework):
+class MempoolPackagesTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [["-maxorphantx=1000"]]

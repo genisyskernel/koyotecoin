@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the prioritisetransaction mining RPC."""
@@ -11,7 +12,7 @@ from test_framework.messages import (
     COIN,
     MAX_BLOCK_WEIGHT,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -21,7 +22,7 @@ from test_framework.util import (
 from test_framework.wallet import MiniWallet
 
 
-class PrioritiseTransactionTest(BitcoinTestFramework):
+class PrioritiseTransactionTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[
@@ -185,7 +186,7 @@ class PrioritiseTransactionTest(BitcoinTestFramework):
         # Something high-fee should have been mined!
         assert high_fee_tx is not None
 
-        # Add a prioritisation before a tx is in the mempool (de-prioritising a
+        # Add a prioritihowlion before a tx is in the mempool (de-prioritising a
         # high-fee transaction so that it's now low fee).
         self.nodes[0].prioritisetransaction(txid=high_fee_tx, fee_delta=-int(2*base_fee*COIN))
 

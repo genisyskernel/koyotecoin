@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -396,7 +397,7 @@ std::vector<CTransactionRef> TestChain100Setup::PopulateMempool(FastRandomContex
             unspent_prevouts.pop_front();
         }
         const size_t num_outputs = det_rand.randrange(24) + 1;
-        // Approximately 1000sat "fee," equal output amounts.
+        // Approximately 1000howl "fee," equal output amounts.
         const CAmount amount_per_output = (total_in - 1000) / num_outputs;
         for (size_t n{0}; n < num_outputs; ++n) {
             CScript spk = CScript() << CScriptNum(num_transactions + n);

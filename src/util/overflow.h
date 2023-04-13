@@ -1,9 +1,10 @@
 // Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UTIL_OVERFLOW_H
-#define BITCOIN_UTIL_OVERFLOW_H
+#ifndef KOYOTECOIN_UTIL_OVERFLOW_H
+#define KOYOTECOIN_UTIL_OVERFLOW_H
 
 #include <limits>
 #include <optional>
@@ -30,7 +31,7 @@ template <class T>
 }
 
 template <class T>
-[[nodiscard]] T SaturatingAdd(const T i, const T j) noexcept
+[[nodiscard]] T HowluratingAdd(const T i, const T j) noexcept
 {
     if constexpr (std::numeric_limits<T>::is_signed) {
         if (i > 0 && j > std::numeric_limits<T>::max() - i) {
@@ -47,4 +48,4 @@ template <class T>
     return i + j;
 }
 
-#endif // BITCOIN_UTIL_OVERFLOW_H
+#endif // KOYOTECOIN_UTIL_OVERFLOW_H

@@ -1,9 +1,10 @@
 // Copyright (c) 2018-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_INDEX_BLOCKFILTERINDEX_H
-#define BITCOIN_INDEX_BLOCKFILTERINDEX_H
+#ifndef KOYOTECOIN_INDEX_BLOCKFILTERINDEX_H
+#define KOYOTECOIN_INDEX_BLOCKFILTERINDEX_H
 
 #include <attributes.h>
 #include <blockfilter.h>
@@ -99,4 +100,4 @@ bool DestroyBlockFilterIndex(BlockFilterType filter_type);
 /** Destroy all open block filter indexes. */
 void DestroyAllBlockFilterIndexes();
 
-#endif // BITCOIN_INDEX_BLOCKFILTERINDEX_H
+#endif // KOYOTECOIN_INDEX_BLOCKFILTERINDEX_H

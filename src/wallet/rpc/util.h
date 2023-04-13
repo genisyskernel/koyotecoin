@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_RPC_UTIL_H
-#define BITCOIN_WALLET_RPC_UTIL_H
+#ifndef KOYOTECOIN_WALLET_RPC_UTIL_H
+#define KOYOTECOIN_WALLET_RPC_UTIL_H
 
 #include <script/script.h>
 
@@ -47,4 +48,4 @@ void PushParentDescriptors(const CWallet& wallet, const CScript& script_pubkey, 
 void HandleWalletError(const std::shared_ptr<CWallet> wallet, DatabaseStatus& status, bilingual_str& error);
 } //  namespace wallet
 
-#endif // BITCOIN_WALLET_RPC_UTIL_H
+#endif // KOYOTECOIN_WALLET_RPC_UTIL_H

@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -36,7 +37,7 @@ static RPCHelpMan estimatesmartfee()
         {
             {"conf_target", RPCArg::Type::NUM, RPCArg::Optional::NO, "Confirmation target in blocks (1 - 1008)"},
             {"estimate_mode", RPCArg::Type::STR, RPCArg::Default{"conservative"}, "The fee estimate mode.\n"
-            "Whether to return a more conservative estimate which also satisfies\n"
+            "Whether to return a more conservative estimate which also howlisfies\n"
             "a longer history. A conservative estimate potentially returns a\n"
             "higher feerate and is more likely to be sufficient for the desired\n"
             "target, but is not as responsive to short term drops in the\n"

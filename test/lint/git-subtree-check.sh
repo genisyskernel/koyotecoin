@@ -1,5 +1,6 @@
 #!/bin/sh
 # Copyright (c) 2015-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,7 +22,7 @@ while getopts "?hr" opt; do
       echo "-r      Check that subtree commit is present in repository."
       echo "        To do this check, fetch the subtreed remote first. Example:"
       echo ""
-      echo "            git fetch https://github.com/bitcoin-core/secp256k1.git"
+      echo "            git fetch https://github.com/koyotecoin-core/secp256k1.git"
       echo "            test/lint/git-subtree-check.sh -r src/secp256k1"
       exit 1
     ;;

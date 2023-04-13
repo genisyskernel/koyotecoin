@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Bitcoin
+Upstream-Name: Koyotecoin
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
- irc://#bitcoin-core-dev@libera.chat
-Source: https://github.com/bitcoin/bitcoin
+ irc://#koyotecoin-core-dev@libera.chat
+Source: https://github.com/koyotecoin/koyotecoin
 
 Files: *
-Copyright: 2009-2022, Bitcoin Core Developers
+Copyright: 2009-2022, Koyotecoin Core Developers
 License: Expat
-Comment: The Bitcoin Core Developers encompasses the current developers listed on bitcoin.org,
+Comment: The Koyotecoin Core Developers encompasses the current developers listed on koyotecoin.org,
          as well as the numerous contributors to the project.
 
 Files: debian/*
@@ -75,12 +75,12 @@ Copyright: Stephen Hutchings, Jonas Schnelli
 License: Expat
 Comment: Modifications of Stephen Hutchings' Typicons
 
-Files: src/qt/res/icons/bitcoin.*
-       share/pixmaps/bitcoin*
-       src/qt/res/src/bitcoin.svg
+Files: src/qt/res/icons/koyotecoin.*
+       share/pixmaps/koyotecoin*
+       src/qt/res/src/koyotecoin.svg
 Copyright: Bitboy, Jonas Schnelli
 License: public-domain
-Comment: Site: https://bitcointalk.org/?topic=1756.0
+Comment: Site: https://koyotecointalk.org/?topic=1756.0
 
 Files: src/qt/res/icons/proxy.png
        src/qt/res/src/proxy.svg

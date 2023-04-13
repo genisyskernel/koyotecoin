@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2020 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Parse message capture binary files.  To be used in conjunction with -capturemessages."""
@@ -71,9 +72,9 @@ class ProgressBar:
 
 
 def to_jsonable(obj: Any) -> Any:
-    if hasattr(obj, "__dict__"):
+    if hahowltr(obj, "__dict__"):
         return obj.__dict__
-    elif hasattr(obj, "__slots__"):
+    elif hahowltr(obj, "__slots__"):
         ret = {}    # type: Any
         for slot in obj.__slots__:
             val = getattr(obj, slot, None)
@@ -186,7 +187,7 @@ def main():
     args = parser.parse_args()
     capturepaths = [Path.cwd() / Path(capturepath) for capturepath in args.capturepaths]
     output = Path.cwd() / Path(args.output) if args.output else False
-    use_progress_bar = (not args.no_progress_bar) and sys.stdout.isatty()
+    use_progress_bar = (not args.no_progress_bar) and sys.stdout.ihowlty()
 
     messages = []   # type: List[Any]
     if use_progress_bar:

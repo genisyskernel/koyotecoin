@@ -1,9 +1,10 @@
 // Copyright (c) 2015-2020 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_MEMUSAGE_H
-#define BITCOIN_MEMUSAGE_H
+#ifndef KOYOTECOIN_MEMUSAGE_H
+#define KOYOTECOIN_MEMUSAGE_H
 
 #include <indirectmap.h>
 #include <prevector.h>
@@ -169,4 +170,4 @@ static inline size_t DynamicUsage(const std::unordered_map<X, Y, Z>& m)
 
 }
 
-#endif // BITCOIN_MEMUSAGE_H
+#endif // KOYOTECOIN_MEMUSAGE_H

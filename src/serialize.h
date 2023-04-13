@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SERIALIZE_H
-#define BITCOIN_SERIALIZE_H
+#ifndef KOYOTECOIN_SERIALIZE_H
+#define KOYOTECOIN_SERIALIZE_H
 
 #include <compat/endian.h>
 
@@ -1119,4 +1120,4 @@ size_t GetSerializeSizeMany(int nVersion, const T&... t)
     return sc.size();
 }
 
-#endif // BITCOIN_SERIALIZE_H
+#endif // KOYOTECOIN_SERIALIZE_H

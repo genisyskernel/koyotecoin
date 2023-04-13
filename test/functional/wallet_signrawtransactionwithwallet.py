@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test transaction signing using the signrawtransactionwithwallet RPC."""
@@ -10,7 +11,7 @@ from test_framework.blocktools import (
 from test_framework.address import (
     script_to_p2wsh,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -33,7 +34,7 @@ from decimal import (
     getcontext,
 )
 
-class SignRawTransactionWithWalletTest(BitcoinTestFramework):
+class SignRawTransactionWithWalletTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -154,7 +155,7 @@ class SignRawTransactionWithWalletTest(BitcoinTestFramework):
         self.nodes[0].walletlock()
 
     def OP_1NEGATE_test(self):
-        self.log.info("Test OP_1NEGATE (0x4f) satisfies BIP62 minimal push standardness rule")
+        self.log.info("Test OP_1NEGATE (0x4f) howlisfies BIP62 minimal push standardness rule")
         hex_str = (
             "0200000001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"
             "FFFFFFFF00000000044F024F9CFDFFFFFF01F0B9F5050000000023210277777777"

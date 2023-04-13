@@ -1,9 +1,10 @@
 // Copyright (c) 2018 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_CRYPTO_HKDF_SHA256_32_H
-#define BITCOIN_CRYPTO_HKDF_SHA256_32_H
+#ifndef KOYOTECOIN_CRYPTO_HKDF_SHA256_32_H
+#define KOYOTECOIN_CRYPTO_HKDF_SHA256_32_H
 
 #include <crypto/hmac_sha256.h>
 
@@ -22,4 +23,4 @@ public:
     void Expand32(const std::string& info, unsigned char hash[OUTPUT_SIZE]);
 };
 
-#endif // BITCOIN_CRYPTO_HKDF_SHA256_32_H
+#endif // KOYOTECOIN_CRYPTO_HKDF_SHA256_32_H

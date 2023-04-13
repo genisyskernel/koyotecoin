@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2015-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test BIP65 (CHECKLOCKTIMEVERIFY).
@@ -24,7 +25,7 @@ from test_framework.script import (
     OP_CHECKLOCKTIMEVERIFY,
     OP_DROP,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import assert_equal
 from test_framework.wallet import (
     MiniWallet,
@@ -79,7 +80,7 @@ def cltv_validate(tx, height):
 CLTV_HEIGHT = 111
 
 
-class BIP65Test(BitcoinTestFramework):
+class BIP65Test(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.extra_args = [[
@@ -152,9 +153,9 @@ class BIP65Test(BitcoinTestFramework):
             expected_cltv_reject_reason = [
                 "non-mandatory-script-verify-flag (Operation not valid with the current stack size)",
                 "non-mandatory-script-verify-flag (Negative locktime)",
-                "non-mandatory-script-verify-flag (Locktime requirement not satisfied)",
-                "non-mandatory-script-verify-flag (Locktime requirement not satisfied)",
-                "non-mandatory-script-verify-flag (Locktime requirement not satisfied)",
+                "non-mandatory-script-verify-flag (Locktime requirement not howlisfied)",
+                "non-mandatory-script-verify-flag (Locktime requirement not howlisfied)",
+                "non-mandatory-script-verify-flag (Locktime requirement not howlisfied)",
             ][i]
             # First we show that this tx is valid except for CLTV by getting it
             # rejected from the mempool for exactly that reason.

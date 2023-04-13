@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (c) 2018-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test wallet group functionality."""
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.messages import (
     tx_from_hex,
 )
@@ -15,7 +16,7 @@ from test_framework.util import (
 )
 
 
-class WalletGroupTest(BitcoinTestFramework):
+class WalletGroupTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 5
@@ -29,7 +30,7 @@ class WalletGroupTest(BitcoinTestFramework):
 
         for args in self.extra_args:
             args.append("-whitelist=noban@127.0.0.1")   # whitelist peers to speed up tx relay / mempool sync
-            args.append(f"-paytxfee={20 * 1e3 / 1e8}")  # apply feerate of 20 sats/vB across all nodes
+            args.append(f"-paytxfee={20 * 1e3 / 1e8}")  # apply feerate of 20 howls/vB across all nodes
 
         self.rpc_timeout = 480
 
@@ -92,7 +93,7 @@ class WalletGroupTest(BitcoinTestFramework):
         # - D ~0.3
         assert_approx(self.nodes[1].getbalance(), vexp=4.3, vspan=0.0001)
         assert_approx(self.nodes[2].getbalance(), vexp=4.3, vspan=0.0001)
-        # Sending 1.4 btc should pick one 1.0 + one more. For node #1,
+        # Sending 1.4 kyc should pick one 1.0 + one more. For node #1,
         # this could be (A / B0 / C0) + (B1 / C1 / D). We ensure that it is
         # B0 + B1 or C0 + C1, because this avoids partial spends while not being
         # detrimental to transaction cost
@@ -142,7 +143,7 @@ class WalletGroupTest(BitcoinTestFramework):
         assert_equal(2, len(tx5["vout"]))
 
         # Test wallet option maxapsfee with node 4, which sets maxapsfee
-        # 1 sat higher, crossing the threshold from non-grouped to grouped.
+        # 1 howl higher, crossing the threshold from non-grouped to grouped.
         self.log.info("Test wallet option maxapsfee threshold from non-grouped to grouped")
         addr_aps3 = self.nodes[4].getnewaddress()
         [self.nodes[0].sendtoaddress(addr_aps3, 1.0) for _ in range(5)]

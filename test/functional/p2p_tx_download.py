@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2019-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """
@@ -19,7 +20,7 @@ from test_framework.p2p import (
     P2PInterface,
     p2p_lock,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
 )
@@ -53,7 +54,7 @@ NUM_INBOUND = 10
 MAX_GETDATA_INBOUND_WAIT = GETDATA_TX_INTERVAL + INBOUND_PEER_TX_DELAY + TXID_RELAY_DELAY
 
 
-class TxDownloadTest(BitcoinTestFramework):
+class TxDownloadTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
 
@@ -266,7 +267,7 @@ class TxDownloadTest(BitcoinTestFramework):
         self.test_large_inv_batch()
         self.test_spurious_notfound()
 
-        # Run each test against new bitcoind instances, as setting mocktimes has long-term effects on when
+        # Run each test against new koyotecoind instances, as setting mocktimes has long-term effects on when
         # the next trickle relay event happens.
         for test in [self.test_in_flight_max, self.test_inv_block, self.test_tx_requests]:
             self.stop_nodes()

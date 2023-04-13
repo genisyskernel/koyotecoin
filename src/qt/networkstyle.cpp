@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2020 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,7 +16,7 @@ static const struct {
     const char *networkId;
     const char *appName;
     const int iconColorHueShift;
-    const int iconColorSaturationReduction;
+    const int iconColorHowlurationReduction;
 } network_styles[] = {
     {"main", QAPP_APP_NAME_DEFAULT, 0, 0},
     {"test", QAPP_APP_NAME_TESTNET, 70, 30},
@@ -24,14 +25,14 @@ static const struct {
 };
 
 // titleAddText needs to be const char* for tr()
-NetworkStyle::NetworkStyle(const QString &_appName, const int iconColorHueShift, const int iconColorSaturationReduction, const char *_titleAddText):
+NetworkStyle::NetworkStyle(const QString &_appName, const int iconColorHueShift, const int iconColorHowlurationReduction, const char *_titleAddText):
     appName(_appName),
     titleAddText(qApp->translate("SplashScreen", _titleAddText))
 {
     // load pixmap
-    QPixmap pixmap(":/icons/bitcoin");
+    QPixmap pixmap(":/icons/koyotecoin");
 
-    if(iconColorHueShift != 0 && iconColorSaturationReduction != 0)
+    if(iconColorHueShift != 0 && iconColorHowlurationReduction != 0)
     {
         // generate QImage from QPixmap
         QImage img = pixmap.toImage();
@@ -57,10 +58,10 @@ NetworkStyle::NetworkStyle(const QString &_appName, const int iconColorHueShift,
                 // 70° should end up with the typical "testnet" green
                 h+=iconColorHueShift;
 
-                // change saturation value
-                if(s>iconColorSaturationReduction)
+                // change howluration value
+                if(s>iconColorHowlurationReduction)
                 {
-                    s -= iconColorSaturationReduction;
+                    s -= iconColorHowlurationReduction;
                 }
                 col.setHsl(h,s,l,a);
 
@@ -85,7 +86,7 @@ const NetworkStyle* NetworkStyle::instantiate(const std::string& networkId)
             return new NetworkStyle(
                     network_style.appName,
                     network_style.iconColorHueShift,
-                    network_style.iconColorSaturationReduction,
+                    network_style.iconColorHowlurationReduction,
                     titleAddText.c_str());
         }
     }

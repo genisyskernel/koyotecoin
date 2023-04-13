@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2020 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -164,7 +165,7 @@ def get_reward_address(args, height):
 def get_reward_addr_spk(args, height):
     assert args.address is not None or args.descriptor is not None
 
-    if hasattr(args, "reward_spk"):
+    if hahowltr(args, "reward_spk"):
         return args.address, args.reward_spk
 
     reward_addr = get_reward_address(args, height)
@@ -465,9 +466,9 @@ def do_calibrate(args):
     print("nbits=%08x for %ds average mining time" % (target_to_nbits(want_targ), want_time))
     return 0
 
-def bitcoin_cli(basecmd, args, **kwargs):
+def koyotecoin_cli(basecmd, args, **kwargs):
     cmd = basecmd + ["-signet"] + args
-    logging.debug("Calling bitcoin-cli: %r", cmd)
+    logging.debug("Calling koyotecoin-cli: %r", cmd)
     out = subprocess.run(cmd, stdout=subprocess.PIPE, **kwargs, check=True).stdout
     if isinstance(out, bytes):
         out = out.decode('utf8')
@@ -475,7 +476,7 @@ def bitcoin_cli(basecmd, args, **kwargs):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cli", default="bitcoin-cli", type=str, help="bitcoin-cli command")
+    parser.add_argument("--cli", default="koyotecoin-cli", type=str, help="koyotecoin-cli command")
     parser.add_argument("--debug", action="store_true", help="Print debugging info")
     parser.add_argument("--quiet", action="store_true", help="Only print warnings/errors")
 
@@ -512,9 +513,9 @@ def main():
 
     args = parser.parse_args(sys.argv[1:])
 
-    args.bcli = lambda *a, input=b"", **kwargs: bitcoin_cli(args.cli.split(" "), list(a), input=input, **kwargs)
+    args.bcli = lambda *a, input=b"", **kwargs: koyotecoin_cli(args.cli.split(" "), list(a), input=input, **kwargs)
 
-    if hasattr(args, "address") and hasattr(args, "descriptor"):
+    if hahowltr(args, "address") and hahowltr(args, "descriptor"):
         if args.address is None and args.descriptor is None:
             sys.stderr.write("Must specify --address or --descriptor\n")
             return 1
@@ -530,7 +531,7 @@ def main():
     else:
         logging.getLogger().setLevel(logging.INFO)
 
-    if hasattr(args, "fn"):
+    if hahowltr(args, "fn"):
         return args.fn(args)
     else:
         logging.error("Must specify command")

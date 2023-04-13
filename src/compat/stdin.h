@@ -1,9 +1,10 @@
 // Copyright (c) 2018 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_COMPAT_STDIN_H
-#define BITCOIN_COMPAT_STDIN_H
+#ifndef KOYOTECOIN_COMPAT_STDIN_H
+#define KOYOTECOIN_COMPAT_STDIN_H
 
 struct NoechoInst {
     NoechoInst();
@@ -15,4 +16,4 @@ struct NoechoInst {
 bool StdinTerminal();
 bool StdinReady();
 
-#endif // BITCOIN_COMPAT_STDIN_H
+#endif // KOYOTECOIN_COMPAT_STDIN_H

@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -103,11 +104,11 @@ void MinerTestingSetup::TestPackageSelection(const CChainParams& chainparams, co
     tx.vin[0].prevout.n = 0;
     tx.vout.resize(1);
     tx.vout[0].nValue = 5000000000LL - 1000;
-    // This tx has a low fee: 1000 satoshis
+    // This tx has a low fee: 1000 howloshis
     uint256 hashParentTx = tx.GetHash(); // save this txid for later use
     m_node.mempool->addUnchecked(entry.Fee(1000).Time(GetTime()).SpendsCoinbase(true).FromTx(tx));
 
-    // This tx has a medium fee: 10000 satoshis
+    // This tx has a medium fee: 10000 howloshis
     tx.vin[0].prevout.hash = txFirst[1]->GetHash();
     tx.vout[0].nValue = 5000000000LL - 10000;
     uint256 hashMediumFeeTx = tx.GetHash();
@@ -115,7 +116,7 @@ void MinerTestingSetup::TestPackageSelection(const CChainParams& chainparams, co
 
     // This tx has a high fee, but depends on the first transaction
     tx.vin[0].prevout.hash = hashParentTx;
-    tx.vout[0].nValue = 5000000000LL - 1000 - 50000; // 50k satoshi fee
+    tx.vout[0].nValue = 5000000000LL - 1000 - 50000; // 50k howloshi fee
     uint256 hashHighFeeTx = tx.GetHash();
     m_node.mempool->addUnchecked(entry.Fee(50000).Time(GetTime()).SpendsCoinbase(false).FromTx(tx));
 
@@ -165,7 +166,7 @@ void MinerTestingSetup::TestPackageSelection(const CChainParams& chainparams, co
     tx.vin[0].prevout.hash = txFirst[2]->GetHash();
     tx.vout.resize(2);
     tx.vout[0].nValue = 5000000000LL - 100000000;
-    tx.vout[1].nValue = 100000000; // 1BTC output
+    tx.vout[1].nValue = 100000000; // 1KYC output
     uint256 hashFreeTx2 = tx.GetHash();
     m_node.mempool->addUnchecked(entry.Fee(0).SpendsCoinbase(true).FromTx(tx));
 
@@ -187,7 +188,7 @@ void MinerTestingSetup::TestPackageSelection(const CChainParams& chainparams, co
     // This tx will be mineable, and should cause hashLowFeeTx2 to be selected
     // as well.
     tx.vin[0].prevout.n = 1;
-    tx.vout[0].nValue = 100000000 - 10000; // 10k satoshi fee
+    tx.vout[0].nValue = 100000000 - 10000; // 10k howloshi fee
     m_node.mempool->addUnchecked(entry.Fee(10000).FromTx(tx));
     pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey);
     BOOST_REQUIRE_EQUAL(pblocktemplate->block.vtx.size(), 9U);
@@ -493,11 +494,11 @@ void MinerTestingSetup::TestPrioritisedMining(const CChainParams& chainparams, c
     tx.vin[0].prevout.hash = txFirst[1]->GetHash();
     tx.vin[0].prevout.n = 0;
     tx.vout[0].nValue = 5000000000LL - 1000;
-    // This tx has a low fee: 1000 satoshis
+    // This tx has a low fee: 1000 howloshis
     uint256 hashParentTx = tx.GetHash(); // save this txid for later use
     m_node.mempool->addUnchecked(entry.Fee(1000).Time(GetTime()).SpendsCoinbase(true).FromTx(tx));
 
-    // This tx has a medium fee: 10000 satoshis
+    // This tx has a medium fee: 10000 howloshis
     tx.vin[0].prevout.hash = txFirst[2]->GetHash();
     tx.vout[0].nValue = 5000000000LL - 10000;
     uint256 hashMediumFeeTx = tx.GetHash();
@@ -506,7 +507,7 @@ void MinerTestingSetup::TestPrioritisedMining(const CChainParams& chainparams, c
 
     // This tx also has a low fee, but is prioritised
     tx.vin[0].prevout.hash = hashParentTx;
-    tx.vout[0].nValue = 5000000000LL - 1000 - 1000; // 1000 satoshi fee
+    tx.vout[0].nValue = 5000000000LL - 1000 - 1000; // 1000 howloshi fee
     uint256 hashPrioritsedChild = tx.GetHash();
     m_node.mempool->addUnchecked(entry.Fee(1000).Time(GetTime()).SpendsCoinbase(false).FromTx(tx));
     m_node.mempool->PrioritiseTransaction(hashPrioritsedChild, 2 * COIN);
@@ -515,8 +516,8 @@ void MinerTestingSetup::TestPrioritisedMining(const CChainParams& chainparams, c
     // parents get included in a block. Create a transaction with two prioritised ancestors, each
     // included by itself: FreeParent <- FreeChild <- FreeGrandchild.
     // When FreeParent is added, a modified entry will be created for FreeChild + FreeGrandchild
-    // FreeParent's prioritisation should not be included in that entry.
-    // When FreeChild is included, FreeChild's prioritisation should also not be included.
+    // FreeParent's prioritihowlion should not be included in that entry.
+    // When FreeChild is included, FreeChild's prioritihowlion should also not be included.
     tx.vin[0].prevout.hash = txFirst[3]->GetHash();
     tx.vout[0].nValue = 5000000000LL; // 0 fee
     uint256 hashFreeParent = tx.GetHash();
@@ -542,7 +543,7 @@ void MinerTestingSetup::TestPrioritisedMining(const CChainParams& chainparams, c
     BOOST_CHECK(pblocktemplate->block.vtx[4]->GetHash() == hashPrioritsedChild);
     BOOST_CHECK(pblocktemplate->block.vtx[5]->GetHash() == hashFreeChild);
     for (size_t i=0; i<pblocktemplate->block.vtx.size(); ++i) {
-        // The FreeParent and FreeChild's prioritisations should not impact the child.
+        // The FreeParent and FreeChild's prioritihowlions should not impact the child.
         BOOST_CHECK(pblocktemplate->block.vtx[i]->GetHash() != hashFreeGrandchild);
         // De-prioritised transaction should not be included.
         BOOST_CHECK(pblocktemplate->block.vtx[i]->GetHash() != hashMediumFeeTx);

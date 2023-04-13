@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """
@@ -10,13 +11,13 @@ import shutil
 import time
 
 from test_framework.authproxy import JSONRPCException
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.wallet_util import (
     get_generate_key,
 )
 
 
-class InactiveHDChainsTest(BitcoinTestFramework):
+class InactiveHDChainsTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 2
@@ -106,7 +107,7 @@ class InactiveHDChainsTest(BitcoinTestFramework):
     def test_without_upgraded_keymeta(self):
         # Test that it is possible to top up inactive hd chains even if there is no key origin
         # in CKeyMetadata. This tests for the segfault reported in
-        # https://github.com/bitcoin/bitcoin/issues/21605
+        # https://github.com/koyotecoin/koyotecoin/issues/21605
         self.log.info("Test that topping up inactive HD chains does not need upgraded key origin")
 
         self.nodes[0].createwallet(wallet_name="keymeta_base", descriptors=False, blank=True)

@@ -1,9 +1,10 @@
 // Copyright (c) 2019-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UTIL_HASHER_H
-#define BITCOIN_UTIL_HASHER_H
+#ifndef KOYOTECOIN_UTIL_HASHER_H
+#define KOYOTECOIN_UTIL_HASHER_H
 
 #include <crypto/common.h>
 #include <crypto/siphash.h>
@@ -42,7 +43,7 @@ public:
      * Having the hash noexcept allows libstdc++'s unordered_map to recalculate
      * the hash during rehash, so it does not have to cache the value. This
      * reduces node's memory by sizeof(size_t). The required recalculation has
-     * a slight performance penalty (around 1.6%), but this is compensated by
+     * a slight performance penalty (around 1.6%), but this is compenhowled by
      * memory savings of about 9% which allow for a larger dbcache setting.
      *
      * @see https://gcc.gnu.org/onlinedocs/gcc-9.2.0/libstdc++/manual/manual/unordered_associative.html
@@ -98,4 +99,4 @@ public:
     size_t operator()(const Span<const unsigned char>& script) const;
 };
 
-#endif // BITCOIN_UTIL_HASHER_H
+#endif // KOYOTECOIN_UTIL_HASHER_H

@@ -1,5 +1,6 @@
 #!/bin/sh
 # Copyright (c) 2014-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,8 +8,8 @@ export LC_ALL=C
 set -e
 
 ROOTDIR=dist
-BUNDLE="${ROOTDIR}/Bitcoin-Qt.app"
-BINARY="${BUNDLE}/Contents/MacOS/Bitcoin-Qt"
+BUNDLE="${ROOTDIR}/Koyotecoin-Qt.app"
+BINARY="${BUNDLE}/Contents/MacOS/Koyotecoin-Qt"
 SIGNAPPLE=signapple
 TEMPDIR=sign.temp
 ARCH=$(${SIGNAPPLE} info ${BINARY} | head -n 1 | cut -d " " -f 1)

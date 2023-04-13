@@ -20,7 +20,7 @@ git diff -U0 HEAD~1.. | ./contrib/devtools/clang-format-diff.py -p1 -i -v
 copyright\_header.py
 ====================
 
-Provides utilities for managing copyright headers of `The Bitcoin Core
+Provides utilities for managing copyright headers of `The Koyotecoin Core
 developers` in repository source files. It has three subcommands:
 
 ```
@@ -40,13 +40,16 @@ Specifying `verbose` will list the full filenames of files of each category.
 copyright\_header.py update \<base\_directory\> [verbose]
 ---------------------------------------------------------
 Updates all the copyright headers of `The Bitcoin Core developers` which were
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 changed in a year more recent than is listed. For example:
 ```
 // Copyright (c) <firstYear>-<lastYear> The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 ```
 will be updated to:
 ```
 // Copyright (c) <firstYear>-<lastModifiedYear> The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 ```
 where `<lastModifiedYear>` is obtained from the `git log` history.
 
@@ -54,16 +57,19 @@ This subcommand also handles copyright headers that have only a single year. In
 those cases:
 ```
 // Copyright (c) <year> The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 ```
 will be updated to:
 ```
 // Copyright (c) <year>-<lastModifiedYear> The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 ```
 where the update is appropriate.
 
 copyright\_header.py insert \<file\>
 ------------------------------------
 Inserts a copyright header for `The Bitcoin Core developers` at the top of the
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 file in either Python or C++ style as determined by the file extension. If the
 file is a Python file and it has  `#!` starting the first line, the header is
 inserted in the line below it.
@@ -74,6 +80,7 @@ The copyright dates will be set to be `<year_introduced>-<current_year>` where
 year rather than two hyphenated years.
 
 If the file already has a copyright for `The Bitcoin Core developers`, the
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 script will exit.
 
 gen-manpages.py
@@ -90,11 +97,11 @@ example:
 BUILDDIR=$PWD/build contrib/devtools/gen-manpages.py
 ```
 
-gen-bitcoin-conf.sh
+gen-koyotecoin-conf.sh
 ===================
 
-Generates a bitcoin.conf file in `share/examples/` by parsing the output from `bitcoind --help`. This script is run during the
-release process to include a bitcoin.conf with the release binaries and can also be run by users to generate a file locally.
+Generates a koyotecoin.conf file in `share/examples/` by parsing the output from `koyotecoind --help`. This script is run during the
+release process to include a koyotecoin.conf with the release binaries and can also be run by users to generate a file locally.
 When generating a file as part of the release process, make sure to commit the changes after running the script.
 
 With in-tree builds this tool can be run from any directory within the
@@ -102,7 +109,7 @@ repository. To use this tool with out-of-tree builds set `BUILDDIR`. For
 example:
 
 ```bash
-BUILDDIR=$PWD/build contrib/devtools/gen-bitcoin-conf.sh
+BUILDDIR=$PWD/build contrib/devtools/gen-koyotecoin-conf.sh
 ```
 
 security-check.py and test-security-check.py
@@ -129,10 +136,10 @@ If no errors occur the return value will be 0 and the output will be empty.
 
 If there are any errors the return value will be 1 and output like this will be printed:
 
-    .../64/test_bitcoin: symbol memcpy from unsupported version GLIBC_2.14
-    .../64/test_bitcoin: symbol __fdelt_chk from unsupported version GLIBC_2.15
-    .../64/test_bitcoin: symbol std::out_of_range::~out_of_range() from unsupported version GLIBCXX_3.4.15
-    .../64/test_bitcoin: symbol _ZNSt8__detail15_List_nod from unsupported version GLIBCXX_3.4.15
+    .../64/test_koyotecoin: symbol memcpy from unsupported version GLIBC_2.14
+    .../64/test_koyotecoin: symbol __fdelt_chk from unsupported version GLIBC_2.15
+    .../64/test_koyotecoin: symbol std::out_of_range::~out_of_range() from unsupported version GLIBCXX_3.4.15
+    .../64/test_koyotecoin: symbol _ZNSt8__detail15_List_nod from unsupported version GLIBCXX_3.4.15
 
 circular-dependencies.py
 ========================

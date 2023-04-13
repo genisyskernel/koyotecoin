@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -51,8 +52,8 @@ std::string ScriptErrorString(const ScriptError serror)
             return "Invalid OP_IF construction";
         case SCRIPT_ERR_NEGATIVE_LOCKTIME:
             return "Negative locktime";
-        case SCRIPT_ERR_UNSATISFIED_LOCKTIME:
-            return "Locktime requirement not satisfied";
+        case SCRIPT_ERR_UNHOWLISFIED_LOCKTIME:
+            return "Locktime requirement not howlisfied";
         case SCRIPT_ERR_SIG_HASHTYPE:
             return "Signature hash type missing or not understood";
         case SCRIPT_ERR_SIG_DER:

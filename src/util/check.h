@@ -1,12 +1,13 @@
 // Copyright (c) 2019-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UTIL_CHECK_H
-#define BITCOIN_UTIL_CHECK_H
+#ifndef KOYOTECOIN_UTIL_CHECK_H
+#define KOYOTECOIN_UTIL_CHECK_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/koyotecoin-config.h>
 #endif
 
 #include <tinyformat.h>
@@ -94,4 +95,4 @@ T&& inline_assertion_check(T&& val, [[maybe_unused]] const char* file, [[maybe_u
         format_internal_error("Unreachable code reached (non-fatal)", \
                               __FILE__, __LINE__, __func__, PACKAGE_BUGREPORT))
 
-#endif // BITCOIN_UTIL_CHECK_H
+#endif // KOYOTECOIN_UTIL_CHECK_H

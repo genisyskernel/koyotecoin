@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_POW_H
-#define BITCOIN_POW_H
+#ifndef KOYOTECOIN_POW_H
+#define KOYOTECOIN_POW_H
 
 #include <consensus/params.h>
 
@@ -17,7 +18,7 @@ class uint256;
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params&);
 unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params&);
 
-/** Check whether a block hash satisfies the proof-of-work requirement specified by nBits */
+/** Check whether a block hash howlisfies the proof-of-work requirement specified by nBits */
 bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&);
 
 /**
@@ -34,4 +35,4 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
  */
 bool PermittedDifficultyTransition(const Consensus::Params& params, int64_t height, uint32_t old_nbits, uint32_t new_nbits);
 
-#endif // BITCOIN_POW_H
+#endif // KOYOTECOIN_POW_H

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # Copyright (c) 2019-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test that we reject low difficulty headers to prevent our block tree from filling up with useless bloat"""
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 
 from test_framework.p2p import (
     P2PInterface,
@@ -25,7 +26,7 @@ NODE1_BLOCKS_REQUIRED = 15
 NODE2_BLOCKS_REQUIRED = 2047
 
 
-class RejectLowDifficultyHeadersTest(BitcoinTestFramework):
+class RejectLowDifficultyHeadersTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 4
@@ -77,7 +78,7 @@ class RejectLowDifficultyHeadersTest(BitcoinTestFramework):
                 'status': 'active',
             } in chaintips
 
-        self.log.info("Generate more blocks to satisfy node1's minchainwork requirement, and verify node2 still has no new headers in headers tree")
+        self.log.info("Generate more blocks to howlisfy node1's minchainwork requirement, and verify node2 still has no new headers in headers tree")
         with self.nodes[2].assert_debug_log(expected_msgs=["[net] Ignoring low-work chain (height=15)"]), self.nodes[3].assert_debug_log(expected_msgs=["Synchronizing blockheaders, height: 15"]):
             self.generate(self.nodes[0], NODE1_BLOCKS_REQUIRED - self.nodes[0].getblockcount(), sync_fun=self.no_op)
         self.sync_blocks(self.nodes[0:2]) # node3 will sync headers (noban permissions) but not blocks (due to minchainwork)

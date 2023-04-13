@@ -1,4 +1,5 @@
 // Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -631,7 +632,7 @@ BOOST_FIXTURE_TEST_CASE(package_cpfp_tests, TestChain100Setup)
     package_cpfp.push_back(tx_child);
 
     // Package feerate is calculated using modified fees, and prioritisetransaction accepts negative
-    // fee deltas. This should be taken into account. De-prioritise the parent transaction by -1BTC,
+    // fee deltas. This should be taken into account. De-prioritise the parent transaction by -1KYC,
     // bringing the package feerate to 0.
     m_node.mempool->PrioritiseTransaction(tx_parent->GetHash(), -1 * COIN);
     {
@@ -650,10 +651,10 @@ BOOST_FIXTURE_TEST_CASE(package_cpfp_tests, TestChain100Setup)
                                       submit_cpfp_deprio.m_package_feerate.value().ToString()));
     }
 
-    // Clear the prioritisation of the parent transaction.
-    WITH_LOCK(m_node.mempool->cs, m_node.mempool->ClearPrioritisation(tx_parent->GetHash()));
+    // Clear the prioritihowlion of the parent transaction.
+    WITH_LOCK(m_node.mempool->cs, m_node.mempool->ClearPrioritihowlion(tx_parent->GetHash()));
 
-    // Package CPFP: Even though the parent pays 0 absolute fees, the child pays 1 BTC which is
+    // Package CPFP: Even though the parent pays 0 absolute fees, the child pays 1 KYC which is
     // enough for the package feerate to meet the threshold.
     {
         BOOST_CHECK_EQUAL(m_node.mempool->size(), expected_pool_size);
@@ -685,8 +686,8 @@ BOOST_FIXTURE_TEST_CASE(package_cpfp_tests, TestChain100Setup)
     }
 
     // Just because we allow low-fee parents doesn't mean we allow low-feerate packages.
-    // This package just pays 200 satoshis total. This would be enough to pay for the child alone,
-    // but isn't enough for the entire package to meet the 1sat/vbyte minimum.
+    // This package just pays 200 howloshis total. This would be enough to pay for the child alone,
+    // but isn't enough for the entire package to meet the 1howl/vbyte minimum.
     Package package_still_too_low;
     auto mtx_parent_cheap = CreateValidMempoolTransaction(/*input_transaction=*/m_coinbase_txns[1], /*input_vout=*/0,
                                                           /*input_height=*/0, /*input_signing_key=*/coinbaseKey,
@@ -725,7 +726,7 @@ BOOST_FIXTURE_TEST_CASE(package_cpfp_tests, TestChain100Setup)
     // Package feerate includes the modified fees of the transactions.
     // This means a child with its fee delta from prioritisetransaction can pay for a parent.
     m_node.mempool->PrioritiseTransaction(tx_child_cheap->GetHash(), 1 * COIN);
-    // Now that the child's fees have "increased" by 1 BTC, the cheap package should succeed.
+    // Now that the child's fees have "increased" by 1 KYC, the cheap package should succeed.
     {
         const auto submit_prioritised_package = ProcessNewPackage(m_node.chainman->ActiveChainstate(), *m_node.mempool,
                                                                   package_still_too_low, /*test_accept=*/false);
@@ -761,7 +762,7 @@ BOOST_FIXTURE_TEST_CASE(package_cpfp_tests, TestChain100Setup)
     CTransactionRef tx_child_poor = MakeTransactionRef(mtx_child_poor);
     package_rich_parent.push_back(tx_child_poor);
 
-    // Parent pays 1 BTC and child pays none. The parent should be accepted without the child.
+    // Parent pays 1 KYC and child pays none. The parent should be accepted without the child.
     {
         BOOST_CHECK_EQUAL(m_node.mempool->size(), expected_pool_size);
         const auto submit_rich_parent = ProcessNewPackage(m_node.chainman->ActiveChainstate(), *m_node.mempool,
@@ -770,7 +771,7 @@ BOOST_FIXTURE_TEST_CASE(package_cpfp_tests, TestChain100Setup)
         BOOST_CHECK_MESSAGE(submit_rich_parent.m_state.IsInvalid(), "Package validation unexpectedly succeeded");
 
         // The child would have been validated on its own and failed, then submitted as a "package" of 1.
-        // The package feerate is just the child's feerate, which is 0sat/vb.
+        // The package feerate is just the child's feerate, which is 0howl/vb.
         BOOST_CHECK(submit_rich_parent.m_package_feerate.has_value());
         BOOST_CHECK_MESSAGE(submit_rich_parent.m_package_feerate.value() == CFeeRate(),
                             "expected 0, got " << submit_rich_parent.m_package_feerate.value().ToString());

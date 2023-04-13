@@ -1,9 +1,10 @@
 // Copyright (c) 2017-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_RPC_RAWTRANSACTION_UTIL_H
-#define BITCOIN_RPC_RAWTRANSACTION_UTIL_H
+#ifndef KOYOTECOIN_RPC_RAWTRANSACTION_UTIL_H
+#define KOYOTECOIN_RPC_RAWTRANSACTION_UTIL_H
 
 #include <map>
 #include <string>
@@ -41,4 +42,4 @@ void ParsePrevouts(const UniValue& prevTxsUnival, FillableSigningProvider* keyst
 /** Create a transaction from univalue parameters */
 CMutableTransaction ConstructTransaction(const UniValue& inputs_in, const UniValue& outputs_in, const UniValue& locktime, std::optional<bool> rbf);
 
-#endif // BITCOIN_RPC_RAWTRANSACTION_UTIL_H
+#endif // KOYOTECOIN_RPC_RAWTRANSACTION_UTIL_H

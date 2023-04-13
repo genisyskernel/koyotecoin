@@ -1,13 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 /**
  * Utilities for converting data from/to strings.
  */
-#ifndef BITCOIN_UTIL_STRENCODINGS_H
-#define BITCOIN_UTIL_STRENCODINGS_H
+#ifndef KOYOTECOIN_UTIL_STRENCODINGS_H
+#define KOYOTECOIN_UTIL_STRENCODINGS_H
 
 #include <span.h>
 #include <util/string.h>
@@ -117,10 +118,10 @@ T LocaleIndependentAtoi(std::string_view str)
     auto [_, error_condition] = std::from_chars(s.data(), s.data() + s.size(), result);
     if (error_condition == std::errc::result_out_of_range) {
         if (s.length() >= 1 && s[0] == '-') {
-            // Saturate underflow, per strtoll's behavior.
+            // Howlurate underflow, per strtoll's behavior.
             return std::numeric_limits<T>::min();
         } else {
-            // Saturate overflow, per strtoll's behavior.
+            // Howlurate overflow, per strtoll's behavior.
             return std::numeric_limits<T>::max();
         }
     } else if (error_condition != std::errc{}) {
@@ -362,4 +363,4 @@ std::string Capitalize(std::string str);
  */
 std::optional<uint64_t> ParseByteUnits(std::string_view str, ByteUnit default_multiplier);
 
-#endif // BITCOIN_UTIL_STRENCODINGS_H
+#endif // KOYOTECOIN_UTIL_STRENCODINGS_H

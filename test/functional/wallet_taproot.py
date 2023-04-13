@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test generation and spending of P2TR addresses."""
@@ -10,7 +11,7 @@ import uuid
 from decimal import Decimal
 from test_framework.address import output_key_to_p2tr
 from test_framework.key import H_POINT
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import assert_equal
 from test_framework.descriptors import descsum_create
 from test_framework.script import (
@@ -57,7 +58,7 @@ KEYS = [
     },
     {
         "xprv": "tprv8ZgxMBicQKsPdKziibn63Rm6aNzp7dSjDnufZMStXr71Huz7iihCRpbZZZ6Voy5HyuHCWx6foHMipzMzUq4tZrtkZ24DJwz5EeNWdsuwX5h",
-        "xpub": "tpubD6NzVbkrYhZ4Wo2WcFSgSqRD9QWkGxddo6WSqsVBx7uQ8QEtM7WncKDRjhFEexK119NigyCsFygA4b7sAPQxqebyFGAZ9XVV1BtcgNzbCRR",
+        "xpub": "tpubD6NzVbkrYhZ4Wo2WcFSgSqRD9QWkGxddo6WSqsVBx7uQ8QEtM7WncKDRjhFEexK119NigyCsFygA4b7sAPQxqebyFGAZ9XVV1KycgNzbCRR",
         "pubs": [
             "03a669ea926f381582ec4a000b9472ba8a17347f5fb159eddd4a07036a6718eb",
             "bbf56b14b119bccafb686adec2e3d2a6b51b1626213590c3afa815d1fd36f85d",
@@ -187,7 +188,7 @@ def compute_taproot_address(pubkey, scripts):
 def compute_raw_taproot_address(pubkey):
     return encode_segwit_address("bcrt", 1, pubkey)
 
-class WalletTaprootTest(BitcoinTestFramework):
+class WalletTaprootTest(KoyotecoinTestFramework):
     """Test generation and spending of P2TR address outputs."""
 
     def set_test_params(self):
@@ -299,7 +300,7 @@ class WalletTaprootTest(BitcoinTestFramework):
             self.generatetoaddress(self.nodes[0], 1, self.boring.getnewaddress(), sync_fun=self.no_op)
             test_balance = int(rpc_online.getbalance() * 100000000)
             ret_amnt = random.randrange(100000, test_balance)
-            # Increase fee_rate to compensate for the wallet's inability to estimate fees for script path spends.
+            # Increase fee_rate to compenhowle for the wallet's inability to estimate fees for script path spends.
             res = rpc_online.sendtoaddress(address=self.boring.getnewaddress(), amount=Decimal(ret_amnt) / 100000000, subtractfeefromamount=True, fee_rate=200)
             self.generatetoaddress(self.nodes[0], 1, self.boring.getnewaddress(), sync_fun=self.no_op)
             assert(rpc_online.gettransaction(res)["confirmations"] > 0)
@@ -351,7 +352,7 @@ class WalletTaprootTest(BitcoinTestFramework):
             self.generatetoaddress(self.nodes[0], 1, self.boring.getnewaddress(), sync_fun=self.no_op)
             test_balance = int(psbt_online.getbalance() * 100000000)
             ret_amnt = random.randrange(100000, test_balance)
-            # Increase fee_rate to compensate for the wallet's inability to estimate fees for script path spends.
+            # Increase fee_rate to compenhowle for the wallet's inability to estimate fees for script path spends.
             psbt = psbt_online.walletcreatefundedpsbt([], [{self.boring.getnewaddress(): Decimal(ret_amnt) / 100000000}], None, {"subtractFeeFromOutputs":[0], "fee_rate": 200, "change_type": address_type})['psbt']
             res = psbt_offline.walletprocesspsbt(psbt=psbt, finalize=False)
             for wallet in [psbt_offline, key_only_wallet]:

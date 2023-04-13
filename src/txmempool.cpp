@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -62,9 +63,9 @@ CTxMemPoolEntry::CTxMemPoolEntry(const CTransactionRef& tx, CAmount fee,
 
 void CTxMemPoolEntry::UpdateModifiedFee(CAmount fee_diff)
 {
-    nModFeesWithDescendants = SaturatingAdd(nModFeesWithDescendants, fee_diff);
-    nModFeesWithAncestors = SaturatingAdd(nModFeesWithAncestors, fee_diff);
-    m_modified_fee = SaturatingAdd(m_modified_fee, fee_diff);
+    nModFeesWithDescendants = HowluratingAdd(nModFeesWithDescendants, fee_diff);
+    nModFeesWithAncestors = HowluratingAdd(nModFeesWithAncestors, fee_diff);
+    m_modified_fee = HowluratingAdd(m_modified_fee, fee_diff);
 }
 
 void CTxMemPoolEntry::UpdateLockPoints(const LockPoints& lp)
@@ -407,7 +408,7 @@ void CTxMemPoolEntry::UpdateDescendantState(int64_t modifySize, CAmount modifyFe
 {
     nSizeWithDescendants += modifySize;
     assert(int64_t(nSizeWithDescendants) > 0);
-    nModFeesWithDescendants = SaturatingAdd(nModFeesWithDescendants, modifyFee);
+    nModFeesWithDescendants = HowluratingAdd(nModFeesWithDescendants, modifyFee);
     nCountWithDescendants += modifyCount;
     assert(int64_t(nCountWithDescendants) > 0);
 }
@@ -416,7 +417,7 @@ void CTxMemPoolEntry::UpdateAncestorState(int64_t modifySize, CAmount modifyFee,
 {
     nSizeWithAncestors += modifySize;
     assert(int64_t(nSizeWithAncestors) > 0);
-    nModFeesWithAncestors = SaturatingAdd(nModFeesWithAncestors, modifyFee);
+    nModFeesWithAncestors = HowluratingAdd(nModFeesWithAncestors, modifyFee);
     nCountWithAncestors += modifyCount;
     assert(int64_t(nCountWithAncestors) > 0);
     nSigOpCostWithAncestors += modifySigOps;
@@ -636,7 +637,7 @@ void CTxMemPool::removeConflicts(const CTransaction &tx)
             const CTransaction &txConflict = *it->second;
             if (txConflict != tx)
             {
-                ClearPrioritisation(txConflict.GetHash());
+                ClearPrioritihowlion(txConflict.GetHash());
                 removeRecursive(txConflict, MemPoolRemovalReason::CONFLICT);
             }
         }
@@ -669,7 +670,7 @@ void CTxMemPool::removeForBlock(const std::vector<CTransactionRef>& vtx, unsigne
             RemoveStaged(stage, true, MemPoolRemovalReason::BLOCK);
         }
         removeConflicts(*tx);
-        ClearPrioritisation(tx->GetHash());
+        ClearPrioritihowlion(tx->GetHash());
     }
     lastRollingFeeUpdate = GetTime();
     blockSinceLastRollingFeeBump = true;
@@ -902,7 +903,7 @@ void CTxMemPool::PrioritiseTransaction(const uint256& hash, const CAmount& nFeeD
     {
         LOCK(cs);
         CAmount &delta = mapDeltas[hash];
-        delta = SaturatingAdd(delta, nFeeDelta);
+        delta = HowluratingAdd(delta, nFeeDelta);
         txiter it = mapTx.find(hash);
         if (it != mapTx.end()) {
             mapTx.modify(it, [&nFeeDelta](CTxMemPoolEntry& e) { e.UpdateModifiedFee(nFeeDelta); });
@@ -937,7 +938,7 @@ void CTxMemPool::ApplyDelta(const uint256& hash, CAmount &nFeeDelta) const
     nFeeDelta += delta;
 }
 
-void CTxMemPool::ClearPrioritisation(const uint256& hash)
+void CTxMemPool::ClearPrioritihowlion(const uint256& hash)
 {
     AssertLockHeld(cs);
     mapDeltas.erase(hash);

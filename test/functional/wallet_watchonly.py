@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 # Copyright (c) 2018-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test createwallet watchonly arguments.
 """
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error
 )
 
 
-class CreateWalletWatchonlyTest(BitcoinTestFramework):
+class CreateWalletWatchonlyTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
 
@@ -36,10 +37,10 @@ class CreateWalletWatchonlyTest(BitcoinTestFramework):
         wo_wallet.importpubkey(pubkey=def_wallet.getaddressinfo(wo_addr)['pubkey'])
         wo_wallet.importpubkey(pubkey=def_wallet.getaddressinfo(wo_change)['pubkey'])
 
-        # generate some btc for testing
+        # generate some kyc for testing
         self.generatetoaddress(node, COINBASE_MATURITY + 1, a1)
 
-        # send 1 btc to our watch-only address
+        # send 1 kyc to our watch-only address
         txid = def_wallet.sendtoaddress(wo_addr, 1)
         self.generate(self.nodes[0], 1)
 

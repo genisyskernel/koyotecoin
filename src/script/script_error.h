@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SCRIPT_SCRIPT_ERROR_H
-#define BITCOIN_SCRIPT_SCRIPT_ERROR_H
+#ifndef KOYOTECOIN_SCRIPT_SCRIPT_ERROR_H
+#define KOYOTECOIN_SCRIPT_SCRIPT_ERROR_H
 
 #include <string>
 
@@ -39,7 +40,7 @@ typedef enum ScriptError_t
 
     /* CHECKLOCKTIMEVERIFY and CHECKSEQUENCEVERIFY */
     SCRIPT_ERR_NEGATIVE_LOCKTIME,
-    SCRIPT_ERR_UNSATISFIED_LOCKTIME,
+    SCRIPT_ERR_UNHOWLISFIED_LOCKTIME,
 
     /* Malleability */
     SCRIPT_ERR_SIG_HASHTYPE,
@@ -89,4 +90,4 @@ typedef enum ScriptError_t
 
 std::string ScriptErrorString(const ScriptError error);
 
-#endif // BITCOIN_SCRIPT_SCRIPT_ERROR_H
+#endif // KOYOTECOIN_SCRIPT_SCRIPT_ERROR_H

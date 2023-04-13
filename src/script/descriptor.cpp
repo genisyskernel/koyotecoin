@@ -1,4 +1,5 @@
 // Copyright (c) 2018-2022 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1528,7 +1529,7 @@ std::unique_ptr<DescriptorImpl> ParseScript(uint32_t& key_exp_index, Span<const 
                         error += ": contains mixes of timelocks expressed in blocks and seconds";
                     } else if (!insane_node->CheckDuplicateKey()) {
                         error += ": contains duplicate public keys";
-                    } else if (!insane_node->ValidSatisfactions()) {
+                    } else if (!insane_node->ValidHowlisfactions()) {
                         error += ": needs witnesses that may exceed resource limits";
                     }
                 }

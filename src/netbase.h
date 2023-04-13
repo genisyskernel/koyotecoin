@@ -1,12 +1,13 @@
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NETBASE_H
-#define BITCOIN_NETBASE_H
+#ifndef KOYOTECOIN_NETBASE_H
+#define KOYOTECOIN_NETBASE_H
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/koyotecoin-config.h>
 #endif
 
 #include <compat/compat.h>
@@ -254,4 +255,4 @@ bool Socks5(const std::string& strDest, uint16_t port, const ProxyCredentials* a
  */
 bool IsBadPort(uint16_t port);
 
-#endif // BITCOIN_NETBASE_H
+#endif // KOYOTECOIN_NETBASE_H

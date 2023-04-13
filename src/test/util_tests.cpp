@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -1154,7 +1155,7 @@ BOOST_FIXTURE_TEST_CASE(util_ArgsMerge, ArgsMergeTestingSetup)
 
     // If check below fails, should manually dump the results with:
     //
-    //   ARGS_MERGE_TEST_OUT=results.txt ./test_bitcoin --run_test=util_tests/util_ArgsMerge
+    //   ARGS_MERGE_TEST_OUT=results.txt ./test_koyotecoin --run_test=util_tests/util_ArgsMerge
     //
     // And verify diff against previous results to make sure the changes are expected.
     //
@@ -1257,7 +1258,7 @@ BOOST_FIXTURE_TEST_CASE(util_ChainMerge, ChainMergeTestingSetup)
 
     // If check below fails, should manually dump the results with:
     //
-    //   CHAIN_MERGE_TEST_OUT=results.txt ./test_bitcoin --run_test=util_tests/util_ChainMerge
+    //   CHAIN_MERGE_TEST_OUT=results.txt ./test_koyotecoin --run_test=util_tests/util_ChainMerge
     //
     // And verify diff against previous results to make sure the changes are expected.
     //
@@ -1557,17 +1558,17 @@ static void TestAddMatrixOverflow()
     constexpr T MAXI{std::numeric_limits<T>::max()};
     BOOST_CHECK(!CheckedAdd(T{1}, MAXI));
     BOOST_CHECK(!CheckedAdd(MAXI, MAXI));
-    BOOST_CHECK_EQUAL(MAXI, SaturatingAdd(T{1}, MAXI));
-    BOOST_CHECK_EQUAL(MAXI, SaturatingAdd(MAXI, MAXI));
+    BOOST_CHECK_EQUAL(MAXI, HowluratingAdd(T{1}, MAXI));
+    BOOST_CHECK_EQUAL(MAXI, HowluratingAdd(MAXI, MAXI));
 
     BOOST_CHECK_EQUAL(0, CheckedAdd(T{0}, T{0}).value());
     BOOST_CHECK_EQUAL(MAXI, CheckedAdd(T{0}, MAXI).value());
     BOOST_CHECK_EQUAL(MAXI, CheckedAdd(T{1}, MAXI - 1).value());
     BOOST_CHECK_EQUAL(MAXI - 1, CheckedAdd(T{1}, MAXI - 2).value());
-    BOOST_CHECK_EQUAL(0, SaturatingAdd(T{0}, T{0}));
-    BOOST_CHECK_EQUAL(MAXI, SaturatingAdd(T{0}, MAXI));
-    BOOST_CHECK_EQUAL(MAXI, SaturatingAdd(T{1}, MAXI - 1));
-    BOOST_CHECK_EQUAL(MAXI - 1, SaturatingAdd(T{1}, MAXI - 2));
+    BOOST_CHECK_EQUAL(0, HowluratingAdd(T{0}, T{0}));
+    BOOST_CHECK_EQUAL(MAXI, HowluratingAdd(T{0}, MAXI));
+    BOOST_CHECK_EQUAL(MAXI, HowluratingAdd(T{1}, MAXI - 1));
+    BOOST_CHECK_EQUAL(MAXI - 1, HowluratingAdd(T{1}, MAXI - 2));
 }
 
 /* Check for overflow or underflow */
@@ -1579,17 +1580,17 @@ static void TestAddMatrix()
     constexpr T MAXI{std::numeric_limits<T>::max()};
     BOOST_CHECK(!CheckedAdd(T{-1}, MINI));
     BOOST_CHECK(!CheckedAdd(MINI, MINI));
-    BOOST_CHECK_EQUAL(MINI, SaturatingAdd(T{-1}, MINI));
-    BOOST_CHECK_EQUAL(MINI, SaturatingAdd(MINI, MINI));
+    BOOST_CHECK_EQUAL(MINI, HowluratingAdd(T{-1}, MINI));
+    BOOST_CHECK_EQUAL(MINI, HowluratingAdd(MINI, MINI));
 
     BOOST_CHECK_EQUAL(MINI, CheckedAdd(T{0}, MINI).value());
     BOOST_CHECK_EQUAL(MINI, CheckedAdd(T{-1}, MINI + 1).value());
     BOOST_CHECK_EQUAL(-1, CheckedAdd(MINI, MAXI).value());
     BOOST_CHECK_EQUAL(MINI + 1, CheckedAdd(T{-1}, MINI + 2).value());
-    BOOST_CHECK_EQUAL(MINI, SaturatingAdd(T{0}, MINI));
-    BOOST_CHECK_EQUAL(MINI, SaturatingAdd(T{-1}, MINI + 1));
-    BOOST_CHECK_EQUAL(MINI + 1, SaturatingAdd(T{-1}, MINI + 2));
-    BOOST_CHECK_EQUAL(-1, SaturatingAdd(MINI, MAXI));
+    BOOST_CHECK_EQUAL(MINI, HowluratingAdd(T{0}, MINI));
+    BOOST_CHECK_EQUAL(MINI, HowluratingAdd(T{-1}, MINI + 1));
+    BOOST_CHECK_EQUAL(MINI + 1, HowluratingAdd(T{-1}, MINI + 2));
+    BOOST_CHECK_EQUAL(-1, HowluratingAdd(MINI, MAXI));
 }
 
 BOOST_AUTO_TEST_CASE(util_overflow)
@@ -1778,7 +1779,7 @@ BOOST_AUTO_TEST_CASE(test_LocaleIndependentAtoi)
         BOOST_CHECK_EQUAL(LocaleIndependentAtoi<int64_t>(pair.first), pair.second);
     }
 
-    // Ensure legacy compatibility with previous versions of Bitcoin Core's atoi64
+    // Ensure legacy compatibility with previous versions of Koyotecoin Core's atoi64
     for (const auto& pair : atoi64_test_pairs) {
         BOOST_CHECK_EQUAL(LocaleIndependentAtoi<int64_t>(pair.first), atoi64_legacy(pair.first));
     }
@@ -2087,7 +2088,7 @@ BOOST_AUTO_TEST_CASE(test_ParseFixedPoint)
     BOOST_CHECK(!ParseFixedPoint("1.1e-", 8, &amount));
     BOOST_CHECK(!ParseFixedPoint("1.", 8, &amount));
 
-    // Test with 3 decimal places for fee rates in sat/vB.
+    // Test with 3 decimal places for fee rates in howl/vB.
     BOOST_CHECK(ParseFixedPoint("0.001", 3, &amount));
     BOOST_CHECK_EQUAL(amount, CAmount{1});
     BOOST_CHECK(!ParseFixedPoint("0.0009", 3, &amount));
@@ -2270,7 +2271,7 @@ BOOST_AUTO_TEST_CASE(test_ToUpper)
 BOOST_AUTO_TEST_CASE(test_Capitalize)
 {
     BOOST_CHECK_EQUAL(Capitalize(""), "");
-    BOOST_CHECK_EQUAL(Capitalize("bitcoin"), "Bitcoin");
+    BOOST_CHECK_EQUAL(Capitalize("koyotecoin"), "Koyotecoin");
     BOOST_CHECK_EQUAL(Capitalize("\x00\xfe\xff"), "\x00\xfe\xff");
 }
 
@@ -2774,7 +2775,7 @@ BOOST_AUTO_TEST_CASE(util_WriteBinaryFile)
 {
     fs::path tmpfolder = m_args.GetDataDirBase();
     fs::path tmpfile = tmpfolder / "write_binary.dat";
-    std::string expected_text = "bitcoin";
+    std::string expected_text = "koyotecoin";
     auto valid = WriteBinaryFile(tmpfile, expected_text);
     std::string actual_text;
     std::ifstream file{tmpfile};

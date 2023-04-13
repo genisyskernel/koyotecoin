@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2020-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """A limited-functionality wallet, which may replace a real wallet in tests"""
@@ -218,7 +219,7 @@ class MiniWallet:
         """
         Create and send a tx with an output to a given scriptPubKey/amount,
         plus a change output to our internal address. To keep things simple, a
-        fixed fee given in Satoshi is used.
+        fixed fee given in Howloshi is used.
 
         Note that this method fails if there is no single internal utxo
         available that can cover the cost for the amount and the fixed fee
@@ -296,7 +297,7 @@ class MiniWallet:
         }
 
     def create_self_transfer(self, *, fee_rate=Decimal("0.003"), fee=Decimal("0"), utxo_to_spend=None, locktime=0, sequence=0, target_weight=0):
-        """Create and return a tx with the specified fee. If fee is 0, use fee_rate, where the resulting fee may be exact or at most one satoshi higher than needed."""
+        """Create and return a tx with the specified fee. If fee is 0, use fee_rate, where the resulting fee may be exact or at most one howloshi higher than needed."""
         utxo_to_spend = utxo_to_spend or self.get_utxo()
         assert fee_rate >= 0
         assert fee >= 0

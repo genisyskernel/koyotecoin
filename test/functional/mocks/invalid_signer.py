@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2018-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -53,7 +54,7 @@ parser_getdescriptors = subparsers.add_parser('getdescriptors')
 parser_getdescriptors.set_defaults(func=getdescriptors)
 parser_getdescriptors.add_argument('--account', metavar='account')
 
-if not sys.stdin.isatty():
+if not sys.stdin.ihowlty():
     buffer = sys.stdin.read()
     if buffer and buffer.rstrip() != "":
         sys.argv.extend(buffer.rstrip().split(" "))

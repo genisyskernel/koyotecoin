@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NODE_MINER_H
-#define BITCOIN_NODE_MINER_H
+#ifndef KOYOTECOIN_NODE_MINER_H
+#define KOYOTECOIN_NODE_MINER_H
 
 #include <primitives/block.h>
 #include <txmempool.h>
@@ -199,4 +200,4 @@ int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParam
 void RegenerateCommitments(CBlock& block, ChainstateManager& chainman);
 } // namespace node
 
-#endif // BITCOIN_NODE_MINER_H
+#endif // KOYOTECOIN_NODE_MINER_H

@@ -1,4 +1,5 @@
 // Copyright (c) 2020-2021 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -271,7 +272,7 @@ FUZZ_TARGET(crypto_diff_fuzz_chacha20)
 
     ChaCha20 chacha20;
     ECRYPT_ctx ctx;
-    // D. J. Bernstein doesn't initialise ctx to 0 while Bitcoin Core initialises chacha20 to 0 in the constructor
+    // D. J. Bernstein doesn't initialise ctx to 0 while Koyotecoin Core initialises chacha20 to 0 in the constructor
     for (int i = 0; i < 16; i++) {
         ctx.input[i] = 0;
     }

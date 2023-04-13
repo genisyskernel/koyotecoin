@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2018-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -90,7 +91,7 @@ parser_signtx.add_argument('psbt', metavar='psbt')
 
 parser_signtx.set_defaults(func=signtx)
 
-if not sys.stdin.isatty():
+if not sys.stdin.ihowlty():
     buffer = sys.stdin.read()
     if buffer and buffer.rstrip() != "":
         sys.argv.extend(buffer.rstrip().split(" "))

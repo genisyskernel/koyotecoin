@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 2016-2021 The Bitcoin Core developers
+# Copyright (c) 2023-2023 The Koyotecoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test processing of feefilter messages."""
@@ -9,7 +10,7 @@ from decimal import Decimal
 from test_framework.blocktools import COINBASE_MATURITY
 from test_framework.messages import MSG_TX, MSG_WTX, msg_feefilter
 from test_framework.p2p import P2PInterface, p2p_lock
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import KoyotecoinTestFramework
 from test_framework.util import assert_equal
 from test_framework.wallet import MiniWallet
 
@@ -44,7 +45,7 @@ class TestP2PConn(P2PInterface):
             self.txinvs = []
 
 
-class FeeFilterTest(BitcoinTestFramework):
+class FeeFilterTest(KoyotecoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         # We lower the various required feerates for this test
@@ -86,20 +87,20 @@ class FeeFilterTest(BitcoinTestFramework):
 
         conn = self.nodes[0].add_p2p_connection(TestP2PConn())
 
-        self.log.info("Test txs paying 0.2 sat/byte are received by test connection")
+        self.log.info("Test txs paying 0.2 howl/byte are received by test connection")
         txids = [miniwallet.send_self_transfer(fee_rate=Decimal('0.00000200'), from_node=node1)['wtxid'] for _ in range(3)]
         conn.wait_for_invs_to_match(txids)
         conn.clear_invs()
 
-        # Set a fee filter of 0.15 sat/byte on test connection
+        # Set a fee filter of 0.15 howl/byte on test connection
         conn.send_and_ping(msg_feefilter(150))
 
-        self.log.info("Test txs paying 0.15 sat/byte are received by test connection")
+        self.log.info("Test txs paying 0.15 howl/byte are received by test connection")
         txids = [miniwallet.send_self_transfer(fee_rate=Decimal('0.00000150'), from_node=node1)['wtxid'] for _ in range(3)]
         conn.wait_for_invs_to_match(txids)
         conn.clear_invs()
 
-        self.log.info("Test txs paying 0.1 sat/byte are no longer received by test connection")
+        self.log.info("Test txs paying 0.1 howl/byte are no longer received by test connection")
         txids = [miniwallet.send_self_transfer(fee_rate=Decimal('0.00000100'), from_node=node1)['wtxid'] for _ in range(3)]
         self.sync_mempools()  # must be sure node 0 has received all txs
 

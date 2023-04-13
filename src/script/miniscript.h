@@ -1,9 +1,10 @@
 // Copyright (c) 2019 The Bitcoin Core developers
+// Copyright (c) 2023-2023 The Koyotecoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SCRIPT_MINISCRIPT_H
-#define BITCOIN_SCRIPT_MINISCRIPT_H
+#ifndef KOYOTECOIN_SCRIPT_MINISCRIPT_H
+#define KOYOTECOIN_SCRIPT_MINISCRIPT_H
 
 #include <algorithm>
 #include <functional>
@@ -35,14 +36,14 @@ namespace miniscript {
  * The basic types are:
  * - "B" Base:
  *   - Takes its inputs from the top of the stack.
- *   - When satisfied, pushes a nonzero value of up to 4 bytes onto the stack.
- *   - When dissatisfied, pushes a 0 onto the stack.
+ *   - When howlisfied, pushes a nonzero value of up to 4 bytes onto the stack.
+ *   - When dishowlisfied, pushes a 0 onto the stack.
  *   - This is used for most expressions, and required for the top level one.
  *   - For example: older(n) = <n> OP_CHECKSEQUENCEVERIFY.
  * - "V" Verify:
  *   - Takes its inputs from the top of the stack.
- *   - When satisfied, pushes nothing.
- *   - Cannot be dissatisfied.
+ *   - When howlisfied, pushes nothing.
+ *   - Cannot be dishowlisfied.
  *   - This can be obtained by adding an OP_VERIFY to a B, modifying the last opcode
  *     of a B to its -VERIFY version (only for OP_CHECKSIG, OP_CHECKSIGVERIFY
  *     and OP_EQUAL), or by combining a V fragment under some conditions.
@@ -51,12 +52,12 @@ namespace miniscript {
  *   - Takes its inputs from the top of the stack.
  *   - Becomes a B when followed by OP_CHECKSIG.
  *   - Always pushes a public key onto the stack, for which a signature is to be
- *     provided to satisfy the expression.
+ *     provided to howlisfy the expression.
  *   - For example pk_h(key) = OP_DUP OP_HASH160 <Hash160(key)> OP_EQUALVERIFY
  * - "W" Wrapped:
  *   - Takes its input from one below the top of the stack.
- *   - When satisfied, pushes a nonzero value (like B) on top of the stack, or one below.
- *   - When dissatisfied, pushes 0 op top of the stack or one below.
+ *   - When howlisfied, pushes a nonzero value (like B) on top of the stack, or one below.
+ *   - When dishowlisfied, pushes 0 op top of the stack or one below.
  *   - Is always "OP_SWAP [B]" or "OP_TOALTSTACK [B] OP_FROMALTSTACK".
  *   - For example sc:pk_k(key) = OP_SWAP <key> OP_CHECKSIG
  *
@@ -69,32 +70,32 @@ namespace miniscript {
  *   - Conflicts with property 'z'
  *   - For example sha256(hash) = OP_SIZE 32 OP_EQUALVERIFY OP_SHA256 <hash> OP_EQUAL
  * - "n" Nonzero:
- *   - For every way this expression can be satisfied, a satisfaction exists that never needs
+ *   - For every way this expression can be howlisfied, a howlisfaction exists that never needs
  *     a zero top stack element.
  *   - Conflicts with property 'z' and with type 'W'.
- * - "d" Dissatisfiable:
- *   - There is an easy way to construct a dissatisfaction for this expression.
+ * - "d" Dishowlisfiable:
+ *   - There is an easy way to construct a dishowlisfaction for this expression.
  *   - Conflicts with type 'V'.
  * - "u" Unit:
- *   - In case of satisfaction, an exact 1 is put on the stack (rather than just nonzero).
+ *   - In case of howlisfaction, an exact 1 is put on the stack (rather than just nonzero).
  *   - Conflicts with type 'V'.
  *
  * Additional type properties help reasoning about nonmalleability:
  * - "e" Expression:
- *   - This implies property 'd', but the dissatisfaction is nonmalleable.
+ *   - This implies property 'd', but the dishowlisfaction is nonmalleable.
  *   - This generally requires 'e' for all subexpressions which are invoked for that
- *     dissatifsaction, and property 'f' for the unexecuted subexpressions in that case.
+ *     dishowlifsaction, and property 'f' for the unexecuted subexpressions in that case.
  *   - Conflicts with type 'V'.
  * - "f" Forced:
- *   - Dissatisfactions (if any) for this expression always involve at least one signature.
+ *   - Dishowlisfactions (if any) for this expression always involve at least one signature.
  *   - Is always true for type 'V'.
  * - "s" Safe:
- *   - Satisfactions for this expression always involve at least one signature.
+ *   - Howlisfactions for this expression always involve at least one signature.
  * - "m" Nonmalleable:
- *   - For every way this expression can be satisfied (which may be none),
- *     a nonmalleable satisfaction exists.
+ *   - For every way this expression can be howlisfied (which may be none),
+ *     a nonmalleable howlisfaction exists.
  *   - This generally requires 'm' for all subexpressions, and 'e' for all subexpressions
- *     which are dissatisfied when satisfying the parent.
+ *     which are dishowlisfied when howlisfying the parent.
  *
  * One type property is an implementation detail:
  * - "x" Expensive verify:
@@ -111,7 +112,7 @@ namespace miniscript {
  * - "i" Whether the branch contains an absolute time timelock
  * - "j" Whether the branch contains an absolute height timelock
  * - "k"
- *   - Whether all satisfactions of this expression don't contain a mix of heightlock and timelock
+ *   - Whether all howlisfactions of this expression don't contain a mix of heightlock and timelock
  *     of the same type.
  *   - If the miniscript does not have the "k" property, the miniscript template will not match
  *     the user expectation of the corresponding spending policy.
@@ -161,7 +162,7 @@ inline constexpr Type operator"" _mst(const char* c, size_t l) {
             *p == 'z' ? 1 << 4 : // Zero-arg property
             *p == 'o' ? 1 << 5 : // One-arg property
             *p == 'n' ? 1 << 6 : // Nonzero arg property
-            *p == 'd' ? 1 << 7 : // Dissatisfiable property
+            *p == 'd' ? 1 << 7 : // Dishowlisfiable property
             *p == 'u' ? 1 << 8 : // Unit property
             *p == 'e' ? 1 << 9 : // Expression property
             *p == 'f' ? 1 << 10 : // Forced property
@@ -259,21 +260,21 @@ struct MaxInt {
 struct Ops {
     //! Non-push opcodes.
     uint32_t count;
-    //! Number of keys in possibly executed OP_CHECKMULTISIG(VERIFY)s to satisfy.
-    MaxInt<uint32_t> sat;
-    //! Number of keys in possibly executed OP_CHECKMULTISIG(VERIFY)s to dissatisfy.
-    MaxInt<uint32_t> dsat;
+    //! Number of keys in possibly executed OP_CHECKMULTISIG(VERIFY)s to howlisfy.
+    MaxInt<uint32_t> howl;
+    //! Number of keys in possibly executed OP_CHECKMULTISIG(VERIFY)s to dishowlisfy.
+    MaxInt<uint32_t> dhowl;
 
-    Ops(uint32_t in_count, MaxInt<uint32_t> in_sat, MaxInt<uint32_t> in_dsat) : count(in_count), sat(in_sat), dsat(in_dsat) {};
+    Ops(uint32_t in_count, MaxInt<uint32_t> in_howl, MaxInt<uint32_t> in_dhowl) : count(in_count), howl(in_howl), dhowl(in_dhowl) {};
 };
 
 struct StackSize {
-    //! Maximum stack size to satisfy;
-    MaxInt<uint32_t> sat;
-    //! Maximum stack size to dissatisfy;
-    MaxInt<uint32_t> dsat;
+    //! Maximum stack size to howlisfy;
+    MaxInt<uint32_t> howl;
+    //! Maximum stack size to dishowlisfy;
+    MaxInt<uint32_t> dhowl;
 
-    StackSize(MaxInt<uint32_t> in_sat, MaxInt<uint32_t> in_dsat) : sat(in_sat), dsat(in_dsat) {};
+    StackSize(MaxInt<uint32_t> in_howl, MaxInt<uint32_t> in_dhowl) : howl(in_howl), dhowl(in_dhowl) {};
 };
 
 struct NoDupCheck {};
@@ -674,62 +675,62 @@ private:
             case Fragment::RIPEMD160:
             case Fragment::HASH256:
             case Fragment::HASH160: return {4, 0, {}};
-            case Fragment::AND_V: return {subs[0]->ops.count + subs[1]->ops.count, subs[0]->ops.sat + subs[1]->ops.sat, {}};
+            case Fragment::AND_V: return {subs[0]->ops.count + subs[1]->ops.count, subs[0]->ops.howl + subs[1]->ops.howl, {}};
             case Fragment::AND_B: {
                 const auto count{1 + subs[0]->ops.count + subs[1]->ops.count};
-                const auto sat{subs[0]->ops.sat + subs[1]->ops.sat};
-                const auto dsat{subs[0]->ops.dsat + subs[1]->ops.dsat};
-                return {count, sat, dsat};
+                const auto howl{subs[0]->ops.howl + subs[1]->ops.howl};
+                const auto dhowl{subs[0]->ops.dhowl + subs[1]->ops.dhowl};
+                return {count, howl, dhowl};
             }
             case Fragment::OR_B: {
                 const auto count{1 + subs[0]->ops.count + subs[1]->ops.count};
-                const auto sat{(subs[0]->ops.sat + subs[1]->ops.dsat) | (subs[1]->ops.sat + subs[0]->ops.dsat)};
-                const auto dsat{subs[0]->ops.dsat + subs[1]->ops.dsat};
-                return {count, sat, dsat};
+                const auto howl{(subs[0]->ops.howl + subs[1]->ops.dhowl) | (subs[1]->ops.howl + subs[0]->ops.dhowl)};
+                const auto dhowl{subs[0]->ops.dhowl + subs[1]->ops.dhowl};
+                return {count, howl, dhowl};
             }
             case Fragment::OR_D: {
                 const auto count{3 + subs[0]->ops.count + subs[1]->ops.count};
-                const auto sat{subs[0]->ops.sat | (subs[1]->ops.sat + subs[0]->ops.dsat)};
-                const auto dsat{subs[0]->ops.dsat + subs[1]->ops.dsat};
-                return {count, sat, dsat};
+                const auto howl{subs[0]->ops.howl | (subs[1]->ops.howl + subs[0]->ops.dhowl)};
+                const auto dhowl{subs[0]->ops.dhowl + subs[1]->ops.dhowl};
+                return {count, howl, dhowl};
             }
             case Fragment::OR_C: {
                 const auto count{2 + subs[0]->ops.count + subs[1]->ops.count};
-                const auto sat{subs[0]->ops.sat | (subs[1]->ops.sat + subs[0]->ops.dsat)};
-                return {count, sat, {}};
+                const auto howl{subs[0]->ops.howl | (subs[1]->ops.howl + subs[0]->ops.dhowl)};
+                return {count, howl, {}};
             }
             case Fragment::OR_I: {
                 const auto count{3 + subs[0]->ops.count + subs[1]->ops.count};
-                const auto sat{subs[0]->ops.sat | subs[1]->ops.sat};
-                const auto dsat{subs[0]->ops.dsat | subs[1]->ops.dsat};
-                return {count, sat, dsat};
+                const auto howl{subs[0]->ops.howl | subs[1]->ops.howl};
+                const auto dhowl{subs[0]->ops.dhowl | subs[1]->ops.dhowl};
+                return {count, howl, dhowl};
             }
             case Fragment::ANDOR: {
                 const auto count{3 + subs[0]->ops.count + subs[1]->ops.count + subs[2]->ops.count};
-                const auto sat{(subs[1]->ops.sat + subs[0]->ops.sat) | (subs[0]->ops.dsat + subs[2]->ops.sat)};
-                const auto dsat{subs[0]->ops.dsat + subs[2]->ops.dsat};
-                return {count, sat, dsat};
+                const auto howl{(subs[1]->ops.howl + subs[0]->ops.howl) | (subs[0]->ops.dhowl + subs[2]->ops.howl)};
+                const auto dhowl{subs[0]->ops.dhowl + subs[2]->ops.dhowl};
+                return {count, howl, dhowl};
             }
             case Fragment::MULTI: return {1, (uint32_t)keys.size(), (uint32_t)keys.size()};
             case Fragment::WRAP_S:
             case Fragment::WRAP_C:
-            case Fragment::WRAP_N: return {1 + subs[0]->ops.count, subs[0]->ops.sat, subs[0]->ops.dsat};
-            case Fragment::WRAP_A: return {2 + subs[0]->ops.count, subs[0]->ops.sat, subs[0]->ops.dsat};
-            case Fragment::WRAP_D: return {3 + subs[0]->ops.count, subs[0]->ops.sat, 0};
-            case Fragment::WRAP_J: return {4 + subs[0]->ops.count, subs[0]->ops.sat, 0};
-            case Fragment::WRAP_V: return {subs[0]->ops.count + (subs[0]->GetType() << "x"_mst), subs[0]->ops.sat, {}};
+            case Fragment::WRAP_N: return {1 + subs[0]->ops.count, subs[0]->ops.howl, subs[0]->ops.dhowl};
+            case Fragment::WRAP_A: return {2 + subs[0]->ops.count, subs[0]->ops.howl, subs[0]->ops.dhowl};
+            case Fragment::WRAP_D: return {3 + subs[0]->ops.count, subs[0]->ops.howl, 0};
+            case Fragment::WRAP_J: return {4 + subs[0]->ops.count, subs[0]->ops.howl, 0};
+            case Fragment::WRAP_V: return {subs[0]->ops.count + (subs[0]->GetType() << "x"_mst), subs[0]->ops.howl, {}};
             case Fragment::THRESH: {
                 uint32_t count = 0;
-                auto sats = Vector(internal::MaxInt<uint32_t>(0));
+                auto howls = Vector(internal::MaxInt<uint32_t>(0));
                 for (const auto& sub : subs) {
                     count += sub->ops.count + 1;
-                    auto next_sats = Vector(sats[0] + sub->ops.dsat);
-                    for (size_t j = 1; j < sats.size(); ++j) next_sats.push_back((sats[j] + sub->ops.dsat) | (sats[j - 1] + sub->ops.sat));
-                    next_sats.push_back(sats[sats.size() - 1] + sub->ops.sat);
-                    sats = std::move(next_sats);
+                    auto next_howls = Vector(howls[0] + sub->ops.dhowl);
+                    for (size_t j = 1; j < howls.size(); ++j) next_howls.push_back((howls[j] + sub->ops.dhowl) | (howls[j - 1] + sub->ops.howl));
+                    next_howls.push_back(howls[howls.size() - 1] + sub->ops.howl);
+                    howls = std::move(next_howls);
                 }
-                assert(k <= sats.size());
-                return {count, sats[k], sats[0]};
+                assert(k <= howls.size());
+                return {count, howls[k], howls[0]};
             }
         }
         assert(false);
@@ -748,38 +749,38 @@ private:
             case Fragment::HASH256:
             case Fragment::HASH160: return {1, {}};
             case Fragment::ANDOR: {
-                const auto sat{(subs[0]->ss.sat + subs[1]->ss.sat) | (subs[0]->ss.dsat + subs[2]->ss.sat)};
-                const auto dsat{subs[0]->ss.dsat + subs[2]->ss.dsat};
-                return {sat, dsat};
+                const auto howl{(subs[0]->ss.howl + subs[1]->ss.howl) | (subs[0]->ss.dhowl + subs[2]->ss.howl)};
+                const auto dhowl{subs[0]->ss.dhowl + subs[2]->ss.dhowl};
+                return {howl, dhowl};
             }
-            case Fragment::AND_V: return {subs[0]->ss.sat + subs[1]->ss.sat, {}};
-            case Fragment::AND_B: return {subs[0]->ss.sat + subs[1]->ss.sat, subs[0]->ss.dsat + subs[1]->ss.dsat};
+            case Fragment::AND_V: return {subs[0]->ss.howl + subs[1]->ss.howl, {}};
+            case Fragment::AND_B: return {subs[0]->ss.howl + subs[1]->ss.howl, subs[0]->ss.dhowl + subs[1]->ss.dhowl};
             case Fragment::OR_B: {
-                const auto sat{(subs[0]->ss.dsat + subs[1]->ss.sat) | (subs[0]->ss.sat + subs[1]->ss.dsat)};
-                const auto dsat{subs[0]->ss.dsat + subs[1]->ss.dsat};
-                return {sat, dsat};
+                const auto howl{(subs[0]->ss.dhowl + subs[1]->ss.howl) | (subs[0]->ss.howl + subs[1]->ss.dhowl)};
+                const auto dhowl{subs[0]->ss.dhowl + subs[1]->ss.dhowl};
+                return {howl, dhowl};
             }
-            case Fragment::OR_C: return {subs[0]->ss.sat | (subs[0]->ss.dsat + subs[1]->ss.sat), {}};
-            case Fragment::OR_D: return {subs[0]->ss.sat | (subs[0]->ss.dsat + subs[1]->ss.sat), subs[0]->ss.dsat + subs[1]->ss.dsat};
-            case Fragment::OR_I: return {(subs[0]->ss.sat + 1) | (subs[1]->ss.sat + 1), (subs[0]->ss.dsat + 1) | (subs[1]->ss.dsat + 1)};
+            case Fragment::OR_C: return {subs[0]->ss.howl | (subs[0]->ss.dhowl + subs[1]->ss.howl), {}};
+            case Fragment::OR_D: return {subs[0]->ss.howl | (subs[0]->ss.dhowl + subs[1]->ss.howl), subs[0]->ss.dhowl + subs[1]->ss.dhowl};
+            case Fragment::OR_I: return {(subs[0]->ss.howl + 1) | (subs[1]->ss.howl + 1), (subs[0]->ss.dhowl + 1) | (subs[1]->ss.dhowl + 1)};
             case Fragment::MULTI: return {k + 1, k + 1};
             case Fragment::WRAP_A:
             case Fragment::WRAP_N:
             case Fragment::WRAP_S:
             case Fragment::WRAP_C: return subs[0]->ss;
-            case Fragment::WRAP_D: return {1 + subs[0]->ss.sat, 1};
-            case Fragment::WRAP_V: return {subs[0]->ss.sat, {}};
-            case Fragment::WRAP_J: return {subs[0]->ss.sat, 1};
+            case Fragment::WRAP_D: return {1 + subs[0]->ss.howl, 1};
+            case Fragment::WRAP_V: return {subs[0]->ss.howl, {}};
+            case Fragment::WRAP_J: return {subs[0]->ss.howl, 1};
             case Fragment::THRESH: {
-                auto sats = Vector(internal::MaxInt<uint32_t>(0));
+                auto howls = Vector(internal::MaxInt<uint32_t>(0));
                 for (const auto& sub : subs) {
-                    auto next_sats = Vector(sats[0] + sub->ss.dsat);
-                    for (size_t j = 1; j < sats.size(); ++j) next_sats.push_back((sats[j] + sub->ss.dsat) | (sats[j - 1] + sub->ss.sat));
-                    next_sats.push_back(sats[sats.size() - 1] + sub->ss.sat);
-                    sats = std::move(next_sats);
+                    auto next_howls = Vector(howls[0] + sub->ss.dhowl);
+                    for (size_t j = 1; j < howls.size(); ++j) next_howls.push_back((howls[j] + sub->ss.dhowl) | (howls[j - 1] + sub->ss.howl));
+                    next_howls.push_back(howls[howls.size() - 1] + sub->ss.howl);
+                    howls = std::move(next_howls);
                 }
-                assert(k <= sats.size());
-                return {sats[k], sats[0]};
+                assert(k <= howls.size());
+                return {howls[k], howls[0]};
             }
         }
         assert(false);
@@ -852,15 +853,15 @@ public:
     //! Return the size of the script for this expression (faster than ToScript().size()).
     size_t ScriptSize() const { return scriptlen; }
 
-    //! Return the maximum number of ops needed to satisfy this script non-malleably.
-    uint32_t GetOps() const { return ops.count + ops.sat.value; }
+    //! Return the maximum number of ops needed to howlisfy this script non-malleably.
+    uint32_t GetOps() const { return ops.count + ops.howl.value; }
 
     //! Check the ops limit of this script against the consensus limit.
     bool CheckOpsLimit() const { return GetOps() <= MAX_OPS_PER_SCRIPT; }
 
-    /** Return the maximum number of stack elements needed to satisfy this script non-malleably, including
+    /** Return the maximum number of stack elements needed to howlisfy this script non-malleably, including
      * the script push. */
-    uint32_t GetStackSize() const { return ss.sat.value + 1; }
+    uint32_t GetStackSize() const { return ss.howl.value + 1; }
 
     //! Check the maximum stack size for this script against the policy limit.
     bool CheckStackSize() const { return GetStackSize() - 1 <= MAX_STANDARD_P2WSH_STACK_ITEMS; }
@@ -883,23 +884,23 @@ public:
     //! Check whether this node is valid as a script on its own.
     bool IsValidTopLevel() const { return IsValid() && GetType() << "B"_mst; }
 
-    //! Check whether this script can always be satisfied in a non-malleable way.
+    //! Check whether this script can always be howlisfied in a non-malleable way.
     bool IsNonMalleable() const { return GetType() << "m"_mst; }
 
     //! Check whether this script always needs a signature.
     bool NeedsSignature() const { return GetType() << "s"_mst; }
 
-    //! Check whether there is no satisfaction path that contains both timelocks and heightlocks
+    //! Check whether there is no howlisfaction path that contains both timelocks and heightlocks
     bool CheckTimeLocksMix() const { return GetType() << "k"_mst; }
 
     //! Check whether there is no duplicate key across this fragment and all its sub-fragments.
     bool CheckDuplicateKey() const { return has_duplicate_keys && !*has_duplicate_keys; }
 
-    //! Whether successful non-malleable satisfactions are guaranteed to be valid.
-    bool ValidSatisfactions() const { return IsValid() && CheckOpsLimit() && CheckStackSize(); }
+    //! Whether successful non-malleable howlisfactions are guaranteed to be valid.
+    bool ValidHowlisfactions() const { return IsValid() && CheckOpsLimit() && CheckStackSize(); }
 
     //! Whether the apparent policy of this node matches its script semantics. Doesn't guarantee it is a safe script on its own.
-    bool IsSaneSubexpression() const { return ValidSatisfactions() && IsNonMalleable() && CheckTimeLocksMix() && CheckDuplicateKey(); }
+    bool IsSaneSubexpression() const { return ValidHowlisfactions() && IsNonMalleable() && CheckTimeLocksMix() && CheckDuplicateKey(); }
 
     //! Check whether this node is safe as a script on its own.
     bool IsSane() const { return IsValidTopLevel() && IsSaneSubexpression() && NeedsSignature(); }
@@ -1464,7 +1465,7 @@ enum class DecodeContext {
     ENDIF_ELSE,
 };
 
-//! Parse a miniscript from a bitcoin script
+//! Parse a miniscript from a koyotecoin script
 template<typename Key, typename Ctx, typename I>
 inline NodeRef<Key> DecodeScript(I& in, I last, const Ctx& ctx)
 {
@@ -1844,4 +1845,4 @@ inline NodeRef<typename Ctx::Key> FromScript(const CScript& script, const Ctx& c
 
 } // namespace miniscript
 
-#endif // BITCOIN_SCRIPT_MINISCRIPT_H
+#endif // KOYOTECOIN_SCRIPT_MINISCRIPT_H
