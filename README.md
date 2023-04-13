@@ -1,6 +1,7 @@
 Koyotecoin Core integration/staging tree
 =====================================
 
+Koyotecoin is an open source censorship-resistant peer-to-peer immutable network for education, meme and fun.
 https://koyotecoin.org
 
 For an immediately usable, binary version of the Koyotecoin Core software, see
@@ -24,25 +25,14 @@ information or see https://opensource.org/licenses/MIT.
 Development Process
 -------------------
 
-The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested, but it is not guaranteed to be
-completely stable. [Tags](https://github.com/koyotecoin/koyotecoin/tags) are created
-regularly from release branches to indicate new official, stable release versions of Koyotecoin Core.
+The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested, but it is not guaranteed to be completely stable. [Tags](https://github.com/koyotecoin/koyotecoin/tags) are created regularly from release branches to indicate new official, stable release versions of Koyotecoin Core.
 
-The https://github.com/koyotecoin-core/gui repository is used exclusively for the
-development of the GUI. Its master branch is identical in all monotree
-repositories. Release branches and tags do not exist, so please do not fork
-that repository unless it is for development reasons.
-
-The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md)
-and useful hints for developers can be found in [doc/developer-notes.md](doc/developer-notes.md).
+The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md) and useful hints for developers can be found in [doc/developer-notes.md](doc/developer-notes.md).
 
 Testing
 -------
 
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test on short notice. Please be patient and help out by testing
-other people's pull requests, and remember this is a security-critical project where any mistake might cost people
-lots of money.
+Testing and code review is the bottleneck for development; we get more pull requests than we can review and test on short notice. Please be patient and help out by testing other people's pull requests, and remember this is a security-critical project where any mistake might cost people lots of money.
 
 ### Automated Testing
 
@@ -60,19 +50,13 @@ and that unit/sanity tests are run automatically.
 
 ### Manual Quality Assurance (QA) Testing
 
-Changes should be tested by somebody other than the developer who wrote the
-code. This is especially important for large or high-risk changes. It is useful
-to add a test plan to the pull request description if testing the changes is
-not straightforward.
+Changes should be tested by somebody other than the developer who wrote the code. This is especially important for large or high-risk changes. It is useful to add a test plan to the pull request description if testing the changes is not straightforward.
 
 Translations
 ------------
 
-Changes to translations as well as new translations can be submitted to
-[Koyotecoin Core's Transifex page](https://www.transifex.com/koyotecoin/koyotecoin/).
+Changes to translations as well as new translations can be submitted directly to Koyotecoin Core's GitHub repository by creating a pull request.
 
-Translations are periodically pulled from Transifex and merged into the git repository. See the
-[translation process](doc/translation_process.md) for details on how this works.
+Translations will be periodically reviewed and merged into the git repository. See the [translation process](doc/translation_process.md) for details on how this works.
 
-**Important**: We do not accept translation changes as GitHub pull requests because the next
-pull from Transifex would automatically overwrite them again.
+**Important**: Please make sure to update only the translation files and avoid making changes to the code or other non-related files.
