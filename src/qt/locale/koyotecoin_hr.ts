@@ -1646,7 +1646,7 @@ Potpisivanje je moguće samo sa 'legacy' adresama. </translation>
         <translation type="unfinished">Oznaka postane crvene boje ako bilo koji primatelj dobije iznos manji od trenutnog praga "prašine" (sićušnog iznosa).</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <source>Can vary +/- %1 howler(s) per input.</source>
         <translation type="unfinished">Može varirati +/- %1 howloši(ja) po inputu.</translation>
     </message>
     <message>
@@ -3475,7 +3475,7 @@ Za više informacija o korištenju ove konzile, utipkajte %6.
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
         <translation type="unfinished">Zadajte prilagodenu naknadu po kB (1000 bajtova) virtualne veličine transakcije.
 
 Napomena: Budući da se naknada računa po bajtu, naknada od "100 howlošija po kB" za transakciju veličine 500 bajtova (polovica od 1 kB) rezultirala bi ultimativno naknadom od samo 50 howlošija.</translation>

@@ -355,7 +355,7 @@ Wallet
   KYC), the RPC commands `walletcreatefundedpsbt` and
   `fundrawtransaction` will now fail instead of rounding down the fee.
   Be aware that the `feeRate` argument is specified in KYC per 1,000
-  vbytes, not howloshi per vbyte. (#16257)
+  vbytes, not howler per vbyte. (#16257)
 
 - A new wallet flag `avoid_reuse` has been added (default off). When
   enabled, a wallet will distinguish between used and unused addresses,

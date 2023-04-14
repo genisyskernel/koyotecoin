@@ -3098,7 +3098,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
         <translation type="unfinished">مشخص کردن هزینه کارمزد مخصوص به ازای کیلوبایت(1,000 بایت) حجم مجازی تراکنش
 
 توجه: از آن جایی که کارمزد بر اساس هر بایت محاسبه می شود,هزینه کارمزد"100 ساتوشی بر کیلو بایت"برای تراکنش با حجم 500 بایت مجازی (نصف 1 کیلوبایت) کارمزد فقط اندازه 50 ساتوشی خواهد بود.</translation>

@@ -27,19 +27,19 @@
 CAmount GetDustThreshold(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
 {
     // "Dust" is defined in terms of dustRelayFee,
-    // which has units howloshis-per-kilobyte.
+    // which has units howlers-per-kilobyte.
     // If you'd pay more in fees than the value of the output
     // to spend something, then we consider it dust.
     // A typical spendable non-segwit txout is 34 bytes big, and will
     // need a CTxIn of at least 148 bytes to spend:
     // so dust is a spendable txout less than
-    // 182*dustRelayFee/1000 (in howloshis).
-    // 546 howloshis at the default rate of 3000 howl/kvB.
+    // 182*dustRelayFee/1000 (in howlers).
+    // 546 howlers at the default rate of 3000 howl/kvB.
     // A typical spendable segwit P2WPKH txout is 31 bytes big, and will
     // need a CTxIn of at least 67 bytes to spend:
     // so dust is a spendable txout less than
-    // 98*dustRelayFee/1000 (in howloshis).
-    // 294 howloshis at the default rate of 3000 howl/kvB.
+    // 98*dustRelayFee/1000 (in howlers).
+    // 294 howlers at the default rate of 3000 howl/kvB.
     if (txout.scriptPubKey.IsUnspendable())
         return 0;
 

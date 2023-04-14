@@ -684,8 +684,8 @@
         <translation type="unfinished">Esta etiqueta tórnase vermella se algún receptor recibe unha cantidade máis pequena que o actual límite de po.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
-        <translation type="unfinished">Pode variar +/- %1 howloshi(s) por entrada.</translation>
+        <source>Can vary +/- %1 howler(s) per input.</source>
+        <translation type="unfinished">Pode variar +/- %1 howler(s) por entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>

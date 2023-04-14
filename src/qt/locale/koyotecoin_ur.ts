@@ -909,7 +909,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">یہ لیبل سرخ ہو جاتا ہے اگر کوئی وصول کنندہ موجودہ کم سے کم مقرر کردہ حد سے کم رقم وصول کرتا ہے۔</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <source>Can vary +/- %1 howler(s) per input.</source>
         <translation type="unfinished">مختلف ہو سکتے ہیں%1 +/- ساتوشی فی ان پٹ۔</translation>
     </message>
     <message>

@@ -1087,7 +1087,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">நடப்பு தூசி நிலையை விட குறைவான அளவு பெறுநரை பெறுமானால் இந்த லேபிள் சிவப்பு நிறமாக மாறும்.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <source>Can vary +/- %1 howler(s) per input.</source>
         <translation type="unfinished">உள்ளீடு ஒன்றுக்கு +/- %1 சாத்தோஷி (கள்) மாறுபடலாம்</translation>
     </message>
     <message>

@@ -72,7 +72,7 @@ class BumpFeeTest(KoyotecoinTestFramework):
         peer_node, rbf_node = self.nodes
         rbf_node_address = rbf_node.getnewaddress()
 
-        # fund rbf node with 10 coins of 0.001 kyc (100,000 howloshis)
+        # fund rbf node with 10 coins of 0.001 kyc (100,000 howlers)
         self.log.info("Mining blocks...")
         self.generate(peer_node, 110)
         for _ in range(25):

@@ -28,16 +28,16 @@ enum class FeeEstimateMode {
 };
 
 /**
- * Fee rate in howloshis per kilovirtualbyte: CAmount / kvB
+ * Fee rate in howlers per kilovirtualbyte: CAmount / kvB
  */
 class CFeeRate
 {
 private:
-    /** Fee rate in howl/kvB (howloshis per 1000 virtualbytes) */
+    /** Fee rate in howl/kvB (howlers per 1000 virtualbytes) */
     CAmount nHowloshisPerK;
 
 public:
-    /** Fee rate of 0 howloshis per kvB */
+    /** Fee rate of 0 howlers per kvB */
     CFeeRate() : nHowloshisPerK(0) { }
     template<typename I>
     explicit CFeeRate(const I _nHowloshisPerK): nHowloshisPerK(_nHowloshisPerK) {
@@ -46,22 +46,22 @@ public:
     }
 
     /**
-     * Construct a fee rate from a fee in howloshis and a vsize in vB.
+     * Construct a fee rate from a fee in howlers and a vsize in vB.
      *
-     * param@[in]   nFeePaid    The fee paid by a transaction, in howloshis
+     * param@[in]   nFeePaid    The fee paid by a transaction, in howlers
      * param@[in]   num_bytes   The vsize of a transaction, in vbytes
      */
     CFeeRate(const CAmount& nFeePaid, uint32_t num_bytes);
 
     /**
-     * Return the fee in howloshis for the given vsize in vbytes.
-     * If the calculated fee would have fractional howloshis, then the
-     * returned fee will always be rounded up to the nearest howloshi.
+     * Return the fee in howlers for the given vsize in vbytes.
+     * If the calculated fee would have fractional howlers, then the
+     * returned fee will always be rounded up to the nearest howler.
      */
     CAmount GetFee(uint32_t num_bytes) const;
 
     /**
-     * Return the fee in howloshis for a vsize of 1000 vbytes
+     * Return the fee in howlers for a vsize of 1000 vbytes
      */
     CAmount GetFeePerK() const { return GetFee(1000); }
     friend bool operator<(const CFeeRate& a, const CFeeRate& b) { return a.nHowloshisPerK < b.nHowloshisPerK; }

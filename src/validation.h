@@ -152,7 +152,7 @@ struct MempoolAcceptResult {
     const std::optional<std::list<CTransactionRef>> m_replaced_transactions;
     /** Virtual size as used by the mempool, calculated using serialized size and sigops. */
     const std::optional<int64_t> m_vsize;
-    /** Raw base fees in howloshis. */
+    /** Raw base fees in howlers. */
     const std::optional<CAmount> m_base_fees;
 
     // The following field is only present when m_result_type = ResultType::DIFFERENT_WITNESS

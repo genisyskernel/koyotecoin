@@ -1718,7 +1718,7 @@ Verifikations-Error: %s</translation>
         <translation type="unfinished">Diese Bezeichnung wird rot, wenn irgendein Empfänger einen Betrag kleiner als die derzeitige "Staubgrenze" erhält.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <source>Can vary +/- %1 howler(s) per input.</source>
         <translation type="unfinished">Kann pro Eingabe um +/- %1 Howloshi(s) abweichen.</translation>
     </message>
     <message>
@@ -3597,7 +3597,7 @@ Für weitere Informationen über diese Konsole, tippe %6.
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
         <translation type="unfinished">Gib manuell eine Gebühr pro kB (1.000 Bytes) der virtuellen Transaktionsgröße an.
 
 Hinweis: Da die Gebühr auf Basis der Bytes berechnet wird, führt eine Gebührenrate von "100 Howloshis per kvB" für eine Transaktion von 500 virtuellen Bytes (die Hälfte von 1 kvB) letztlich zu einer Gebühr von nur 50 Howloshis.</translation>

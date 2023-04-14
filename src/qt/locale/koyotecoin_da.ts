@@ -1637,8 +1637,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Denne mærkat bliver rød, hvis en eller flere modtagere modtager et beløb, der er mindre end den aktuelle støvgrænse.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
-        <translation type="unfinished">Kan variere med ±%1 howloshi per input.</translation>
+        <source>Can vary +/- %1 howler(s) per input.</source>
+        <translation type="unfinished">Kan variere med ±%1 howler per input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -3437,10 +3437,10 @@ For mere information om brug af denne konsol, skriv %6.
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
         <translation type="unfinished">Angiv et brugerdefineret gebyr pr. kB (1.000 bytes) af transaktionens virtuelle størrelse.
 
-Bemærk: Da gebyret beregnes på per-byte-basis, ville en gebyrhowls på "100 howloshis pr. kvB" for en transaktionsstørrelse på 500 virtuelle bytes (halvdelen af 1 kvB) i sidste ende kun give et gebyr på 50 howloshis.</translation>
+Bemærk: Da gebyret beregnes på per-byte-basis, ville en gebyrhowls på "100 howlers pr. kvB" for en transaktionsstørrelse på 500 virtuelle bytes (halvdelen af 1 kvB) i sidste ende kun give et gebyr på 50 howlers.</translation>
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for koyotecoin transactions than the network can process.</source>

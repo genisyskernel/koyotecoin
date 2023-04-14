@@ -1423,8 +1423,8 @@ Försök igen.</translation>
         <translation type="unfinished">Denna etikett blir röd om någon mottagare tar emot ett belopp som är lägre än aktuell dammtröskel.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
-        <translation type="unfinished">Kan variera +/- %1 howloshi per inmatning.</translation>
+        <source>Can vary +/- %1 howler(s) per input.</source>
+        <translation type="unfinished">Kan variera +/- %1 howler per inmatning.</translation>
     </message>
     <message>
         <source>(no label)</source>

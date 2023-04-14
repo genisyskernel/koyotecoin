@@ -969,8 +969,8 @@ Pasirašymas galimas tik su 'legacy' tipo adresais.</translation>
         <translation type="unfinished">Ši etiketė tampa raudona, jei bet kuris gavėjas gauna mažesnę sumą nei dabartinė dulkių slenkstis.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
-        <translation type="unfinished">Gali svyruoti nuo +/-%1 howloshi(-ų) vienam įvedimui.</translation>
+        <source>Can vary +/- %1 howler(s) per input.</source>
+        <translation type="unfinished">Gali svyruoti nuo +/-%1 howler(-ų) vienam įvedimui.</translation>
     </message>
     <message>
         <source>(no label)</source>

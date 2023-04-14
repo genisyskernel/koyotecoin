@@ -951,7 +951,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <context-group purpose="location"><context context-type="linenumber">548</context></context-group>
       </trans-unit>
       <trans-unit id="_msg217">
-        <source xml:space="preserve">Can vary +/- %1 howloshi(s) per input.</source>
+        <source xml:space="preserve">Can vary +/- %1 howler(s) per input.</source>
         <context-group purpose="location"><context context-type="linenumber">553</context></context-group>
       </trans-unit>
       <trans-unit id="_msg218">
@@ -3235,7 +3235,7 @@ For more information on using this console, type %6.
       <trans-unit id="_msg702">
         <source xml:space="preserve">Specify a custom fee per kB (1,000 bytes) of the transaction&apos;s virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 howloshis per kvB&quot; for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 howlers per kvB&quot; for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
         <context-group purpose="location"><context context-type="linenumber">851</context></context-group>
       </trans-unit>
       <trans-unit id="_msg703">

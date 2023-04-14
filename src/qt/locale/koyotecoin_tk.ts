@@ -930,7 +930,7 @@ Diňe "miras" görnüşli salgylar bilen gol çekmek mümkin.</translation>
         <translation type="unfinished">Islendik kabul ediji häzirki toz çäginden has kiçi möçberi kabul edip alsa, bu bellik gyzyla öwrülýär.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <source>Can vary +/- %1 howler(s) per input.</source>
         <translation type="unfinished">Her giriş üçin +/- %1 howlosi üýtgäp biler.</translation>
     </message>
     <message>

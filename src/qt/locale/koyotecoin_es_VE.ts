@@ -645,8 +645,8 @@ Registrarse solo es posible utilizando  una direccion tipo "Legal"</translation>
         <translation type="unfinished">si</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
-        <translation type="unfinished">Puede variar +/- %1 howloshi(s) por entrada.</translation>
+        <source>Can vary +/- %1 howler(s) per input.</source>
+        <translation type="unfinished">Puede variar +/- %1 howler(s) por entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>

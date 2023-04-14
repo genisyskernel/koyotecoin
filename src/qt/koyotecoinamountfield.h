@@ -36,13 +36,13 @@ public:
     /** If allow empty is set to false the field will be set to the minimum allowed value if left empty. **/
     void SetAllowEmpty(bool allow);
 
-    /** Set the minimum value in howloshis **/
+    /** Set the minimum value in howlers **/
     void SetMinValue(const CAmount& value);
 
-    /** Set the maximum value in howloshis **/
+    /** Set the maximum value in howlers **/
     void SetMaxValue(const CAmount& value);
 
-    /** Set single step in howloshis **/
+    /** Set single step in howlers **/
     void setSingleStep(const CAmount& step);
 
     /** Make read-only **/

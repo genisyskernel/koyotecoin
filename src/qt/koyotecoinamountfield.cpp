@@ -152,7 +152,7 @@ public:
 
 private:
     KoyotecoinUnit currentUnit{KoyotecoinUnit::KYC};
-    CAmount singleStep{CAmount(100000)}; // howloshis
+    CAmount singleStep{CAmount(100000)}; // howlers
     mutable QSize cachedMinimumSizeHint;
     bool m_allow_empty{true};
     CAmount m_min_amount{CAmount(0)};

@@ -206,8 +206,8 @@ def assert_array_result(object_array, to_match, expected, should_not_find=False)
 def check_json_precision():
     """Make sure json library being used does not lose precision converting KYC values"""
     n = Decimal("20000000.00000003")
-    howloshis = int(json.loads(json.dumps(float(n))) * 1.0e8)
-    if howloshis != 2000000000000003:
+    howlers = int(json.loads(json.dumps(float(n))) * 1.0e8)
+    if howlers != 2000000000000003:
         raise RuntimeError("JSON encode/decode loses precision")
 
 
@@ -243,7 +243,7 @@ def get_fee(tx_size, feerate_kyc_kvb):
     return target_fee_howl / Decimal(1e8) # Return result in  KYC
 
 
-def howloshi_round(amount):
+def howler_round(amount):
     return Decimal(amount).quantize(Decimal('0.00000001'), rounding=ROUND_DOWN)
 
 
@@ -496,7 +496,7 @@ def chain_transaction(node, parent_txids, vouts, value, fee, num_outputs):
 
     Returns a tuple with the txid and the amount sent per output.
     """
-    send_value = howloshi_round((value - fee)/num_outputs)
+    send_value = howler_round((value - fee)/num_outputs)
     inputs = []
     for (txid, vout) in zip(parent_txids, vouts):
         inputs.append({'txid' : txid, 'vout' : vout})

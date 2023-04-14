@@ -1420,8 +1420,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">當任何一個收款金額小於目前的灰塵金額上限時，文字會變紅色。</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howloshi(s) per input.</source>
-        <translation type="unfinished">每組輸入可能有 +/- %1 個 howloshi 的誤差。</translation>
+        <source>Can vary +/- %1 howler(s) per input.</source>
+        <translation type="unfinished">每組輸入可能有 +/- %1 個 howler 的誤差。</translation>
     </message>
     <message>
         <source>(no label)</source>
