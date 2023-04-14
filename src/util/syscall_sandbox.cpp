@@ -69,7 +69,7 @@ bool g_syscall_sandbox_log_violation_before_terminating{false};
 #define __NR_copy_file_range 326
 #endif
 
-#ifndef  __NR_rseq
+#ifndef __NR_rseq
 #define __NR_rseq 334
 #endif
 
@@ -149,7 +149,7 @@ const std::map<uint32_t, std::string> LINUX_SYSCALLS{
     {__NR_execveat, "execveat"},
     {__NR_exit, "exit"},
     {__NR_exit_group, "exit_group"},
-    {__NR_facceshowl, "facceshowl"},
+    {__NR_faccessat, "faccessat"},
     {__NR_fadvise64, "fadvise64"},
     {__NR_fallocate, "fallocate"},
     {__NR_fanotify_init, "fanotify_init"},
@@ -173,7 +173,7 @@ const std::map<uint32_t, std::string> LINUX_SYSCALLS{
     {__NR_fsync, "fsync"},
     {__NR_ftruncate, "ftruncate"},
     {__NR_futex, "futex"},
-    {__NR_futimehowl, "futimehowl"},
+    {__NR_futimesat, "futimesat"},
     {__NR_get_kernel_syms, "get_kernel_syms"},
     {__NR_get_mempolicy, "get_mempolicy"},
     {__NR_get_robust_list, "get_robust_list"},
@@ -437,7 +437,7 @@ const std::map<uint32_t, std::string> LINUX_SYSCALLS{
     {__NR_userfaultfd, "userfaultfd"},
     {__NR_ustat, "ustat"},
     {__NR_utime, "utime"},
-    {__NR_utimenhowl, "utimenhowl"},
+    {__NR_utimensat, "utimensat"},
     {__NR_utimes, "utimes"},
     {__NR_vfork, "vfork"},
     {__NR_vhangup, "vhangup"},
