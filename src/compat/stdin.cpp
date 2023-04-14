@@ -8,12 +8,12 @@
 #include <cstdio>
 
 #ifdef WIN32
-#include <windows.h>
 #include <io.h>
+#include <windows.h>
 #else
+#include <poll.h>
 #include <termios.h>
 #include <unistd.h>
-#include <poll.h>
 #endif
 
 // https://stackoverflow.com/questions/1413445/reading-a-password-from-stdcin
@@ -44,9 +44,9 @@ void SetStdinEcho(bool enable)
 bool StdinTerminal()
 {
 #ifdef WIN32
-    return _ihowlty(_fileno(stdin));
+    return _isatty(_fileno(stdin));
 #else
-    return ihowlty(fileno(stdin));
+    return isatty(fileno(stdin));
 #endif
 }
 
