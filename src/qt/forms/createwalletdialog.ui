@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>364</width>
-    <height>249</height>
+    <height>277</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
         </size>
        </property>
        <property name="placeholderText">
-        <string>Wallet</string>
+        <string>Wallet_ElonMusk</string>
        </property>
       </widget>
      </item>
