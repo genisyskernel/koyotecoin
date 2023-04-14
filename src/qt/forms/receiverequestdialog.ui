@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>413</width>
+    <width>451</width>
     <height>229</height>
    </rect>
   </property>
@@ -31,7 +31,6 @@
     <widget class="QLabel" name="payment_header">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -47,7 +46,6 @@
     <widget class="QLabel" name="uri_tag">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -65,7 +63,7 @@
    <item row="2" column="1" alignment="Qt::AlignTop">
     <widget class="QLabel" name="uri_content">
      <property name="text">
-      <string notr="true">koyotecoin:BC1…</string>
+      <string notr="true">koyotecoin:KC1…</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
@@ -82,7 +80,6 @@
     <widget class="QLabel" name="address_tag">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -97,7 +94,7 @@
    <item row="3" column="1" alignment="Qt::AlignTop">
     <widget class="QLabel" name="address_content">
      <property name="text">
-      <string notr="true">bc1…</string>
+      <string notr="true">kc1…</string>
      </property>
      <property name="textFormat">
       <enum>Qt::PlainText</enum>
@@ -111,7 +108,6 @@
     <widget class="QLabel" name="amount_tag">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -140,7 +136,6 @@
     <widget class="QLabel" name="label_tag">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -172,7 +167,6 @@
     <widget class="QLabel" name="message_tag">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -204,7 +198,6 @@
     <widget class="QLabel" name="wallet_tag">
      <property name="font">
       <font>
-       <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
@@ -256,11 +249,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="btnVerify">
-       <property name="text">
-        <string>&amp;Verify</string>
-       </property>
        <property name="toolTip">
         <string>Verify this address on e.g. a hardware wallet screen</string>
+       </property>
+       <property name="text">
+        <string>&amp;Verify</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
