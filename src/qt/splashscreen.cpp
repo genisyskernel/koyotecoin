@@ -82,29 +82,30 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
         fontFactor = fontFactor * 176 / titleTextWidth;
     }
 
-    pixPaint.setFont(QFont(font, 33 * fontFactor));
+    QFont FontTitle = QFont(font, 35 * fontFactor)
+                          FontTitle.setWeight(QFont::Bold)
+                              pixPaint.setFont(FontTitle);
     fm = pixPaint.fontMetrics();
     titleTextWidth = GUIUtil::TextWidth(fm, titleText);
     pixPaint.drawText(pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight, paddingTop, titleText);
 
-    QFont boldFontVersion = QFont(font, 25 * fontFactor);
-    boldFontVersion.setWeight(QFont::Bold);
-    pixPaint.setFont(boldFontVersion);
+    QFont FontVersion = QFont(font, 25 * fontFactor);
+    pixPaint.setFont(FontVersion);
 
     // if the version string is too long, reduce size
     fm = pixPaint.fontMetrics();
     int versionTextWidth = GUIUtil::TextWidth(fm, versionText);
     if (versionTextWidth > titleTextWidth + paddingRight - 10) {
-        QFont boldFontVersionSmall = QFont(font, 15 * fontFactor);
-        boldFontVersionSmall.setWeight(QFont::Bold);
-        pixPaint.setFont(boldFontVersionSmall);
+        QFont FontVersionSmall = QFont(font, 15 * fontFactor);
+        ;
+        pixPaint.setFont(FontVersionSmall);
         titleVersionVSpace -= 5;
     }
     pixPaint.drawText(pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight + 2, paddingTop + titleVersionVSpace, versionText);
 
     // draw copyright stuff
     {
-        QFont boldFontCopyright = QFont(font, 10 * fontFactor);
+        QFont boldFontCopyright = QFont(font, 12 * fontFactor);
         boldFontCopyright.setWeight(QFont::Bold);
         pixPaint.setFont(boldFontCopyright);
         const int x = pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight;
