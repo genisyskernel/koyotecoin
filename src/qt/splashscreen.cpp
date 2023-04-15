@@ -67,7 +67,7 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     pixPaint.fillRect(rGradient, gradient);
 
     // draw the koyotecoin icon, expected size of PNG: 1024x1024
-    QRect rectIcon(QPoint(-50, -40), QSize(300, 300));
+    QRect rectIcon(QPoint(-50, -45), QSize(300, 300));
 
     const QSize requiredSize(1024, 1024);
     QPixmap icon(networkStyle->getAppIcon().pixmap(requiredSize));
@@ -87,20 +87,22 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     titleTextWidth = GUIUtil::TextWidth(fm, titleText);
     pixPaint.drawText(pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight, paddingTop, titleText);
 
-    pixPaint.setFont(QFont(font, 15 * fontFactor));
+    pixPaint.setFont(QFont(font, 20 * fontFactor));
 
     // if the version string is too long, reduce size
     fm = pixPaint.fontMetrics();
     int versionTextWidth = GUIUtil::TextWidth(fm, versionText);
     if (versionTextWidth > titleTextWidth + paddingRight - 10) {
-        pixPaint.setFont(QFont(font, 10 * fontFactor));
+        pixPaint.setFont(QFont(font, 15 * fontFactor));
         titleVersionVSpace -= 5;
     }
     pixPaint.drawText(pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight + 2, paddingTop + titleVersionVSpace, versionText);
 
     // draw copyright stuff
     {
-        pixPaint.setFont(QFont(font, 10 * fontFactor));
+        QFont boldFontCopyright = QFont(font, 15 * fontFactor);
+        boldFontCopyright.setWeight(QFont::Bold);
+        pixPaint.setFont(boldFontCopyright);
         const int x = pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight;
         const int y = paddingTop + titleCopyrightVSpace;
         QRect copyrightRect(x, y, pixmap.width() - x - paddingRight, pixmap.height() - y);
