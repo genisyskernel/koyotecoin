@@ -67,8 +67,6 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     pixPaint.fillRect(rGradient, gradient);
 
     // draw the koyotecoin icon, expected size of PNG: 1024x1024
-    // QRect rectIcon(QPoint(-150, -122), QSize(430, 430));
-    // QRect rectIcon(QPoint(-150, -122), QSize(400, 400));
     QRect rectIcon(QPoint(-50, -40), QSize(300, 300));
 
     const QSize requiredSize(1024, 1024);
