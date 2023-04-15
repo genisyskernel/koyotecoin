@@ -1,5 +1,5 @@
 {
-  "name": "koyotecoin-core",
+  "name": "koyotecoin",
   "version-string": "1",
   "dependencies": [
     "berkeleydb",

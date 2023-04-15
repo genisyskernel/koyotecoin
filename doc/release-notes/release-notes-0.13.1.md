@@ -1,6 +1,6 @@
 Koyotecoin Core version 0.13.1 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.13.1/>
+<https://koyotecoin.org/bin/koyotecoin-0.13.1/>
 
 This is a new minor version release, including activation parameters for the
 segwit softfork, various bugfixes and performance improvements, as well as
@@ -8,14 +8,13 @@ updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-Compatibility
-==============
+# Compatibility
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
 an OS initially released in 2001. This means that not even critical security
@@ -36,15 +35,13 @@ No attempt is made to prevent installing or running the software on Windows XP,
 you can still do so at your own risk, but do not expect it to work: do not
 report issues about Windows XP to the issue tracker.
 
-From 0.13.1 onwards OS X 10.7 is no longer supported. 0.13.0 was intended to work on 10.7+, 
-but severe issues with the libc++ version on 10.7.x keep it from running reliably. 
+From 0.13.1 onwards OS X 10.7 is no longer supported. 0.13.0 was intended to work on 10.7+,
+but severe issues with the libc++ version on 10.7.x keep it from running reliably.
 0.13.1 now requires 10.8+, and will communicate that to 10.7 users, rather than crashing unexpectedly.
 
-Notable changes
-===============
+# Notable changes
 
-Segregated witness soft fork
-----------------------------
+## Segregated witness soft fork
 
 Segregated witness (segwit) is a soft fork that, if activated, will
 allow transaction-producing software to separate (segregate) transaction
@@ -74,13 +71,13 @@ covered by the txid. This provides several immediate benefits:
 - **Weighting data based on how it affects node performance:** Some parts of
   each Koyotecoin block need to be stored by nodes in order to validate future
   blocks; other parts of a block can be immediately forgotten (pruned) or used
-  only for helping other nodes sync their copy of the block chain.  One large
+  only for helping other nodes sync their copy of the block chain. One large
   part of the immediately prunable data are transaction signatures (witnesses),
   and segwit makes it possible to give a different "weight" to segregated
   witnesses to correspond with the lower demands they place on node resources.
   Specifically, each byte of a segregated witness is given a weight of 1, each
   other byte in a block is given a weight of 4, and the maximum allowed weight
-  of a block is 4 million.  Weighting the data this way better aligns the most
+  of a block is 4 million. Weighting the data this way better aligns the most
   profitable strategy for creating blocks with the long-term costs of block
   validation.
 
@@ -88,18 +85,18 @@ covered by the txid. This provides several immediate benefits:
   generated in segwit simplifies the design of secure signature generators
   (such as hardware wallets), reduces the amount of data the signature
   generator needs to download, and allows the signature generator to operate
-  more quickly.  This is made possible by having the generator sign the amount
+  more quickly. This is made possible by having the generator sign the amount
   of koyotecoins they think they are spending, and by having full nodes refuse to
   accept those signatures unless the amount of koyotecoins being spent is exactly
-  the same as was signed.  For non-segwit transactions, wallets instead had to
+  the same as was signed. For non-segwit transactions, wallets instead had to
   download the complete previous transactions being spent for every payment
   they made, which could be a slow operation on hardware wallets and in other
   situations where bandwidth or computation speed was constrained.
 
 - **Linear scaling of sighash operations:** In 2015 a block was produced that
   required about 25 seconds to validate on modern hardware because of the way
-  transaction signature hashes are performed.  Other similar blocks, or blocks
-  that could take even longer to validate, can still be produced today.  The
+  transaction signature hashes are performed. Other similar blocks, or blocks
+  that could take even longer to validate, can still be produced today. The
   problem that caused this can't be fixed in a soft fork without unwanted
   side-effects, but transactions that opt-in to using segwit will now use a
   different signature method that doesn't suffer from this problem and doesn't
@@ -107,13 +104,13 @@ covered by the txid. This provides several immediate benefits:
 
 - **Increased security for multisig:** Koyotecoin addresses (both P2PKH addresses
   that start with a '1' and P2SH addresses that start with a '3') use a hash
-  function known as RIPEMD-160.  For P2PKH addresses, this provides about 160
+  function known as RIPEMD-160. For P2PKH addresses, this provides about 160
   bits of security---which is beyond what cryptographers believe can be broken
-  today.  But because P2SH is more flexible, only about 80 bits of security is
+  today. But because P2SH is more flexible, only about 80 bits of security is
   provided per address. Although 80 bits is very strong security, it is within
   the realm of possibility that it can be broken by a powerful adversary.
   Segwit allows advanced transactions to use the SHA256 hash function instead,
-  which provides about 128 bits of security  (that is 281 trillion times as
+  which provides about 128 bits of security (that is 281 trillion times as
   much security as 80 bits and is equivalent to the maximum bits of security
   believed to be provided by Koyotecoin's choice of parameters for its Elliptic
   Curve Digital Security Algorithm [ECDSA].)
@@ -121,7 +118,7 @@ covered by the txid. This provides several immediate benefits:
 - **More efficient almost-full-node security** Satoshi Nakamoto's original
   Koyotecoin paper describes a method for allowing newly-started full nodes to
   skip downloading and validating some data from historic blocks that are
-  protected by large amounts of proof of work.  Unfortunately, Nakamoto's
+  protected by large amounts of proof of work. Unfortunately, Nakamoto's
   method can't guarantee that a newly-started node using this method will
   produce an accurate copy of Koyotecoin's current ledger (called the UTXO set),
   making the node vulnerable to falling out of consensus with other nodes.
@@ -130,13 +127,13 @@ covered by the txid. This provides several immediate benefits:
   possible for a node to optionally skip downloading some blockchain data
   (specifically, the segregated witnesses) while still ensuring that the node
   can build an accurate copy of the UTXO set for the block chain with the most
-  proof of work.  Segwit enables this capability at the consensus layer, but
+  proof of work. Segwit enables this capability at the consensus layer, but
   note that Koyotecoin Core does not provide an option to use this capability as
   of this 0.13.1 release.
 
 - **Script versioning:** Segwit makes it easy for future soft forks to allow
   Koyotecoin users to individually opt-in to almost any change in the Koyotecoin
-  Script language when those users receive new transactions.  Features
+  Script language when those users receive new transactions. Features
   currently being researched by Koyotecoin Core contributors that may use this
   capability include support for Schnorr signatures, which can improve the
   privacy and efficiency of multisig transactions (or transactions with
@@ -146,30 +143,28 @@ covered by the txid. This provides several immediate benefits:
   that can be made using script versioning.
 
 Activation for the segwit soft fork is being managed using BIP9
-versionbits.  Segwit's version bit is bit 1, and nodes will begin
+versionbits. Segwit's version bit is bit 1, and nodes will begin
 tracking which blocks signal support for segwit at the beginning of the
-first retarget period after segwit's start date of 15 November 2016.  If
+first retarget period after segwit's start date of 15 November 2016. If
 95% of blocks within a 2,016-block retarget period (about two weeks)
-signal support for segwit, the soft fork will be locked in.  After
+signal support for segwit, the soft fork will be locked in. After
 another 2,016 blocks, segwit will activate.
 
 For more information about segwit, please see the [segwit FAQ][], the
-[segwit wallet developers guide][] or BIPs [141][BIP141], [143][BIP143],
-[144][BIP144], and [145][BIP145].  If you're a miner or mining pool
+[segwit wallet developers guide][] or BIPs [141][bip141], [143][bip143],
+[144][bip144], and [145][bip145]. If you're a miner or mining pool
 operator, please see the [versionbits FAQ][] for information about
 signaling support for a soft fork.
 
-[Segwit FAQ]: https://koyotecoin.org/2016/01/26/segwit-benefits/
+[segwit faq]: https://koyotecoin.org/2016/01/26/segwit-benefits/
 [segwit wallet developers guide]: https://koyotecoin.org/segwit_wallet_dev/
-[BIP141]: https://github.com/koyotecoin/bips/blob/master/bip-0141.mediawiki
-[BIP143]: https://github.com/koyotecoin/bips/blob/master/bip-0143.mediawiki
-[BIP144]: https://github.com/koyotecoin/bips/blob/master/bip-0144.mediawiki
-[BIP145]: https://github.com/koyotecoin/bips/blob/master/bip-0145.mediawiki
-[versionbits FAQ]: https://koyotecoin.org/2016/06/08/version-bits-miners-faq/
+[bip141]: https://github.com/koyotecoin/bips/blob/master/bip-0141.mediawiki
+[bip143]: https://github.com/koyotecoin/bips/blob/master/bip-0143.mediawiki
+[bip144]: https://github.com/koyotecoin/bips/blob/master/bip-0144.mediawiki
+[bip145]: https://github.com/koyotecoin/bips/blob/master/bip-0145.mediawiki
+[versionbits faq]: https://koyotecoin.org/2016/06/08/version-bits-miners-faq/
 
-
-Null dummy soft fork
--------------------
+## Null dummy soft fork
 
 Combined with the segwit soft fork is an additional change that turns a
 long-existing network relay policy into a consensus rule. The
@@ -185,7 +180,7 @@ causing other problems.
 
 Since Koyotecoin Core 0.10.0, nodes have defaulted to only relaying and
 mining transactions whose dummy element was a null value (0x00, also
-called OP_0).  The null dummy soft fork turns this relay rule into a
+called OP_0). The null dummy soft fork turns this relay rule into a
 consensus rule both for non-segwit transactions and segwit transactions,
 so that this method of mutating transactions is permanently eliminated
 from the network.
@@ -196,18 +191,15 @@ as segwit.
 
 For more information, please see [BIP147][].
 
-[BIP147]: https://github.com/koyotecoin/bips/blob/master/bip-0147.mediawiki
+[bip147]: https://github.com/koyotecoin/bips/blob/master/bip-0147.mediawiki
 
-Low-level RPC changes
----------------------
+## Low-level RPC changes
 
 - `importprunedfunds` only accepts two required arguments. Some versions accept
   an optional third arg, which was always ignored. Make sure to never pass more
   than two arguments.
 
-
-Linux ARM builds
-----------------
+## Linux ARM builds
 
 With the 0.13.0 release, pre-built Linux ARM binaries were added to the set of
 uploaded executables. Additional detail on the ARM architecture targeted by each
@@ -232,9 +224,7 @@ ARMv6 architecture devices that are not compatible with ARMv7-A or ARMv8-A.
 Note that Android is not considered ARM Linux in this context. The executables
 are not expected to work out of the box on Android.
 
-
-0.13.1 Change log
-=================
+# 0.13.1 Change log
 
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
@@ -242,11 +232,13 @@ the code changes and accompanying discussion, both the pull request and
 git merge commit are mentioned.
 
 ### Consensus
+
 - #8636 `9dfa0c8` Implement NULLDUMMY softfork (BIP147) (jl2012)
 - #8848 `7a34a46` Add NULLDUMMY verify flag in koyotecoinconsensus.h (jl2012)
 - #8937 `8b66659` Define start and end time for segwit deployment (sipa)
 
 ### RPC and other APIs
+
 - #8581 `526d2b0` Drop misleading option in importprunedfunds (MarcoFalke)
 - #8699 `a5ec248` Remove createwitnessaddress RPC command (jl2012)
 - #8780 `794b007` Deprecate getinfo (MarcoFalke)
@@ -256,6 +248,7 @@ git merge commit are mentioned.
 - #8951 `7c2bf4b` RPC/Mining: getblocktemplate: Update and fix formatting of help (luke-jr)
 
 ### Block and transaction handling
+
 - #8611 `a9429ca` Reduce default number of blocks to check at startup (sipa)
 - #8634 `3e80ab7` Add policy: null signature for failed CHECK(MULTI)SIG (jl2012)
 - #8525 `1672225` Do not store witness txn in rejection cache (sipa)
@@ -265,6 +258,7 @@ git merge commit are mentioned.
 - #8651 `b8c79a0` Predeclare PrecomputedTransactionData as struct (sipa)
 
 ### P2P protocol and network code
+
 - #8740 `42ea51a` No longer send local address in addrMe (laanwj)
 - #8427 `69d1cd2` Ignore `notfound` P2P messages (laanwj)
 - #8573 `4f84082` Set jonasschnellis dns-seeder filter flag (jonasschnelli)
@@ -280,6 +274,7 @@ git merge commit are mentioned.
 - #8949 `0dbc48a` Be more agressive in getting connections to peers with relevant services (gmaxwell)
 
 ### Build system
+
 - #8293 `fa5b249` Allow building libkoyotecoinconsensus without any univalue (luke-jr)
 - #8492 `8b0bdd3` Allow building bench_koyotecoin by itself (luke-jr)
 - #8563 `147003c` Add configure check for -latomic (ajtowns)
@@ -287,6 +282,7 @@ git merge commit are mentioned.
 - #8520 `75f2065` Remove check for `openssl/ec.h` (laanwj)
 
 ### GUI
+
 - #8481 `d9f0d4e` Fix minimize and close bugs (adlawren)
 - #8487 `a37cec5` Persist the datadir after option reset (achow101)
 - #8697 `41fd852` Fix op order to append first alert (rodasmith)
@@ -296,6 +292,7 @@ git merge commit are mentioned.
 - #7579 `f1c0d78` Show network/chain errors in the GUI (jonasschnelli)
 
 ### Wallet
+
 - #8443 `464dedd` Trivial cleanup of HD wallet changes (jonasschnelli)
 - #8539 `cb07f19` CDB: fix debug output (crowning-)
 - #8664 `091cdeb` Fix segwit-related wallet bug (sdaftuar)
@@ -303,6 +300,7 @@ git merge commit are mentioned.
 - #8765 `6288659` Remove "unused" ThreadFlushWalletDB from removeprunedfunds (jonasschnelli)
 
 ### Tests and QA
+
 - #8713 `ae8c7df` create_cache: Delete temp dir when done (MarcoFalke)
 - #8716 `e34374e` Check legacy wallet as well (MarcoFalke)
 - #8750 `d6ebe13` Refactor RPCTestHandler to prevent TimeoutExpired (MarcoFalke)
@@ -334,10 +332,11 @@ git merge commit are mentioned.
 - #8904 `cc6f551` Fix compact block shortids for a test case (dagurval)
 
 ### Documentation
+
 - #8754 `0e2c6bd` Target protobuf 2.6 in OS X build notes. (fanquake)
 - #8461 `b17a3f9` Document return value of networkhashps for getmininginfo RPC endpoint (jlopp)
 - #8512 `156e305` Corrected JSON typo on setban of net.cpp (sevastos)
-- #8683 `8a7d7ff` Fix incorrect file name koyotecoin.qrc  (koyotecoinsSG)
+- #8683 `8a7d7ff` Fix incorrect file name koyotecoin.qrc (koyotecoinsSG)
 - #8891 `5e0dd9e` Update bips.md for Segregated Witness (fanquake)
 - #8545 `863ae74` Update git-subtree-check.sh README (MarcoFalke)
 - #8607 `486650a` Fix doxygen off-by-one comments, fix typos (MarcoFalke)
@@ -349,6 +348,7 @@ git merge commit are mentioned.
 - #8939 `06d15fb` Update implemented bips for 0.13.1 (sipa)
 
 ### Miscellaneous
+
 - #8742 `d31ac72` Specify Protobuf version 2 in paymentrequest.proto (fanquake)
 - #8414,#8558,#8676,#8700,#8701,#8702 Add missing copyright headers (isle2983, kazcw)
 - #8899 `4ed2627` Fix wake from sleep issue with Boost 1.59.0 (fanquake)
@@ -358,8 +358,7 @@ git merge commit are mentioned.
 - #8548 `305d8ac` Use `__func__` to get function name for output printing (MarcoFalke)
 - #8291 `a987431` [util] CopyrightHolders: Check for untranslated substitution (MarcoFalke)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

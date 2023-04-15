@@ -22,7 +22,7 @@ while getopts "?hr" opt; do
       echo "-r      Check that subtree commit is present in repository."
       echo "        To do this check, fetch the subtreed remote first. Example:"
       echo ""
-      echo "            git fetch https://github.com/koyotecoin-core/secp256k1.git"
+      echo "            git fetch https://github.com/koyotecoin/secp256k1.git"
       echo "            test/lint/git-subtree-check.sh -r src/secp256k1"
       exit 1
     ;;

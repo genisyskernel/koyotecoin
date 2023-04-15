@@ -310,7 +310,7 @@
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
         <translation type="unfinished">-fallbackfee=&lt;amount&gt; үшін қате сан: "%s"</translation>

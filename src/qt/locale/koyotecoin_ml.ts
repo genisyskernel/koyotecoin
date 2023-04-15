@@ -303,7 +303,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>-maxtxfee is set very high! Fees this large could be paid on a single transaction.</source>
         <translation type="unfinished">-maxtxfee യുടെ മൂല്യം വളരെ വലുതാണ്! ഇത്രയും ഉയര്ന്ന പ്രതിഫലം ഒരൊറ്റ ഇടപാടിൽ നൽകാൻ സാധ്യതയുണ്ട്.</translation>

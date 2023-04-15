@@ -390,7 +390,7 @@ Podpisovanje je možno le s podedovanimi ("legacy") naslovi.</translation>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">Nastavitvene datoteke ni bilo moč prebrati</translation>

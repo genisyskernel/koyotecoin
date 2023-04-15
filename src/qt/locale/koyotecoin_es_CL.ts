@@ -341,7 +341,7 @@ Usa el boton "Crear nueva direccion de recibimiento" en la pestaña de recibir p
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>The %s developers</source>
         <translation type="unfinished">Los desarrolladores de %s</translation>

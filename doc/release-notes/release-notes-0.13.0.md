@@ -1,20 +1,19 @@
 Koyotecoin Core version 0.13.0 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.13.0/>
+<https://koyotecoin.org/bin/koyotecoin-0.13.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-Compatibility
-==============
+# Compatibility
 
 Microsoft ended support for Windows XP on [April 8th, 2014](https://www.microsoft.com/en-us/WindowsForBusiness/end-of-xp-support),
 an OS initially released in 2001. This means that not even critical security
@@ -35,11 +34,9 @@ No attempt is made to prevent installing or running the software on Windows XP,
 you can still do so at your own risk, but do not expect it to work: do not
 report issues about Windows XP to the issue tracker.
 
-Notable changes
-===============
+# Notable changes
 
-Database cache memory increased
---------------------------------
+## Database cache memory increased
 
 As a result of growth of the UTXO set, performance with the prior default
 database cache of 100 MiB has suffered.
@@ -54,9 +51,7 @@ For nodes on low-memory systems, the database cache can be changed back to
 Note that the database cache setting has the most performance impact
 during initial sync of a node, and when catching up after downtime.
 
-
-koyotecoin-cli: arguments privacy
-------------------------------
+## koyotecoin-cli: arguments privacy
 
 The RPC command line client gained a new argument, `-stdin`
 to read extra arguments from standard input, one per line until EOF/Ctrl-D.
@@ -72,9 +67,7 @@ It is recommended to use this for sensitive information such as wallet
 passphrases, as command-line arguments can usually be read from the process
 table by any user on the system.
 
-
-C++11 and Python 3
-------------------
+## C++11 and Python 3
 
 Various code modernizations have been done. The Koyotecoin Core code base has
 started using C++11. This means that a C++11-capable compiler is now needed for
@@ -86,9 +79,7 @@ When cross-compiling for a target that doesn't have C++11 libraries, configure w
 For running the functional tests in `qa/rpc-tests`, Python3.4 or higher is now
 required.
 
-
-Linux ARM builds
-----------------
+## Linux ARM builds
 
 Due to popular request, Linux ARM builds have been added to the uploaded
 executables.
@@ -112,9 +103,7 @@ ARMv6 architecture devices that are not compatible with ARMv7-A or ARMv8-A.
 Note that Android is not considered ARM Linux in this context. The executables
 are not expected to work out of the box on Android.
 
-
-Compact Block support (BIP 152)
--------------------------------
+## Compact Block support (BIP 152)
 
 Support for block relay using the Compact Blocks protocol has been implemented
 in PR 8068.
@@ -133,9 +122,8 @@ relay differences on the network may result in blocks which include widely-
 discouraged transactions losing a stale block race, and therefore miners may
 wish to configure their node to take common relay policies into consideration.
 
+## Hierarchical Deterministic Key Generation
 
-Hierarchical Deterministic Key Generation
------------------------------------------
 Newly created wallets will use hierarchical deterministic key generation
 according to BIP32 (keypath m/0'/0'/k').
 Existing wallets will still use traditional key generation.
@@ -160,50 +148,46 @@ HD wallets are incompatible with older versions of Koyotecoin Core.
 
 [Pull request](https://github.com/koyotecoin/koyotecoin/pull/8035/files), [BIP 32](https://github.com/koyotecoin/bips/blob/master/bip-0032.mediawiki)
 
-
-Segregated Witness
-------------------
+## Segregated Witness
 
 The code preparations for Segregated Witness ("segwit"), as described in [BIP
 141](https://github.com/koyotecoin/bips/blob/master/bip-0141.mediawiki), [BIP
 143](https://github.com/koyotecoin/bips/blob/master/bip-0143.mediawiki), [BIP
 144](https://github.com/koyotecoin/bips/blob/master/bip-0144.mediawiki), and [BIP
 145](https://github.com/koyotecoin/bips/blob/master/bip-0145.mediawiki) are
-finished and included in this release.  However, BIP 141 does not yet specify
+finished and included in this release. However, BIP 141 does not yet specify
 activation parameters on mainnet, and so this release does not support segwit
-use on mainnet.  Testnet use is supported, and after BIP 141 is updated with
+use on mainnet. Testnet use is supported, and after BIP 141 is updated with
 proposed parameters, a future release of Koyotecoin Core is expected that
 implements those parameters for mainnet.
 
 Furthermore, because segwit activation is not yet specified for mainnet,
 version 0.13.0 will behave similarly as other pre-segwit releases even after a
-future activation of BIP 141 on the network.  Upgrading from 0.13.0 will be
+future activation of BIP 141 on the network. Upgrading from 0.13.0 will be
 required in order to utilize segwit-related features on mainnet (such as signal
 BIP 141 activation, mine segwit blocks, fully validate segwit blocks, relay
 segwit blocks to other segwit nodes, and use segwit transactions in the
 wallet, etc).
 
-
-Mining transaction selection ("Child Pays For Parent")
-------------------------------------------------------
+## Mining transaction selection ("Child Pays For Parent")
 
 The mining transaction selection algorithm has been replaced with an algorithm
 that selects transactions based on their feerate inclusive of unconfirmed
-ancestor transactions.  This means that a low-fee transaction can become more
+ancestor transactions. This means that a low-fee transaction can become more
 likely to be selected if a high-fee transaction that spends its outputs is
 relayed.
 
 With this change, the `-blockminsize` command line option has been removed.
 
 The command line option `-blockmaxsize` remains an option to specify the
-maximum number of serialized bytes in a generated block.  In addition, the new
+maximum number of serialized bytes in a generated block. In addition, the new
 command line option `-blockmaxweight` has been added, which specifies the
 maximum "block weight" of a generated block, as defined by [BIP 141 (Segregated
 Witness)] (https://github.com/koyotecoin/bips/blob/master/bip-0141.mediawiki).
 
 In preparation for Segregated Witness, the mining algorithm has been modified
 to optimize transaction selection for a given block weight, rather than a given
-number of serialized bytes in a block.  In this release, transaction selection
+number of serialized bytes in a block. In this release, transaction selection
 is unaffected by this distinction (as BIP 141 activation is not supported on
 mainnet in this release, see above), but in future releases and after BIP 141
 activation, these calculations would be expected to differ.
@@ -213,19 +197,17 @@ For optimal runtime performance, miners using this release should specify
 Additionally (or only) specifying `-blockmaxsize`, or relying on default
 settings for both, may result in performance degradation, as the logic to
 support `-blockmaxsize` performs additional computation to ensure that
-constraint is met.  (Note that for mainnet, in this release, the equivalent
+constraint is met. (Note that for mainnet, in this release, the equivalent
 parameter for `-blockmaxweight` would be four times the desired
-`-blockmaxsize`.  See [BIP 141]
+`-blockmaxsize`. See [BIP 141]
 (https://github.com/koyotecoin/bips/blob/master/bip-0141.mediawiki) for additional
 details.)
 
 In the future, the `-blockmaxsize` option may be removed, as block creation is
-no longer optimized for this metric.  Feedback is requested on whether to
+no longer optimized for this metric. Feedback is requested on whether to
 deprecate or keep this command line option in future releases.
 
-
-Reindexing changes
-------------------
+## Reindexing changes
 
 In earlier versions, reindexing did validation while reading through the block
 files on disk. These two have now been split up, so that all blocks are known
@@ -242,9 +224,7 @@ using the command line option `-reindex-chainstate` (in addition to
 are assumed to be fine, but the chainstate is still corrupted. It is also
 useful for benchmarks.
 
-
-Removal of internal miner
---------------------------
+## Removal of internal miner
 
 As CPU mining has been useless for a long time, the internal miner has been
 removed in this release, and replaced with a simpler implementation for the
@@ -257,9 +237,7 @@ For testing, the `generate` call can still be used to mine a block, and a new
 RPC call `generatetoaddress` has been added to mine to a specific address. This
 works with wallet disabled.
 
-
-New bytespersigop implementation
---------------------------------
+## New bytespersigop implementation
 
 The former implementation of the bytespersigop filter accidentally broke bare
 multisig (which is meant to be controlled by the `permitbaremultisig` option),
@@ -270,9 +248,7 @@ replaced with a new implementation that rather than filter such transactions,
 instead treats them (for fee purposes only) as if they were in fact the size
 of a transaction actually using all 20 sigops.
 
-
-Low-level P2P changes
-----------------------
+## Low-level P2P changes
 
 - The optional new p2p message "feefilter" is implemented and the protocol
   version is bumped to 70013. Upon receiving a feefilter message from a peer,
@@ -306,9 +282,7 @@ Low-level P2P changes
 - Connections to peers who have recently been the first one to give us a valid
   new block or transaction are protected from disconnections since PR #8084.
 
-
-Low-level RPC changes
-----------------------
+## Low-level RPC changes
 
 - RPC calls have been added to output detailed statistics for individual mempool
   entries, as well as to calculate the in-mempool ancestors or descendants of a
@@ -325,11 +299,11 @@ Low-level RPC changes
 
 - Asm script outputs replacements for OP_NOP2 and OP_NOP3
 
-  - OP_NOP2 has been renamed to OP_CHECKLOCKTIMEVERIFY by [BIP 
-65](https://github.com/koyotecoin/bips/blob/master/bip-0065.mediawiki)
+  - OP_NOP2 has been renamed to OP_CHECKLOCKTIMEVERIFY by [BIP
+    65](https://github.com/koyotecoin/bips/blob/master/bip-0065.mediawiki)
 
-  - OP_NOP3 has been renamed to OP_CHECKSEQUENCEVERIFY by [BIP 
-112](https://github.com/koyotecoin/bips/blob/master/bip-0112.mediawiki)
+  - OP_NOP3 has been renamed to OP_CHECKSEQUENCEVERIFY by [BIP
+    112](https://github.com/koyotecoin/bips/blob/master/bip-0112.mediawiki)
 
   - The following outputs are affected by this change:
 
@@ -350,9 +324,7 @@ Low-level RPC changes
 
 - New options were added to `fundrawtransaction`: `includeWatching`, `changeAddress`, `changePosition` and `feeRate`.
 
-
-Low-level ZMQ changes
-----------------------
+## Low-level ZMQ changes
 
 - Each ZMQ notification now contains an up-counting sequence number that allows
   listeners to detect lost notifications.
@@ -360,9 +332,7 @@ Low-level ZMQ changes
   therefore backward compatible. Each message type has its own counter.
   PR [#7762](https://github.com/koyotecoin/koyotecoin/pull/7762).
 
-
-0.13.0 Change log
-=================
+  # 0.13.0 Change log
 
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
@@ -407,7 +377,7 @@ git merge commit are mentioned.
 
 - #7056 `6a07208` Save last db read (morcos)
 - #6842 `0192806` Limitfreerelay edge case bugfix (ptschip)
-- #7084 `11d74f6` Replace maxFeeRate of 10000*minRelayTxFee with maxTxFee in mempool (MarcoFalke)
+- #7084 `11d74f6` Replace maxFeeRate of 10000\*minRelayTxFee with maxTxFee in mempool (MarcoFalke)
 - #7539 `9f33dba` Add tags to mempool's mapTx indices (sdaftuar)
 - #7592 `26a2a72` Re-remove ERROR logging for mempool rejects (laanwj)
 - #7187 `14d6324` Keep reorgs fast for SequenceLocks checks (morcos)
@@ -488,7 +458,7 @@ git merge commit are mentioned.
 - #7528 `9b9bfce` autogen.sh: warn about needing autoconf if autoreconf is not found (knocte)
 - #7504 `19324cf` Crystal clean make clean (paveljanik)
 - #7619 `18b3f1b` Add missing sudo entry in gitian VM setup (kycdrak)
-- #7616 `639ec58`  [depends] Delete unused patches  (MarcoFalke)
+- #7616 `639ec58` [depends] Delete unused patches (MarcoFalke)
 - #7658 `c15eb28` Add curl to Gitian setup instructions (kycdrak)
 - #7710 `909b72b` [Depends] Bump miniupnpc and config.guess+sub (fanquake)
 - #7723 `5131005` build: python 3 compatibility (laanwj)
@@ -587,7 +557,7 @@ git merge commit are mentioned.
 - #7689 `b89ef13` Replace OpenSSL AES with ctaes-based version (sipa)
 - #7825 `f972b04` Prevent multiple calls to ExtractDestination (pedrobranco)
 - #8137 `243ac0c` Improve CWallet API with new AccountMove function (pstratem)
-- #8142 `52c3f34` Improve CWallet API  with new GetAccountPubkey function (pstratem)
+- #8142 `52c3f34` Improve CWallet API with new GetAccountPubkey function (pstratem)
 - #8035 `b67a472` Add simplest BIP32/deterministic key generation implementation (jonasschnelli)
 - #7687 `a6ddb19` Stop treating importaddress'ed scripts as change (sipa)
 - #8298 `aef3811` wallet: Revert input selection post-pruning (laanwj)
@@ -643,7 +613,7 @@ git merge commit are mentioned.
 - #8030 `409a8a1` Revert fatal-ness of missing python-zmq (laanwj)
 - #8018 `3e90fe6` Autofind rpc tests --srcdir (jonasschnelli)
 - #8016 `5767e80` Fix multithread CScheduler and reenable test (paveljanik)
-- #7972 `423ca30` pull-tester: Run rpc test in parallel  (MarcoFalke)
+- #7972 `423ca30` pull-tester: Run rpc test in parallel (MarcoFalke)
 - #8039 `69b3a6d` Bench: Add crypto hash benchmarks (laanwj)
 - #8041 `5b736dd` Fix bip9-softforks blockstore issue (MarcoFalke)
 - #7994 `1f01443` Add op csv tests to script_tests.json (Christewart)
@@ -667,7 +637,7 @@ git merge commit are mentioned.
 - #8214 `ed2cd59` Mininode: fail on send_message instead of silent return (MarcoFalke)
 - #8215 `a072d1a` Don't use floating point in wallet tests (MarcoFalke)
 - #8066 `65c2058` Test_framework: Use different rpc_auth_pair for each node (MarcoFalke)
-- #8216 `0d41d70` Assert 'changePosition out of bounds'  (MarcoFalke)
+- #8216 `0d41d70` Assert 'changePosition out of bounds' (MarcoFalke)
 - #8222 `961893f` Enable mempool consistency checks in unit tests (sipa)
 - #7751 `84370d5` test_framework: python3.4 authproxy compat (laanwj)
 - #7744 `d8e862a` test_framework: detect failure of koyotecoind startup (laanwj)
@@ -707,7 +677,7 @@ git merge commit are mentioned.
 - #7791 `e30a5b0` Change Precise to Trusty in gitian-building.md (JeremyRand)
 - #7838 `8bb5d3d` Update gitian build guide to debian 8.4.0 (fanquake)
 - #7855 `b778e59` Replace precise with trusty (MarcoFalke)
-- #7975 `fc23fee` Update koyotecoin-core GitHub links (MarcoFalke)
+- #7975 `fc23fee` Update koyotecoin GitHub links (MarcoFalke)
 - #8034 `e3a8207` Add basic git squash workflow (fanquake)
 - #7813 `214ec0b` Update port in tor.md (MarcoFalke)
 - #8193 `37c9830` Use Debian 8.5 in the gitian-build guide (fanquake)
@@ -750,7 +720,7 @@ git merge commit are mentioned.
 - #7402 `6a5932b` devtools: github-merge get toplevel dir without extra whitespace (achow101)
 - #7425 `20a408c` devtools: Fix utf-8 support in messages for github-merge (laanwj)
 - #7632 `409f843` Delete outdated test-patches reference (Lewuathe)
-- #7662 `386f438` remove unused NOBLKS_VERSION_{START,END} constants (rat4)
+- #7662 `386f438` remove unused NOBLKS*VERSION*{START,END} constants (rat4)
 - #7737 `aa0d2b2` devtools: make github-merge.py use py3 (laanwj)
 - #7781 `55db5f0` devtools: Auto-set branch to merge to in github-merge (laanwj)
 - #7934 `f17032f` Improve rolling bloom filter performance and benchmark (sipa)
@@ -758,8 +728,7 @@ git merge commit are mentioned.
 - #7713 `f6598df` Fixes for verify-commits script (petertodd)
 - #8412 `8360d5b` libconsensus: Expose a flag for BIP112 (jtimon)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

@@ -447,7 +447,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">Не вдалося прочитати файл параметрів</translation>

@@ -1,39 +1,36 @@
 Koyotecoin Core version 0.11.0 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.11.0/>
+<https://koyotecoin.org/bin/koyotecoin-0.11.0/>
 
 This is a new major version release, bringing both new features and
 bug fixes.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
-Upgrading and downgrading
-=========================
+# Upgrading and downgrading
 
-How to Upgrade
---------------
+## How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Koyotecoin-Qt (on Mac) or
 koyotecoind/koyotecoin-qt (on Linux).
 
-Downgrade warning
-------------------
+## Downgrade warning
 
 Because release 0.10.0 and later makes use of headers-first synchronization and
 parallel block download (see further), the block files and databases are not
 backwards-compatible with pre-0.10 versions of Koyotecoin Core or other software:
 
-* Blocks will be stored on disk out of order (in the order they are
-received, really), which makes it incompatible with some tools or
-other programs. Reindexing using earlier versions will also not work
-anymore as a result of this.
+- Blocks will be stored on disk out of order (in the order they are
+  received, really), which makes it incompatible with some tools or
+  other programs. Reindexing using earlier versions will also not work
+  anymore as a result of this.
 
-* The block index database will now hold headers for which no block is
-stored on disk, which earlier versions won't support.
+- The block index database will now hold headers for which no block is
+  stored on disk, which earlier versions won't support.
 
 If you want to be able to downgrade smoothly, make a backup of your entire data
 directory. Without this your node will need start syncing (or importing from
@@ -44,11 +41,9 @@ supported and may break as soon as the older version attempts to reindex.
 This does not affect wallet forward or backward compatibility. There are no
 known problems when downgrading from 0.11.x to 0.10.x.
 
-Important information
-======================
+# Important information
 
-Transaction flooding
----------------------
+## Transaction flooding
 
 At the time of this release, the P2P network is being flooded with low-fee
 transactions. This causes a ballooning of the mempool size.
@@ -69,61 +64,59 @@ to free transactions.
 
 For example, add the following to `koyotecoin.conf`:
 
-    minrelaytxfee=0.00005 
+    minrelaytxfee=0.00005
     limitfreerelay=5
 
 More robust solutions are being worked on for a follow-up release.
 
-Notable changes
-===============
+# Notable changes
 
-Block file pruning
-----------------------
+## Block file pruning
 
-This release supports running a fully validating node without maintaining a copy 
-of the raw block and undo data on disk. To recap, there are four types of data 
-related to the blockchain in the koyotecoin system: the raw blocks as received over 
-the network (blk???.dat), the undo data (rev???.dat), the block index and the 
+This release supports running a fully validating node without maintaining a copy
+of the raw block and undo data on disk. To recap, there are four types of data
+related to the blockchain in the koyotecoin system: the raw blocks as received over
+the network (blk???.dat), the undo data (rev???.dat), the block index and the
 UTXO set (both LevelDB databases). The databases are built from the raw data.
 
-Block pruning allows Koyotecoin Core to delete the raw block and undo data once 
-it's been validated and used to build the databases. At that point, the raw data 
-is used only to relay blocks to other nodes, to handle reorganizations, to look 
-up old transactions (if -txindex is enabled or via the RPC/REST interfaces), or 
-for rescanning the wallet. The block index continues to hold the metadata about 
+Block pruning allows Koyotecoin Core to delete the raw block and undo data once
+it's been validated and used to build the databases. At that point, the raw data
+is used only to relay blocks to other nodes, to handle reorganizations, to look
+up old transactions (if -txindex is enabled or via the RPC/REST interfaces), or
+for rescanning the wallet. The block index continues to hold the metadata about
 all blocks in the blockchain.
 
-The user specifies how much space to allot for block & undo files. The minimum 
-allowed is 550MB. Note that this is in addition to whatever is required for the 
-block index and UTXO databases. The minimum was chosen so that Koyotecoin Core will 
-be able to maintain at least 288 blocks on disk (two days worth of blocks at 10 
-minutes per block). In rare instances it is possible that the amount of space 
-used will exceed the pruning target in order to keep the required last 288 
+The user specifies how much space to allot for block & undo files. The minimum
+allowed is 550MB. Note that this is in addition to whatever is required for the
+block index and UTXO databases. The minimum was chosen so that Koyotecoin Core will
+be able to maintain at least 288 blocks on disk (two days worth of blocks at 10
+minutes per block). In rare instances it is possible that the amount of space
+used will exceed the pruning target in order to keep the required last 288
 blocks on disk.
 
-Block pruning works during initial sync in the same way as during steady state, 
-by deleting block files "as you go" whenever disk space is allocated. Thus, if 
-the user specifies 550MB, once that level is reached the program will begin 
-deleting the oldest block and undo files, while continuing to download the 
+Block pruning works during initial sync in the same way as during steady state,
+by deleting block files "as you go" whenever disk space is allocated. Thus, if
+the user specifies 550MB, once that level is reached the program will begin
+deleting the oldest block and undo files, while continuing to download the
 blockchain.
 
-For now, block pruning disables block relay.  In the future, nodes with block 
-pruning will at a minimum relay "new" blocks, meaning blocks that extend their 
-active chain. 
+For now, block pruning disables block relay. In the future, nodes with block
+pruning will at a minimum relay "new" blocks, meaning blocks that extend their
+active chain.
 
-Block pruning is currently incompatible with running a wallet due to the fact 
-that block data is used for rescanning the wallet and importing keys or 
-addresses (which require a rescan.) However, running the wallet with block 
+Block pruning is currently incompatible with running a wallet due to the fact
+that block data is used for rescanning the wallet and importing keys or
+addresses (which require a rescan.) However, running the wallet with block
 pruning will be supported in the near future, subject to those limitations.
 
-Block pruning is also incompatible with -txindex and will automatically disable 
+Block pruning is also incompatible with -txindex and will automatically disable
 it.
 
-Once you have pruned blocks, going back to unpruned state requires 
-re-downloading the entire blockchain. To do this, re-start the node with 
--reindex. Note also that any problem that would cause a user to reindex (e.g., 
-disk corruption) will cause a pruned node to redownload the entire blockchain. 
-Finally, note that when a pruned node reindexes, it will delete any blk???.dat 
+Once you have pruned blocks, going back to unpruned state requires
+re-downloading the entire blockchain. To do this, re-start the node with
+-reindex. Note also that any problem that would cause a user to reindex (e.g.,
+disk corruption) will cause a pruned node to redownload the entire blockchain.
+Finally, note that when a pruned node reindexes, it will delete any blk???.dat
 and rev???.dat files in the data directory prior to restarting the download.
 
 To enable block pruning on the command line:
@@ -133,23 +126,21 @@ To enable block pruning on the command line:
 Modified RPC calls:
 
 - `getblockchaininfo` now includes whether we are in pruned mode or not.
-- `getblock` will check if the block's data has been pruned and if so, return an 
-error.
-- `getrawtransaction` will no longer be able to locate a transaction that has a 
-UTXO but where its block file has been pruned. 
+- `getblock` will check if the block's data has been pruned and if so, return an
+  error.
+- `getrawtransaction` will no longer be able to locate a transaction that has a
+  UTXO but where its block file has been pruned.
 
 Pruning is disabled by default.
 
-Big endian support
---------------------
+## Big endian support
 
 Experimental support for big-endian CPU architectures was added in this
 release. All little-endian specific code was replaced with endian-neutral
 constructs. This has been tested on at least MIPS and PPC hosts. The build
 system will automatically detect the endianness of the target.
 
-Memory usage optimization
---------------------------
+## Memory usage optimization
 
 There have been many changes in this release to reduce the default memory usage
 of a node, among which:
@@ -161,19 +152,17 @@ of a node, among which:
 - Reduce the number of threads (#5964, #5679); lowers the amount of (esp.
   virtual) memory needed
 
-Fee estimation changes
-----------------------
+## Fee estimation changes
 
-This release improves the algorithm used for fee estimation.  Previously, -1
-was returned when there was insufficient data to give an estimate.  Now, -1
+This release improves the algorithm used for fee estimation. Previously, -1
+was returned when there was insufficient data to give an estimate. Now, -1
 will also be returned when there is no fee or priority high enough for the
 desired confirmation target. In those cases, it can help to ask for an estimate
 for a higher target number of blocks. It is not uncommon for there to be no
 fee or priority high enough to be reliably (85%) included in the next block and
 for this reason, the default for `-txconfirmtarget=n` has changed from 1 to 2.
 
-Privacy: Disable wallet transaction broadcast
-----------------------------------------------
+## Privacy: Disable wallet transaction broadcast
 
 This release adds an option `-walletbroadcast=0` to prevent automatic
 transaction broadcast and rebroadcast (#5951). This option allows separating
@@ -194,8 +183,7 @@ internet but transactions are broadcasted over Tor.
 
 For an example script see [koyotecoin-submittx](https://github.com/laanwj/koyotecoin-submittx).
 
-Privacy: Stream isolation for Tor
-----------------------------------
+## Privacy: Stream isolation for Tor
 
 This release adds functionality to create a new circuit for every peer
 connection, when the software is used with Tor. The new option,
@@ -213,8 +201,7 @@ connections. A user and password is sent where they weren't before. This setup
 is exceedingly rare, but in this case `-proxyrandomize=0` can be passed to
 disable the behavior.
 
-0.11.0 Change log
-=================
+# 0.11.0 Change log
 
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
@@ -222,6 +209,7 @@ the code changes and accompanying discussion, both the pull request and
 git merge commit are mentioned.
 
 ### RPC and REST
+
 - #5461 `5f7279a` signrawtransaction: validate private key
 - #5444 `103f66b` Add /rest/headers/<count>/<hash>.<ext>
 - #4964 `95ecc0a` Add scriptPubKey field to validateaddress RPC call
@@ -242,6 +230,7 @@ git merge commit are mentioned.
 - #6226 `5901596` json: fail read_string if string contains trailing garbage
 
 ### Configuration and command-line options
+
 - #5636 `a353ad4` Add option `-allowselfsignedrootcertificate` to allow self signed root certs (for testing payment requests)
 - #5900 `3e8a1f2` Add a consistency check `-checkblockindex` for the block chain data structures
 - #5951 `7efc9cf` Make it possible to disable wallet transaction broadcast (using `-walletbroadcast=0`)
@@ -251,6 +240,7 @@ git merge commit are mentioned.
 - #6274 `4d9c7fe` Add option `-alerts` to opt out of alert system
 
 ### Block and transaction handling
+
 - #5367 `dcc1304` Do all block index writes in a batch
 - #5253 `203632d` Check against MANDATORY flags prior to accepting to mempool
 - #5459 `4406c3e` Reject headers that build on an invalid parent
@@ -276,6 +266,7 @@ git merge commit are mentioned.
 - #6233 `a587606` Advance pindexLastCommonBlock for blocks in chainActive
 
 ### P2P protocol and network code
+
 - #5507 `844ace9` Prevent DOS attacks on in-flight data structures
 - #5770 `32a8b6a` Sanitize command strings before logging them
 - #5859 `dd4ffce` Add correct bool combiner for net signals
@@ -292,10 +283,12 @@ git merge commit are mentioned.
 - #6333 `41bbc85` Hardcoded seeds update June 2015
 
 ### Validation
+
 - #5143 `48e1765` Implement BIP62 rule 6
 - #5713 `41e6e4c` Implement BIP66
 
 ### Build system
+
 - #5501 `c76c9d2` Add mips, mipsel and aarch64 to depends platforms
 - #5334 `cf87536` libkoyotecoinconsensus: Add pkg-config support
 - #5514 `ed11d53` Fix 'make distcheck'
@@ -318,6 +311,7 @@ git merge commit are mentioned.
 - #6354 `bdf0d94` Gitian windows signing normalization
 
 ### Wallet
+
 - #2340 `811c71d` Discourage fee sniping with nLockTime
 - #5485 `d01bcc4` Enforce minRelayTxFee on wallet created tx and add a maxtxfee option
 - #5508 `9a5cabf` Add RandAddSeedPerfmon to MakeNewKey
@@ -328,9 +322,10 @@ git merge commit are mentioned.
 - #5511 `23c998d` Sort pending wallet transactions before reaccepting
 - #6126 `26e08a1` Change default nTxConfirmTarget to 2
 - #6183 `75a4d51` Fix off-by-one error w/ nLockTime in the wallet
-- #6276 `c9fd907` Fix getbalance * 0
+- #6276 `c9fd907` Fix getbalance \* 0
 
 ### GUI
+
 - #5219 `f3af0c8` New icons
 - #5228 `bb3c75b` HiDPI (retina) support for splash screen
 - #5258 `73cbf0a` The RPC Console should be a QWidget to make window more independent
@@ -359,6 +354,7 @@ git merge commit are mentioned.
 - #6160 `0d862c2` Overviewpage: make sure warning icons gets colored
 
 ### Tests
+
 - #5453 `2f2d337` Add ability to run single test manually to RPC tests
 - #5421 `886eb57` Test unexecuted OP_CODESEPARATOR
 - #5530 `565b300` Additional rpc tests
@@ -377,11 +373,12 @@ git merge commit are mentioned.
 - #6074 `948beaf` Correct the PUSHDATA4 minimal encoding test in script_invalid.json
 - #6032 `e08886d` Stop nodes after RPC tests, even with --nocleanup
 - #6075 `df1609f` Add additional script edge condition tests
-- #5981 `da38dc6` Python P2P testing 
+- #5981 `da38dc6` Python P2P testing
 - #5958 `9ef00c3` Add multisig rpc tests
 - #6112 `fec5c0e` Add more script edge condition tests
 
 ### Miscellaneous
+
 - #5457, #5506, #5952, #6047 Update libsecp256k1
 - #5437 `84857e8` Add missing CAutoFile::IsNull() check in main
 - #5490 `ec20fd7` Replace uint256/uint160 with opaque blobs where possible
@@ -415,8 +412,7 @@ git merge commit are mentioned.
 - #6286 `3902c15` Remove berkeley-db4 workaround in MacOSX build docs
 - #6319 `3f8fcc9` doc: update mailing list address
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 
@@ -502,4 +498,3 @@ And all those who contributed additional code review and/or security research:
 - Sergio Demian Lerner
 
 As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/koyotecoin/).
-

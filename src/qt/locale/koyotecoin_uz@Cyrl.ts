@@ -324,7 +324,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Done loading</source>
         <translation type="unfinished">Юклаш тайёр</translation>

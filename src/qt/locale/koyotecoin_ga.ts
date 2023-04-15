@@ -355,7 +355,7 @@ Ní féidir síniú ach le seoltaí 'oidhreachta'.</translation>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>The %s developers</source>
         <translation type="unfinished">Forbróirí %s</translation>

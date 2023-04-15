@@ -330,7 +330,7 @@ Firmar solo es posible con direcciones del tipo 'Legacy'.</translation>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>The %s developers</source>
         <translation type="unfinished">Los desarrolladores de %s</translation>

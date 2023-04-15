@@ -1,23 +1,21 @@
-22.0 Release Notes
-==================
+# 22.0 Release Notes
 
 Koyotecoin Core version 22.0 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-22.0/>
+<https://koyotecoin.org/bin/koyotecoin-22.0/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes in some cases), then run the
@@ -28,37 +26,34 @@ Upgrading directly from a version of Koyotecoin Core that has reached its EOL is
 possible, but it might take some time if the data directory needs to be migrated. Old
 wallet versions of Koyotecoin Core are generally supported.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 10.14+, and Windows 7 and newer.  Koyotecoin
+using the Linux kernel, macOS 10.14+, and Windows 7 and newer. Koyotecoin
 Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Koyotecoin Core on
+frequently tested on them. It is not recommended to use Koyotecoin Core on
 unsupported systems.
 
 From Koyotecoin Core 22.0 onwards, macOS versions earlier than 10.14 are no longer supported.
 
-Notable changes
-===============
+# Notable changes
 
-P2P and network changes
------------------------
+## P2P and network changes
+
 - Added support for running Koyotecoin Core as an
   [I2P (Invisible Internet Project)](https://en.wikipedia.org/wiki/I2P) service
   and connect to such services. See [i2p.md](https://github.com/koyotecoin/koyotecoin/blob/22.x/doc/i2p.md) for details. (#20685)
 - This release removes support for Tor version 2 hidden services in favor of Tor
   v3 only, as the Tor network [dropped support for Tor
   v2](https://blog.torproject.org/v2-deprecation-timeline) with the release of
-  Tor version 0.4.6.  Henceforth, Koyotecoin Core ignores Tor v2 addresses; it
+  Tor version 0.4.6. Henceforth, Koyotecoin Core ignores Tor v2 addresses; it
   neither rumors them over the network to other peers, nor stores them in memory
-  or to `peers.dat`.  (#22050)
+  or to `peers.dat`. (#22050)
 
 - Added NAT-PMP port mapping support via
   [`libnatpmp`](https://miniupnp.tuxfamily.org/libnatpmp.html). (#18077)
 
-New and Updated RPCs
---------------------
+## New and Updated RPCs
 
 - Due to [BIP 350](https://github.com/koyotecoin/bips/blob/master/bip-0350.mediawiki)
   being implemented, behavior for all RPCs that accept addresses is changed when
@@ -84,7 +79,7 @@ New and Updated RPCs
   `whitelisted`, the `permissions` field indicates if the peer has special
   privileges. The `banscore` field has simply been removed. (#20755)
 
-- The following RPCs:  `gettxout`, `getrawtransaction`, `decoderawtransaction`,
+- The following RPCs: `gettxout`, `getrawtransaction`, `decoderawtransaction`,
   `decodescript`, `gettransaction`, and REST endpoints: `/rest/tx`,
   `/rest/getutxos`, `/rest/block` deprecated the following fields (which are no
   longer returned in the responses by default): `addresses`, `reqSigs`.
@@ -106,10 +101,10 @@ New and Updated RPCs
 - The `setban` RPC can ban onion addresses again. This fixes a regression introduced in version 0.21.0. (#20852)
 
 - The `getnodeaddresses` RPC now returns a "network" field indicating the
-  network type (ipv4, ipv6, onion, or i2p) for each address.  (#21594)
+  network type (ipv4, ipv6, onion, or i2p) for each address. (#21594)
 
 - `getnodeaddresses` now also accepts a "network" argument (ipv4, ipv6, onion,
-  or i2p) to return only addresses of the specified network.  (#21843)
+  or i2p) to return only addresses of the specified network. (#21843)
 
 - The `testmempoolaccept` RPC now accepts multiple transactions (still experimental at the moment,
   API may be unstable). This is intended for testing transaction packages with dependency
@@ -125,14 +120,12 @@ New and Updated RPCs
 
 Changes to Wallet or GUI related RPCs can be found in the GUI or Wallet section below.
 
-Build System
-------------
+## Build System
 
 - Release binaries are now produced using the new `guix`-based build system.
   The [/doc/release-process.md](/doc/release-process.md) document has been updated accordingly.
 
-Files
------
+## Files
 
 - The list of banned hosts and networks (via `setban` RPC) is now saved on disk
   in JSON format in `banlist.json` instead of `banlist.dat`. `banlist.dat` is
@@ -140,35 +133,31 @@ Files
   `banlist.json`. A future version of Koyotecoin Core may completely ignore
   `banlist.dat`. (#20966)
 
-New settings
-------------
+## New settings
 
 - The `-natpmp` option has been added to use NAT-PMP to map the listening port.
   If both UPnP and NAT-PMP are enabled, a successful allocation from UPnP
   prevails over one from NAT-PMP. (#18077)
 
-Updated settings
-----------------
+## Updated settings
 
 Changes to Wallet or GUI related settings can be found in the GUI or Wallet section below.
 
-- Passing an invalid `-rpcauth` argument now cause koyotecoind to fail to start.  (#20461)
+- Passing an invalid `-rpcauth` argument now cause koyotecoind to fail to start. (#20461)
 
-Tools and Utilities
--------------------
+## Tools and Utilities
 
 - A new CLI `-addrinfo` command returns the number of addresses known to the
   node per network type (including Tor v2 versus v3) and total. This can be
   useful to see if the node knows enough addresses in a network to use options
   like `-onlynet=<network>` or to upgrade to this release of Koyotecoin Core 22.0
-  that supports Tor v3 only.  (#21595)
+  that supports Tor v3 only. (#21595)
 
 - A new `-rpcwaittimeout` argument to `koyotecoin-cli` sets the timeout
   in seconds to use with `-rpcwait`. If the timeout expires,
   `koyotecoin-cli` will report a failure. (#21056)
 
-Wallet
-------
+## Wallet
 
 - External signers such as hardware wallets can now be used through the new RPC methods `enumeratesigners` and `displayaddress`. Support is also added to the `send` RPC call. This feature is experimental. See [external-signer.md](https://github.com/koyotecoin/koyotecoin/blob/22.x/doc/external-signer.md) for details. (#16546)
 
@@ -189,16 +178,13 @@ Wallet
 
 - Taproot descriptors can be imported into the wallet only after activation has occurred on the network (e.g. mainnet, testnet, signet) in use. See [descriptors.md](https://github.com/koyotecoin/koyotecoin/blob/22.x/doc/descriptors.md) for supported descriptors.
 
-GUI changes
------------
+## GUI changes
 
-- External signers such as hardware wallets can now be used. These require an external tool such as [HWI](https://github.com/koyotecoin-core/HWI) to be installed and configured under Options -> Wallet. When creating a new wallet a new option "External signer" will appear in the dialog. If the device is detected, its name is suggested as the wallet name. The watch-only keys are then automatically imported. Receive addresses can be verified on the device. The send dialog will automatically use the connected device. This feature is experimental and the UI may freeze for a few seconds when performing these actions.
+- External signers such as hardware wallets can now be used. These require an external tool such as [HWI](https://github.com/koyotecoin/HWI) to be installed and configured under Options -> Wallet. When creating a new wallet a new option "External signer" will appear in the dialog. If the device is detected, its name is suggested as the wallet name. The watch-only keys are then automatically imported. Receive addresses can be verified on the device. The send dialog will automatically use the connected device. This feature is experimental and the UI may freeze for a few seconds when performing these actions.
 
-Low-level changes
-=================
+# Low-level changes
 
-RPC
----
+## RPC
 
 - The RPC server can process a limited number of simultaneous RPC requests.
   Previously, if this limit was exceeded, the RPC server would respond with
@@ -213,28 +199,30 @@ RPC
   - `verifymessage` now returns RPC_TYPE_ERROR (-3) if the passed signature
     is malformed. Previously returned RPC_INVALID_ADDRESS_OR_KEY (-5).
 
-Tests
------
+## Tests
 
-22.0 change log
-===============
+# 22.0 change log
 
 A detailed list of changes in this version follows. To keep the list to a manageable length, small refactors and typo fixes are not included, and similar changes are sometimes condensed into one line.
 
 ### Consensus
+
 - koyotecoin/koyotecoin#19438 Introduce deploymentstatus (ajtowns)
 - koyotecoin/koyotecoin#20207 Follow-up extra comments on taproot code and tests (sipa)
 - koyotecoin/koyotecoin#21330 Deal with missing data in signature hashes more consistently (sipa)
 
 ### Policy
+
 - koyotecoin/koyotecoin#18766 Disable fee estimation in blocksonly mode (by removing the fee estimates global) (darosior)
 - koyotecoin/koyotecoin#20497 Add `MAX_STANDARD_SCRIPTSIG_SIZE` to policy (sanket1729)
 - koyotecoin/koyotecoin#20611 Move `TX_MAX_STANDARD_VERSION` to policy (MarcoFalke)
 
 ### Mining
+
 - koyotecoin/koyotecoin#19937, koyotecoin/koyotecoin#20923 Signet mining utility (ajtowns)
 
 ### Block and transaction handling
+
 - koyotecoin/koyotecoin#14501 Fix possible data race when committing block files (luke-jr)
 - koyotecoin/koyotecoin#15946 Allow maintaining the blockfilterindex when using prune (jonasschnelli)
 - koyotecoin/koyotecoin#18710 Add local thread pool to CCheckQueue (hebasto)
@@ -272,6 +260,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22589 net, doc: update I2P hardcoded seeds and docs for 22.0 (jonatack)
 
 ### P2P protocol and network code
+
 - koyotecoin/koyotecoin#18077 Add NAT-PMP port forwarding support (hebasto)
 - koyotecoin/koyotecoin#18722 addrman: improve performance by using more suitable containers (vasild)
 - koyotecoin/koyotecoin#18819 Replace `cs_feeFilter` with simple std::atomic (MarcoFalke)
@@ -313,7 +302,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#20816 Move RecordBytesSent() call out of `cs_vSend` lock (jnewbery)
 - koyotecoin/koyotecoin#20845 Log to net debug in MaybeDiscourageAndDisconnect except for noban and manual peers (MarcoFalke)
 - koyotecoin/koyotecoin#20864 Move SocketSendData lock annotation to header (MarcoFalke)
-- koyotecoin/koyotecoin#20965 net, rpc:  return `NET_UNROUTABLE` as `not_publicly_routable`, automate helps (jonatack)
+- koyotecoin/koyotecoin#20965 net, rpc: return `NET_UNROUTABLE` as `not_publicly_routable`, automate helps (jonatack)
 - koyotecoin/koyotecoin#20966 banman: save the banlist in a JSON format on disk (vasild)
 - koyotecoin/koyotecoin#21015 Make all of `net_processing` (and some of net) use std::chrono types (dhruv)
 - koyotecoin/koyotecoin#21029 koyotecoin-cli: Correct docs (no "generatenewaddress" exists) (luke-jr)
@@ -363,6 +352,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22455 addrman: detect on-disk corrupted nNew and nTried during unserialization (vasild)
 
 ### Wallet
+
 - koyotecoin/koyotecoin#15710 Catch `ios_base::failure` specifically (Bushstar)
 - koyotecoin/koyotecoin#16546 External signer support - Wallet Box edition (Sjors)
 - koyotecoin/koyotecoin#17331 Use effective values throughout coin selection (achow101)
@@ -411,6 +401,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22686 Use GetSelectionAmount in ApproximateBestSubset (achow101)
 
 ### RPC and other APIs
+
 - koyotecoin/koyotecoin#18335, koyotecoin/koyotecoin#21484 cli: Print useful error if koyotecoind rpc work queue exceeded (LarryRuane)
 - koyotecoin/koyotecoin#18466 Fix invalid parameter error codes for `{sign,verify}message` RPCs (theStack)
 - koyotecoin/koyotecoin#18772 Calculate fees in `getblock` using BlockUndo data (robot-visions)
@@ -450,83 +441,85 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22327 cli: Avoid truncating `-rpcwaittimeout` (MarcoFalke)
 
 ### GUI
+
 - koyotecoin/koyotecoin#18948 Call setParent() in the parent's context (hebasto)
 - koyotecoin/koyotecoin#20482 Add depends qt fix for ARM macs (jonasschnelli)
 - koyotecoin/koyotecoin#21836 scripted-diff: Replace three dots with ellipsis in the ui strings (hebasto)
 - koyotecoin/koyotecoin#21935 Enable external signer support for GUI builds (Sjors)
 - koyotecoin/koyotecoin#22133 Make QWindowsVistaStylePlugin available again (regression) (hebasto)
-- koyotecoin-core/gui#4 UI external signer support (e.g. hardware wallet) (Sjors)
-- koyotecoin-core/gui#13 Hide peer detail view if multiple are selected (promag)
-- koyotecoin-core/gui#18 Add peertablesortproxy module (hebasto)
-- koyotecoin-core/gui#21 Improve pruning tooltip (fluffypony, KoyotecoinErrorLog)
-- koyotecoin-core/gui#72 Log static plugins meta data and used style (hebasto)
-- koyotecoin-core/gui#79 Embed monospaced font (hebasto)
-- koyotecoin-core/gui#85 Remove unused "What's This" button in dialogs on Windows OS (hebasto)
-- koyotecoin-core/gui#115 Replace "Hide tray icon" option with positive "Show tray icon" one (hebasto)
-- koyotecoin-core/gui#118 Remove BDB version from the Information tab (hebasto)
-- koyotecoin-core/gui#121 Early subscribe core signals in transaction table model (promag)
-- koyotecoin-core/gui#123 Do not accept command while executing another one (hebasto)
-- koyotecoin-core/gui#125 Enable changing the autoprune block space size in intro dialog (luke-jr)
-- koyotecoin-core/gui#138 Unlock encrypted wallet "OK" button bugfix (mjdietzx)
-- koyotecoin-core/gui#139 doc: Improve gui/src/qt README.md (jarolrod)
-- koyotecoin-core/gui#154 Support macOS Dark mode (goums, Uplab)
-- koyotecoin-core/gui#162 Add network to peers window and peer details (jonatack)
-- koyotecoin-core/gui#163, koyotecoin-core/gui#180 Peer details: replace Direction with Connection Type (jonatack)
-- koyotecoin-core/gui#164 Handle peer addition/removal in a right way (hebasto)
-- koyotecoin-core/gui#165 Save QSplitter state in QSettings (hebasto)
-- koyotecoin-core/gui#173 Follow Qt docs when implementing rowCount and columnCount (hebasto)
-- koyotecoin-core/gui#179 Add Type column to peers window, update peer details name/tooltip (jonatack)
-- koyotecoin-core/gui#186 Add information to "Confirm fee bump" window (prayank23)
-- koyotecoin-core/gui#189 Drop workaround for QTBUG-42503 which was fixed in Qt 5.5.0 (prusnak)
-- koyotecoin-core/gui#194 Save/restore RPCConsole geometry only for window (hebasto)
-- koyotecoin-core/gui#202 Fix right panel toggle in peers tab (RandyMcMillan)
-- koyotecoin-core/gui#203 Display plain "Inbound" in peer details (jonatack)
-- koyotecoin-core/gui#204 Drop buggy TableViewLastColumnResizingFixer class (hebasto)
-- koyotecoin-core/gui#205, koyotecoin-core/gui#229 Save/restore TransactionView and recentRequestsView tables column sizes (hebasto)
-- koyotecoin-core/gui#206 Display fRelayTxes and `bip152_highbandwidth_{to, from}` in peer details (jonatack)
-- koyotecoin-core/gui#213 Add Copy Address Action to Payment Requests (jarolrod)
-- koyotecoin-core/gui#214 Disable requests context menu actions when appropriate (jarolrod)
-- koyotecoin-core/gui#217 Make warning label look clickable (jarolrod)
-- koyotecoin-core/gui#219 Prevent the main window popup menu (hebasto)
-- koyotecoin-core/gui#220 Do not translate file extensions (hebasto)
-- koyotecoin-core/gui#221 RPCConsole translatable string fixes and improvements (jonatack)
-- koyotecoin-core/gui#226 Add "Last Block" and "Last Tx" rows to peer details area (jonatack)
-- koyotecoin-core/gui#233 qt test: Don't bind to regtest port (achow101)
-- koyotecoin-core/gui#243 Fix issue when disabling the auto-enabled blank wallet checkbox (jarolrod)
-- koyotecoin-core/gui#246 Revert "qt: Use "fusion" style on macOS Big Sur with old Qt" (hebasto)
-- koyotecoin-core/gui#248 For values of "Bytes transferred" and "Bytes/s" with 1000-based prefix names use 1000-based divisor instead of 1024-based (wodry)
-- koyotecoin-core/gui#251 Improve URI/file handling message (hebasto)
-- koyotecoin-core/gui#256 Save/restore column sizes of the tables in the Peers tab (hebasto)
-- koyotecoin-core/gui#260 Handle exceptions isntead of crash (hebasto)
-- koyotecoin-core/gui#263 Revamp context menus (hebasto)
-- koyotecoin-core/gui#271 Don't clear console prompt when font resizing (jarolrod)
-- koyotecoin-core/gui#275 Support runtime appearance adjustment on macOS (hebasto)
-- koyotecoin-core/gui#276 Elide long strings in their middle in the Peers tab (hebasto)
-- koyotecoin-core/gui#281 Set shortcuts for console's resize buttons (jarolrod)
-- koyotecoin-core/gui#293 Enable wordWrap for Services (RandyMcMillan)
-- koyotecoin-core/gui#296 Do not use QObject::tr plural syntax for numbers with a unit symbol (hebasto)
-- koyotecoin-core/gui#297 Avoid unnecessary translations (hebasto)
-- koyotecoin-core/gui#298 Peertableview alternating row colors (RandyMcMillan)
-- koyotecoin-core/gui#300 Remove progress bar on modal overlay (brunoerg)
-- koyotecoin-core/gui#309 Add access to the Peers tab from the network icon (hebasto)
-- koyotecoin-core/gui#311 Peers Window rename 'Peer id' to 'Peer' (jarolrod)
-- koyotecoin-core/gui#313 Optimize string concatenation by default (hebasto)
-- koyotecoin-core/gui#325 Align numbers in the "Peer Id" column to the right (hebasto)
-- koyotecoin-core/gui#329 Make console buttons look clickable (jarolrod)
-- koyotecoin-core/gui#330 Allow prompt icon to be colorized (jarolrod)
-- koyotecoin-core/gui#331 Make RPC console welcome message translation-friendly (hebasto)
-- koyotecoin-core/gui#332 Replace disambiguation strings with translator comments (hebasto)
-- koyotecoin-core/gui#335 test: Use QSignalSpy instead of QEventLoop (jarolrod)
-- koyotecoin-core/gui#343 Improve the GUI responsiveness when progress dialogs are used (hebasto)
-- koyotecoin-core/gui#361 Fix GUI segfault caused by koyotecoin/koyotecoin#22216 (ryanofsky)
-- koyotecoin-core/gui#362 Add keyboard shortcuts to context menus (luke-jr)
-- koyotecoin-core/gui#366 Dark Mode fixes/portability (luke-jr)
-- koyotecoin-core/gui#375 Emit dataChanged signal to dynamically re-sort Peers table (hebasto)
-- koyotecoin-core/gui#393 Fix regression in "Encrypt Wallet" menu item (hebasto)
-- koyotecoin-core/gui#396 Ensure external signer option remains disabled without signers (achow101)
-- koyotecoin-core/gui#406 Handle new added plurals in `koyotecoin_en.ts` (hebasto)
+- koyotecoin/gui#4 UI external signer support (e.g. hardware wallet) (Sjors)
+- koyotecoin/gui#13 Hide peer detail view if multiple are selected (promag)
+- koyotecoin/gui#18 Add peertablesortproxy module (hebasto)
+- koyotecoin/gui#21 Improve pruning tooltip (fluffypony, KoyotecoinErrorLog)
+- koyotecoin/gui#72 Log static plugins meta data and used style (hebasto)
+- koyotecoin/gui#79 Embed monospaced font (hebasto)
+- koyotecoin/gui#85 Remove unused "What's This" button in dialogs on Windows OS (hebasto)
+- koyotecoin/gui#115 Replace "Hide tray icon" option with positive "Show tray icon" one (hebasto)
+- koyotecoin/gui#118 Remove BDB version from the Information tab (hebasto)
+- koyotecoin/gui#121 Early subscribe core signals in transaction table model (promag)
+- koyotecoin/gui#123 Do not accept command while executing another one (hebasto)
+- koyotecoin/gui#125 Enable changing the autoprune block space size in intro dialog (luke-jr)
+- koyotecoin/gui#138 Unlock encrypted wallet "OK" button bugfix (mjdietzx)
+- koyotecoin/gui#139 doc: Improve gui/src/qt README.md (jarolrod)
+- koyotecoin/gui#154 Support macOS Dark mode (goums, Uplab)
+- koyotecoin/gui#162 Add network to peers window and peer details (jonatack)
+- koyotecoin/gui#163, koyotecoin/gui#180 Peer details: replace Direction with Connection Type (jonatack)
+- koyotecoin/gui#164 Handle peer addition/removal in a right way (hebasto)
+- koyotecoin/gui#165 Save QSplitter state in QSettings (hebasto)
+- koyotecoin/gui#173 Follow Qt docs when implementing rowCount and columnCount (hebasto)
+- koyotecoin/gui#179 Add Type column to peers window, update peer details name/tooltip (jonatack)
+- koyotecoin/gui#186 Add information to "Confirm fee bump" window (prayank23)
+- koyotecoin/gui#189 Drop workaround for QTBUG-42503 which was fixed in Qt 5.5.0 (prusnak)
+- koyotecoin/gui#194 Save/restore RPCConsole geometry only for window (hebasto)
+- koyotecoin/gui#202 Fix right panel toggle in peers tab (RandyMcMillan)
+- koyotecoin/gui#203 Display plain "Inbound" in peer details (jonatack)
+- koyotecoin/gui#204 Drop buggy TableViewLastColumnResizingFixer class (hebasto)
+- koyotecoin/gui#205, koyotecoin/gui#229 Save/restore TransactionView and recentRequestsView tables column sizes (hebasto)
+- koyotecoin/gui#206 Display fRelayTxes and `bip152_highbandwidth_{to, from}` in peer details (jonatack)
+- koyotecoin/gui#213 Add Copy Address Action to Payment Requests (jarolrod)
+- koyotecoin/gui#214 Disable requests context menu actions when appropriate (jarolrod)
+- koyotecoin/gui#217 Make warning label look clickable (jarolrod)
+- koyotecoin/gui#219 Prevent the main window popup menu (hebasto)
+- koyotecoin/gui#220 Do not translate file extensions (hebasto)
+- koyotecoin/gui#221 RPCConsole translatable string fixes and improvements (jonatack)
+- koyotecoin/gui#226 Add "Last Block" and "Last Tx" rows to peer details area (jonatack)
+- koyotecoin/gui#233 qt test: Don't bind to regtest port (achow101)
+- koyotecoin/gui#243 Fix issue when disabling the auto-enabled blank wallet checkbox (jarolrod)
+- koyotecoin/gui#246 Revert "qt: Use "fusion" style on macOS Big Sur with old Qt" (hebasto)
+- koyotecoin/gui#248 For values of "Bytes transferred" and "Bytes/s" with 1000-based prefix names use 1000-based divisor instead of 1024-based (wodry)
+- koyotecoin/gui#251 Improve URI/file handling message (hebasto)
+- koyotecoin/gui#256 Save/restore column sizes of the tables in the Peers tab (hebasto)
+- koyotecoin/gui#260 Handle exceptions isntead of crash (hebasto)
+- koyotecoin/gui#263 Revamp context menus (hebasto)
+- koyotecoin/gui#271 Don't clear console prompt when font resizing (jarolrod)
+- koyotecoin/gui#275 Support runtime appearance adjustment on macOS (hebasto)
+- koyotecoin/gui#276 Elide long strings in their middle in the Peers tab (hebasto)
+- koyotecoin/gui#281 Set shortcuts for console's resize buttons (jarolrod)
+- koyotecoin/gui#293 Enable wordWrap for Services (RandyMcMillan)
+- koyotecoin/gui#296 Do not use QObject::tr plural syntax for numbers with a unit symbol (hebasto)
+- koyotecoin/gui#297 Avoid unnecessary translations (hebasto)
+- koyotecoin/gui#298 Peertableview alternating row colors (RandyMcMillan)
+- koyotecoin/gui#300 Remove progress bar on modal overlay (brunoerg)
+- koyotecoin/gui#309 Add access to the Peers tab from the network icon (hebasto)
+- koyotecoin/gui#311 Peers Window rename 'Peer id' to 'Peer' (jarolrod)
+- koyotecoin/gui#313 Optimize string concatenation by default (hebasto)
+- koyotecoin/gui#325 Align numbers in the "Peer Id" column to the right (hebasto)
+- koyotecoin/gui#329 Make console buttons look clickable (jarolrod)
+- koyotecoin/gui#330 Allow prompt icon to be colorized (jarolrod)
+- koyotecoin/gui#331 Make RPC console welcome message translation-friendly (hebasto)
+- koyotecoin/gui#332 Replace disambiguation strings with translator comments (hebasto)
+- koyotecoin/gui#335 test: Use QSignalSpy instead of QEventLoop (jarolrod)
+- koyotecoin/gui#343 Improve the GUI responsiveness when progress dialogs are used (hebasto)
+- koyotecoin/gui#361 Fix GUI segfault caused by koyotecoin/koyotecoin#22216 (ryanofsky)
+- koyotecoin/gui#362 Add keyboard shortcuts to context menus (luke-jr)
+- koyotecoin/gui#366 Dark Mode fixes/portability (luke-jr)
+- koyotecoin/gui#375 Emit dataChanged signal to dynamically re-sort Peers table (hebasto)
+- koyotecoin/gui#393 Fix regression in "Encrypt Wallet" menu item (hebasto)
+- koyotecoin/gui#396 Ensure external signer option remains disabled without signers (achow101)
+- koyotecoin/gui#406 Handle new added plurals in `koyotecoin_en.ts` (hebasto)
 
 ### Build system
+
 - koyotecoin/koyotecoin#17227 Add Android packaging support (icota)
 - koyotecoin/koyotecoin#17920 guix: Build support for macOS (dongcarl)
 - koyotecoin/koyotecoin#18298 Fix Qt processing of configure script for depends with DEBUG=1 (hebasto)
@@ -586,7 +579,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#21239 guix: Add codesignature attachment support for osx+win (dongcarl)
 - koyotecoin/koyotecoin#21250 Make `HAVE_O_CLOEXEC` available outside LevelDB (bugfix) (theStack)
 - koyotecoin/koyotecoin#21272 guix: Passthrough `SDK_PATH` into container (dongcarl)
-- koyotecoin/koyotecoin#21274 assumptions:  Assume C++17 (fanquake)
+- koyotecoin/koyotecoin#21274 assumptions: Assume C++17 (fanquake)
 - koyotecoin/koyotecoin#21286 Bump minimum Qt version to 5.9.5 (hebasto)
 - koyotecoin/koyotecoin#21298 guix: Bump time-machine, glibc, and linux-headers (dongcarl)
 - koyotecoin/koyotecoin#21304 guix: Add guix-clean script + establish gc-root for container profiles (dongcarl)
@@ -657,6 +650,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22713 Fix build with Boost 1.77.0 (sizeofvoid)
 
 ### Tests and QA
+
 - koyotecoin/koyotecoin#14604 Add test and refactor `feature_block.py` (sanket1729)
 - koyotecoin/koyotecoin#17556 Change `feature_config_args.py` not to rely on strange regtest=0 behavior (ryanofsky)
 - koyotecoin/koyotecoin#18795 wallet issue with orphaned rewards (domob1812)
@@ -875,6 +869,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22742 Use proper target in `do_fund_send` (S3RK)
 
 ### Miscellaneous
+
 - koyotecoin/koyotecoin#19337 sync: Detect double lock from the same thread (vasild)
 - koyotecoin/koyotecoin#19809 log: Prefix log messages with function name and source code location if -logsourcelocations is set (practicalswift)
 - koyotecoin/koyotecoin#19866 eBPF Linux tracepoints (jb55)
@@ -938,6 +933,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22654 guix: Don't include directory name in SHA256SUMS (achow101)
 
 ### Documentation
+
 - koyotecoin/koyotecoin#15451 clarify getdata limit after #14897 (HashUnlimited)
 - koyotecoin/koyotecoin#15545 Explain why CheckBlock() is called before AcceptBlock (Sjors)
 - koyotecoin/koyotecoin#17350 Add developer documentation to isminetype (HAOYUatHZ)
@@ -1025,8 +1021,7 @@ A detailed list of changes in this version follows. To keep the list to a manage
 - koyotecoin/koyotecoin#22432 Fix incorrect `testmempoolaccept` doc (glozow)
 - koyotecoin/koyotecoin#22648 doc, test: improve i2p/tor docs and i2p reachable unit tests (jonatack)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

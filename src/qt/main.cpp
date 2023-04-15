@@ -16,7 +16,7 @@
 
 /** Translate string to current locale using Qt. */
 extern const std::function<std::string(const char*)> G_TRANSLATION_FUN = [](const char* psz) {
-    return QCoreApplication::translate("koyotecoin-core", psz).toStdString();
+    return QCoreApplication::translate("koyotecoin", psz).toStdString();
 };
 UrlDecodeFn* const URL_DECODE = urlDecode;
 

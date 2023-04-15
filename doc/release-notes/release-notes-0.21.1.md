@@ -1,23 +1,21 @@
-0.21.1 Release Notes
-====================
+# 0.21.1 Release Notes
 
 Koyotecoin Core version 0.21.1 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.21.1/>
+<https://koyotecoin.org/bin/koyotecoin-0.21.1/>
 
 This minor release includes various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes in some cases), then run the
@@ -28,21 +26,19 @@ Upgrading directly from a version of Koyotecoin Core that has reached its EOL is
 possible, but it might take some time if the data directory needs to be migrated. Old
 wallet versions of Koyotecoin Core are generally supported.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 10.12+, and Windows 7 and newer.  Koyotecoin
+using the Linux kernel, macOS 10.12+, and Windows 7 and newer. Koyotecoin
 Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Koyotecoin Core on
+frequently tested on them. It is not recommended to use Koyotecoin Core on
 unsupported systems.
 
 From Koyotecoin Core 0.20.0 onwards, macOS versions earlier than 10.12 are no
 longer supported. Additionally, Koyotecoin Core does not yet change appearance
 when macOS "dark mode" is activated.
 
-Notable changes
-===============
+# Notable changes
 
 ## Taproot Soft Fork
 
@@ -57,7 +53,7 @@ fungibility of all koyotecoins. Spenders will enjoy lower fees and the
 ability to resolve many multisig scripts and complex contracts with the
 same efficiency, low fees, and large anonymity set as single-sig users.
 Taproot and schnorr also include efficiency improvements for full nodes
-such as the ability to batch signature verification.  Together, the
+such as the ability to batch signature verification. Together, the
 improvements lay the groundwork for future potential
 upgrades that may improve efficiency, privacy, and fungibility further.
 
@@ -65,7 +61,7 @@ Activation for taproot is being managed using a variation of BIP9
 versionbits called Speedy Trial (described in BIP341). Taproot's
 versionbit is bit 2, and nodes will begin tracking which blocks signal
 support for taproot at the beginning of the first retarget period after
-taproot’s start date of 24 April 2021.  If 90% of blocks within a
+taproot’s start date of 24 April 2021. If 90% of blocks within a
 2,016-block retarget period (about two weeks) signal support for taproot
 prior to the first retarget period beginning after the time of 11 August
 2021, the soft fork will be locked in, and taproot will then be active
@@ -78,42 +74,44 @@ changes to address the reasons the Speedy Trial method failed.
 This release includes the ability to pay taproot addresses, although
 payments to such addresses are not secure until taproot activates.
 It also includes the ability to relay and mine taproot transactions
-after activation.  Beyond those two basic capabilities, this release
+after activation. Beyond those two basic capabilities, this release
 does not include any code that allows anyone to directly use taproot.
 The addition of taproot-related features to Koyotecoin Core's wallet is
 expected in later releases once taproot activation is assured.
 
 All users, businesses, and miners are encouraged to upgrade to this
 release (or a subsequent compatible release) unless they object to
-activation of taproot.  If taproot is locked in, then upgrading before
+activation of taproot. If taproot is locked in, then upgrading before
 block 709632 is highly recommended to help enforce taproot's new rules
 and to avoid the unlikely case of seeing falsely confirmed transactions.
 
 Miners who want to activate Taproot should preferably use this release
-to control their signaling.  The `getblocktemplate` RPC results will
+to control their signaling. The `getblocktemplate` RPC results will
 automatically be updated to signal once the appropriate start has been
 reached and continue signaling until the timeout occurs or taproot
-activates.  Alternatively, miners may manually start signaling on bit 2
+activates. Alternatively, miners may manually start signaling on bit 2
 at any time; if taproot activates, they will need to ensure they update
 their nodes before block 709632 or non-upgraded nodes could cause them to mine on
-an invalid chain.  See the [versionbits
+an invalid chain. See the [versionbits
 FAQ](https://koyotecoin.org/2016/06/08/version-bits-miners-faq/) for
 details.
-
 
 For more information about taproot, please see the following resources:
 
 - Technical specifications
-  - [BIP340 Schnorr signatures for secp256k1](https://github.com/koyotecoin/bips/blob/master/bip-0340.mediawiki) 
+
+  - [BIP340 Schnorr signatures for secp256k1](https://github.com/koyotecoin/bips/blob/master/bip-0340.mediawiki)
   - [BIP341 Taproot: SegWit version 1 spending rules](https://github.com/koyotecoin/bips/blob/master/bip-0341.mediawiki)
   - [BIP342 Validation of Taproot scripts](https://github.com/koyotecoin/bips/blob/master/bip-0342.mediawiki)
 
 - Popular articles;
+
   - [Taproot Is Coming: What It Is, and How It Will Benefit Koyotecoin](https://koyotecoinmagazine.com/technical/taproot-coming-what-it-and-how-it-will-benefit-koyotecoin)
   - [What do Schnorr Signatures Mean for Koyotecoin?](https://academy.binance.com/en/articles/what-do-schnorr-signatures-mean-for-koyotecoin)
   - [The Schnorr Signature & Taproot Softfork Proposal](https://blog.bitmex.com/the-schnorr-signature-taproot-softfork-proposal/)
 
 - Development history overview
+
   - [Taproot](https://koyotecoinops.org/en/topics/taproot/)
   - [Schnorr signatures](https://koyotecoinops.org/en/topics/schnorr-signatures/)
   - [Tapscript](https://koyotecoinops.org/en/topics/tapscript/)
@@ -123,8 +121,7 @@ For more information about taproot, please see the following resources:
   - [Questions and answers related to taproot](https://koyotecoin.stackexchange.com/questions/tagged/taproot)
   - [Taproot review](https://github.com/ajtowns/taproot-review)
 
-Updated RPCs
-------------
+## Updated RPCs
 
 - Due to [BIP 350](https://github.com/koyotecoin/bips/blob/master/bip-0350.mediawiki)
   being implemented, behavior for all RPCs that accept addresses is changed when
@@ -137,29 +134,34 @@ Updated RPCs
   affect any production systems, but may be observed on other networks where such
   addresses already have meaning (like signet).
 
-0.21.1 change log
-=================
+  # 0.21.1 change log
 
 ### Consensus
+
 - #21377 Speedy trial support for versionbits (ajtowns)
 - #21686 Speedy trial activation parameters for Taproot (achow101)
 
 ### P2P protocol and network code
+
 - #20852 allow CSubNet of non-IP networks (vasild)
 - #21043 Avoid UBSan warning in ProcessMessage(…) (practicalswift)
 
 ### Wallet
+
 - #21166 Introduce DeferredSignatureChecker and have SignatureExtractorClass subclass it (achow101)
 - #21083 Avoid requesting fee rates multiple times during coin selection (achow101)
 
 ### RPC and other APIs
+
 - #21201 Disallow sendtoaddress and sendmany when private keys disabled (achow101)
 
 ### Build system
+
 - #21486 link against -lsocket if required for `*ifaddrs` (fanquake)
 - #20983 Fix MSVC build after gui#176 (hebasto)
 
 ### Tests and QA
+
 - #21380 Add fuzzing harness for versionbits (ajtowns)
 - #20812 fuzz: Bump FuzzedDataProvider.h (MarcoFalke)
 - #20740 fuzz: Update FuzzedDataProvider.h from upstream (LLVM) (practicalswift)
@@ -171,14 +173,15 @@ Updated RPCs
 - #21489 fuzz: cleanups for versionbits fuzzer (ajtowns)
 
 ### Miscellaneous
+
 - #20861 BIP 350: Implement Bech32m and use it for v1+ segwit addresses (sipa)
 
 ### Documentation
+
 - #21384 add signet to koyotecoin.conf documentation (jonatack)
 - #21342 Remove outdated comment (hebasto)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

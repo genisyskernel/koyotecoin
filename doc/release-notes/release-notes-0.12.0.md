@@ -1,6 +1,6 @@
 Koyotecoin Core version 0.12.0 is now available from:
 
-<https://koyotecoin.org/bin/koyotecoin-core-0.12.0/>
+<https://koyotecoin.org/bin/koyotecoin-0.12.0/>
 
 This is a new major version release, bringing new features and other improvements.
 
@@ -56,7 +56,7 @@ earlier.
 ## Signature validation using libsecp256k1
 
 ECDSA signatures inside Koyotecoin transactions now use validation using
-[libsecp256k1](https://github.com/koyotecoin-core/secp256k1) instead of OpenSSL.
+[libsecp256k1](https://github.com/koyotecoin/secp256k1) instead of OpenSSL.
 
 Depending on the platform, this means a significant speedup for raw signature
 validation speed. The advantage is largest on x86_64, where validation is over

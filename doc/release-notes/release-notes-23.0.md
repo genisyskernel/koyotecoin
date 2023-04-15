@@ -1,23 +1,21 @@
-23.0 Release Notes
-==================
+# 23.0 Release Notes
 
 Koyotecoin Core version 23.0 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-23.0/>
+<https://koyotecoin.org/bin/koyotecoin-23.0/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes in some cases), then run the
@@ -28,20 +26,17 @@ Upgrading directly from a version of Koyotecoin Core that has reached its EOL is
 possible, but it might take some time if the data directory needs to be migrated. Old
 wallet versions of Koyotecoin Core are generally supported.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 10.15+, and Windows 7 and newer.  Koyotecoin
+using the Linux kernel, macOS 10.15+, and Windows 7 and newer. Koyotecoin
 Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Koyotecoin Core on
+frequently tested on them. It is not recommended to use Koyotecoin Core on
 unsupported systems.
 
-Notable changes
-===============
+# Notable changes
 
-P2P and network changes
------------------------
+## P2P and network changes
 
 - A koyotecoind node will no longer rumour addresses to inbound peers by default.
   They will become eligible for address gossip after sending an ADDR, ADDRV2,
@@ -51,21 +46,18 @@ P2P and network changes
 
 - Full support has been added for the CJDNS network. See the new option `-cjdnsreachable` and [doc/cjdns.md](https://github.com/koyotecoin/koyotecoin/tree/23.x/doc/cjdns.md) (#23077)
 
-Fee estimation changes
-----------------------
+## Fee estimation changes
 
 - Fee estimation now takes the feerate of replacement (RBF) transactions into
   account. (#22539)
 
-Rescan startup parameter removed
---------------------------------
+## Rescan startup parameter removed
 
 The `-rescan` startup parameter has been removed. Wallets which require
 rescanning due to corruption will still be rescanned on startup.
 Otherwise, please use the `rescanblockchain` RPC to trigger a rescan. (#23123)
 
-Tracepoints and Userspace, Statically Defined Tracing support
--------------------------------------------------------------
+## Tracepoints and Userspace, Statically Defined Tracing support
 
 Koyotecoin Core release binaries for Linux now include experimental tracepoints which
 act as an interface for process-internal events. These can be used for review,
@@ -75,8 +67,7 @@ tracepoints. Information about the existing tracepoints can be found under
 [doc/tracing.md](https://github.com/koyotecoin/koyotecoin/blob/23.x/doc/tracing.md) and
 usage examples are provided in [contrib/tracing/](https://github.com/koyotecoin/koyotecoin/tree/23.x/contrib/tracing).
 
-Updated RPCs
-------------
+## Updated RPCs
 
 - The `validateaddress` RPC now returns an `error_locations` array for invalid
   addresses, with the indices of invalid character locations in the address (if
@@ -86,15 +77,16 @@ Updated RPCs
   The error message returned in the `error` field now also returns more specific
   errors when decoding fails. (#16807)
 
-- The `-deprecatedrpc=addresses` configuration option has been removed.  RPCs
+- The `-deprecatedrpc=addresses` configuration option has been removed. RPCs
   `gettxout`, `getrawtransaction`, `decoderawtransaction`, `decodescript`,
   `gettransaction verbose=true` and REST endpoints `/rest/tx`, `/rest/getutxos`,
   `/rest/block` no longer return the `addresses` and `reqSigs` fields, which
   were previously deprecated in 22.0. (#22650)
 - The `getblock` RPC command now supports verbosity level 3 containing transaction inputs'
-  `prevout` information.  The existing `/rest/block/` REST endpoint is modified to contain
+  `prevout` information. The existing `/rest/block/` REST endpoint is modified to contain
   this information too. Every `vin` field will contain an additional `prevout` subfield
   describing the spent output. `prevout` contains the following keys:
+
   - `generated` - true if the spent coins was a coinbase.
   - `height`
   - `value`
@@ -115,8 +107,7 @@ Updated RPCs
 
 Changes to wallet related RPCs can be found in the Wallet section below.
 
-New RPCs
---------
+## New RPCs
 
 - Information on soft fork status has been moved from `getblockchaininfo`
   to the new `getdeploymentinfo` RPC which allows querying soft fork status at any
@@ -127,22 +118,20 @@ New RPCs
   now reflects the status of the current block rather than the next
   block. (#23508)
 
-Files
------
+## Files
 
-* On startup, the list of banned hosts and networks (via `setban` RPC) in
+- On startup, the list of banned hosts and networks (via `setban` RPC) in
   `banlist.dat` is ignored and only `banlist.json` is considered. Koyotecoin Core
   version 22.x is the only version that can read `banlist.dat` and also write
   it to `banlist.json`. If `banlist.json` already exists, version 22.x will not
   try to translate the `banlist.dat` into json. After an upgrade, `listbanned`
   can be used to double check the parsed entries. (#22570)
 
-Updated settings
-----------------
+## Updated settings
 
 - In previous releases, the meaning of the command line option
   `-persistmempool` (without a value provided) incorrectly disabled mempool
-  persistence.  `-persistmempool` is now treated like other boolean options to
+  persistence. `-persistmempool` is now treated like other boolean options to
   mean `-persistmempool=1`. Passing `-persistmempool=0`, `-persistmempool=1`
   and `-nopersistmempool` is unaffected. (#23061)
 
@@ -156,8 +145,7 @@ Updated settings
   `addnode` RPC. To mimic the old behavior use `-proxy=` together with
   `-onlynet=` listing all relevant networks except `onion`. (#22834)
 
-Tools and Utilities
--------------------
+## Tools and Utilities
 
 - Update `-getinfo` to return data in a user-friendly format that also reduces vertical space. (#21832)
 
@@ -165,8 +153,7 @@ Tools and Utilities
   known to the node instead of separate `torv2` and `torv3` fields, as support
   for Tor V2 addresses was removed from Koyotecoin Core in 22.0. (#22544)
 
-Wallet
-------
+## Wallet
 
 - Descriptor wallets are now the default wallet type. Newly created wallets
   will use descriptors unless `descriptors=false` is set during `createwallet`, or
@@ -208,31 +195,26 @@ Wallet
   transactions. Immature coinbase transactions are coinbase transactions that
   have 100 or fewer confirmations, and are not spendable. (#14707)
 
-GUI changes
------------
+## GUI changes
 
 - UTXOs which are locked via the GUI are now stored persistently in the
   wallet database, so are not lost on node shutdown or crash. (#23065)
 
 - The Bech32 checkbox has been replaced with a dropdown for all address types, including the new Bech32m (BIP-350) standard for Taproot enabled wallets.
 
-Low-level changes
-=================
+# Low-level changes
 
-RPC
----
+## RPC
 
 - `getblockchaininfo` now returns a new `time` field, that provides the chain tip time. (#22407)
 
-Tests
------
+## Tests
 
 - For the `regtest` network the activation heights of several softforks were
   set to block height 1. They can be changed by the runtime setting
   `-testactivationheight=name@height`. (#22818)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

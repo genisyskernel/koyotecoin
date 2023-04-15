@@ -367,7 +367,7 @@ Signing is only possible with addresses of the type 'legacy'</translation>
     </message>
 </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">ไม่สามารถอ่านไฟล์ตั้งค่าได้</translation>

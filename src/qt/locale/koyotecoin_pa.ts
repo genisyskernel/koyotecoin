@@ -234,7 +234,7 @@
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">ਸੈਟਿੰਗ ਫਾਈਲ ਨੂੰ ਪੜ੍ਹਨ ਵਿੱਚ ਅਸਫਲ</translation>

@@ -2,7 +2,7 @@
 
 Koyotecoin Core version 0.21.0 is now available from:
 
-<https://koyotecoin.org/bin/koyotecoin-core-0.21.0/>
+<https://koyotecoin.org/bin/koyotecoin-0.21.0/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.

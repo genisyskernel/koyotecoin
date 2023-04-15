@@ -84,7 +84,7 @@
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Error: Missing checksum</source>
         <translation type="unfinished">Iphutha: iChecksum engekho</translation>

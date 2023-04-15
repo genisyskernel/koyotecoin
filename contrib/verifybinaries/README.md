@@ -19,23 +19,22 @@ It first checks if the signature passes, and then downloads the files specified 
 
 The script returns 0 if everything passes the checks. It returns 1 if either the signature check or the hash check doesn't pass. If an error occurs the return value is 2.
 
-
 ```sh
-./verify.py koyotecoin-core-0.11.2
-./verify.py koyotecoin-core-0.12.0
-./verify.py koyotecoin-core-0.13.0-rc3
+./verify.py koyotecoin-0.11.2
+./verify.py koyotecoin-0.12.0
+./verify.py koyotecoin-0.13.0-rc3
 ```
 
 If you only want to download the binaries of certain platform, add the corresponding suffix, e.g.:
 
 ```sh
-./verify.py koyotecoin-core-0.11.2-osx
+./verify.py koyotecoin-0.11.2-osx
 ./verify.py 0.12.0-linux
-./verify.py koyotecoin-core-0.13.0-rc3-win64
+./verify.py koyotecoin-0.13.0-rc3-win64
 ```
 
 If you do not want to keep the downloaded binaries, specify anything as the second parameter.
 
 ```sh
-./verify.py koyotecoin-core-0.13.0 delete
+./verify.py koyotecoin-0.13.0 delete
 ```

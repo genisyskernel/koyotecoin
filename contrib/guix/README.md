@@ -52,10 +52,10 @@ tar -C depends/SDKs -xaf /path/to/SDK/tarball
 
 ## Building
 
-*The author highly recommends at least reading over the [common usage patterns
+_The author highly recommends at least reading over the [common usage patterns
 and examples](#common-guix-build-invocation-patterns-and-examples) section below
 before starting a build. For a full list of customization options, see the
-[recognized environment variables][env-vars-list] section.*
+[recognized environment variables][env-vars-list] section._
 
 To build Koyotecoin Core reproducibly with all default options, invoke the
 following from the top of a clean repository:
@@ -75,14 +75,15 @@ crucial differences:
 
 1. Since only Windows and macOS build outputs require codesigning, the `HOSTS`
    environment variable will have a sane default value of `x86_64-w64-mingw32
-   x86_64-apple-darwin arm64-apple-darwin` instead of all the platforms.
-2. The `guix-codesign` command ***requires*** a `DETACHED_SIGS_REPO` flag.
-    * _**DETACHED_SIGS_REPO**_
+x86_64-apple-darwin arm64-apple-darwin` instead of all the platforms.
+2. The `guix-codesign` command **_requires_** a `DETACHED_SIGS_REPO` flag.
 
-      Set the directory where detached codesignatures can be found for the current
-      Koyotecoin Core version being built.
+   - _**DETACHED_SIGS_REPO**_
 
-      _REQUIRED environment variable_
+     Set the directory where detached codesignatures can be found for the current
+     Koyotecoin Core version being built.
+
+     _REQUIRED environment variable_
 
 An invocation with all default options would look like:
 
@@ -103,12 +104,11 @@ worktree to save disk space:
 ./contrib/guix/guix-clean
 ```
 
-
 ## Attesting to build outputs
 
 Much like how Gitian build outputs are attested to in a `gitian.sigs`
 repository, Guix build outputs are attested to in the [`guix.sigs`
-repository](https://github.com/koyotecoin-core/guix.sigs).
+repository](https://github.com/koyotecoin/guix.sigs).
 
 After you've cloned the `guix.sigs` repository, to attest to the current
 worktree's commit/tag:
@@ -129,7 +129,6 @@ repository:
 git -C <path/to/guix.sigs> pull
 env GUIX_SIGS_REPO=<path/to/guix.sigs> ./contrib/guix/guix-verify
 ```
-
 
 ## Common `guix-build` invocation patterns and examples
 
@@ -181,13 +180,13 @@ Here is the difference between `--cores=` and `--max-jobs=`:
 
 `--cores=`
 
-  - controls the number of CPU cores to build each derivation. This is the value
-    passed to `make`'s `--jobs=` flag.
+- controls the number of CPU cores to build each derivation. This is the value
+  passed to `make`'s `--jobs=` flag.
 
 `--max-jobs=`
 
-  - controls how many derivations can be built in parallel
-  - defaults to 1
+- controls how many derivations can be built in parallel
+- defaults to 1
 
 Therefore, the default is for `guix` build commands to build one derivation at a
 time, utilizing `$JOBS` threads.
@@ -217,16 +216,16 @@ details.
 
 ## Recognized environment variables
 
-* _**HOSTS**_
+- _**HOSTS**_
 
   Override the space-separated list of platform triples for which to perform a
   bootstrappable build.
 
-  _(defaults to "x86\_64-linux-gnu arm-linux-gnueabihf aarch64-linux-gnu
+  _(defaults to "x86_64-linux-gnu arm-linux-gnueabihf aarch64-linux-gnu
   riscv64-linux-gnu powerpc64-linux-gnu powerpc64le-linux-gnu
-  x86\_64-w64-mingw32 x86\_64-apple-darwin arm64-apple-darwin")_
+  x86_64-w64-mingw32 x86_64-apple-darwin arm64-apple-darwin")_
 
-* _**SOURCES_PATH**_
+- _**SOURCES_PATH**_
 
   Set the depends tree download cache for sources. This is passed through to the
   depends tree. Setting this to the same directory across multiple builds of the
@@ -235,7 +234,7 @@ details.
   The path that this environment variable points to **must be a directory**, and
   **NOT a symlink to a directory**.
 
-* _**BASE_CACHE**_
+- _**BASE_CACHE**_
 
   Set the depends tree cache for built packages. This is passed through to the
   depends tree. Setting this to the same directory across multiple builds of the
@@ -244,7 +243,7 @@ details.
   The path that this environment variable points to **must be a directory**, and
   **NOT a symlink to a directory**.
 
-* _**SDK_PATH**_
+- _**SDK_PATH**_
 
   Set the path where _extracted_ SDKs can be found. This is passed through to
   the depends tree. Note that this is should be set to the _parent_ directory of
@@ -254,7 +253,7 @@ details.
   The path that this environment variable points to **must be a directory**, and
   **NOT a symlink to a directory**.
 
-* _**JOBS**_
+- _**JOBS**_
 
   Override the number of jobs to run simultaneously, you might want to do so on
   a memory-limited machine. This may be passed to:
@@ -268,14 +267,14 @@ details.
 
   _(defaults to the value of `nproc` outside the container)_
 
-* _**SOURCE_DATE_EPOCH**_
+- _**SOURCE_DATE_EPOCH**_
 
   Override the reference UNIX timestamp used for bit-for-bit reproducibility,
   the variable name conforms to [standard][r12e/source-date-epoch].
 
   _(defaults to the output of `$(git log --format=%at -1)`)_
 
-* _**V**_
+- _**V**_
 
   If non-empty, will pass `V=1` to all `make` invocations, making `make` output
   verbose.
@@ -285,21 +284,21 @@ details.
   string) is interpreted the same way as not setting `V` at all, and that `V=0`
   has the same effect as `V=1`.
 
-* _**SUBSTITUTE_URLS**_
+- _**SUBSTITUTE_URLS**_
 
   A whitespace-delimited list of URLs from which to download pre-built packages.
   A URL is only used if its signing key is authorized (refer to the [substitute
   servers section](#option-1-building-with-substitutes) for more details).
 
-* _**ADDITIONAL_GUIX_COMMON_FLAGS**_
+- _**ADDITIONAL_GUIX_COMMON_FLAGS**_
 
   Additional flags to be passed to all `guix` commands.
 
-* _**ADDITIONAL_GUIX_TIMEMACHINE_FLAGS**_
+- _**ADDITIONAL_GUIX_TIMEMACHINE_FLAGS**_
 
   Additional flags to be passed to `guix time-machine`.
 
-* _**ADDITIONAL_GUIX_ENVIRONMENT_FLAGS**_
+- _**ADDITIONAL_GUIX_ENVIRONMENT_FLAGS**_
 
   Additional flags to be passed to the invocation of `guix environment` inside
   `guix time-machine`.
@@ -360,6 +359,7 @@ guix archive --authorize < <PREFIX>/share/guix/ci.guix.gnu.org.pub
 ```
 
 Where `<PREFIX>` is likely:
+
 - `/usr` if you installed from a distribution package
 - `/usr/local` if you installed Guix from source and didn't supply any
   prefix-modifying flags to Guix's `./configure`
@@ -412,11 +412,13 @@ like in the following snippet. The first build will take a while, but the
 resulting packages will be cached for future builds.
 
 For direct invocations of `guix`:
+
 ```sh
 guix <cmd> --no-substitutes
 ```
 
 For the scripts under `./contrib/guix/`:
+
 ```sh
 export ADDITIONAL_GUIX_COMMON_FLAGS='--no-substitutes'
 ```
@@ -430,7 +432,6 @@ used.
 If you start `guix-daemon` using an init script, you can edit said script to
 supply this flag.
 
-
 # Purging/Uninstalling Guix
 
 In the extraordinarily rare case where you messed up your Guix installation in
@@ -438,7 +439,7 @@ an irreversible way, you may want to completely purge Guix from your system and
 start over.
 
 1. Uninstall Guix itself according to the way you installed it (e.g. `sudo apt
-   purge guix` for Ubuntu packaging, `sudo make uninstall` for a build from source).
+purge guix` for Ubuntu packaging, `sudo make uninstall` for a build from source).
 2. Remove all build users and groups
 
    You may check for relevant users and groups using:
@@ -456,29 +457,26 @@ start over.
    ```
 
 3. Remove all possible Guix-related directories
-    - `/var/guix/`
-    - `/var/log/guix/`
-    - `/gnu/`
-    - `/etc/guix/`
-    - `/home/*/.config/guix/`
-    - `/home/*/.cache/guix/`
-    - `/home/*/.guix-profile/`
-    - `/root/.config/guix/`
-    - `/root/.cache/guix/`
-    - `/root/.guix-profile/`
+   - `/var/guix/`
+   - `/var/log/guix/`
+   - `/gnu/`
+   - `/etc/guix/`
+   - `/home/*/.config/guix/`
+   - `/home/*/.cache/guix/`
+   - `/home/*/.guix-profile/`
+   - `/root/.config/guix/`
+   - `/root/.cache/guix/`
+   - `/root/.guix-profile/`
 
 [b17e]: https://bootstrappable.org/
 [r12e/source-date-epoch]: https://reproducible-builds.org/docs/source-date-epoch/
-
 [guix/install.sh]: https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh
 [guix/bin-install]: https://www.gnu.org/software/guix/manual/en/html_node/Binary-Installation.html
 [guix/env-setup]: https://www.gnu.org/software/guix/manual/en/html_node/Build-Environment-Setup.html
 [guix/substitutes]: https://www.gnu.org/software/guix/manual/en/html_node/Substitutes.html
 [guix/substitute-server-auth]: https://www.gnu.org/software/guix/manual/en/html_node/Substitute-Server-Authorization.html
 [guix/time-machine]: https://guix.gnu.org/manual/en/html_node/Invoking-guix-time_002dmachine.html
-
 [debian/guix-bullseye]: https://packages.debian.org/bullseye/guix
 [ubuntu/guix-hirsute]: https://packages.ubuntu.com/hirsute/guix
 [fanquake/guix-docker]: https://github.com/fanquake/core-review/tree/master/guix
-
 [env-vars-list]: #recognized-environment-variables

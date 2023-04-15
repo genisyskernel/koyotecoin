@@ -1,6 +1,6 @@
 Koyotecoin Core version 0.10.4 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.10.4/>
+<https://koyotecoin.org/bin/koyotecoin-0.10.4/>
 
 This is a new minor version release, bringing bug fixes, the BIP65
 (CLTV) consensus change, and relay policy preparation for BIP113. It is
@@ -8,33 +8,30 @@ recommended to upgrade to this version as soon as possible.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
-Upgrading and downgrading
-=========================
+# Upgrading and downgrading
 
-How to Upgrade
---------------
+## How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Koyotecoin-Qt (on Mac) or
 koyotecoind/koyotecoin-qt (on Linux).
 
-Downgrade warning
-------------------
+## Downgrade warning
 
 Because release 0.10.0 and later makes use of headers-first synchronization and
 parallel block download (see further), the block files and databases are not
 backwards-compatible with pre-0.10 versions of Koyotecoin Core or other software:
 
-* Blocks will be stored on disk out of order (in the order they are
-received, really), which makes it incompatible with some tools or
-other programs. Reindexing using earlier versions will also not work
-anymore as a result of this.
+- Blocks will be stored on disk out of order (in the order they are
+  received, really), which makes it incompatible with some tools or
+  other programs. Reindexing using earlier versions will also not work
+  anymore as a result of this.
 
-* The block index database will now hold headers for which no block is
-stored on disk, which earlier versions won't support.
+- The block index database will now hold headers for which no block is
+  stored on disk, which earlier versions won't support.
 
 If you want to be able to downgrade smoothly, make a backup of your entire data
 directory. Without this your node will need start syncing (or importing from
@@ -45,11 +42,9 @@ supported and may break as soon as the older version attempts to reindex.
 This does not affect wallet forward or backward compatibility. There are no
 known problems when downgrading from 0.11.x to 0.10.x.
 
-Notable changes since 0.10.3
-============================
+# Notable changes since 0.10.3
 
-BIP65 soft fork to enforce OP_CHECKLOCKTIMEVERIFY opcode
---------------------------------------------------------
+## BIP65 soft fork to enforce OP_CHECKLOCKTIMEVERIFY opcode
 
 This release includes several changes related to the [BIP65][] soft fork
 which redefines the existing OP_NOP2 opcode as OP_CHECKLOCKTIMEVERIFY
@@ -60,7 +55,7 @@ specified point in the future.
    output if they comply with the BIP65 rules as provided in code.
 
 2. This release will produce version 4 blocks by default. Please see the
-   *notice to miners* below.
+   _notice to miners_ below.
 
 3. Once 951 out of a sequence of 1,001 blocks on the local node's best block
    chain contain version 4 (or higher) blocks, this release will no
@@ -95,10 +90,9 @@ version FIXME or any version from FIXME onward.
   will affect you at the pool operator’s discretion, which must be no
   later than BIP65 achieving its 951/1001 status.
 
-[BIP65]: https://github.com/koyotecoin/bips/blob/master/bip-0065.mediawiki
+[bip65]: https://github.com/koyotecoin/bips/blob/master/bip-0065.mediawiki
 
-Windows bug fix for corrupted UTXO database on unclean shutdowns
-----------------------------------------------------------------
+## Windows bug fix for corrupted UTXO database on unclean shutdowns
 
 Several Windows users reported that they often need to reindex the
 entire blockchain after an unclean shutdown of Koyotecoin Core on Windows
@@ -112,8 +106,7 @@ For more information, see: <https://github.com/koyotecoin/koyotecoin/pull/6917>
 Other fixes for database corruption on Windows are expected in the
 next major release.
 
-0.10.4 Change log
-=================
+# 0.10.4 Change log
 
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
@@ -146,8 +139,7 @@ git merge commit are mentioned.
 - #6836 `fb818b6` Bring historical release notes up to date
 - #6852 `0b3fd07` build: make sure OpenSSL heeds noexecstack
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

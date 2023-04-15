@@ -212,7 +212,7 @@
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Corrupted block database detected</source>
         <translation type="unfinished">Mekapansin lang me-corrupt a block database</translation>

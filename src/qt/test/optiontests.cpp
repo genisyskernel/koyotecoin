@@ -92,8 +92,8 @@ void OptionTests::integerGetArgBug()
 
 void OptionTests::parametersInteraction()
 {
-    // Test that the bug https://github.com/koyotecoin-core/gui/issues/567 does not resurface.
-    // It was fixed via https://github.com/koyotecoin-core/gui/pull/568.
+    // Test that the bug https://github.com/koyotecoin/gui/issues/567 does not resurface.
+    // It was fixed via https://github.com/koyotecoin/gui/pull/568.
     // With fListen=false in ~/.config/Koyotecoin/Koyotecoin-Qt.conf and all else left as default,
     // koyotecoin-qt should set both -listen and -listenonion to false and start successfully.
     gArgs.LockSettings([&](util::Settings& s) {

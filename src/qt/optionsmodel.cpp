@@ -713,6 +713,6 @@ void OptionsModel::checkAndMigrate()
     // parameter interaction code to update other settings. This is particularly
     // important for the -listen setting, which should cause -listenonion, -upnp,
     // and other settings to default to false if it was set to false.
-    // (https://github.com/koyotecoin-core/gui/issues/567).
+    // (https://github.com/koyotecoin/gui/issues/567).
     node().initParameterInteraction();
 }

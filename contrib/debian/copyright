@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Koyotecoin
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
- irc://#koyotecoin-core-dev@libera.chat
+ irc://#koyotecoin-dev@libera.chat
 Source: https://github.com/koyotecoin/koyotecoin
 
 Files: *

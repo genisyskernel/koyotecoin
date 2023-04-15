@@ -270,7 +270,7 @@
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>The %s developers</source>
         <translation type="unfinished">Twōrcy %s</translation>

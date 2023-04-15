@@ -1,26 +1,24 @@
-24.0.1 Release Notes
-====================
+# 24.0.1 Release Notes
 
 Due to last-minute issues (#26616), 24.0, although tagged, was never fully
 announced or released.
 
 Koyotecoin Core version 24.0.1 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-24.0.1/>
+<https://koyotecoin.org/bin/koyotecoin-24.0.1/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes in some cases), then run the
@@ -31,21 +29,19 @@ Upgrading directly from a version of Koyotecoin Core that has reached its EOL is
 possible, but it might take some time if the data directory needs to be migrated. Old
 wallet versions of Koyotecoin Core are generally supported.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 10.15+, and Windows 7 and newer.  Koyotecoin
+using the Linux kernel, macOS 10.15+, and Windows 7 and newer. Koyotecoin
 Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Koyotecoin Core on
+frequently tested on them. It is not recommended to use Koyotecoin Core on
 unsupported systems.
 
-Notice of new option for transaction replacement policies
-=========================================================
+# Notice of new option for transaction replacement policies
 
 This version of Koyotecoin Core adds a new `mempoolfullrbf` configuration
 option which allows users to change the policy their individual node
-will use for relaying and mining unconfirmed transactions.  The option
+will use for relaying and mining unconfirmed transactions. The option
 defaults to the same policy that was used in previous releases and no
 changes to node policy will occur if everyone uses the default.
 
@@ -56,7 +52,7 @@ policy sometimes called "first-seen".
 
 The Koyotecoin Protocol does not, and cannot, provide any assurance that
 the first version of an unconfirmed transaction seen by a particular
-node will be the version that gets confirmed.  If there are multiple
+node will be the version that gets confirmed. If there are multiple
 versions of the same unconfirmed transaction available, only the miner
 who includes one of those transactions in a block gets to decide which
 version of the transaction gets confirmed.
@@ -64,8 +60,8 @@ version of the transaction gets confirmed.
 Despite this lack of assurance, multiple merchants and services today
 still make this assumption.
 
-There are several benefits to users from removing this *first-seen*
-simplification.  One key benefit, the ability for the sender of a
+There are several benefits to users from removing this _first-seen_
+simplification. One key benefit, the ability for the sender of a
 transaction to replace it with an alternative version paying higher
 fees, was realized in [Koyotecoin Core 0.12.0][] (February 2016) with the
 introduction of [BIP125][] opt-in Replace By Fee (RBF).
@@ -73,7 +69,7 @@ introduction of [BIP125][] opt-in Replace By Fee (RBF).
 Since then, there has been discussion about completely removing the
 first-seen simplification and allowing users to replace any of their
 older unconfirmed transactions with newer transactions, a feature called
-*full-RBF*.  This release includes a `mempoolfullrbf` configuration
+_full-RBF_. This release includes a `mempoolfullrbf` configuration
 option that allows enabling full-RBF, although it defaults to off
 (allowing only opt-in RBF).
 
@@ -91,17 +87,15 @@ not accept unconfirmed transactions as final, and if they insist on doing so,
 to take the appropriate steps to ensure they have some recourse or plan for
 when their assumptions do not hold.
 
-[Koyotecoin Core 0.12.0]: https://koyotecoin.org/releases/0.12.0/#opt-in-replace-by-fee-transactions
+[koyotecoin core 0.12.0]: https://koyotecoin.org/releases/0.12.0/#opt-in-replace-by-fee-transactions
 [bip125]: https://github.com/koyotecoin/bips/blob/master/bip-0125.mediawiki
 
-Notable changes
-===============
+# Notable changes
 
-P2P and network changes
------------------------
+## P2P and network changes
 
 - To address a potential denial-of-service, the logic to download headers from peers
-  has been reworked.  This is particularly relevant for nodes starting up for the
+  has been reworked. This is particularly relevant for nodes starting up for the
   first time (or for nodes which are starting up after being offline for a long time).
 
   Whenever headers are received from a peer that have a total chainwork that is either
@@ -120,10 +114,9 @@ P2P and network changes
 - With I2P connections, a new, transient address is used for each outbound
   connection if `-i2pacceptincoming=0`. (#25355)
 
-Updated RPCs
-------------
+## Updated RPCs
 
-- The `-deprecatedrpc=softforks` configuration option has been removed.  The
+- The `-deprecatedrpc=softforks` configuration option has been removed. The
   RPC `getblockchaininfo` no longer returns the `softforks` field, which was
   previously deprecated in 23.0. (#23508) Information on soft fork status is
   now only available via the `getdeploymentinfo` RPC.
@@ -148,8 +141,7 @@ Updated RPCs
 
 Changes to wallet related RPCs can be found in the Wallet section below.
 
-New RPCs
---------
+## New RPCs
 
 - The `sendall` RPC spends specific UTXOs to one or more recipients
   without creating change. By default, the `sendall` RPC will spend
@@ -167,8 +159,7 @@ New RPCs
   useful e.g. when verifying that a coin join like transaction doesn't contain unexpected
   inputs that the wallet will then sign for unintentionally. (#22751)
 
-Updated REST APIs
------------------
+## Updated REST APIs
 
 - The `/headers/` and `/blockfilterheaders/` endpoints have been updated to use
   a query parameter instead of path parameter to specify the result count. The
@@ -187,20 +178,17 @@ Updated REST APIs
 
   (#24098)
 
-Build System
-------------
+## Build System
 
 - Guix builds are now reproducible across architectures (x86_64 & aarch64). (#21194)
 
-New settings
-------------
+## New settings
 
 - A new `mempoolfullrbf` option has been added, which enables the mempool to
   accept transaction replacement without enforcing BIP125 replaceability
   signaling. (#25353)
 
-Wallet
-------
+## Wallet
 
 - The `-walletrbf` startup option will now default to `true`. The
   wallet will now default to opt-in RBF on transactions that it creates. (#25610)
@@ -232,36 +220,32 @@ Wallet
 - RPC `getreceivedbylabel` now returns an error, "Label not found
   in wallet" (-4), if the label is not in the address book. (#25122)
 
-Migrating Legacy Wallets to Descriptor Wallets
----------------------------------------------
+## Migrating Legacy Wallets to Descriptor Wallets
 
 An experimental RPC `migratewallet` has been added to migrate Legacy (non-descriptor) wallets to
 Descriptor wallets. More information about the migration process is available in the
 [documentation](https://github.com/koyotecoin/koyotecoin/blob/master/doc/managing-wallets.md#migrating-legacy-wallets-to-descriptor-wallets).
 
-GUI changes
------------
+## GUI changes
 
 - A new menu item to restore a wallet from a backup file has been added (gui#471).
 
 - Configuration changes made in the koyotecoin GUI (such as the pruning setting,
-proxy settings, UPNP preferences) are now saved to `<datadir>/settings.json`
-file rather than to the Qt settings backend (windows registry or unix desktop
-config files), so these settings will now apply to koyotecoind, instead of being
-ignored. (#15936, gui#602)
+  proxy settings, UPNP preferences) are now saved to `<datadir>/settings.json`
+  file rather than to the Qt settings backend (windows registry or unix desktop
+  config files), so these settings will now apply to koyotecoind, instead of being
+  ignored. (#15936, gui#602)
 
 - Also, the interaction between GUI settings and `koyotecoin.conf` settings is
-simplified. Settings from `koyotecoin.conf` are now displayed normally in the GUI
-settings dialog, instead of in a separate warning message ("Options set in this
-dialog are overridden by the configuration file: -setting=value"). And these
-settings can now be edited because `settings.json` values take precedence over
-`koyotecoin.conf` values. (#15936)
+  simplified. Settings from `koyotecoin.conf` are now displayed normally in the GUI
+  settings dialog, instead of in a separate warning message ("Options set in this
+  dialog are overridden by the configuration file: -setting=value"). And these
+  settings can now be edited because `settings.json` values take precedence over
+  `koyotecoin.conf` values. (#15936)
 
-Low-level changes
-=================
+# Low-level changes
 
-RPC
----
+## RPC
 
 - The `deriveaddresses`, `getdescriptorinfo`, `importdescriptors` and `scantxoutset` commands now
   accept Miniscript expression within a `wsh()` descriptor. (#24148)
@@ -269,8 +253,7 @@ RPC
 - The `getaddressinfo`, `decodescript`, `listdescriptors` and `listunspent` commands may now output
   a Miniscript descriptor inside a `wsh()` where a `wsh(raw())` descriptor was previously returned. (#24148)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

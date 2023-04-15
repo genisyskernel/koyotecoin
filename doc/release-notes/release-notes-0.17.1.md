@@ -1,24 +1,23 @@
 Koyotecoin Core version 0.17.1 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.17.1/>
+<https://koyotecoin.org/bin/koyotecoin-0.17.1/>
 
 or through BitTorrent:
 
-    magnet:?xt=urn:btih:c56c87ccfaa8e6fbccc90d549121e61efd97cb6f&dn=koyotecoin-core-0.17.1&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969    
+    magnet:?xt=urn:btih:c56c87ccfaa8e6fbccc90d549121e61efd97cb6f&dn=koyotecoin-0.17.1&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969
 
 This is a new minor version release, with various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
@@ -36,8 +35,7 @@ automatic upgrade code from before version 0.8 to version 0.15.0. Upgrading
 directly from 0.7.x and earlier without redownloading the blockchain is not supported.
 However, as usual, old wallet versions are still supported.
 
-Downgrading warning
--------------------
+## Downgrading warning
 
 The chainstate database for this release is not compatible with previous
 releases, so if you run 0.15 and then decide to switch back to any
@@ -47,8 +45,7 @@ option to rebuild the chainstate data structures in the old format.
 If your node has pruning enabled, this will entail re-downloading and
 processing the entire blockchain.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer (Windows XP is not supported).
@@ -59,11 +56,9 @@ frequently tested on them.
 From 0.17.0 onwards macOS <10.10 is no longer supported. 0.17.0 is built using Qt 5.9.x, which doesn't
 support versions of macOS older than 10.10.
 
-Notable changes
-===============
+# Notable changes
 
-`listtransactions` label support
---------------------------------
+## `listtransactions` label support
 
 The `listtransactions` RPC `account` parameter which was deprecated in 0.17.0
 and renamed to `dummy` has been un-deprecated and renamed again to `label`.
@@ -80,14 +75,15 @@ to list transactions that don't have any label. Without
 only non-labeled transactions is not generally useful behavior and can cause
 confusion.
 
-0.17.1 change log
-=================
+# 0.17.1 change log
 
 ### P2P protocol and network code
+
 - #14685 `9406502` Fix a deserialization overflow edge case (kazcw)
 - #14728 `b901578` Fix uninitialized read when stringifying an addrLocal (kazcw)
 
 ### Wallet
+
 - #14441 `5150acc` Restore ability to list incoming transactions by label (jnewbery)
 - #13546 `91fa15a` Fix use of uninitialized value `bnb_used` in CWallet::CreateTransaction(…) (practicalswift)
 - #14310 `bb90695` Ensure wallet is unlocked before signing (gustavonalle)
@@ -98,6 +94,7 @@ confusion.
 - #14424 `89a9a9d` Stop requiring imported pubkey to sign non-PKH schemes (sipa, MeshCollider)
 
 ### RPC and other APIs
+
 - #14417 `fb9ad04` Fix listreceivedbyaddress not taking address as a string (etscrivner)
 - #14596 `de5e48a` Bugfix: RPC: Add `address_type` named param for createmultisig (luke-jr)
 - #14618 `9666dba` Make HTTP RPC debug logging more informative (practicalswift)
@@ -107,14 +104,17 @@ confusion.
 - #14453 `75b5d8c` Fix wallet unload during walletpassphrase timeout (promag)
 
 ### GUI
+
 - #14403 `0242b5a` Revert "Force TLS1.0+ for SSL connections" (real-or-random)
 - #14593 `df5131b` Explicitly disable "Dark Mode" appearance on macOS (fanquake)
 
 ### Build system
+
 - #14647 `7edebed` Remove illegal spacing in darwin.mk (ch4ot1c)
 - #14698 `ec71f06` Add koyotecoin-tx.exe into Windows installer (ken2812221)
 
 ### Tests and QA
+
 - #13965 `29899ec` Fix extended functional tests fail (ken2812221)
 - #14011 `9461f98` Disable wallet and address book Qt tests on macOS minimal platform (ryanofsky)
 - #14180 `86fadee` Run all tests even if wallet is not compiled (MarcoFalke)
@@ -130,11 +130,11 @@ confusion.
 - #14845 `67225e2` Add `wallet_balance.py` (jnewbery)
 
 ### Documentation
+
 - #14161 `5f51fd6` doc/descriptors.md tweaks (ryanofsky)
 - #14276 `85aacc4` Add autogen.sh in ARM Cross-compilation (walterwhite81)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

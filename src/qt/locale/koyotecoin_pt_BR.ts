@@ -364,7 +364,7 @@ Somente é possível assinar com endereços do tipo 'legado'.</translation>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">Não foi possível ler o arquivo de configurações</translation>

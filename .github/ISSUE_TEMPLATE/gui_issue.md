@@ -1,11 +1,10 @@
 ---
 name: An issue or feature request related to the GUI
-about: Any report, issue or feature request related to the GUI should be reported at https://github.com/koyotecoin-core/gui/issues/
-title: Any report, issue or feature request related to the GUI should be reported at https://github.com/koyotecoin-core/gui/issues/
+about: Any report, issue or feature request related to the GUI should be reported at https://github.com/koyotecoin/gui/issues/
+title: Any report, issue or feature request related to the GUI should be reported at https://github.com/koyotecoin/gui/issues/
 labels: GUI
-assignees: ''
-
+assignees: ""
 ---
 
 Any report, issue or feature request related to the GUI should be reported at
-https://github.com/koyotecoin-core/gui/issues/
+https://github.com/koyotecoin/gui/issues/

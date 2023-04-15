@@ -1,20 +1,19 @@
 Koyotecoin Core version 0.16.0 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.16.0/>
+<https://koyotecoin.org/bin/koyotecoin-0.16.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
@@ -30,15 +29,13 @@ automatic upgrade code from before version 0.8 to version 0.15.0 or higher. Upgr
 directly from 0.7.x and earlier without re-downloading the blockchain is not supported.
 However, as usual, old wallet versions are still supported.
 
-Downgrading warning
--------------------
+## Downgrading warning
 
 Wallets created in 0.16 and later are not compatible with versions prior to 0.16
 and will not work if you try to use newly created wallets in older versions. Existing
 wallets that were created with older versions are not affected by this.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
@@ -46,11 +43,9 @@ the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not su
 Koyotecoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
-Notable changes
-===============
+# Notable changes
 
-Wallet changes
----------------
+## Wallet changes
 
 ### Segwit Wallet
 
@@ -110,31 +105,30 @@ koyotecoin data directory. The behavior is now:
 Care should be taken when choosing the wallets directory location, as if it
 becomes unavailable during operation, funds may be lost.
 
-Build: Minimum GCC bumped to 4.8.x
-------------------------------------
+## Build: Minimum GCC bumped to 4.8.x
+
 The minimum version of the GCC compiler required to compile Koyotecoin Core is now 4.8. No effort will be
 made to support older versions of GCC. See discussion in issue #11732 for more information.
 The minimum version for the Clang compiler is still 3.3. Other minimum dependency versions can be found in `doc/dependencies.md` in the repository.
 
-Support for signalling pruned nodes (BIP159)
----------------------------------------------
+## Support for signalling pruned nodes (BIP159)
+
 Pruned nodes can now signal BIP159's NODE_NETWORK_LIMITED using service bits, in preparation for
 full BIP159 support in later versions. This would allow pruned nodes to serve the most recent blocks. However, the current change does not yet include support for connecting to these pruned peers.
 
-Performance: SHA256 assembly enabled by default
--------------------------------------------------
+## Performance: SHA256 assembly enabled by default
+
 The SHA256 hashing optimizations for architectures supporting SSE4, which lead to ~50% speedups in SHA256 on supported hardware (~5% faster synchronization and block validation), have now been enabled by default. In previous versions they were enabled using the `--enable-experimental-asm` flag when building, but are now the default and no longer deemed experimental.
 
-GUI changes
------------
+## GUI changes
+
 - Uses of "µKYC" in the GUI now also show the more colloquial term "bits", specified in BIP176.
 - The option to reuse a previous address has now been removed. This was justified by the need to "resend" an invoice, but now that we have the request history, that need should be gone.
 - Support for searching by TXID has been added, rather than just address and label.
 - A "Use available balance" option has been added to the send coins dialog, to add the remaining available wallet balance to a transaction output.
 - A toggle for unblinding the password fields on the password dialog has been added.
 
-RPC changes
-------------
+## RPC changes
 
 ### New `rescanblockchain` RPC
 
@@ -143,6 +137,7 @@ The RPC supports start and end-height arguments for the rescan, and can be used 
 multiwallet environment to rescan the blockchain at runtime.
 
 ### New `savemempool` RPC
+
 A new `savemempool` RPC has been added which allows the current mempool to be saved to
 disk at any time to avoid it being lost due to crashes / power loss.
 
@@ -158,19 +153,20 @@ used to create `rpcauth` credentials for a JSON-RPC user.
 ### Validateaddress improvements
 
 The `validateaddress` RPC output has been extended with a few new fields, and support for segwit addresses (both P2SH and Bech32). Specifically:
-* A new field `iswitness` is True for P2WPKH and P2WSH addresses ("bc1..." addresses), but not for P2SH-wrapped segwit addresses (see below).
-* The existing field `isscript` will now also report True for P2WSH addresses.
-* A new field `embedded` is present for all script addresses where the script is known and matches something that can be interpreted as a known address. This is particularly true for P2SH-P2WPKH and P2SH-P2WSH addresses. The value for `embedded` includes much of the information `validateaddress` would report if invoked directly on the embedded address.
-* For multisig scripts a new `pubkeys` field was added that reports the full public keys involved in the script (if known). This is a replacement for the existing `addresses` field (which reports the same information but encoded as P2PKH addresses), represented in a more useful and less confusing way. The `addresses` field remains present for non-segwit addresses for backward compatibility.
-* For all single-key addresses with known key (even when wrapped in P2SH or P2WSH), the `pubkey` field will be present. In particular, this means that invoking `validateaddress` on the output of `getnewaddress` will always report the `pubkey`, even when the address type is P2SH-P2WPKH.
+
+- A new field `iswitness` is True for P2WPKH and P2WSH addresses ("bc1..." addresses), but not for P2SH-wrapped segwit addresses (see below).
+- The existing field `isscript` will now also report True for P2WSH addresses.
+- A new field `embedded` is present for all script addresses where the script is known and matches something that can be interpreted as a known address. This is particularly true for P2SH-P2WPKH and P2SH-P2WSH addresses. The value for `embedded` includes much of the information `validateaddress` would report if invoked directly on the embedded address.
+- For multisig scripts a new `pubkeys` field was added that reports the full public keys involved in the script (if known). This is a replacement for the existing `addresses` field (which reports the same information but encoded as P2PKH addresses), represented in a more useful and less confusing way. The `addresses` field remains present for non-segwit addresses for backward compatibility.
+- For all single-key addresses with known key (even when wrapped in P2SH or P2WSH), the `pubkey` field will be present. In particular, this means that invoking `validateaddress` on the output of `getnewaddress` will always report the `pubkey`, even when the address type is P2SH-P2WPKH.
 
 ### Low-level changes
 
 - The deprecated RPC `getinfo` was removed. It is recommended that the more specific RPCs are used:
-  * `getblockchaininfo`
-  * `getnetworkinfo`
-  * `getwalletinfo`
-  * `getmininginfo`
+  - `getblockchaininfo`
+  - `getnetworkinfo`
+  - `getwalletinfo`
+  - `getmininginfo`
 - The wallet RPC `getreceivedbyaddress` will return an error if called with an address not in the wallet.
 - The wallet RPC `addwitnessaddress` was deprecated and will be removed in version 0.17,
   set the `address_type` argument of `getnewaddress`, or option `-addresstype=[bech32|p2sh-segwit]` instead.
@@ -188,22 +184,24 @@ The `validateaddress` RPC output has been extended with a few new fields, and su
 - An `initialblockdownload` boolean has been added to the `getblockchaininfo` RPC to indicate whether the node is currently in IBD or not.
 - `minrelaytxfee` is now included in the output of `getmempoolinfo`
 
-Other changed command-line options
-----------------------------------
+## Other changed command-line options
+
 - `-debuglogfile=<file>` can be used to specify an alternative debug logging file.
 - koyotecoin-cli now has an `-stdinrpcpass` option to allow the RPC password to be read from standard input.
 - The `-usehd` option has been removed.
 - koyotecoin-cli now supports a new `-getinfo` flag which returns an output like that of the now-removed `getinfo` RPC.
 
-Testing changes
-----------------
+## Testing changes
+
 - The default regtest JSON-RPC port has been changed to 18443 to avoid conflict with testnet's default of 18332.
 - Segwit is now always active in regtest mode by default. Thus, if you upgrade a regtest node you will need to either -reindex or use the old rules by adding `vbparams=segwit:0:999999999999` to your regtest koyotecoin.conf. Failure to do this will result in a CheckBlockIndex() assertion failure that will look like: Assertion `(pindexFirstNeverProcessed != nullptr) == (pindex->nChainTx == 0)' failed.
 
-0.16.0 change log
-------------------
+  0.16.0 change log
+
+---
 
 ### Block and transaction handling
+
 - #10953 `aeed345` Combine scriptPubKey and amount as CTxOut in CScriptCheck (jl2012)
 - #11309 `93d20a7` Minor cleanups for AcceptToMemoryPool (morcos)
 - #11418 `38c201f` Add error string for CLEANSTACK script violation (maaku)
@@ -224,6 +222,7 @@ Testing changes
 - #12415 `f893824` Interrupt loading thread after shutdown request (promag)
 
 ### P2P protocol and network code
+
 - #10596 `6866b49` Add vConnect to CConnman::Options (benma)
 - #10663 `9d31ed2` Split resolve out of connect (theuni)
 - #11113 `fef65c4` Ignore getheaders requests for very old side blocks (jimpo)
@@ -232,16 +231,17 @@ Testing changes
 - #11580 `1f4375f` Do not send (potentially) invalid headers in response to getheaders (TheBlueMatt)
 - #11655 `aca77a4` Assert state.m_chain_sync.m_work_header in ConsiderEviction (practicalswift)
 - #11744 `3ff6ff5` Add missing locks in net.{cpp,h} (practicalswift)
-- #11740 `59d3dc8` Implement BIP159 NODE_NETWORK_LIMITED (pruned peers) *signaling only* (jonasschnelli)
+- #11740 `59d3dc8` Implement BIP159 NODE_NETWORK_LIMITED (pruned peers) _signaling only_ (jonasschnelli)
 - #11583 `37ffa16` Do not make it trivial for inbound peers to generate log entries (TheBlueMatt)
 - #11363 `ba2f195` Split socket create/connect (theuni)
-- #11917 `bc66765` Add testnet DNS seed:  seed.testnet.koyotecoin.sprovoost.nl (Sjors)
+- #11917 `bc66765` Add testnet DNS seed: seed.testnet.koyotecoin.sprovoost.nl (Sjors)
 - #11512 `6e89de5` Use GetDesireableServiceFlags in seeds, dnsseeds, fixing static seed adding (TheBlueMatt)
 - #12262 `16bac24` Hardcoded seed update (laanwj)
 - #12270 `9cf6393` Update chainTxData for 0.16 (laanwj)
 - #12392 `0f61651` Fix ignoring tx data requests when fPauseSend is set on a peer (TheBlueMatt)
 
 ### Wallet
+
 - #11039 `fc51565` Avoid second mapWallet lookup (promag)
 - #10952 `2621673` Remove vchDefaultKey and have better first run detection (achow101)
 - #11007 `fc5c237` Fix potential memory leak when loading a corrupted wallet file (practicalswift)
@@ -279,6 +279,7 @@ Testing changes
 - #12276 `7936446` Remove duplicate mapWallet lookups (promag)
 
 ### RPC and other APIs
+
 - #11008 `3841aaf` Enable disablesafemode by default (gmaxwell)
 - #11050 `7ed57d3` Avoid treating null RPC arguments different from missing arguments (ryanofsky)
 - #10997 `affe927` Add option -stdinrpcpass to koyotecoin-cli to allow RPC password to be read from standard input (jharvell)
@@ -289,7 +290,7 @@ Testing changes
 - #10753 `7fcd61b` test: Check RPC argument mapping (laanwj)
 - #11288 `0f8e095` More user-friendly error message when partially signing (MeshCollider)
 - #11031 `ef8340d` deprecate estimatefee (jnewbery)
-- #10858 `9a8e916` Add "errors" field to getblockchaininfo and unify "errors" field in get*info RPCs (achow101)
+- #10858 `9a8e916` Add "errors" field to getblockchaininfo and unify "errors" field in get\*info RPCs (achow101)
 - #11021 `90926db` Fix getchaintxstats() (AkioNak)
 - #11367 `3a93270` getblockchaininfo: Add disk_size, prune_target_size (esotericnonsense)
 - #11006 `a1d78b5` Improve shutdown process (promag)
@@ -321,21 +322,22 @@ Testing changes
 - #12427 `3762ac1` Make signrawtransaction accept P2SH-P2WSH redeemscripts (sipa)
 
 ### GUI
+
 - #10964 `64e66bb` Pass SendCoinsRecipient (208 bytes) by reference (practicalswift)
 - #11169 `5b8af7b` Make tabs toolbar no longer have a context menu (achow101)
 - #10911 `9c8f365` Fix typo and access key in optionsdialog.ui (keystrike)
 - #10770 `ea729d5` Drop upgrade-cancel callback registration for a generic "cancelable" (TheBlueMatt)
 - #11156 `a3624dd` Fix memory leaks in qt/guiutil.cpp (danra)
 - #11268 `31e72b2` [macOS] remove Growl support, remove unused code (jonasschnelli)
-- #11193 `c5c77bd` Terminate string *pszExePath after readlink and without using memset (practicalswift)
+- #11193 `c5c77bd` Terminate string \*pszExePath after readlink and without using memset (practicalswift)
 - #11508 `ffa5159` Fix crash via division by zero assertion (jonasschnelli)
 - #11499 `6157e8c` Add upload and download info to the peerlist (debug menu) (aarongolliver)
 - #11480 `ffc0b11` Add toggle for unblinding password fields (tjps)
 - #11316 `22cdf93` Add use available balance in send coins dialog (CryptAxe, promag)
 - #3716 `13e352d` Receive: Remove option to reuse a previous address (luke-jr)
 - #11690 `f0c1f8a` Fix the StartupWMClass for bitoin-qt, so gnome-shell can recognize it (eklitzke)
-- #10920 `f6f8d54` Fix potential memory leak in newPossibleKey(ChangeCWallet *wallet) (practicalswift)
-- #11698 `7293d06` RPC-Console nested commands documentation  (lmlsna)
+- #10920 `f6f8d54` Fix potential memory leak in newPossibleKey(ChangeCWallet \*wallet) (practicalswift)
+- #11698 `7293d06` RPC-Console nested commands documentation (lmlsna)
 - #11395 `38d31f9` Enable searching by transaction id (luke-jr)
 - #11556 `91eeaa0` Improved copy for RBF checkbox and tooltip (Sjors)
 - #11809 `80f9dad` Fix proxy setting options dialog crash (laanwj)
@@ -355,6 +357,7 @@ Testing changes
 - #12349 `ad10b90` shutdown: fix crash on shutdown with reindex-chainstate (theuni)
 
 ### Build system
+
 - #10923 `2c9f5ec` travis: Build with --enable-werror under OS X (practicalswift)
 - #11176 `df8c722` build: Rename --enable-experimental-asm to --enable-asm and enable by default (laanwj)
 - #11286 `11dacc6` [depends] Don't build libevent sample code (fanquake)
@@ -374,17 +377,18 @@ Testing changes
 - #11945 `7a11ba7` Improve BSD compatibility of contrib/install_db4.sh (laanwj)
 - #11981 `180a255` Fix gitian build after libzmq bump (theuni)
 - #11903 `8f68fd2` [trivial] Add required package dependencies for depends cross compilation (jonasschnelli)
-- #12168 `45cf8a0`  #include sys/fcntl.h to just fcntl.h (without sys/) (jsarenik)
+- #12168 `45cf8a0` #include sys/fcntl.h to just fcntl.h (without sys/) (jsarenik)
 - #12095 `3fa1ab4` Use BDB_LIBS/CFLAGS and pass --disable-replication (fanquake)
 - #11711 `6378e5c` koyotecoin_qt.m4: Minor fixes and clean-ups (fanquake)
 - #11989 `90d4104` .gitignore: add QT Creator artifacts (Sjors)
 - #11577 `c0ae864` Fix warnings (-Wsign-compare) when building with DEBUG_ADDRMAN (practicalswift)
 
 ### Tests and QA
+
 - #11024 `3e55f13` Remove OldSetKeyFromPassphrase/OldEncrypt/OldDecrypt (practicalswift)
 - #10679 `31b2612` Document the non-DER-conformance of one test in tx_valid.json (schildbach)
 - #11160 `ede386c` Improve versionbits_computeblockversion test code consistency (danra)
-- #10303 `f088a1b` Include ms/blk stats in Connect* benchmarks (kallewoof)
+- #10303 `f088a1b` Include ms/blk stats in Connect\* benchmarks (kallewoof)
 - #10777 `d81dccf` Avoid redundant assignments. Remove unused variables (practicalswift)
 - #11260 `52f8877` travis: Assert default datadir isn't created, Run scripted diff only once (MarcoFalke)
 - #11271 `638e6c5` travis: filter out pyenv (theuni)
@@ -423,7 +427,7 @@ Testing changes
 - #11718 `9cdd2bc` Move pwalletMain to wallet test fixture (laanwj)
 - #11714 `901ba3e` Test that mempool rejects coinbase transactions (jamesob)
 - #11743 `3d6ad40` Add multiwallet prefix test (MarcoFalke)
-- #11683 `a892218` Remove unused mininode functions {ser,deser}_int_vector(...). Remove unused imports (practicalswift)
+- #11683 `a892218` Remove unused mininode functions {ser,deser}\_int_vector(...). Remove unused imports (practicalswift)
 - #11712 `9f2c2db` Split NodeConn from NodeConnCB (jnewbery)
 - #11791 `13e31dd` Rename NodeConn and NodeConnCB (jnewbery)
 - #11835 `f60b4ad` Add Travis check for unused Python imports (practicalswift)
@@ -458,10 +462,11 @@ Testing changes
 - #12388 `e2431d1` travis: Full clone for git subtree check (MarcoFalke)
 
 ### Documentation
+
 - #10680 `6366941` Fix inconsistencies and grammar in various files (MeshCollider)
 - #11011 `7db65c3` Add a comment on the use of prevector in script (gmaxwell)
 - #10878 `c58128f` Fix Markdown formatting issues in init.md (dongcarl)
-- #11066 `9e00a62` Document the preference of nullptr over NULL or (void*)0 (practicalswift)
+- #11066 `9e00a62` Document the preference of nullptr over NULL or (void\*)0 (practicalswift)
 - #11094 `271e40a` Hash in ZMQ hash is raw bytes, not hex (runn1ng)
 - #11026 `ea3ac59` Bugfix: Use testnet RequireStandard for -acceptnonstdtxn default (luke-jr)
 - #11058 `4b65fa5` Comments: More comments on functions/globals in standard.h (jimpo)
@@ -520,6 +525,7 @@ Testing changes
 - #12177 `cad504b` Fix address_type help text of getnewaddress and getrawchangeaddress (mruddy)
 
 ### Refactoring
+
 - #9964 `b6a4891` Add const to methods that do not modify the object for which it is called (practicalswift)
 - #10965 `655970d` Replace deprecated throw() with noexcept specifier (C++11) (practicalswift)
 - #10645 `c484ec6` Use nullptr (C++11) instead of zero (0) as the null pointer constant (practicalswift)
@@ -577,6 +583,7 @@ Testing changes
 - #12266 `3448907` Move scheduler/threadGroup into common-init instead of per-app (TheBlueMatt)
 
 ### Miscellaneous
+
 - #11246 `777519b` github-merge: Coalesce git fetches (laanwj)
 - #10871 `c9a4aa8` Handle getinfo in koyotecoin-cli w/ -getinfo (revival of #8843) (achow101)
 - #11419 `093074b` Utils: Fix launchctl not being able to stop koyotecoind (OmeGak)
@@ -610,8 +617,7 @@ Testing changes
 - #12367 `09fc859` Fix two fast-shutdown bugs (TheBlueMatt)
 - #12422 `4d54e7a` util: Make LockDirectory thread-safe, consistent, and fix OpenBSD 6.2 build (laanwj)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

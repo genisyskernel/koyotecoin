@@ -433,7 +433,7 @@ La signature n'est possible qu'avec les adresses de type "patrimoine".</translat
     </message>
 </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">Impossible de lire le fichier des paramètres</translation>

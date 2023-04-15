@@ -265,7 +265,7 @@
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Done loading</source>
         <translation type="unfinished">Ielāde pabeigta</translation>

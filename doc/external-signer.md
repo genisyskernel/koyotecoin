@@ -4,7 +4,7 @@ Koyotecoin Core can be launched with `-signer=<cmd>` where `<cmd>` is an externa
 
 ## Example usage
 
-The following example is based on the [HWI](https://github.com/koyotecoin-core/HWI) tool. Version 2.0 or newer is required. Although this tool is hosted under the Koyotecoin Core GitHub organization and maintained by Koyotecoin Core developers, it should be used with caution. It is considered experimental and has far less review than Koyotecoin Core itself. Be particularly careful when running tools such as these on a computer with private keys on it.
+The following example is based on the [HWI](https://github.com/koyotecoin/HWI) tool. Version 2.0 or newer is required. Although this tool is hosted under the Koyotecoin Core GitHub organization and maintained by Koyotecoin Core developers, it should be used with caution. It is considered experimental and has far less review than Koyotecoin Core itself. Be particularly careful when running tools such as these on a computer with private keys on it.
 
 When using a hardware wallet, consult the manufacturer website for (alternative) software they recommend. As long as their software conforms to the standard below, it should be able to work with Koyotecoin Core.
 
@@ -16,7 +16,7 @@ $ koyotecoind -signer=../HWI/hwi.py
 
 ### Device setup
 
-Follow the hardware manufacturers instructions for the initial device setup, as well as their instructions for creating a backup. Alternatively, for some devices, you can use the `setup`, `restore` and `backup` commands provided by [HWI](https://github.com/koyotecoin-core/HWI).
+Follow the hardware manufacturers instructions for the initial device setup, as well as their instructions for creating a backup. Alternatively, for some devices, you can use the `setup`, `restore` and `backup` commands provided by [HWI](https://github.com/koyotecoin/HWI).
 
 ### Create wallet and import keys
 
@@ -71,12 +71,14 @@ it automatically broadcasts the transaction.
 In order to be compatible with Koyotecoin Core any signer command should conform to the specification below. This specification is subject to change. Ideally a BIP should propose a standard so that other wallets can also make use of it.
 
 Prerequisite knowledge:
-* [Output Descriptors](descriptors.md)
-* Partially Signed Koyotecoin Transaction ([PSBT](psbt.md))
+
+- [Output Descriptors](descriptors.md)
+- Partially Signed Koyotecoin Transaction ([PSBT](psbt.md))
 
 ### `enumerate` (required)
 
 Usage:
+
 ```
 $ <cmd> enumerate
 [
@@ -95,6 +97,7 @@ A future extension could add an optional return field `reachable`, in case `<cmd
 ### `signtransaction` (required)
 
 Usage:
+
 ```
 $ <cmd> --fingerprint=<fingerprint> (--testnet) signtransaction <psbt>
 base64_encode_signed_psbt
@@ -138,6 +141,7 @@ $ <cmd> --fingerprint=00000000 --testnet getdescriptors
 ### `displayaddress` (optional)
 
 Usage:
+
 ```
 <cmd> --fingerprint=<fingerprint> (--testnet) displayaddress --desc descriptor
 ```
@@ -162,7 +166,7 @@ The `enumeratesigners` RPC simply calls `<cmd> enumerate`.
 
 The `createwallet` RPC calls:
 
-* `<cmd> --fingerprint=00000000 getdescriptors 0`
+- `<cmd> --fingerprint=00000000 getdescriptors 0`
 
 It then imports descriptors for all support address types, in a BIP44/49/84 compatible manner.
 

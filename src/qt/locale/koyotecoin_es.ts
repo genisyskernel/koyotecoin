@@ -396,7 +396,7 @@ Firmar solo es posible con direcciones del tipo «Legacy».</translation>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">El archivo de configuración no puede leerse</translation>

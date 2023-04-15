@@ -145,7 +145,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>SQLiteDatabase: Unexpected application id. Expected %u, got %u</source>
         <translation type="unfinished">এস. কিয়ু. লাইট ডাটাবেস : অপ্রত্যাশিত এপ্লিকেশন আই.ডি. প্রত্যাশিত %u, পাওয়া গেলো %u </translation>

@@ -215,7 +215,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Please check that your computer's date and time are correct! If your clock is wrong, %s will not work properly.</source>
         <translation type="unfinished">تکایە بپشکنە کە بەروار و کاتی کۆمپیوتەرەکەت ڕاستە! ئەگەر کاژێرەکەت هەڵە بوو، %s بە دروستی کار ناکات.</translation>

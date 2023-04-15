@@ -5181,7 +5181,7 @@ Go to File &gt; Open Wallet to load a wallet.
     </message>
 </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <location filename="../koyotecoinstrings.cpp" line="+12"/>
         <source>The %s developers</source>

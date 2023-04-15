@@ -364,7 +364,7 @@ Försök igen.</translation>
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">Filen för inställningar kunde inte läsas</translation>

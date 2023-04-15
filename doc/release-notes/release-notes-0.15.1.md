@@ -1,27 +1,26 @@
-Koyotecoin Core version *0.15.1* is now available from:
+Koyotecoin Core version _0.15.1_ is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.15.1/>
+<https://koyotecoin.org/bin/koyotecoin-0.15.1/>
 
 or
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.15.1/>
+<https://koyotecoin.org/bin/koyotecoin-0.15.1/>
 
 This is a new minor version release, including various bugfixes and
 performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
-shut down (which might take a few minutes for older versions), then run the 
+shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over `/Applications/Koyotecoin-Qt` (on Mac)
 or `koyotecoind`/`koyotecoin-qt` (on Linux).
 
@@ -38,8 +37,7 @@ automatic upgrade code from before version 0.8 to version 0.15.0. Upgrading
 directly from 0.7.x and earlier without redownloading the blockchain is not supported.
 However, as usual, old wallet versions are still supported.
 
-Downgrading warning
--------------------
+## Downgrading warning
 
 The chainstate database for this release is not compatible with previous
 releases, so if you run 0.15 and then decide to switch back to any
@@ -49,8 +47,7 @@ option to rebuild the chainstate data structures in the old format.
 If your node has pruning enabled, this will entail re-downloading and
 processing the entire blockchain.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
@@ -58,44 +55,39 @@ the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not su
 Koyotecoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
+# Notable changes
 
-Notable changes
-===============
-
-Network fork safety enhancements
---------------------------------
+## Network fork safety enhancements
 
 A number of changes to the way Koyotecoin Core deals with peer connections and invalid blocks
 have been made, as a safety precaution against blockchain forks and misbehaving peers.
 
 - Unrequested blocks with less work than the minimum-chain-work are now no longer processed even
-if they have more work than the tip (a potential issue during IBD where the tip may have low-work).
-This prevents peers wasting the resources of a node. 
+  if they have more work than the tip (a potential issue during IBD where the tip may have low-work).
+  This prevents peers wasting the resources of a node.
 
 - Peers which provide a chain with less work than the minimum-chain-work during IBD will now be disconnected.
 
 - For a given outbound peer, we now check whether their best known block has at least as much work as our tip. If it
-doesn't, and if we still haven't heard about a block with sufficient work after a 20 minute timeout, then we send
-a single getheaders message, and wait 2 more minutes. If after two minutes their best known block has insufficient
-work, we disconnect that peer. We protect 4 of our outbound peers from being disconnected by this logic to prevent
-excessive network topology changes as a result of this algorithm, while still ensuring that we have a reasonable
-number of nodes not known to be on bogus chains.
+  doesn't, and if we still haven't heard about a block with sufficient work after a 20 minute timeout, then we send
+  a single getheaders message, and wait 2 more minutes. If after two minutes their best known block has insufficient
+  work, we disconnect that peer. We protect 4 of our outbound peers from being disconnected by this logic to prevent
+  excessive network topology changes as a result of this algorithm, while still ensuring that we have a reasonable
+  number of nodes not known to be on bogus chains.
 
 - Outbound (non-manual) peers that serve us block headers that are already known to be invalid (other than compact
-block announcements, because BIP 152 explicitly permits nodes to relay compact blocks before fully validating them)
-will now be disconnected.
+  block announcements, because BIP 152 explicitly permits nodes to relay compact blocks before fully validating them)
+  will now be disconnected.
 
 - If the chain tip has not been advanced for over 30 minutes, we now assume the tip may be stale and will try to connect
-to an additional outbound peer. A periodic check ensures that if this extra peer connection is in use, we will disconnect
-the peer that least recently announced a new block.
+  to an additional outbound peer. A periodic check ensures that if this extra peer connection is in use, we will disconnect
+  the peer that least recently announced a new block.
 
 - The set of all known invalid-themselves blocks (i.e. blocks which we attempted to connect but which were found to be
-invalid) are now tracked and used to check if new headers build on an invalid chain. This ensures that everything that
-descends from an invalid block is marked as such.
+  invalid) are now tracked and used to check if new headers build on an invalid chain. This ensures that everything that
+  descends from an invalid block is marked as such.
 
-
-Miner block size limiting deprecated
-------------------------------------
+## Miner block size limiting deprecated
 
 Though blockmaxweight has been preferred for limiting the size of blocks returned by
 getblocktemplate since 0.13.0, blockmaxsize remained as an option for those who wished
@@ -106,31 +98,23 @@ implied blockmaxweight, instead of limiting block size directly. Any miners who 
 to limit their blocks by size, instead of by weight, will have to do so manually by
 removing transactions from their block template directly.
 
-
-GUI settings backed up on reset
--------------------------------
+## GUI settings backed up on reset
 
 The GUI settings will now be written to `guisettings.ini.bak` in the data directory before wiping them when
 the `-resetguisettings` argument is used. This can be used to retroactively troubleshoot issues due to the
 GUI settings.
 
-
-Duplicate wallets disallowed
-----------------------------
+## Duplicate wallets disallowed
 
 Previously, it was possible to open the same wallet twice by manually copying the wallet file, causing
 issues when both were opened simultaneously. It is no longer possible to open copies of the same wallet.
 
-
-Debug `-minimumchainwork` argument added
-----------------------------------------
+## Debug `-minimumchainwork` argument added
 
 A hidden debug argument `-minimumchainwork` has been added to allow a custom minimum work value to be used
 when validating a chain.
 
-
-Low-level RPC changes
-----------------------
+## Low-level RPC changes
 
 - The "currentblocksize" value in getmininginfo has been removed.
 
@@ -144,13 +128,14 @@ Low-level RPC changes
   value is passed, instead of returning a list of all wallet transactions since
   the genesis block. The behaviour is unchanged when an empty string is provided.
 
-0.15.1 Change log
-=================
+  # 0.15.1 Change log
 
 ### Mining
+
 - #11100 `7871a7d` Fix confusing blockmax{size,weight} options, dont default to throwing away money (TheBlueMatt)
 
 ### RPC and other APIs
+
 - #10859 `2a5d099` gettxout: Slightly improve doc and tests (jtimon)
 - #11267 `b1a6c94` update cli for estimate\*fee argument rename (laanwj)
 - #11483 `20cdc2b` Fix importmulti bug when importing an already imported key (pedrobranco)
@@ -161,6 +146,7 @@ Low-level RPC changes
 - #11593 `8195cb0` Work-around an upstream libevent bug (theuni)
 
 ### P2P protocol and network code
+
 - #11397 `27e861a` Improve and document SOCKS code (laanwj)
 - #11252 `0fe2a9a` When clearing addrman clear mapInfo and mapAddr (instagibbs)
 - #11527 `a2bd86a` Remove my testnet DNS seed (schildbach)
@@ -173,14 +159,17 @@ Low-level RPC changes
 - #11490 `bf191a7` Disconnect from outbound peers with bad headers chains (sdaftuar)
 
 ### Validation
+
 - #10357 `da4908c` Allow setting nMinimumChainWork on command line (sdaftuar)
 - #11458 `2df65ee` Don't process unrequested, low-work blocks (sdaftuar)
 
 ### Build system
+
 - #11440 `b6c0209` Fix validationinterface build on super old boost/clang (TheBlueMatt)
 - #11530 `265bb21` Add share/rpcuser to dist. source code archive (MarcoFalke)
 
 ### GUI
+
 - #11334 `19d63e8` Remove custom fee radio group and remove nCustomFeeRadio setting (achow101)
 - #11198 `7310f1f` Fix display of package name on 'open config file' tooltip (esotericnonsense)
 - #11015 `6642558` Add delay before filtering transactions (lclc)
@@ -190,6 +179,7 @@ Low-level RPC changes
 - #11247 `47c02a8` Use IsMine to validate custom change address (MarcoFalke)
 
 ### Wallet
+
 - #11017 `9e8aae3` Close DB on error (kallewoof)
 - #11225 `6b4d9f2` Update stored witness in AddToWallet (sdaftuar)
 - #11126 `2cb720a` Acquire cs_main lock before cs_wallet during wallet initialization (ryanofsky)
@@ -199,6 +189,7 @@ Low-level RPC changes
 - #11326 `d570aa4` Fix crash on shutdown with invalid wallet (MeshCollider)
 
 ### Tests and QA
+
 - #11399 `a825d4a` Fix bip68-sequence rpc test (jl2012)
 - #11150 `847c75e` Add getmininginfo test (mess110)
 - #11407 `806c78f` add functional test for mempoolreplacement command line arg (instagibbs)
@@ -232,6 +223,7 @@ Low-level RPC changes
 - #11310 `b6468d3` Test listwallets RPC (mess110)
 
 ### Miscellaneous
+
 - #11377 `75997c3` Disallow uncompressed pubkeys in koyotecoin-tx [multisig] output adds (TheBlueMatt)
 - #11437 `dea3b87` [Docs] Update Windows build instructions for using WSL and Ubuntu 17.04 (fanquake)
 - #11318 `8b61aee` Put back inadvertently removed copyright notices (gmaxwell)
@@ -239,9 +231,7 @@ Low-level RPC changes
 - #10957 `50bd3f6` Avoid returning a BIP9Stats object with uninitialized values (practicalswift)
 - #11539 `01223a0` [verify-commits] Allow revoked keys to expire (TheBlueMatt)
 
-
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

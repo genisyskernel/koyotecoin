@@ -1,14 +1,13 @@
-Koyotecoin Core
-=============
+# Koyotecoin Core
 
-Setup
----------------------
+## Setup
+
 Koyotecoin Core is the original Koyotecoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Koyotecoin transactions, which requires a few hundred gigabytes of disk space. Depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
 To download Koyotecoin Core, visit [koyotecoin.org](https://koyotecoin.org/download/).
 
-Running
----------------------
+## Running
+
 The following are some helpful notes on how to run Koyotecoin Core on your native platform.
 
 ### Unix
@@ -28,14 +27,14 @@ Drag Koyotecoin Core to your applications folder, and then run Koyotecoin Core.
 
 ### Need Help?
 
-* See the documentation at the [Koyotecoin Wiki](https://en.koyotecoin.it/wiki/Main_Page)
-for help and more information.
-* Ask for help on [Koyotecoin StackExchange](https://koyotecoin.stackexchange.com).
-* Ask for help on #koyotecoin on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#koyotecoin).
-* Ask for help on the [KoyotecoinTalk](https://koyotecointalk.org/) forums, in the [Technical Support board](https://koyotecointalk.org/index.php?board=4.0).
+- See the documentation at the [Koyotecoin Wiki](https://en.koyotecoin.it/wiki/Main_Page)
+  for help and more information.
+- Ask for help on [Koyotecoin StackExchange](https://koyotecoin.stackexchange.com).
+- Ask for help on #koyotecoin on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#koyotecoin).
+- Ask for help on the [KoyotecoinTalk](https://koyotecointalk.org/) forums, in the [Technical Support board](https://koyotecointalk.org/index.php?board=4.0).
 
-Building
----------------------
+## Building
+
 The following are developer notes on how to build Koyotecoin Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [Dependencies](dependencies.md)
@@ -47,8 +46,8 @@ The following are developer notes on how to build Koyotecoin Core on your native
 - [NetBSD Build Notes](build-netbsd.md)
 - [Android Build Notes](build-android.md)
 
-Development
----------------------
+## Development
+
 The Koyotecoin repo's [root README](/README.md) contains relevant information on the development process and automated testing.
 
 - [Developer Notes](developer-notes.md)
@@ -66,10 +65,12 @@ The Koyotecoin repo's [root README](/README.md) contains relevant information on
 - [Internal Design Docs](design/)
 
 ### Resources
-* Discuss on the [KoyotecoinTalk](https://koyotecointalk.org/) forums, in the [Development & Technical Discussion board](https://koyotecointalk.org/index.php?board=6.0).
-* Discuss project-specific development on #koyotecoin-core-dev on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#koyotecoin-core-dev).
+
+- Discuss on the [KoyotecoinTalk](https://koyotecointalk.org/) forums, in the [Development & Technical Discussion board](https://koyotecointalk.org/index.php?board=6.0).
+- Discuss project-specific development on #koyotecoin-dev on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#koyotecoin-dev).
 
 ### Miscellaneous
+
 - [Assets Attribution](assets-attribution.md)
 - [koyotecoin.conf Configuration File](koyotecoin-conf.md)
 - [CJDNS Support](cjdns.md)
@@ -87,6 +88,6 @@ The Koyotecoin repo's [root README](/README.md) contains relevant information on
 - [Transaction Relay Policy](policy/README.md)
 - [ZMQ](zmq.md)
 
-License
----------------------
+## License
+
 Distributed under the [MIT software license](/COPYING).

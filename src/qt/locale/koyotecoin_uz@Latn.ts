@@ -142,7 +142,7 @@
     </message>
     </context>
 <context>
-    <name>koyotecoin-core</name>
+    <name>koyotecoin</name>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
         <translation type="unfinished">HTTP serverni ishga tushirib bo'lmadi. Tafsilotlar uchun disk raskadrovka jurnaliga qarang.</translation>

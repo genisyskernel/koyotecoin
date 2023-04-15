@@ -24,7 +24,7 @@ WORKINGDIR = "/tmp/koyotecoin_verify_binaries"
 HASHFILE = "hashes.tmp"
 HOST1 = "https://koyotecoin.org"
 HOST2 = "https://koyotecoin.org"
-VERSIONPREFIX = "koyotecoin-core-"
+VERSIONPREFIX = "koyotecoin-"
 SIGNATUREFILENAME = "SHA256SUMS.asc"
 
 
@@ -71,7 +71,7 @@ def files_are_equal(filename1, filename2):
 def verify_with_gpg(signature_filename, output_filename):
     result = subprocess.run(['gpg', '--yes', '--decrypt', '--output',
                              output_filename, signature_filename],
-                             stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+                            stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     return result.returncode, result.stdout.decode().rstrip()
 
 

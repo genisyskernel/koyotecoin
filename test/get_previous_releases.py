@@ -101,10 +101,10 @@ def download_binary(tag, args) -> int:
             return 0
         shutil.rmtree(tag)
     Path(tag).mkdir()
-    bin_path = 'bin/koyotecoin-core-{}'.format(tag[1:])
+    bin_path = 'bin/koyotecoin-{}'.format(tag[1:])
     match = re.compile('v(.*)(rc[0-9]+)$').search(tag)
     if match:
-        bin_path = 'bin/koyotecoin-core-{}/test.{}'.format(
+        bin_path = 'bin/koyotecoin-{}/test.{}'.format(
             match.group(1), match.group(2))
     platform = args.platform
     if tag < "v23" and platform in ["x86_64-apple-darwin", "arm64-apple-darwin"]:
@@ -262,11 +262,11 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--target-dir', action='store',
                         help='target directory.', default='releases')
     parser.add_argument('tags', nargs='*', default=set(
-                            [v['tag'] for v in SHA256_SUMS.values()]
-                        ),
-                        help='release tags. e.g.: v0.18.1 v0.20.0rc2 '
-                        '(if not specified, the full list needed for'
-                        'backwards compatibility tests will be used)'
-                        )
+        [v['tag'] for v in SHA256_SUMS.values()]
+    ),
+        help='release tags. e.g.: v0.18.1 v0.20.0rc2 '
+        '(if not specified, the full list needed for'
+        'backwards compatibility tests will be used)'
+    )
     args = parser.parse_args()
     sys.exit(main(args))

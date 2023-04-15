@@ -1,20 +1,19 @@
 Koyotecoin Core version 0.17.0 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.17.0/>
+<https://koyotecoin.org/bin/koyotecoin-0.17.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
@@ -32,8 +31,7 @@ automatic upgrade code from before version 0.8 to version 0.15.0. Upgrading
 directly from 0.7.x and earlier without redownloading the blockchain is not supported.
 However, as usual, old wallet versions are still supported.
 
-Downgrading warning
--------------------
+## Downgrading warning
 
 The chainstate database for this release is not compatible with previous
 releases, so if you run 0.15 and then decide to switch back to any
@@ -43,8 +41,7 @@ option to rebuild the chainstate data structures in the old format.
 If your node has pruning enabled, this will entail re-downloading and
 processing the entire blockchain.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer (Windows XP is not supported).
@@ -55,24 +52,22 @@ frequently tested on them.
 From 0.17.0 onwards macOS <10.10 is no longer supported. 0.17.0 is built using Qt 5.9.x, which doesn't
 support versions of macOS older than 10.10.
 
-Known issues
-============
+# Known issues
 
 - Upgrading from 0.13.0 or older currently results in memory blow-up during the roll-back of blocks to the SegWit activation point. In these cases, a full `-reindex` is necessary.
 
 - The GUI suffers from visual glitches in the new MacOS dark mode. This has to do with our Qt theme handling and is not a new problem in 0.17.0, but is expected to be resolved in 0.17.1.
 
-Notable changes
-===============
+# Notable changes
 
-Changed configuration options
------------------------------
+## Changed configuration options
 
 - `-includeconf=<file>` can be used to include additional configuration files.
   Only works inside the `koyotecoin.conf` file, not inside included files or from
   command-line. Multiple files may be included. Can be disabled from command-
   line via `-noincludeconf`. Note that multi-argument commands like
   `-includeconf` will override preceding `-noincludeconf`, i.e.
+
   ```
   noincludeconf=1
   includeconf=relative.conf
@@ -80,19 +75,16 @@ Changed configuration options
 
   as koyotecoin.conf will still include `relative.conf`.
 
-GUI changes
------------
+## GUI changes
 
 - Block storage can be limited under Preferences, in the Main tab. Undoing this setting requires downloading the full blockchain again. This mode is incompatible with -txindex and -rescan.
 
-External wallet files
----------------------
+## External wallet files
 
 The `-wallet=<path>` option now accepts full paths instead of requiring wallets
 to be located in the -walletdir directory.
 
-Newly created wallet format
----------------------------
+## Newly created wallet format
 
 If `-wallet=<path>` is specified with a path that does not exist, it will now
 create a wallet directory at the specified location (containing a wallet.dat
@@ -106,8 +98,7 @@ For backwards compatibility, wallet paths that are names of existing data files
 in the `-walletdir` directory will continue to be accepted and interpreted the
 same as before.
 
-Dynamic loading and creation of wallets
----------------------------------------
+## Dynamic loading and creation of wallets
 
 Previously, wallets could only be loaded or created at startup, by specifying `-wallet` parameters on the command line or in the koyotecoin.conf file. It is now possible to load, create and unload wallets dynamically at runtime:
 
@@ -117,15 +108,13 @@ Previously, wallets could only be loaded or created at startup, by specifying `-
 
 This feature is currently only available through the RPC interface.
 
-Coin selection
---------------
+## Coin selection
 
 ### Partial spend avoidance
 
 When an address is paid multiple times the coins from those separate payments can be spent separately which hurts privacy due to linking otherwise separate addresses. A new `-avoidpartialspends` flag has been added (default=false). If enabled, the wallet will always spend existing UTXO to the same address together even if it results in higher fees. If someone were to send coins to an address after it was used, those coins will still be included in future coin selections.
 
-Configuration sections for testnet and regtest
-----------------------------------------------
+## Configuration sections for testnet and regtest
 
 It is now possible for a single configuration file to set different
 options for different networks. This is done by using sections or by
@@ -146,8 +135,7 @@ If the following options are not in a section, they will only apply to mainnet:
 The options to choose a network (`regtest=` and `testnet=`) must be specified
 outside of sections.
 
-'label' and 'account' APIs for wallet
--------------------------------------
+## 'label' and 'account' APIs for wallet
 
 A new 'label' API has been introduced for the wallet. This is intended as a
 replacement for the deprecated 'account' API. The 'account' can continue to
@@ -163,29 +151,28 @@ The label RPC methods mirror the account functionality, with the following funct
 
 Here are the changes to RPC methods:
 
-| Deprecated Method       | New Method            | Notes       |
-| :---------------------- | :-------------------- | :-----------|
-| `getaccount`            | `getaddressinfo`      | `getaddressinfo` returns a json object with address information instead of just the name of the account as a string. |
-| `getaccountaddress`     | n/a                   | There is no replacement for `getaccountaddress` since labels do not have an associated receive address. |
-| `getaddressesbyaccount` | `getaddressesbylabel` | `getaddressesbylabel` returns a json object with the addresses as keys, instead of a list of strings. |
-| `getreceivedbyaccount`  | `getreceivedbylabel`  | _no change in behavior_ |
-| `listaccounts`          | `listlabels`          | `listlabels` does not return a balance or accept `minconf` and `watchonly` arguments. |
-| `listreceivedbyaccount` | `listreceivedbylabel` | Both methods return new `label` fields, along with `account` fields for backward compatibility. |
-| `move`                  | n/a                   | _no replacement_ |
-| `sendfrom`              | n/a                   | _no replacement_ |
+| Deprecated Method       | New Method            | Notes                                                                                                                                                                                                                                                                                                                                                                                        |
+| :---------------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `getaccount`            | `getaddressinfo`      | `getaddressinfo` returns a json object with address information instead of just the name of the account as a string.                                                                                                                                                                                                                                                                         |
+| `getaccountaddress`     | n/a                   | There is no replacement for `getaccountaddress` since labels do not have an associated receive address.                                                                                                                                                                                                                                                                                      |
+| `getaddressesbyaccount` | `getaddressesbylabel` | `getaddressesbylabel` returns a json object with the addresses as keys, instead of a list of strings.                                                                                                                                                                                                                                                                                        |
+| `getreceivedbyaccount`  | `getreceivedbylabel`  | _no change in behavior_                                                                                                                                                                                                                                                                                                                                                                      |
+| `listaccounts`          | `listlabels`          | `listlabels` does not return a balance or accept `minconf` and `watchonly` arguments.                                                                                                                                                                                                                                                                                                        |
+| `listreceivedbyaccount` | `listreceivedbylabel` | Both methods return new `label` fields, along with `account` fields for backward compatibility.                                                                                                                                                                                                                                                                                              |
+| `move`                  | n/a                   | _no replacement_                                                                                                                                                                                                                                                                                                                                                                             |
+| `sendfrom`              | n/a                   | _no replacement_                                                                                                                                                                                                                                                                                                                                                                             |
 | `setaccount`            | `setlabel`            | Both methods now: <ul><li>allow assigning labels to any address, instead of raising an error if the address is not receiving address.<li>delete the previous label associated with an address when the final address using that label is reassigned to a different label, instead of making an implicit `getaccountaddress` call to ensure the previous label still has a receiving address. |
 
-| Changed Method         | Notes   |
-| :--------------------- | :------ |
-| `addmultisigaddress`   | Renamed `account` named parameter to `label`. Still accepts `account` for backward compatibility if running with '-deprecatedrpc=accounts'. |
-| `getnewaddress`        | Renamed `account` named parameter to `label`. Still accepts `account` for backward compatibility. if running with '-deprecatedrpc=accounts' |
-| `listunspent`          | Returns new `label` fields. `account` field will be returned for backward compatibility if running with '-deprecatedrpc=accounts' |
-| `sendmany`             | The `account` named parameter has been renamed to `dummy`. If provided, the `dummy` parameter must be set to the empty string, unless running with the `-deprecatedrpc=accounts` argument (in which case functionality is unchanged). |
-| `listtransactions`     | The `account` named parameter has been renamed to `dummy`. If provided, the `dummy` parameter must be set to the string `*`, unless running with the `-deprecatedrpc=accounts` argument (in which case functionality is unchanged). |
-| `getbalance`           | `account`, `minconf` and `include_watchonly` parameters are deprecated, and can only be used if running with '-deprecatedrpc=accounts' |
+| Changed Method       | Notes                                                                                                                                                                                                                                 |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `addmultisigaddress` | Renamed `account` named parameter to `label`. Still accepts `account` for backward compatibility if running with '-deprecatedrpc=accounts'.                                                                                           |
+| `getnewaddress`      | Renamed `account` named parameter to `label`. Still accepts `account` for backward compatibility. if running with '-deprecatedrpc=accounts'                                                                                           |
+| `listunspent`        | Returns new `label` fields. `account` field will be returned for backward compatibility if running with '-deprecatedrpc=accounts'                                                                                                     |
+| `sendmany`           | The `account` named parameter has been renamed to `dummy`. If provided, the `dummy` parameter must be set to the empty string, unless running with the `-deprecatedrpc=accounts` argument (in which case functionality is unchanged). |
+| `listtransactions`   | The `account` named parameter has been renamed to `dummy`. If provided, the `dummy` parameter must be set to the string `*`, unless running with the `-deprecatedrpc=accounts` argument (in which case functionality is unchanged).   |
+| `getbalance`         | `account`, `minconf` and `include_watchonly` parameters are deprecated, and can only be used if running with '-deprecatedrpc=accounts'                                                                                                |
 
-BIP 174 Partially Signed Koyotecoin Transactions support
------------------------------------------------------
+## BIP 174 Partially Signed Koyotecoin Transactions support
 
 [BIP 174 PSBT](https://github.com/koyotecoin/bips/blob/master/bip-0174.mediawiki) is an interchange format for Koyotecoin transactions that are not fully signed
 yet, together with relevant metadata to help entities work towards signing it.
@@ -253,20 +240,17 @@ hardware implementations will typically implement multiple roles simultaneously.
 - **`decodepsbt`** is a diagnostic utility RPC which will show all information in
   a PSBT in human-readable form, as well as compute its eventual fee if known.
 
-Upgrading non-HD wallets to HD wallets
---------------------------------------
+## Upgrading non-HD wallets to HD wallets
 
 Since Koyotecoin Core 0.13.0, creating new BIP 32 Hierarchical Deterministic wallets has been supported by Koyotecoin Core but old non-HD wallets could not be upgraded to HD. Now non-HD wallets can be upgraded to HD using the `-upgradewallet` command line option. This upgrade will result in the all keys in the keypool being marked as used and a new keypool generated. **A new backup must be made when this upgrade is performed.**
 
 Additionally, `-upgradewallet` can be used to upgraded from a non-split HD chain (all keys generated with `m/0'/0'/i'`) to a split HD chain (receiving keys generated with `'m/0'/0'/i'` and change keys generated with `m'/0'/1'/i'`). When this upgrade occurs, all keys already in the keypool will remain in the keypool to be used until all keys from before the upgrade are exhausted. This is to avoid issues with backups and downgrades when some keys may come from the change key keypool. Users can begin using the new split HD chain keypools by using the `newkeypool` RPC to mark all keys in the keypool as used and begin using a new keypool generated from the split HD chain.
 
-HD Master key rotation
-----------------------
+## HD Master key rotation
 
 A new RPC, `sethdseed`, has been introduced which allows users to set a new HD seed or set their own HD seed. This allows for a new HD seed to be used. **A new backup must be made when a new HD seed is set.**
 
-Low-level RPC changes
----------------------
+## Low-level RPC changes
 
 - The new RPC `scantxoutset` can be used to scan the UTXO set for entries
   that match certain output descriptors. Refer to the [output descriptors
@@ -285,9 +269,9 @@ Low-level RPC changes
   (with verbosity=2), `listsinceblock`, `listtransactions`, and
   `getrawtransaction` RPC commands.
 - New `fees` field introduced in `getrawmempool`, `getmempoolancestors`, `getmempooldescendants` and
-   `getmempoolentry` when verbosity is set to `true` with sub-fields `ancestor`, `base`, `modified`
-   and `descendant` denominated in KYC. This new field deprecates previous fee fields, such as
-   `fee`, `modifiedfee`, `ancestorfee` and `descendantfee`.
+  `getmempoolentry` when verbosity is set to `true` with sub-fields `ancestor`, `base`, `modified`
+  and `descendant` denominated in KYC. This new field deprecates previous fee fields, such as
+  `fee`, `modifiedfee`, `ancestorfee` and `descendantfee`.
 - The new RPC `getzmqnotifications` returns information about active ZMQ
   notifications.
 - When koyotecoin is not started with any `-wallet=<path>` options, the name of
@@ -327,8 +311,7 @@ Low-level RPC changes
   `signrawtransactionwithkey` and `signrawtransactionwithwallet` before
   upgrading to v0.18.
 
-Other API changes
------------------
+## Other API changes
 
 - The `inactivehdmaster` property in the `dumpwallet` output has been corrected to `inactivehdseed`
 
@@ -341,46 +324,46 @@ Other API changes
   disables logging to debug.log. Instead, logging to file can be explicitly disabled
   by setting `-debuglogfile=0`.
 
-Transaction index changes
--------------------------
+## Transaction index changes
 
 The transaction index is now built separately from the main node procedure,
 meaning the `-txindex` flag can be toggled without a full reindex. If koyotecoind
 is run with `-txindex` on a node that is already partially or fully synced
 without one, the transaction index will be built in the background and become
 available once caught up. When switching from running `-txindex` to running
-without the flag, the transaction index database will *not* be deleted
+without the flag, the transaction index database will _not_ be deleted
 automatically, meaning it could be turned back on at a later time without a full
 resync.
 
-Miner block size removed
-------------------------
+## Miner block size removed
 
 The `-blockmaxsize` option for miners to limit their blocks' sizes was
 deprecated in V0.15.1, and has now been removed. Miners should use the
 `-blockmaxweight` option if they want to limit the weight of their blocks.
 
-Python Support
---------------
+## Python Support
 
 Support for Python 2 has been discontinued for all test files and tools.
 
-0.17.0 change log
-=================
+# 0.17.0 change log
 
 ### Consensus
+
 - #12204 `3fa24bb` Fix overly eager BIP30 bypass (morcos)
 
 ### Policy
+
 - #12568 `ed6ae80` Allow dustrelayfee to be set to zero (luke-jr)
 - #13120 `ca2a233` Treat segwit as always active (MarcoFalke)
 - #13096 `062738c` Fix `MAX_STANDARD_TX_WEIGHT` check (jl2012)
 
 ### Mining
+
 - #12693 `df529dc` Remove unused variable in SortForBlock (drewx2)
 - #12448 `84efa9a` Interrupt block generation on shutdown request (promag)
 
 ### Block and transaction handling
+
 - #12225 `67447ba` Mempool cleanups (sdaftuar)
 - #12356 `fd65937` Fix 'mempool min fee not met' debug output (Empact)
 - #12287 `bf3353d` Optimise lock behaviour for GuessVerificationProgress() (jonasschnelli)
@@ -412,6 +395,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13527 `e7ea858` Remove promiscuousmempoolflags (MarcoFalke)
 
 ### P2P protocol and network code
+
 - #12342 `eaeaa2d` Extend #11583 ("Do not make it trivial for inbound peers to generate log entries") to include "version handshake timeout" message (clemtaylor)
 - #12218 `9a32114` Move misbehaving logging to net logging category (laanwj)
 - #10387 `5c2aff8` Eventually connect to `NODE_NETWORK_LIMITED` peers (jonasschnelli)
@@ -438,6 +422,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13951 `8a9ffec` Hardcoded seeds update pre-0.17 branch (laanwj)
 
 ### Wallet
+
 - #12330 `2a30e67` Reduce scope of `cs_main` and `cs_wallet` locks in listtransactions (promag)
 - #12298 `a1ffddb` Refactor HaveKeys to early return on false result (promag)
 - #12282 `663911e` Disallow abandon of conflicted txes (MarcoFalke)
@@ -516,6 +501,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #14055 `2307a6e` fix walletcreatefundedpsbt deriv paths, add test (instagibbs)
 
 ### RPC and other APIs
+
 - #12336 `3843780` Remove deprecated rpc options (jnewbery)
 - #12193 `5dc00f6` Consistently use UniValue.pushKV instead of push_back(Pair()) (karel-3d) (MarcoFalke)
 - #12409 `0cc45ed` Reject deprecated reserveChangeKey in fundrawtransaction (MarcoFalke)
@@ -556,11 +542,12 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13960 `517010e` Fix PSBT deserialization of 0-input transactions (achow101)
 
 ### GUI
+
 - #12416 `c997f88` Fix Windows build errors introduced in #10498 (practicalswift)
 - #11733 `e782099` Remove redundant locks (practicalswift)
 - #12426 `bfa3911` Initialize members in WalletModel (MarcoFalke)
 - #12489 `e117cfe` Bugfix: respect user defined configuration file (-conf) in QT settings (jonasschnelli)
-- #12421 `be263fa` navigate to  transaction history page after send (Sjors)
+- #12421 `be263fa` navigate to transaction history page after send (Sjors)
 - #12580 `ce56fdd` Show a transaction's virtual size in its details dialog (dooglus)
 - #12501 `c8ea91a` Improved "custom fee" explanation in tooltip (randolf)
 - #12616 `cff95a6` Set modal overlay hide button as default (promag)
@@ -593,6 +580,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13791 `2c14c1f` Reject dialogs if key escape is pressed (promag)
 
 ### Build system
+
 - #12371 `c9ca4f6` Add gitian PGP key: akx20000 (ghost)
 - #11966 `f4f4f51` clientversion: Use full commit hash for commit-based version descriptions (luke-jr)
 - #12417 `ae0fbf0` Upgrade `mac_alias` to 2.0.7 (droark)
@@ -649,6 +637,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13314 `a9b6957` Fix FreeBSD build by including utilstrencodings.h (laanwj)
 
 ### Tests and QA
+
 - #12252 `8d57319` Require all tests to follow naming convention (ajtowns)
 - #12295 `935eb8d` Enable flake8 warnings for all currently non-violated rules (practicalswift)
 - #11858 `b4d8549` Prepare tests for Windows (MarcoFalke)
@@ -793,6 +782,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #14071 `fab0fbe` Stop txindex thread before calling destructor (MarcoFalke)
 
 ### Miscellaneous
+
 - #11909 `8897135` contrib: Replace developer keys with list of pgp fingerprints (MarcoFalke)
 - #12394 `fe53d5f` gitian-builder.sh: fix --setup doc, since lxc is default (Sjors)
 - #12468 `294a766` Add missing newline in init.cpp log message (Aesti)
@@ -875,6 +865,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13725 `07ce278` Fix koyotecoin-cli --version (Empact)
 
 ### Documentation
+
 - #12306 `216f9a4` Improvements to UNIX documentation (axvr)
 - #12309 `895fbd7` Explain how to update chainTxData in release process (laanwj)
 - #12317 `85123be` Document method for reviewers to verify chainTxData (jnewbery)
@@ -954,8 +945,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #12757 `0c5f67b` Clarify include guard naming convention (practicalswift)
 - #13844 `d3325b0` Correct the help output for `-prune` (hebasto)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 
