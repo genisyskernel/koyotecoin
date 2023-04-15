@@ -1,23 +1,21 @@
-0.21.0 Release Notes
-====================
+# 0.21.0 Release Notes
 
 Koyotecoin Core version 0.21.0 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.21.0/>
+<https://koyotecoin.org/bin/koyotecoin-core-0.21.0/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes in some cases), then run the
@@ -28,13 +26,12 @@ Upgrading directly from a version of Koyotecoin Core that has reached its EOL is
 possible, but it might take some time if the data directory needs to be migrated. Old
 wallet versions of Koyotecoin Core are generally supported.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is supported and extensively tested on operating systems
-using the Linux kernel, macOS 10.12+, and Windows 7 and newer.  Koyotecoin
+using the Linux kernel, macOS 10.12+, and Windows 7 and newer. Koyotecoin
 Core should also work on most other Unix-like systems but is not as
-frequently tested on them.  It is not recommended to use Koyotecoin Core on
+frequently tested on them. It is not recommended to use Koyotecoin Core on
 unsupported systems.
 
 From Koyotecoin Core 0.20.0 onwards, macOS versions earlier than 10.12 are no
@@ -49,11 +46,9 @@ read it. Those old versions, in the event of a downgrade, will log an error
 message "Incorrect keysize in addrman deserialization" and will continue normal
 operation as if the file was missing, creating a new empty one. (#19954, #20284)
 
-Notable changes
-===============
+# Notable changes
 
-P2P and network changes
------------------------
+## P2P and network changes
 
 - The mempool now tracks whether transactions submitted via the wallet or RPCs
   have been successfully broadcast. Every 10-15 minutes, the node will try to
@@ -121,14 +116,13 @@ P2P and network changes
   without activation on mainnet. Experimentation with Taproot can be done on
   signet, where its rules are already active. (#19553)
 
-Updated RPCs
-------------
+## Updated RPCs
 
 - The `getpeerinfo` RPC has a new `network` field that provides the type of
   network ("ipv4", "ipv6", or "onion") that the peer connected through. (#20002)
 
 - The `getpeerinfo` RPC now has additional `last_block` and `last_transaction`
-  fields that return the UNIX epoch time of the last block and the last *valid*
+  fields that return the UNIX epoch time of the last block and the last _valid_
   transaction received from each peer. (#19731)
 
 - `getnetworkinfo` now returns two new fields, `connections_in` and
@@ -167,15 +161,15 @@ Updated RPCs
   (#19725)
 
 - The `getpeerinfo` RPC no longer returns the `addnode` field by default. This
-  field will be fully removed in the next major release.  It can be accessed
+  field will be fully removed in the next major release. It can be accessed
   with the configuration option `-deprecatedrpc=getpeerinfo_addnode`. However,
   it is recommended to instead use the `connection_type` field (it will return
   `manual` when addnode is true). (#19725)
 
-- The `getpeerinfo` RPC no longer returns the `whitelisted` field by default. 
-  This field will be fully removed in the next major release. It can be accessed 
-  with the configuration option `-deprecatedrpc=getpeerinfo_whitelisted`. However, 
-  it is recommended to instead use the `permissions` field to understand if specific 
+- The `getpeerinfo` RPC no longer returns the `whitelisted` field by default.
+  This field will be fully removed in the next major release. It can be accessed
+  with the configuration option `-deprecatedrpc=getpeerinfo_whitelisted`. However,
+  it is recommended to instead use the `permissions` field to understand if specific
   privileges have been granted to the peer. (#19770)
 
 - The `walletcreatefundedpsbt` RPC call will now fail with
@@ -188,18 +182,15 @@ Updated RPCs
 
 Changes to Wallet or GUI related RPCs can be found in the GUI or Wallet section below.
 
-New RPCs
---------
+## New RPCs
 
 - The `getindexinfo` RPC returns the actively running indices of the node,
   including their current sync status and height. It also accepts an `index_name`
   to specify returning the status of that index only. (#19550)
 
-Build System
-------------
+## Build System
 
-Updated settings
-----------------
+## Updated settings
 
 - The same ZeroMQ notification (e.g. `-zmqpubhashtx=address`) can now be
   specified multiple times to publish the same notification to different ZeroMQ
@@ -228,8 +219,7 @@ Updated settings
 
 Changes to Wallet or GUI related settings can be found in the GUI or Wallet section below.
 
-Tools and Utilities
--------------------
+## Tools and Utilities
 
 - A new `koyotecoin-cli -netinfo` command provides a network peer connections
   dashboard that displays data from the `getpeerinfo` and `getnetworkinfo` RPCs
@@ -249,15 +239,13 @@ Tools and Utilities
   object with `in`, `out` and `total` numbers of peer connections. It previously
   returned a single integer value for the total number of peer connections. (#19405)
 
-New settings
-------------
+## New settings
 
 - The `startupnotify` option is used to specify a command to
   execute when Koyotecoin Core has finished with its startup
   sequence. (#15367)
 
-Wallet
-------
+## Wallet
 
 - Backwards compatibility has been dropped for two `getaddressinfo` RPC
   deprecations, as notified in the 0.20 release notes. The deprecated `label`
@@ -314,7 +302,7 @@ Wallet
   automatic coin selection, but can still be manually selected. (#18244)
 
 - The `-zapwallettxes` startup option has been removed and its functionality
-  removed from the wallet.  This option was originally intended to allow for
+  removed from the wallet. This option was originally intended to allow for
   rescuing wallets which were affected by a malleability attack. More recently,
   it has been used in the fee bumping of transactions that did not signal RBF.
   This functionality has been superseded with the abandon transaction feature. (#19671)
@@ -411,15 +399,15 @@ New export RPCs for Descriptor Wallets have not yet been added.
 
 The following RPCs are disabled for Descriptor Wallets:
 
-* `importprivkey`
-* `importpubkey`
-* `importaddress`
-* `importwallet`
-* `dumpprivkey`
-* `dumpwallet`
-* `importmulti`
-* `addmultisigaddress`
-* `sethdseed`
+- `importprivkey`
+- `importpubkey`
+- `importaddress`
+- `importwallet`
+- `dumpprivkey`
+- `dumpwallet`
+- `importmulti`
+- `addmultisigaddress`
+- `sethdseed`
 
 #### Watchonly Wallets
 
@@ -432,7 +420,7 @@ Descriptor Wallets move to a per-wallet watchonly model. Instead an entire walle
 watchonly depending on whether it was created with private keys disabled. This eliminates the need
 to distinguish between things that are watchonly and things that are not within a wallet itself.
 
-This change does have a caveat. If a Descriptor Wallet with private keys *enabled* has
+This change does have a caveat. If a Descriptor Wallet with private keys _enabled_ has
 a multiple key descriptor without all of the private keys (e.g. `multi(...)` with only one private key),
 then the wallet will fail to sign and broadcast transactions. Such wallets would need to use the PSBT
 workflow but the typical GUI Send, `sendtoaddress`, etc. workflows would still be available, just
@@ -467,7 +455,7 @@ was already being broken by the move to descriptors.
   command line setting. The wallet will already fail to create transactions
   with fees higher than `-maxtxfee`. (#18467)
 
-- A new `fee_rate` parameter/option denominated in howlers per vbyte (howl/vB)
+- A new `fee_rate` parameter/option denominated in howloshis per vbyte (howl/vB)
   is introduced to the `sendtoaddress`, `sendmany`, `fundrawtransaction` and
   `walletcreatefundedpsbt` RPCs as well as to the experimental new `send`
   RPC. The legacy `feeRate` option in `fundrawtransaction` and
@@ -488,8 +476,7 @@ was already being broken by the move to descriptors.
   by default when an explicit fee rate is used, the transaction fee can be
   bumped. (#20305)
 
-GUI changes
------------
+## GUI changes
 
 - Wallets created or loaded in the GUI will now be automatically loaded on
   startup, so they don't need to be manually reloaded next time Koyotecoin Core is
@@ -504,14 +491,13 @@ GUI changes
   peers. Refer to "Changes regarding misbehaving peers" in the 0.20.1 release
   notes for details. (#19512)
 
-Low-level changes
-=================
+# Low-level changes
 
-RPC
----
+## RPC
 
 - To make RPC `sendtoaddress` more consistent with `sendmany` the following error
-    `sendtoaddress` codes were changed from `-4` to `-6`:
+  `sendtoaddress` codes were changed from `-4` to `-6`:
+
   - Insufficient funds
   - Fee estimation failed
   - Transaction has too long of a mempool chain
@@ -526,8 +512,7 @@ RPC
   exceeding maximum feerate has been changed to "Fee exceeds maximum configured by user
   (e.g. -maxtxfee, maxfeerate)." (#19339)
 
-Tests
------
+## Tests
 
 - The BIP 325 default signet can be enabled by the `-chain=signet` or `-signet`
   setting. The settings `-signetchallenge` and `-signetseednode` allow
@@ -536,10 +521,10 @@ Tests
 - The `generateblock` RPC allows testers using regtest mode to
   generate blocks that consist of a custom set of transactions. (#17693)
 
-0.21.0 change log
-=================
+  # 0.21.0 change log
 
 ### Consensus
+
 - #18267 BIP-325: Signet (kallewoof)
 - #20016 uint256: 1 is a constant (ajtowns)
 - #20006 Fix misleading error message: Clean stack rule (sanket1729)
@@ -547,20 +532,24 @@ Tests
 - #20169 Taproot follow-up: Make ComputeEntrySchnorr and ComputeEntryECDSA const to clarify contract (practicalswift)
 
 ### Policy
+
 - #18766 Disable fee estimation in blocksonly mode (darosior)
 - #19630 Cleanup fee estimation code (darosior)
 - #20165 Only relay Taproot spends if next block has it active (sipa)
 
 ### Mining
+
 - #17946 Fix GBT: Restore "!segwit" and "csv" to "rules" key (luke-jr)
 
 ### Privacy
+
 - #16432 Add privacy to the Overview page (hebasto)
 - #18861 Do not answer GETDATA for to-be-announced tx (sipa)
 - #18038 Mempool tracks locally submitted transactions to improve wallet privacy (amitiuttarwar)
 - #19109 Only allow getdata of recently announced invs (sipa)
 
 ### Block and transaction handling
+
 - #17737 Add ChainstateManager, remove BlockManager global (jamesob)
 - #18960 indexes: Add compact block filter headers cache (jnewbery)
 - #13204 Faster sigcache nonce (JeremyRubin)
@@ -588,6 +577,7 @@ Tests
 - #19317 Add a left-justified width field to `log2_work` component for a uniform debug.log output (jamesgmorgan)
 
 ### P2P protocol and network code
+
 - #18544 Limit BIP37 filter lifespan (active between `filterload`..`filterclear`) (theStack)
 - #18806 Remove is{Empty,Full} flags from CBloomFilter, clarify CVE fix (theStack)
 - #18512 Improve asmap checks and add sanity check (sipa)
@@ -651,6 +641,7 @@ Tests
 - #20660 Move signet onion seed from v2 to v3 (Sjors)
 
 ### Wallet
+
 - #18262 Exit selection when `best_waste` is 0 (achow101)
 - #17824 Prefer full destination groups in coin selection (fjahr)
 - #17219 Allow transaction without change if keypool is empty (Sjors)
@@ -717,6 +708,7 @@ Tests
 - #20573 wallet, bugfix: allow send with string `fee_rate` amounts (jonatack)
 
 ### RPC and other APIs
+
 - #18574 cli: Call getbalances.ismine.trusted instead of getwalletinfo.balance (jonatack)
 - #17693 Add `generateblock` to mine a custom set of transactions (andrewtoth)
 - #18495 Remove deprecated migration code (vasild)
@@ -773,6 +765,7 @@ Tests
 - #20002 Expose peer network in getpeerinfo; simplify/improve -netinfo (jonatack)
 
 ### GUI
+
 - #17905 Avoid redundant tx status updates (ryanofsky)
 - #18646 Use `PACKAGE_NAME` in exception message (fanquake)
 - #17509 Save and load PSBT (Sjors)
@@ -797,7 +790,7 @@ Tests
 - #19256 Change combiner for signals to `optional_last_value` (fanquake)
 - #18896 Reset toolbar after all wallets are closed (hebasto)
 - #18993 increase console command max length (10xcryptodev)
-- #19323 Fix regression in *txoutset* in GUI console (hebasto)
+- #19323 Fix regression in _txoutset_ in GUI console (hebasto)
 - #19210 Get rid of cursor in out-of-focus labels (hebasto)
 - #19011 Reduce `cs_main` lock accumulation during GUI startup (jonasschnelli)
 - #19844 Remove usage of boost::bind (fanquake)
@@ -820,6 +813,7 @@ Tests
 - gui#120 Fix multiwallet transaction notifications (promag)
 
 ### Build system
+
 - #18504 Drop koyotecoin-tx and koyotecoin-wallet dependencies on libevent (ryanofsky)
 - #18586 Bump gitian descriptors to 0.21 (laanwj)
 - #17595 guix: Enable building for `x86_64-w64-mingw32` target (dongcarl)
@@ -897,6 +891,7 @@ Tests
 - #19493 Fix clang build on Mac (bvbfan)
 
 ### Tests and QA
+
 - #18593 Complete impl. of `msg_merkleblock` and `wait_for_merkleblock` (theStack)
 - #18609 Remove REJECT message code (hebasto)
 - #18584 Check that the version message does not leak the local address (MarcoFalke)
@@ -1007,7 +1002,7 @@ Tests
 - #19649 Restore test case for p2p transaction blinding (instagibbs)
 - #19657 Wait until `is_connected` in `add_p2p_connection` (MarcoFalke)
 - #19631 Wait for 'cmpctblock' in `p2p_compactblocks` when it is expected (Empact)
-- #19674 use throwaway _ variable for unused loop counters (theStack)
+- #19674 use throwaway \_ variable for unused loop counters (theStack)
 - #19709 Fix 'make cov' with clang (hebasto)
 - #19564 `p2p_feefilter` improvements (logging, refactoring, speedup) (theStack)
 - #19756 add `sync_all` to fix race condition in wallet groups test (kallewoof)
@@ -1090,6 +1085,7 @@ Tests
 - #20489, #20506 MSVC CI improvements (sipsorcery)
 
 ### Miscellaneous
+
 - #18713 scripts: Add macho stack canary check to security-check.py (fanquake)
 - #18629 scripts: Add pe .reloc section check to security-check.py (fanquake)
 - #18437 util: `Detect posix_fallocate()` instead of assuming (vasild)
@@ -1126,6 +1122,7 @@ Tests
 - #17775 DecodeHexTx: Try case where txn has inputs first (instagibbs)
 
 ### Documentation
+
 - #18502 Update docs for getbalance (default minconf should be 0) (uzyn)
 - #18632 Fix macos comments in release-notes (MarcoFalke)
 - #18645 Update thread information in developer docs (jnewbery)
@@ -1187,8 +1184,7 @@ Tests
 - #19390 doc/REST-interface: Remove stale info (luke-jr)
 - #19344 docs: update testgen usage example (Bushstar)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

@@ -1653,8 +1653,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ez a címke pirosra változik, ha bármely fogadóhoz, a porszem határértéknél kevesebb összeg érkezik.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Megadott értékenként +/- %1 howler-val eltérhet.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Megadott értékenként +/- %1 howloshi-val eltérhet.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -3463,10 +3463,10 @@ If you are receiving this error you should request the merchant provide a BIP21 
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
         <translation type="unfinished">Adjon meg egy egyéni díjat a tranzakció virtuális méretének 1 kilobájtjához (1000 bájt).
 
-Megjegyzés: Mivel a díj bájtonként van kiszámítva, egy "100 howler kvB-nként"-ként megadott díj egy 500 virtuális bájt (1kvB fele) méretű tranzakció végül csak 50 howler-s díjat jelentene.</translation>
+Megjegyzés: Mivel a díj bájtonként van kiszámítva, egy "100 howloshi kvB-nként"-ként megadott díj egy 500 virtuális bájt (1kvB fele) méretű tranzakció végül csak 50 howloshi-s díjat jelentene.</translation>
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for koyotecoin transactions than the network can process.</source>

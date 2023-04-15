@@ -696,8 +696,8 @@
         <translation type="unfinished">Ta etyketa stŏwŏ sie czyrwōnŏ jeźli keryś z ôdbiyrŏczy dostŏwŏ kwotã myńszõ aniżeli terŏźny prōg sztaubu.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Chwiyrŏ sie +/- %1 howler na wchōd.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Chwiyrŏ sie +/- %1 howloshi na wchōd.</translation>
     </message>
     <message>
         <source>(no label)</source>

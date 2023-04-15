@@ -1462,8 +1462,8 @@ Allekirjoitus on mahdollista vain 'legacy'-tyyppisillä osoitteilla.</translatio
         <translation type="unfinished">Tämä nimike muuttuu punaiseksi, jos jokin vastaanottajista on saamassa tämänhetkistä tomun rajaa pienemmän summan.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Saattaa vaihdella +/- %1 howlera per syöte.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Saattaa vaihdella +/- %1 howloshia per syöte.</translation>
     </message>
     <message>
         <source>(no label)</source>

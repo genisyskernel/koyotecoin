@@ -18,8 +18,8 @@ class QValueComboBox;
 QT_END_NAMESPACE
 
 /** Widget for entering koyotecoin amounts.
-  */
-class KoyotecoinAmountField: public QWidget
+ */
+class KoyotecoinAmountField : public QWidget
 {
     Q_OBJECT
 
@@ -28,21 +28,21 @@ class KoyotecoinAmountField: public QWidget
     Q_PROPERTY(qint64 value READ value WRITE setValue NOTIFY valueChanged USER true)
 
 public:
-    explicit KoyotecoinAmountField(QWidget *parent = nullptr);
+    explicit KoyotecoinAmountField(QWidget* parent = nullptr);
 
-    CAmount value(bool *value=nullptr) const;
+    CAmount value(bool* value = nullptr) const;
     void setValue(const CAmount& value);
 
     /** If allow empty is set to false the field will be set to the minimum allowed value if left empty. **/
     void SetAllowEmpty(bool allow);
 
-    /** Set the minimum value in howlers **/
+    /** Set the minimum value in howloshis **/
     void SetMinValue(const CAmount& value);
 
-    /** Set the maximum value in howlers **/
+    /** Set the maximum value in howloshis **/
     void SetMaxValue(const CAmount& value);
 
-    /** Set single step in howlers **/
+    /** Set single step in howloshis **/
     void setSingleStep(const CAmount& step);
 
     /** Make read-only **/
@@ -65,22 +65,21 @@ public:
     /** Qt messes up the tab chain by default in some cases (issue https://bugreports.qt-project.org/browse/QTBUG-10907),
         in these cases we have to set it up manually.
     */
-    QWidget *setupTabChain(QWidget *prev);
+    QWidget* setupTabChain(QWidget* prev);
 
 Q_SIGNALS:
     void valueChanged();
 
 protected:
     /** Intercept focus-in event and ',' key presses */
-    bool eventFilter(QObject *object, QEvent *event) override;
+    bool eventFilter(QObject* object, QEvent* event) override;
 
 private:
-    AmountSpinBox *amount;
-    QValueComboBox *unit;
+    AmountSpinBox* amount;
+    QValueComboBox* unit;
 
 private Q_SLOTS:
     void unitChanged(int idx);
-
 };
 
 #endif // KOYOTECOIN_QT_KOYOTECOINAMOUNTFIELD_H

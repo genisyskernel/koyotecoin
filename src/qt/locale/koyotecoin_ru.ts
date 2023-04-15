@@ -1863,7 +1863,7 @@ Unable to restore backup of wallet.</source>
         <translation type="unfinished">Эта метка становится красной, если получатель получит сумму меньше, чем текущий порог пыли.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
         <translation type="unfinished">Может меняться на +/- %1 сатоши за каждый вход.</translation>
     </message>
     <message>
@@ -3796,7 +3796,7 @@ For more information on using this console, type %6.
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
         <translation type="unfinished">Укажите пользовательскую комиссию за КБ (1000 байт) виртуального размера транзакции.
 
 Примечание: комиссия рассчитывается пропорционально размеру в байтах. Так при комиссии "100 сатоши за kvB (виртуальный КБ)" для транзакции размером 500 виртуальных байт (половина 1 kvB) комиссия будет всего 50 сатоши.</translation>

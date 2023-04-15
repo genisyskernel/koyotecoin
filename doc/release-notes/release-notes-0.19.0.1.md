@@ -1,20 +1,19 @@
 Koyotecoin Core version 0.19.0.1 is now available from:
 
-  <https://koyotecoin.org/bin/koyotecoin-core-0.19.0.1/>
+<https://koyotecoin.org/bin/koyotecoin-core-0.19.0.1/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/koyotecoin/koyotecoin/issues>
+<https://github.com/koyotecoin/koyotecoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://koyotecoin.org/list/announcements/join/>
+<https://koyotecoin.org/list/announcements/join/>
 
-How to Upgrade
-==============
+# How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
@@ -22,11 +21,10 @@ installer (on Windows) or just copy over `/Applications/Koyotecoin-Qt` (on Mac)
 or `koyotecoind`/`koyotecoin-qt` (on Linux).
 
 Upgrading directly from a version of Koyotecoin Core that has reached its EOL is
-possible, but might take some time if the datadir needs to be migrated.  Old
+possible, but might take some time if the datadir needs to be migrated. Old
 wallet versions of Koyotecoin Core are generally supported.
 
-Compatibility
-==============
+# Compatibility
 
 Koyotecoin Core is supported and extensively tested on operating systems using
 the Linux kernel, macOS 10.10+, and Windows 7 and newer. It is not recommended
@@ -44,24 +42,21 @@ Users running macOS Catalina may need to "right-click" and then choose "Open"
 to open the Koyotecoin Core .dmg. This is due to new signing requirements
 imposed by Apple, which the Koyotecoin Core project does not yet adhere too.
 
-Notable changes
-===============
+# Notable changes
 
-New user documentation
-----------------------
+## New user documentation
 
 - [Reduce memory](https://github.com/koyotecoin/koyotecoin/blob/master/doc/reduce-memory.md)
   suggests configuration tweaks for running Koyotecoin Core on systems with
   limited memory. (#16339)
 
-New RPCs
---------
+## New RPCs
 
 - `getbalances` returns an object with all balances (`mine`,
   `untrusted_pending` and `immature`). Please refer to the RPC help of
   `getbalances` for details. The new RPC is intended to replace
   `getbalance`, `getunconfirmedbalance`, and the balance fields in
-  `getwalletinfo`.  These old calls and fields may be removed in a
+  `getwalletinfo`. These old calls and fields may be removed in a
   future version. (#15930, #16239)
 
 - `setwalletflag` sets and unsets wallet flags that enable or disable
@@ -69,46 +64,42 @@ New RPCs
   `avoid_reuse` feature documented elsewhere in these release notes.
   (#13756)
 
-- `getblockfilter` gets the BIP158 filter for the specified block.  This
+- `getblockfilter` gets the BIP158 filter for the specified block. This
   RPC is only enabled if block filters have been created using the
   `-blockfilterindex` configuration option. (#14121)
 
-New settings
-------------
+## New settings
 
 - `-blockfilterindex` enables the creation of BIP158 block filters for
-  the entire blockchain.  Filters will be created in the background and
-  currently use about 4 GiB of space.  Note: this version of Koyotecoin
+  the entire blockchain. Filters will be created in the background and
+  currently use about 4 GiB of space. Note: this version of Koyotecoin
   Core does not serve block filters over the P2P network, although the
   local user may obtain block filters using the `getblockfilter` RPC.
   (#14121)
 
-Updated settings
-----------------
+## Updated settings
 
 - `whitebind` and `whitelist` now accept a list of permissions to
   provide peers connecting using the indicated interfaces or IP
-  addresses.  If no permissions are specified with an address or CIDR
+  addresses. If no permissions are specified with an address or CIDR
   network, the implicit default permissions are the same as previous
-  releases.  See the `koyotecoind -help` output for these two options for
+  releases. See the `koyotecoind -help` output for these two options for
   details about the available permissions. (#16248)
 
 - Users setting custom `dbcache` values can increase their setting slightly
-  without using any more real memory.  Recent changes reduced the memory use
+  without using any more real memory. Recent changes reduced the memory use
   by about 9% and made chainstate accounting more accurate (it was underestimating
-  the use of memory before).  For example, if you set a value of "450" before, you
+  the use of memory before). For example, if you set a value of "450" before, you
   may now set a value of "500" to use about the same real amount of memory. (#16957)
 
-
-Updated RPCs
-------------
+## Updated RPCs
 
 Note: some low-level RPC changes mainly useful for testing are described in the
 Low-level Changes section below.
 
-- `sendmany` no longer has a `minconf` argument.  This argument was not
+- `sendmany` no longer has a `minconf` argument. This argument was not
   well-specified and would lead to RPC errors even when the wallet's
-  coin selection succeeded.  Users who want to influence coin selection
+  coin selection succeeded. Users who want to influence coin selection
   can use the existing `-spendzeroconfchange`, `-limitancestorcount`,
   `-limitdescendantcount` and `-walletrejectlongchains` configuration
   arguments. (#15596)
@@ -137,19 +128,19 @@ Low-level Changes section below.
 - `utxoupdatepsbt` now accepts a `descriptors` parameter that will fill
   out input and output scripts and keys when known. P2SH-witness inputs
   will be filled in from the UTXO set when a descriptor is provided that
-  shows they're spending segwit outputs.  See the RPC help text for full
+  shows they're spending segwit outputs. See the RPC help text for full
   details. (#15427)
 
 - `sendrawtransaction` and `testmempoolaccept` no longer accept a
   `allowhighfees` parameter to fail mempool acceptance if the
   transaction fee exceeds the value of the configuration option
-  `-maxtxfee`.  Now there is a hardcoded default maximum feerate that
+  `-maxtxfee`. Now there is a hardcoded default maximum feerate that
   can be changed when calling either RPC using a `maxfeerate` parameter.
   (#15620)
 
 - `getmempoolancestors`, `getmempooldescendants`, `getmempoolentry`, and
   `getrawmempool` no longer return a `size` field unless the
-  configuration option `-deprecatedrpc=size` is used.  Instead a new
+  configuration option `-deprecatedrpc=size` is used. Instead a new
   `vsize` field is returned with the transaction's virtual size
   (consistent with other RPCs such as `getrawtransaction`). (#15637)
 
@@ -163,8 +154,8 @@ Low-level Changes section below.
   the decoded transaction. This field is equivalent to RPC `decoderawtransaction`,
   or RPC `getrawtransaction` when `verbose` is passed. (#16185, #16866, #16873)
 
-- `createwallet` accepts a new `passphrase` parameter.  If set, this
-  will create the new wallet encrypted with the given passphrase.  If
+- `createwallet` accepts a new `passphrase` parameter. If set, this
+  will create the new wallet encrypted with the given passphrase. If
   unset (the default) or set to an empty string, no encryption will be
   used. (#16394)
 
@@ -189,30 +180,27 @@ Low-level Changes section below.
 - `walletcreatefundedpsbt` now signals BIP125 Replace-by-Fee if the
   `-walletrbf` configuration option is set to true. (#15911)
 
-GUI changes
------------
+## GUI changes
 
-- The GUI wallet now provides bech32 addresses by default.  The user may change the address type
+- The GUI wallet now provides bech32 addresses by default. The user may change the address type
   during invoice generation using a GUI toggle, or the default address
   type may be changed with the `-addresstype` configuration option.
   (#15711, #16497)
 
-- In 0.18.0, a `./configure` flag was introduced to allow disabling BIP70 support in the GUI (support was enabled by default). In 0.19.0, this flag is now __disabled__ by default. If you want to compile Koyotecoin Core with BIP70 support in the GUI, you can pass `--enable-bip70` to `./configure`. (#15584)
+- In 0.18.0, a `./configure` flag was introduced to allow disabling BIP70 support in the GUI (support was enabled by default). In 0.19.0, this flag is now **disabled** by default. If you want to compile Koyotecoin Core with BIP70 support in the GUI, you can pass `--enable-bip70` to `./configure`. (#15584)
 
-Deprecated or removed configuration options
--------------------------------------------
+## Deprecated or removed configuration options
 
 - `-mempoolreplacement` is removed, although default node behavior
-  remains the same.  This option previously allowed the user to prevent
+  remains the same. This option previously allowed the user to prevent
   the node from accepting or relaying BIP125 transaction replacements.
   This is different from the remaining configuration option
   `-walletrbf`. (#16171)
 
-Deprecated or removed RPCs
---------------------------
+## Deprecated or removed RPCs
 
 - `bumpfee` no longer accepts a `totalFee` option unless the
-  configuration parameter `deprecatedrpc=totalFee` is specified.  This
+  configuration parameter `deprecatedrpc=totalFee` is specified. This
   parameter will be fully removed in a subsequent release. (#15996)
 
 - `bumpfee` has a new `fee_rate` option as a replacement for the deprecated `totalFee`. (#16727)
@@ -220,12 +208,11 @@ Deprecated or removed RPCs
 - `generate` is now removed after being deprecated in Koyotecoin Core 0.18.
   Use the `generatetoaddress` RPC instead. (#15492)
 
-P2P changes
------------
+## P2P changes
 
 - BIP 61 reject messages were deprecated in v0.18. They are now disabled
   by default, but can be enabled by setting the `-enablebip61` command
-  line option.  BIP 61 reject messages will be removed entirely in a
+  line option. BIP 61 reject messages will be removed entirely in a
   future version of Koyotecoin Core. (#14054)
 
 - To eliminate well-known denial-of-service vectors in Koyotecoin Core,
@@ -233,37 +220,34 @@ P2P changes
   `-peerbloomfilters` configuration option has been changed to false.
   This prevents Koyotecoin Core from sending the BIP111 NODE_BLOOM service
   flag, accepting BIP37 bloom filters, or serving merkle blocks or
-  transactions matching a bloom filter.  Users who still want to provide
+  transactions matching a bloom filter. Users who still want to provide
   bloom filter support may either set the configuration option to true
   to re-enable both BIP111 and BIP37 support or enable just BIP37
   support for specific peers using the updated `-whitelist` and
   `-whitebind` configuration options described elsewhere in these
-  release notes.  For the near future, lightweight clients using public
+  release notes. For the near future, lightweight clients using public
   BIP111/BIP37 nodes should still be able to connect to older versions
   of Koyotecoin Core and nodes that have manually enabled BIP37 support,
   but developers of such software should consider migrating to either
   using specific BIP37 nodes or an alternative transaction filtering
   system. (#16152)
 
-- By default, Koyotecoin Core will now make two additional outbound connections that are exclusively used for block-relay.  No transactions or addr messages will be processed on these connections. These connections are designed to add little additional memory or bandwidth resource requirements but should make some partitioning attacks more difficult to carry out. (#15759)
+- By default, Koyotecoin Core will now make two additional outbound connections that are exclusively used for block-relay. No transactions or addr messages will be processed on these connections. These connections are designed to add little additional memory or bandwidth resource requirements but should make some partitioning attacks more difficult to carry out. (#15759)
 
-Miscellaneous CLI Changes
--------------------------
+## Miscellaneous CLI Changes
 
 - The `testnet` field in `koyotecoin-cli -getinfo` has been renamed to
   `chain` and now returns the current network name as defined in BIP70
   (main, test, regtest). (#15566)
 
-Low-level changes
-=================
+# Low-level changes
 
-RPC
----
+## RPC
 
 - `getblockchaininfo` no longer returns a `bip9_softforks` object.
   Instead, information has been moved into the `softforks` object and
   an additional `type` field describes how Koyotecoin Core determines
-  whether that soft fork is active (e.g. BIP9 or BIP90).  See the RPC
+  whether that soft fork is active (e.g. BIP9 or BIP90). See the RPC
   help for details. (#16060)
 
 - `getblocktemplate` no longer returns a `rules` array containing `CSV`
@@ -273,8 +257,7 @@ RPC
 - `getrpcinfo` now returns a `logpath` field with the path to
   `debug.log`. (#15483)
 
-Tests
------
+## Tests
 
 - The regression test chain enabled by the `-regtest` command line flag
   now requires transactions to not violate standard policy by default.
@@ -284,26 +267,24 @@ Tests
   adjusted with the `-acceptnonstdtxn` command line flag for both test
   chains. (#15891)
 
-Configuration
-------------
+## Configuration
 
 - A setting specified in the default section but not also specified in a
   network-specific section (e.g. testnet) will now produce an error
   preventing startup instead of just a warning unless the network is
-  mainnet.  This prevents settings intended for mainnet from being
+  mainnet. This prevents settings intended for mainnet from being
   applied to testnet or regtest. (#15629)
 
 - On platforms supporting `thread_local`, log lines can be prefixed with
   the name of the thread that caused the log. To enable this behavior,
   use `-logthreadnames=1`. (#15849)
 
-Network
--------
+## Network
 
 - When fetching a transaction announced by multiple peers, previous versions of
   Koyotecoin Core would sequentially attempt to download the transaction from each
   announcing peer until the transaction is received, in the order that those
-  peers' announcements were received.  In this release, the download logic has
+  peers' announcements were received. In this release, the download logic has
   changed to randomize the fetch order across peers and to prefer sending
   download requests to outbound peers over inbound peers. This fixes an issue
   where inbound peers could prevent a node from getting a transaction.
@@ -311,16 +292,15 @@ Network
 
 - If a Tor hidden service is being used, Koyotecoin Core will be bound to
   the standard port 8333 even if a different port is configured for
-  clearnet connections.  This prevents leaking node identity through use
+  clearnet connections. This prevents leaking node identity through use
   of identical non-default port numbers. (#15651)
 
-Mempool and transaction relay
------------------------------
+## Mempool and transaction relay
 
-- Allows one extra single-ancestor transaction per package.  Previously,
+- Allows one extra single-ancestor transaction per package. Previously,
   if a transaction in the mempool had 25 descendants, or it and all of
   its descendants were over 101,000 vbytes, any newly-received
-  transaction that was also a descendant would be ignored.  Now, one
+  transaction that was also a descendant would be ignored. Now, one
   extra descendant will be allowed provided it is an immediate
   descendant (child) and the child's size is 10,000 vbytes or less.
   This makes it possible for two-party contract protocols such as
@@ -331,23 +311,22 @@ Mempool and transaction relay
 
 - Transactions with outputs paying v1 to v16 witness versions (future
   segwit versions) are now accepted into the mempool, relayed, and
-  mined.  Attempting to spend those outputs remains forbidden by policy
-  ("non-standard").  When this change has been widely deployed, wallets
+  mined. Attempting to spend those outputs remains forbidden by policy
+  ("non-standard"). When this change has been widely deployed, wallets
   and services can accept any valid bech32 Koyotecoin address without
   concern that transactions paying future segwit versions will become
   stuck in an unconfirmed state. (#15846)
 
 - Legacy transactions (transactions with no segwit inputs) must now be
   sent using the legacy encoding format, enforcing the rule specified in
-  BIP144.  (#14039)
+  BIP144. (#14039)
 
-Wallet
-------
+## Wallet
 
 - When in pruned mode, a rescan that was triggered by an `importwallet`,
   `importpubkey`, `importaddress`, or `importprivkey` RPC will only fail
   when blocks have been pruned. Previously it would fail when `-prune`
-  has been set.  This change allows setting `-prune` to a high value
+  has been set. This change allows setting `-prune` to a high value
   (e.g. the disk size) without the calls to any of the import RPCs
   failing until the first block is pruned. (#15870)
 
@@ -355,20 +334,19 @@ Wallet
   KYC), the RPC commands `walletcreatefundedpsbt` and
   `fundrawtransaction` will now fail instead of rounding down the fee.
   Be aware that the `feeRate` argument is specified in KYC per 1,000
-  vbytes, not howler per vbyte. (#16257)
+  vbytes, not howloshi per vbyte. (#16257)
 
 - A new wallet flag `avoid_reuse` has been added (default off). When
   enabled, a wallet will distinguish between used and unused addresses,
-  and default to not use the former in coin selection.  When setting
+  and default to not use the former in coin selection. When setting
   this flag on an existing wallet, rescanning the blockchain is required
-  to correctly mark previously used destinations.  Together with "avoid
+  to correctly mark previously used destinations. Together with "avoid
   partial spends" (added in Koyotecoin Core v0.17.0), this can eliminate a
   serious privacy issue where a malicious user can track spends by
   sending small payments to a previously-paid address that would then
   be included with unrelated inputs in future payments. (#13756)
 
-Build system changes
---------------------
+## Build system changes
 
 - Python >=3.5 is now required by all aspects of the project. This
   includes the build systems, test framework and linters. The previously
@@ -382,18 +360,20 @@ Build system changes
   [CVE-2017-1000494](https://security-tracker.debian.org/tracker/CVE-2017-1000494)
   (both in jessie and in stretch). (#15993)
 
-0.19.0 change log
-=================
+  # 0.19.0 change log
 
 ### Consensus
+
 - #16128 Delete error-prone CScript constructor only used with FindAndDelete (instagibbs)
 - #16060 Bury bip9 deployments (jnewbery)
 
 ### Policy
+
 - #15557 Enhance `bumpfee` to include inputs when targeting a feerate (instagibbs)
 - #15846 Make sending to future native witness outputs standard (sipa)
 
 ### Block and transaction handling
+
 - #15632 Remove ResendWalletTransactions from the Validation Interface (jnewbery)
 - #14121 Index for BIP 157 block filters (jimpo)
 - #15141 Rewrite DoS interface between validation and net_processing (sdaftuar)
@@ -418,6 +398,7 @@ Build system changes
 - #16849 Fix block index inconsistency in InvalidateBlock() (sdaftuar)
 
 ### P2P protocol and network code
+
 - #15597 Generate log entry when blocks messages are received unexpectedly (pstratem)
 - #15654 Remove unused unsanitized user agent string CNode::strSubVer (MarcoFalke)
 - #15689 netaddress: Update CNetAddr for ORCHIDv2 (dongcarl)
@@ -436,12 +417,13 @@ Build system changes
 - #16999 0.19 seeds update (laanwj)
 
 ### Wallet
+
 - #15288 Remove wallet -> node global function calls (ryanofsky)
 - #15491 Improve log output for errors during load (gwillen)
 - #13541 wallet/rpc: sendrawtransaction maxfeerate (kallewoof)
 - #15680 Remove resendwallettransactions RPC method (jnewbery)
 - #15508 Refactor analyzepsbt for use outside RPC code (gwillen)
-- #15747 Remove plethora of Get*Balance (MarcoFalke)
+- #15747 Remove plethora of Get\*Balance (MarcoFalke)
 - #15728 Refactor relay transactions (jnewbery)
 - #15639 koyotecoin-wallet tool: Drop libkoyotecoin_server.a dependency (ryanofsky)
 - #15853 Remove unused import checkpoints.h (MarcoFalke)
@@ -498,6 +480,7 @@ Build system changes
 - #16609 descriptor: fix missed m_script_arg arg renaming in #14934 (fanquake)
 
 ### RPC and other APIs
+
 - #15492 remove deprecated generate method (Sjors)
 - #15566 cli: Replace testnet with chain and return network name as per bip70 (fanquake)
 - #15564 cli: Remove duplicate wallet fields from -getinfo (fanquake)
@@ -552,6 +535,7 @@ Build system changes
 - #17368 cli: fix -getinfo output when compiled with no wallet (fanquake)
 
 ### GUI
+
 - #15464 Drop unused return values in WalletFrame (promag)
 - #15614 Defer removeAndDeleteWallet when no modal widget is active (promag)
 - #15711 Generate bech32 addresses by default (MarcoFalke)
@@ -607,6 +591,7 @@ Build system changes
 - #17257 disable font antialiasing for QR image address (fanquake)
 
 ### Build system
+
 - #14954 Require python 3.5 (MarcoFalke)
 - #15580 native_protobuf: avoid system zlib (dongcarl)
 - #15601 Switch to python3 (take 3) (MarcoFalke)
@@ -671,6 +656,7 @@ Build system changes
 - #16468 Exclude depends/Makefile in .gitignore (promag)
 
 ### Tests and QA
+
 - #15296 Add script checking for deterministic line coverage in unit tests (practicalswift)
 - #15338 ci: Build and run tests once on freebsd (MarcoFalke)
 - #15479 Add .style.yapf (MarcoFalke)
@@ -688,7 +674,7 @@ Build system changes
 - #15771 Prevent concurrency issues reading .cookie file (promag)
 - #15693 travis: Switch to ubuntu keyserver to avoid timeouts (MarcoFalke)
 - #15629 init: Throw error when network specific config is ignored (MarcoFalke)
-- #15773 Add KoyotecoinTestFramework::sync_* methods (MarcoFalke)
+- #15773 Add KoyotecoinTestFramework::sync\_\* methods (MarcoFalke)
 - #15797 travis: Bump second timeout to 33 minutes, add rationale (MarcoFalke)
 - #15788 Unify testing setups for fuzz, bench, and unit tests (MarcoFalke)
 - #15352 Reduce noise level in test_koyotecoin output (practicalswift)
@@ -750,7 +736,7 @@ Build system changes
 - #15134 Switch one of the Travis jobs to an unsigned char environment (-funsigned-char) (practicalswift)
 - #16505 Changes verbosity of msbuild from quiet to normal in the appveyor script (sipsorcery)
 - #16293 Make test cases separate functions (MarcoFalke)
-- #16470 Fail early on disconnect in mininode.wait_for_* (MarcoFalke)
+- #16470 Fail early on disconnect in mininode.wait*for*\* (MarcoFalke)
 - #16277 Suppress output in test_koyotecoin for expected errors (gertjaap)
 - #16493 Fix test failures (MarcoFalke)
 - #16538 Add missing sync_blocks to feature_pruning (MarcoFalke)
@@ -805,6 +791,7 @@ Build system changes
 - #16740 qa: Relax so that the subscriber is ready before publishing zmq messages (#16740)
 
 ### Miscellaneous
+
 - #15335 Fix lack of warning of unrecognized section names (AkioNak)
 - #15528 contrib: Bump gitian descriptors for 0.19 (MarcoFalke)
 - #15609 scripts and tools: Set 'distro' explicitly (hebasto)
@@ -862,6 +849,7 @@ Build system changes
 - #17449 fix uninitialized variable nMinerConfirmationWindow (koyotecoinVBR)
 
 ### Documentation
+
 - #15514 Update Transifex links (fanquake)
 - #15513 add "sections" info to example koyotecoin.conf (fanquake)
 - #15530 Move wallet lock annotations to header (MarcoFalke)
@@ -957,8 +945,7 @@ Build system changes
 - #17014 Consolidate release notes before 0.19.0 (move-only) (MarcoFalke)
 - #17111 update bips.md with buried BIP9 deployments (MarcoFalke)
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who directly contributed to this release:
 

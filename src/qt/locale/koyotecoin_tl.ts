@@ -905,8 +905,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ang tatak na ito ay nagiging pula kung ang sinomang tatanggap ay tatanggap ng halaga na mas maliit  sa kasalukuyang ♦dust threshold♦</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Maaaring magbago ng +/- %1♦4howler(s)♦ kada ♦input♦.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Maaaring magbago ng +/- %1♦4howloshi(s)♦ kada ♦input♦.</translation>
     </message>
     <message>
         <source>(no label)</source>

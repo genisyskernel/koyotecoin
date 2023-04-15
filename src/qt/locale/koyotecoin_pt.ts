@@ -1544,8 +1544,8 @@ A pasta de blocos especificados "%s" não existe.</translation>
         <translation type="unfinished">Esta etiqueta fica vermelha se qualquer destinatário recebe um valor menor que o limite de dinheiro.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Pode variar +/- %1 howler(s) por input.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Pode variar +/- %1 howloshi(s) por input.</translation>
     </message>
     <message>
         <source>(no label)</source>

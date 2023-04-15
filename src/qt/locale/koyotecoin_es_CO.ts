@@ -992,8 +992,8 @@ Firmar solo es posible con direcciones del tipo 'Legacy'.</translation>
         <translation type="unfinished">Está etiqueta se vuelve roja si algún receptor recibe una cantidad inferior al límite actual establecido para el polvo.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Puede variar +/- %1 howler(s) por entrada.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Puede variar +/- %1 howloshi(s) por entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>

@@ -37,13 +37,16 @@ MAX_BLOCK_WEIGHT = 4000000
 MAX_BLOOM_FILTER_SIZE = 36000
 MAX_BLOOM_HASH_FUNCS = 50
 
-COIN = 100000000  # 1 kyc in howlers
+COIN = 100000000  # 1 kyc in howloshis
 MAX_MONEY = 10000000 * COIN
 
-MAX_BIP125_RBF_SEQUENCE = 0xfffffffd  # Sequence number that is rbf-opt-in (BIP 125) and csv-opt-out (BIP 68)
-SEQUENCE_FINAL = 0xffffffff  # Sequence number that disables nLockTime if set for every input of a tx
+# Sequence number that is rbf-opt-in (BIP 125) and csv-opt-out (BIP 68)
+MAX_BIP125_RBF_SEQUENCE = 0xfffffffd
+# Sequence number that disables nLockTime if set for every input of a tx
+SEQUENCE_FINAL = 0xffffffff
 
-MAX_PROTOCOL_MESSAGE_LENGTH = 4000000  # Maximum length of incoming protocol messages
+# Maximum length of incoming protocol messages
+MAX_PROTOCOL_MESSAGE_LENGTH = 4000000
 MAX_HEADERS_RESULTS = 2000  # Number of headers sent in one getheaders result
 MAX_INV_SIZE = 50000  # Maximum number of entries in an 'inv' protocol message
 
@@ -74,6 +77,7 @@ MAX_OP_RETURN_RELAY = 83
 
 DEFAULT_MEMPOOL_EXPIRY_HOURS = 336  # hours
 
+
 def sha256(s):
     return hashlib.sha256(s).digest()
 
@@ -94,6 +98,7 @@ def ser_compact_size(l):
         r = struct.pack("<BQ", 255, l)
     return r
 
+
 def deser_compact_size(f):
     nit = struct.unpack("<B", f.read(1))[0]
     if nit == 253:
@@ -104,12 +109,15 @@ def deser_compact_size(f):
         nit = struct.unpack("<Q", f.read(8))[0]
     return nit
 
+
 def deser_string(f):
     nit = deser_compact_size(f)
     return f.read(nit)
 
+
 def ser_string(s):
     return ser_compact_size(len(s)) + s
+
 
 def deser_uint256(f):
     r = 0
@@ -303,7 +311,8 @@ class CAddress:
         if self.net == self.NET_IPV4:
             self.ip = socket.inet_ntoa(addr_bytes)
         else:
-            self.ip = b32encode(addr_bytes)[0:-len(self.I2P_PAD)].decode("ascii").lower() + ".b32.i2p"
+            self.ip = b32encode(addr_bytes)[
+                0:-len(self.I2P_PAD)].decode("ascii").lower() + ".b32.i2p"
 
         self.port = struct.unpack(">H", f.read(2))[0]
 
@@ -377,7 +386,8 @@ class CBlockLocator:
 
     def serialize(self):
         r = b""
-        r += struct.pack("<i", 0)  # Koyotecoin Core ignores version field. Set it to 0.
+        # Koyotecoin Core ignores version field. Set it to 0.
+        r += struct.pack("<i", 0)
         r += ser_uint256_vector(self.vHave)
         return r
 
@@ -622,7 +632,8 @@ class CTransaction:
             return uint256_from_str(hash256(self.serialize_with_witness()))
 
         if self.sha256 is None:
-            self.sha256 = uint256_from_str(hash256(self.serialize_without_witness()))
+            self.sha256 = uint256_from_str(
+                hash256(self.serialize_without_witness()))
         self.hash = hash256(self.serialize_without_witness())[::-1].hex()
 
     def is_valid(self):
@@ -717,8 +728,10 @@ class CBlockHeader:
             % (self.nVersion, self.hashPrevBlock, self.hashMerkleRoot,
                time.ctime(self.nTime), self.nBits, self.nNonce)
 
+
 BLOCK_HEADER_SIZE = len(CBlockHeader().serialize())
 assert_equal(BLOCK_HEADER_SIZE, 80)
+
 
 class CBlock(CBlockHeader):
     __slots__ = ("vtx",)
@@ -804,7 +817,7 @@ class CBlock(CBlockHeader):
 class PrefilledTransaction:
     __slots__ = ("index", "tx")
 
-    def __init__(self, index=0, tx = None):
+    def __init__(self, index=0, tx=None):
         self.index = index
         self.tx = tx
 
@@ -852,7 +865,8 @@ class P2PHeaderAndShortIDs:
         for _ in range(self.shortids_length):
             # shortids are defined to be 6 bytes in the spec, so append
             # two zero bytes and read it in as an 8-byte number
-            self.shortids.append(struct.unpack("<Q", f.read(6) + b'\x00\x00')[0])
+            self.shortids.append(struct.unpack(
+                "<Q", f.read(6) + b'\x00\x00')[0])
         self.prefilled_txn = deser_vector(f, PrefilledTransaction)
         self.prefilled_txn_length = len(self.prefilled_txn)
 
@@ -879,10 +893,13 @@ class P2PHeaderAndShortIDs:
 # block version 2)
 class P2PHeaderAndShortWitnessIDs(P2PHeaderAndShortIDs):
     __slots__ = ()
+
     def serialize(self):
         return super().serialize(with_witness=True)
 
 # Calculate the BIP 152-compact blocks shortid for a given transaction hash
+
+
 def calculate_shortid(k0, k1, tx_hash):
     expected_shortid = siphash256(k0, k1, tx_hash)
     expected_shortid &= 0x0000ffffffffffff
@@ -894,7 +911,7 @@ def calculate_shortid(k0, k1, tx_hash):
 class HeaderAndShortIDs:
     __slots__ = ("header", "nonce", "prefilled_txn", "shortids", "use_witness")
 
-    def __init__(self, p2pheaders_and_shortids = None):
+    def __init__(self, p2pheaders_and_shortids=None):
         self.header = CBlockHeader()
         self.nonce = 0
         self.shortids = []
@@ -907,7 +924,8 @@ class HeaderAndShortIDs:
             self.shortids = p2pheaders_and_shortids.shortids
             last_index = -1
             for x in p2pheaders_and_shortids.prefilled_txn:
-                self.prefilled_txn.append(PrefilledTransaction(x.index + last_index + 1, x.tx))
+                self.prefilled_txn.append(
+                    PrefilledTransaction(x.index + last_index + 1, x.tx))
                 last_index = self.prefilled_txn[-1].index
 
     def to_p2p(self):
@@ -923,7 +941,8 @@ class HeaderAndShortIDs:
         ret.prefilled_txn = []
         last_index = -1
         for x in self.prefilled_txn:
-            ret.prefilled_txn.append(PrefilledTransaction(x.index - last_index - 1, x.tx))
+            ret.prefilled_txn.append(PrefilledTransaction(
+                x.index - last_index - 1, x.tx))
             last_index = x.index
         return ret
 
@@ -933,7 +952,7 @@ class HeaderAndShortIDs:
         hash_header_nonce_as_str = sha256(header_nonce)
         key0 = struct.unpack("<Q", hash_header_nonce_as_str[0:8])[0]
         key1 = struct.unpack("<Q", hash_header_nonce_as_str[8:16])[0]
-        return [ key0, key1 ]
+        return [key0, key1]
 
     # Version 2 compact blocks use wtxid in shortids (rather than txid)
     def initialize_from_block(self, block, nonce=0, prefill_list=None, use_witness=False):
@@ -941,7 +960,8 @@ class HeaderAndShortIDs:
             prefill_list = [0]
         self.header = CBlockHeader(block)
         self.nonce = nonce
-        self.prefilled_txn = [ PrefilledTransaction(i, block.vtx[i]) for i in prefill_list ]
+        self.prefilled_txn = [PrefilledTransaction(
+            i, block.vtx[i]) for i in prefill_list]
         self.shortids = []
         self.use_witness = use_witness
         [k0, k1] = self.get_siphash_keys()
@@ -959,7 +979,7 @@ class HeaderAndShortIDs:
 class BlockTransactionsRequest:
     __slots__ = ("blockhash", "indexes")
 
-    def __init__(self, blockhash=0, indexes = None):
+    def __init__(self, blockhash=0, indexes=None):
         self.blockhash = blockhash
         self.indexes = indexes if indexes is not None else []
 
@@ -1000,7 +1020,7 @@ class BlockTransactionsRequest:
 class BlockTransactions:
     __slots__ = ("blockhash", "transactions")
 
-    def __init__(self, blockhash=0, transactions = None):
+    def __init__(self, blockhash=0, transactions=None):
         self.blockhash = blockhash
         self.transactions = transactions if transactions is not None else []
 
@@ -1275,6 +1295,7 @@ class msg_tx:
     def __repr__(self):
         return "msg_tx(tx=%s)" % (repr(self.tx))
 
+
 class msg_wtxidrelay:
     __slots__ = ()
     msgtype = b"wtxidrelay"
@@ -1337,6 +1358,7 @@ class msg_generic:
 
 class msg_no_witness_block(msg_block):
     __slots__ = ()
+
     def serialize(self):
         return self.block.serialize(with_witness=False)
 
@@ -1628,7 +1650,7 @@ class msg_cmpctblock:
     __slots__ = ("header_and_shortids",)
     msgtype = b"cmpctblock"
 
-    def __init__(self, header_and_shortids = None):
+    def __init__(self, header_and_shortids=None):
         self.header_and_shortids = header_and_shortids
 
     def deserialize(self, f):
@@ -1692,7 +1714,7 @@ class msg_no_witness_blocktxn(msg_blocktxn):
 
 class msg_getcfilters:
     __slots__ = ("filter_type", "start_height", "stop_hash")
-    msgtype =  b"getcfilters"
+    msgtype = b"getcfilters"
 
     def __init__(self, filter_type=None, start_height=None, stop_hash=None):
         self.filter_type = filter_type
@@ -1715,9 +1737,10 @@ class msg_getcfilters:
         return "msg_getcfilters(filter_type={:#x}, start_height={}, stop_hash={:x})".format(
             self.filter_type, self.start_height, self.stop_hash)
 
+
 class msg_cfilter:
     __slots__ = ("filter_type", "block_hash", "filter_data")
-    msgtype =  b"cfilter"
+    msgtype = b"cfilter"
 
     def __init__(self, filter_type=None, block_hash=None, filter_data=None):
         self.filter_type = filter_type
@@ -1740,9 +1763,10 @@ class msg_cfilter:
         return "msg_cfilter(filter_type={:#x}, block_hash={:x})".format(
             self.filter_type, self.block_hash)
 
+
 class msg_getcfheaders:
     __slots__ = ("filter_type", "start_height", "stop_hash")
-    msgtype =  b"getcfheaders"
+    msgtype = b"getcfheaders"
 
     def __init__(self, filter_type=None, start_height=None, stop_hash=None):
         self.filter_type = filter_type
@@ -1765,9 +1789,10 @@ class msg_getcfheaders:
         return "msg_getcfheaders(filter_type={:#x}, start_height={}, stop_hash={:x})".format(
             self.filter_type, self.start_height, self.stop_hash)
 
+
 class msg_cfheaders:
     __slots__ = ("filter_type", "stop_hash", "prev_header", "hashes")
-    msgtype =  b"cfheaders"
+    msgtype = b"cfheaders"
 
     def __init__(self, filter_type=None, stop_hash=None, prev_header=None, hashes=None):
         self.filter_type = filter_type
@@ -1793,9 +1818,10 @@ class msg_cfheaders:
         return "msg_cfheaders(filter_type={:#x}, stop_hash={:x})".format(
             self.filter_type, self.stop_hash)
 
+
 class msg_getcfcheckpt:
     __slots__ = ("filter_type", "stop_hash")
-    msgtype =  b"getcfcheckpt"
+    msgtype = b"getcfcheckpt"
 
     def __init__(self, filter_type=None, stop_hash=None):
         self.filter_type = filter_type
@@ -1815,9 +1841,10 @@ class msg_getcfcheckpt:
         return "msg_getcfcheckpt(filter_type={:#x}, stop_hash={:x})".format(
             self.filter_type, self.stop_hash)
 
+
 class msg_cfcheckpt:
     __slots__ = ("filter_type", "stop_hash", "headers")
-    msgtype =  b"cfcheckpt"
+    msgtype = b"cfcheckpt"
 
     def __init__(self, filter_type=None, stop_hash=None, headers=None):
         self.filter_type = filter_type

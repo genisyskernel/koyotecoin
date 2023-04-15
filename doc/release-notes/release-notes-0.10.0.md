@@ -1,39 +1,36 @@
 Koyotecoin Core version 0.10.0 is now available from:
 
-  https://koyotecoin.org/bin/0.10.0/
+https://koyotecoin.org/bin/0.10.0/
 
 This is a new major version release, bringing both new features and
 bug fixes.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/koyotecoin/koyotecoin/issues
+https://github.com/koyotecoin/koyotecoin/issues
 
-Upgrading and downgrading
-=========================
+# Upgrading and downgrading
 
-How to Upgrade
---------------
+## How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Koyotecoin-Qt (on Mac) or
 koyotecoind/koyotecoin-qt (on Linux).
 
-Downgrading warning
----------------------
+## Downgrading warning
 
 Because release 0.10.0 makes use of headers-first synchronization and parallel
 block download (see further), the block files and databases are not
 backwards-compatible with older versions of Koyotecoin Core or other software:
 
-* Blocks will be stored on disk out of order (in the order they are
-received, really), which makes it incompatible with some tools or
-other programs. Reindexing using earlier versions will also not work
-anymore as a result of this.
+- Blocks will be stored on disk out of order (in the order they are
+  received, really), which makes it incompatible with some tools or
+  other programs. Reindexing using earlier versions will also not work
+  anymore as a result of this.
 
-* The block index database will now hold headers for which no block is
-stored on disk, which earlier versions won't support.
+- The block index database will now hold headers for which no block is
+  stored on disk, which earlier versions won't support.
 
 If you want to be able to downgrade smoothly, make a backup of your entire data
 directory. Without this your node will need start syncing (or importing from
@@ -43,12 +40,9 @@ supported and may break as soon as the older version attempts to reindex.
 
 This does not affect wallet forward or backward compatibility.
 
+# Notable changes
 
-Notable changes
-===============
-
-Faster synchronization
-----------------------
+## Faster synchronization
 
 Koyotecoin Core now uses 'headers-first synchronization'. This means that we first
 ask peers for block headers (a total of 27 megabytes, as of December 2014) and
@@ -63,23 +57,23 @@ very first few minutes, when headers are still being fetched and verified, but
 it should gain speed afterwards.
 
 A few RPCs were added/updated as a result of this:
-- `getblockchaininfo` now returns the number of validated headers in addition to
-the number of validated blocks.
-- `getpeerinfo` lists both the number of blocks and headers we know we have in
-common with each peer. While synchronizing, the heights of the blocks that we
-have requested from peers (but haven't received yet) are also listed as
-'inflight'.
-- A new RPC `getchaintips` lists all known branches of the block chain,
-including those we only have headers for.
 
-Transaction fee changes
------------------------
+- `getblockchaininfo` now returns the number of validated headers in addition to
+  the number of validated blocks.
+- `getpeerinfo` lists both the number of blocks and headers we know we have in
+  common with each peer. While synchronizing, the heights of the blocks that we
+  have requested from peers (but haven't received yet) are also listed as
+  'inflight'.
+- A new RPC `getchaintips` lists all known branches of the block chain,
+  including those we only have headers for.
+
+## Transaction fee changes
 
 This release automatically estimates how high a transaction fee (or how
 high a priority) transactions require to be confirmed quickly. The default
 settings will create transactions that confirm quickly; see the new
 'txconfirmtarget' setting to control the tradeoff between fees and
-confirmation times. Fees are added by default unless the 'sendfreetransactions' 
+confirmation times. Fees are added by default unless the 'sendfreetransactions'
 setting is enabled.
 
 Prior releases used hard-coded fees (and priorities), and would
@@ -90,23 +84,24 @@ data directory in the `fee_estimates.dat` file just before
 program shutdown, and are read in at startup.
 
 New command line options for transaction fee changes:
+
 - `-txconfirmtarget=n` : create transactions that have enough fees (or priority)
-so they are likely to begin confirmation within n blocks (default: 1). This setting
-is over-ridden by the -paytxfee option.
-- `-sendfreetransactions` : Send transactions as zero-fee transactions if possible 
-(default: 0)
+  so they are likely to begin confirmation within n blocks (default: 1). This setting
+  is over-ridden by the -paytxfee option.
+- `-sendfreetransactions` : Send transactions as zero-fee transactions if possible
+  (default: 0)
 
 New RPC commands for fee estimation:
-- `estimatefee nblocks` : Returns approximate fee-per-1,000-bytes needed for
-a transaction to begin confirmation within nblocks. Returns -1 if not enough
-transactions have been observed to compute a good estimate.
-- `estimatepriority nblocks` : Returns approximate priority needed for
-a zero-fee transaction to begin confirmation within nblocks. Returns -1 if not
-enough free transactions have been observed to compute a good
-estimate.
 
-RPC access control changes
---------------------------
+- `estimatefee nblocks` : Returns approximate fee-per-1,000-bytes needed for
+  a transaction to begin confirmation within nblocks. Returns -1 if not enough
+  transactions have been observed to compute a good estimate.
+- `estimatepriority nblocks` : Returns approximate priority needed for
+  a zero-fee transaction to begin confirmation within nblocks. Returns -1 if not
+  enough free transactions have been observed to compute a good
+  estimate.
+
+## RPC access control changes
 
 Subnet matching for the purpose of access control is now done
 by matching the binary network address, instead of with string wildcard matching.
@@ -121,20 +116,18 @@ matches one of them.
 
 For example:
 
-| 0.9.x and before                           | 0.10.x                                |
-|--------------------------------------------|---------------------------------------|
-| `-rpcallowip=192.168.1.1`                  | `-rpcallowip=192.168.1.1` (unchanged) |
-| `-rpcallowip=192.168.1.*`                  | `-rpcallowip=192.168.1.0/24`          |
-| `-rpcallowip=192.168.*`                    | `-rpcallowip=192.168.0.0/16`          |
-| `-rpcallowip=*` (dangerous!)               | `-rpcallowip=::/0` (still dangerous!) |
+| 0.9.x and before             | 0.10.x                                |
+| ---------------------------- | ------------------------------------- |
+| `-rpcallowip=192.168.1.1`    | `-rpcallowip=192.168.1.1` (unchanged) |
+| `-rpcallowip=192.168.1.*`    | `-rpcallowip=192.168.1.0/24`          |
+| `-rpcallowip=192.168.*`      | `-rpcallowip=192.168.0.0/16`          |
+| `-rpcallowip=*` (dangerous!) | `-rpcallowip=::/0` (still dangerous!) |
 
 Using wildcards will result in the rule being rejected with the following error in debug.log:
 
     Error: Invalid -rpcallowip subnet specification: *. Valid are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24).
 
-
-REST interface
---------------
+## REST interface
 
 A new HTTP API is exposed when running with the `-rest` flag, which allows
 unauthenticated access to public node data.
@@ -143,29 +136,28 @@ It is served on the same port as RPC, but does not need a password, and uses
 plain HTTP instead of JSON-RPC.
 
 Assuming a local RPC server running on port 8332, it is possible to request:
-- Blocks: http://localhost:8332/rest/block/*HASH*.*EXT*
-- Blocks without transactions: http://localhost:8332/rest/block/notxdetails/*HASH*.*EXT*
-- Transactions (requires `-txindex`): http://localhost:8332/rest/tx/*HASH*.*EXT*
 
-In every case, *EXT* can be `bin` (for raw binary data), `hex` (for hex-encoded
+- Blocks: http://localhost:8332/rest/block/_HASH_._EXT_
+- Blocks without transactions: http://localhost:8332/rest/block/notxdetails/_HASH_._EXT_
+- Transactions (requires `-txindex`): http://localhost:8332/rest/tx/_HASH_._EXT_
+
+In every case, _EXT_ can be `bin` (for raw binary data), `hex` (for hex-encoded
 binary) or `json`.
 
 For more details, see the `doc/REST-interface.md` document in the repository.
 
-RPC Server "Warm-Up" Mode
--------------------------
+## RPC Server "Warm-Up" Mode
 
 The RPC server is started earlier now, before most of the expensive
-intialihowlions like loading the block index.  It is available now almost
-immediately after starting the process.  However, until all initialihowlions
+intialihowlions like loading the block index. It is available now almost
+immediately after starting the process. However, until all initialihowlions
 are done, it always returns an immediate error with code -28 to all calls.
 
 This new behaviour can be useful for clients to know that a server is already
 started and will be available soon (for instance, so that they do not
 have to start it themselves).
 
-Improved signing security
--------------------------
+## Improved signing security
 
 For 0.10 the security of signing against unusual attacks has been
 improved by making the signatures constant time and deterministic.
@@ -193,8 +185,7 @@ than the implementation in OpenSSL.
 
 [1] https://eprint.iacr.org/2014/161.pdf
 
-Watch-only wallet support
--------------------------
+## Watch-only wallet support
 
 The wallet can now track transactions to and from wallets for which you know
 all addresses (or scripts), even without the private keys.
@@ -205,7 +196,7 @@ of multisig transactions where you are only one of the signers.
 
 One new RPC, `importaddress`, is added which functions similarly to
 `importprivkey`, but instead takes an address or script (in hexadecimal) as
-argument.  After using it, outputs credited to this address or script are
+argument. After using it, outputs credited to this address or script are
 considered to be received, and transactions consuming these outputs will be
 considered to be sent.
 
@@ -219,8 +210,7 @@ Compared to using `getrawtransaction`, this mechanism does not require
 with future block chain pruning functionality. It does mean that all relevant
 addresses need to added to the wallet before the payment, though.
 
-Consensus library
------------------
+## Consensus library
 
 Starting from 0.10.0, the Koyotecoin Core distribution includes a consensus library.
 
@@ -234,15 +224,14 @@ Its interface is defined in the C header [koyotecoinconsensus.h](https://github.
 
 In its initial version the API includes two functions:
 
-- `koyotecoinconsensus_verify_script` verifies a script. It returns whether the indicated input of the provided serialized transaction 
-correctly spends the passed scriptPubKey under additional constraints indicated by flags
+- `koyotecoinconsensus_verify_script` verifies a script. It returns whether the indicated input of the provided serialized transaction
+  correctly spends the passed scriptPubKey under additional constraints indicated by flags
 - `koyotecoinconsensus_version` returns the API version, currently at an experimental `0`
 
 The functionality is planned to be extended to e.g. UTXO management in upcoming releases, but the interface
 for existing methods should remain stable.
 
-Standard script rules relaxed for P2SH addresses
-------------------------------------------------
+## Standard script rules relaxed for P2SH addresses
 
 The IsStandard() rules have been almost completely removed for P2SH
 redemption scripts, allowing applications to make use of any valid
@@ -252,8 +241,7 @@ actually using them on mainnet has been previously inconvenient as
 standard Koyotecoin Core nodes wouldn't relay them to miners, nor would
 most miners include them in blocks they mined.
 
-koyotecoin-tx
-----------
+## koyotecoin-tx
 
 It has been observed that many of the RPC functions offered by koyotecoind are
 "pure functions", and operate independently of the koyotecoind wallet. This
@@ -276,8 +264,7 @@ server round-trip to execute.
 Other utilities "koyotecoin-key" and "koyotecoin-script" have been proposed, making
 key and script operations easily accessible via command line.
 
-Mining and relay policy enhancements
-------------------------------------
+## Mining and relay policy enhancements
 
 Koyotecoin Core's block templates are now for version 3 blocks only, and any mining
 software relying on its `getblocktemplate` must be updated in parallel to use
@@ -301,17 +288,17 @@ their next block before expending work on it, reducing risks of accidental
 hardforks or mining invalid blocks.
 
 Two new options to control mining policy:
-- `-datacarrier=0/1` : Relay and mine "data carrier" (OP_RETURN) transactions
-if this is 1.
-- `-datacarriersize=n` : Maximum size, in bytes, we consider acceptable for
-"data carrier" outputs.
 
-The relay policy has changed to more properly implement the desired behavior of not 
-relaying free (or very low fee) transactions unless they have a priority above the 
+- `-datacarrier=0/1` : Relay and mine "data carrier" (OP_RETURN) transactions
+  if this is 1.
+- `-datacarriersize=n` : Maximum size, in bytes, we consider acceptable for
+  "data carrier" outputs.
+
+The relay policy has changed to more properly implement the desired behavior of not
+relaying free (or very low fee) transactions unless they have a priority above the
 AllowFreeThreshold(), in which case they are relayed subject to the rate limiter.
 
-BIP 66: strict DER encoding for signatures
-------------------------------------------
+## BIP 66: strict DER encoding for signatures
 
 Koyotecoin Core 0.10 implements BIP 66, which introduces block version 3, and a new
 consensus rule, which prohibits non-DER signatures. Such transactions have been
@@ -330,13 +317,13 @@ blocks have version number 3 or higher, it becomes mandatory for all blocks.
 Backward compatibility with current mining software is NOT provided, thus miners
 should read the first paragraph of "Mining and relay policy enhancements" above.
 
-0.10.0 Change log
-=================
+# 0.10.0 Change log
 
 Detailed release notes follow. This overview includes changes that affect external
 behavior, not code moves, refactors or string updates.
 
 RPC:
+
 - `f923c07` Support IPv6 lookup in koyotecoin-cli even when IPv6 only bound on localhost
 - `b641c9c` Fix addnode "onetry": Connect with OpenNetworkConnection
 - `171ca77` estimatefee / estimatepriority RPC methods
@@ -381,6 +368,7 @@ RPC:
 - `f9de17e` Add warning comment to getinfo
 
 Command-line options:
+
 - `ee21912` Use netmasks instead of wildcards for IP address matching
 - `deb3572` Add `-rpcbind` option to allow binding RPC port on a specific interface
 - `96b733e` Add `-version` option to get just the version
@@ -402,6 +390,7 @@ Command-line options:
 - `ad3d208` remove -maxorphanblocks config parameter since it is no longer functional
 
 Block and transaction handling:
+
 - `7a0e84d` ProcessGetData(): abort if a block file is missing from disk
 - `8c93bf4` LoadBlockIndexDB(): Require block db reindex if any `blk*.dat` files are missing
 - `77339e5` Get rid of the static chainMostWork (optimization)
@@ -438,6 +427,7 @@ Block and transaction handling:
 - `008138c` Bugfix: only track UTXO modification after lookup
 
 P2P protocol and network code:
+
 - `f80cffa` Do not trigger a DoS ban if SCRIPT_VERIFY_NULLDUMMY fails
 - `c30329a` Add testnet DNS seed of Alex Kotenko
 - `45a4baf` Add testnet DNS seed of Andreas Schildbach
@@ -469,6 +459,7 @@ P2P protocol and network code:
 - `18021d0` Remove bitnodes.io from dnsseeds.
 
 Validation:
+
 - `6fd7ef2` Also switch the (unused) verification code to low-s instead of even-s
 - `584a358` Do merkle root and txid duplicates check simultaneously
 - `217a5c9` When transaction outputs exceed inputs, show the offending amounts so as to aid debugging
@@ -486,6 +477,7 @@ Validation:
 - `76ce5c8` fail immediately on an empty signature
 
 Build system:
+
 - `f25e3ad` Fix build in OS X 10.9
 - `65e8ba4` build: Switch to non-recursive make
 - `460b32d` build: fix broken boost chrono check on some platforms
@@ -499,27 +491,29 @@ Build system:
 - `a7d1f03` build: fix dynamic boost check when --with-boost= is used
 - `d5fd094` build: fix qt test build when libprotobuf is in a non-standard path
 - `2cf5f16` Add libkoyotecoinconsensus library
-- `914868a` build: add a deterministic dmg signer 
+- `914868a` build: add a deterministic dmg signer
 - `2d375fe` depends: bump openssl to 1.0.1k
 - `b7a4ecc` Build: Only check for boost when building code that requires it
 
 Wallet:
+
 - `b33d1f5` Use fee/priority estimates in wallet CreateTransaction
 - `4b7b1bb` Sanity checks for estimates
 - `c898846` Add support for watch-only addresses
 - `d5087d1` Use script matching rather than destination matching for watch-only
 - `d88af56` Fee fixes
 - `a35b55b` Dont run full check every time we decrypt wallet
-- `3a7c348` Fix make_change to not create half-howlers
+- `3a7c348` Fix make_change to not create half-howloshis
 - `f606bb9` fix a possible memory leak in CWalletDB::Recover
 - `870da77` fix possible memory leaks in CWallet::EncryptWallet
 - `ccca27a` Watch-only fixes
-- `9b1627d` [Wallet] Reduce minTxFee for transaction creation to 1000 howlers
+- `9b1627d` [Wallet] Reduce minTxFee for transaction creation to 1000 howloshis
 - `a53fd41` Deterministic signing
 - `15ad0b5` Apply AreSane() checks to the fees from the network
 - `11855c1` Enforce minRelayTxFee on wallet created tx and add a maxtxfee option
 
 GUI:
+
 - `c21c74b` osx: Fix missing dock menu with qt5
 - `b90711c` Fix Transaction details shows wrong To:
 - `516053c` Make links in 'About Koyotecoin Core' clickable
@@ -562,6 +556,7 @@ GUI:
 - `8543b0d` Correct tooltip on address book page
 
 Tests:
+
 - `b41e594` Fix script test handling of empty scripts
 - `d3a33fc` Test CHECKMULTISIG with m == 0 and n == 0
 - `29c1749` Let tx (in)valid tests use any SCRIPT_VERIFY flag
@@ -622,6 +617,7 @@ Tests:
 - `263b65e` tests: run sanity checks in tests too
 
 Miscellaneous:
+
 - `122549f` Fix incorrect checkpoint data for testnet3
 - `5bd02cf` Log used config file to debug.log on startup
 - `68ba85f` Updated Debian example koyotecoin.conf with config from wiki + removed some cruft and updated comments
@@ -652,8 +648,7 @@ Miscellaneous:
 - `867c600` Catch LevelDB errors during flush
 - `06ca065` Fix CScriptID(const CScript& in) in empty script case
 
-Credits
-=======
+# Credits
 
 Thanks to everyone who contributed to this release:
 
@@ -759,4 +754,3 @@ Thanks to everyone who contributed to this release:
 - Zak Wilcox
 
 As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/koyotecoin/).
-

@@ -31,13 +31,15 @@ logger = logging.getLogger("TestFramework.utils")
 def assert_approx(v, vexp, vspan=0.00001):
     """Assert that `v` is within `vspan` of `vexp`"""
     if isinstance(v, Decimal) or isinstance(vexp, Decimal):
-        v=Decimal(v)
-        vexp=Decimal(vexp)
-        vspan=Decimal(vspan)
+        v = Decimal(v)
+        vexp = Decimal(vexp)
+        vspan = Decimal(vspan)
     if v < vexp - vspan:
-        raise AssertionError("%s < [%s..%s]" % (str(v), str(vexp - vspan), str(vexp + vspan)))
+        raise AssertionError("%s < [%s..%s]" % (
+            str(v), str(vexp - vspan), str(vexp + vspan)))
     if v > vexp + vspan:
-        raise AssertionError("%s > [%s..%s]" % (str(v), str(vexp - vspan), str(vexp + vspan)))
+        raise AssertionError("%s > [%s..%s]" % (
+            str(v), str(vexp - vspan), str(vexp + vspan)))
 
 
 def assert_fee_amount(fee, tx_size, feerate_KYC_kvB):
@@ -45,16 +47,19 @@ def assert_fee_amount(fee, tx_size, feerate_KYC_kvB):
     assert isinstance(tx_size, int)
     target_fee = get_fee(tx_size, feerate_KYC_kvB)
     if fee < target_fee:
-        raise AssertionError("Fee of %s KYC too low! (Should be %s KYC)" % (str(fee), str(target_fee)))
+        raise AssertionError(
+            "Fee of %s KYC too low! (Should be %s KYC)" % (str(fee), str(target_fee)))
     # allow the wallet's estimation to be at most 2 bytes off
     high_fee = get_fee(tx_size + 2, feerate_KYC_kvB)
     if fee > high_fee:
-        raise AssertionError("Fee of %s KYC too high! (Should be %s KYC)" % (str(fee), str(target_fee)))
+        raise AssertionError(
+            "Fee of %s KYC too high! (Should be %s KYC)" % (str(fee), str(target_fee)))
 
 
 def assert_equal(thing1, thing2, *args):
     if thing1 != thing2 or any(thing1 != arg for arg in args):
-        raise AssertionError("not(%s)" % " == ".join(str(arg) for arg in (thing1, thing2) + args))
+        raise AssertionError("not(%s)" % " == ".join(str(arg)
+                             for arg in (thing1, thing2) + args))
 
 
 def assert_greater_than(thing1, thing2):
@@ -75,14 +80,16 @@ def assert_raises_message(exc, message, fun, *args, **kwds):
     try:
         fun(*args, **kwds)
     except JSONRPCException:
-        raise AssertionError("Use assert_raises_rpc_error() to test RPC failures")
+        raise AssertionError(
+            "Use assert_raises_rpc_error() to test RPC failures")
     except exc as e:
         if message is not None and message not in e.error['message']:
             raise AssertionError(
                 "Expected substring not found in error message:\nsubstring: '{}'\nerror message: '{}'.".format(
                     message, e.error['message']))
     except Exception as e:
-        raise AssertionError("Unexpected exception raised: " + type(e).__name__)
+        raise AssertionError(
+            "Unexpected exception raised: " + type(e).__name__)
     else:
         raise AssertionError("No exception raised")
 
@@ -141,14 +148,16 @@ def try_rpc(code, message, fun, *args, **kwds):
     except JSONRPCException as e:
         # JSONRPCException was thrown as expected. Check the code and message values are correct.
         if (code is not None) and (code != e.error["code"]):
-            raise AssertionError("Unexpected JSONRPC error code %i" % e.error["code"])
+            raise AssertionError(
+                "Unexpected JSONRPC error code %i" % e.error["code"])
         if (message is not None) and (message not in e.error['message']):
             raise AssertionError(
                 "Expected substring not found in error message:\nsubstring: '{}'\nerror message: '{}'.".format(
                     message, e.error['message']))
         return True
     except Exception as e:
-        raise AssertionError("Unexpected exception raised: " + type(e).__name__)
+        raise AssertionError(
+            "Unexpected exception raised: " + type(e).__name__)
     else:
         return False
 
@@ -157,16 +166,19 @@ def assert_is_hex_string(string):
     try:
         int(string, 16)
     except Exception as e:
-        raise AssertionError("Couldn't interpret %r as hexadecimal; raised: %s" % (string, e))
+        raise AssertionError(
+            "Couldn't interpret %r as hexadecimal; raised: %s" % (string, e))
 
 
 def assert_is_hash_string(string, length=64):
     if not isinstance(string, str):
         raise AssertionError("Expected a string, got type %r" % type(string))
     elif length and len(string) != length:
-        raise AssertionError("String of length %d expected; got %d" % (length, len(string)))
+        raise AssertionError(
+            "String of length %d expected; got %d" % (length, len(string)))
     elif not re.match('[abcdef0-9]+$', string):
-        raise AssertionError("String %r contains invalid characters for a hash." % string)
+        raise AssertionError(
+            "String %r contains invalid characters for a hash." % string)
 
 
 def assert_array_result(object_array, to_match, expected, should_not_find=False):
@@ -191,7 +203,8 @@ def assert_array_result(object_array, to_match, expected, should_not_find=False)
             num_matched = num_matched + 1
         for key, value in expected.items():
             if item[key] != value:
-                raise AssertionError("%s : expected %s=%s" % (str(item), str(key), str(value)))
+                raise AssertionError("%s : expected %s=%s" %
+                                     (str(item), str(key), str(value)))
             num_matched = num_matched + 1
     if num_matched == 0 and not should_not_find:
         raise AssertionError("No objects matched %s" % (str(to_match)))
@@ -206,8 +219,8 @@ def assert_array_result(object_array, to_match, expected, should_not_find=False)
 def check_json_precision():
     """Make sure json library being used does not lose precision converting KYC values"""
     n = Decimal("20000000.00000003")
-    howlers = int(json.loads(json.dumps(float(n))) * 1.0e8)
-    if howlers != 2000000000000003:
+    howloshis = int(json.loads(json.dumps(float(n))) * 1.0e8)
+    if howloshis != 2000000000000003:
         raise RuntimeError("JSON encode/decode loses precision")
 
 
@@ -238,12 +251,14 @@ def ceildiv(a, b):
 
 def get_fee(tx_size, feerate_kyc_kvb):
     """Calculate the fee in KYC given a feerate is KYC/kvB. Reflects CFeeRate::GetFee"""
-    feerate_howl_kvb = int(feerate_kyc_kvb * Decimal(1e8)) # Fee in howl/kvb as an int to avoid float precision errors
-    target_fee_howl = ceildiv(feerate_howl_kvb * tx_size, 1000) # Round calculated fee up to nearest howl
-    return target_fee_howl / Decimal(1e8) # Return result in  KYC
+    feerate_howl_kvb = int(feerate_kyc_kvb * Decimal(1e8)
+                           )  # Fee in howl/kvb as an int to avoid float precision errors
+    # Round calculated fee up to nearest howl
+    target_fee_howl = ceildiv(feerate_howl_kvb * tx_size, 1000)
+    return target_fee_howl / Decimal(1e8)  # Return result in  KYC
 
 
-def howler_round(amount):
+def howloshi_round(amount):
     return Decimal(amount).quantize(Decimal('0.00000001'), rounding=ROUND_DOWN)
 
 
@@ -277,9 +292,11 @@ def wait_until_helper(predicate, *, attempts=float('inf'), timeout=float('inf'),
     predicate_source = "''''\n" + inspect.getsource(predicate) + "'''"
     logger.error("wait_until() failed. Predicate: {}".format(predicate_source))
     if attempt >= attempts:
-        raise AssertionError("Predicate {} not true after {} attempts".format(predicate_source, attempts))
+        raise AssertionError("Predicate {} not true after {} attempts".format(
+            predicate_source, attempts))
     elif time.time() >= time_end:
-        raise AssertionError("Predicate {} not true after {} seconds".format(predicate_source, timeout))
+        raise AssertionError(
+            "Predicate {} not true after {} seconds".format(predicate_source, timeout))
     raise RuntimeError('Unreachable')
 
 
@@ -315,7 +332,7 @@ class PortSeed:
     n = None
 
 
-def get_rpc_proxy(url: str, node_number: int, *, timeout: int=None, coveragedir: str=None) -> coverage.AuthServiceProxyWrapper:
+def get_rpc_proxy(url: str, node_number: int, *, timeout: int = None, coveragedir: str = None) -> coverage.AuthServiceProxyWrapper:
     """
     Args:
         url: URL of the RPC server to call
@@ -335,7 +352,8 @@ def get_rpc_proxy(url: str, node_number: int, *, timeout: int=None, coveragedir:
 
     proxy = AuthServiceProxy(url, **proxy_kwargs)
 
-    coverage_logfile = coverage.get_filename(coveragedir, node_number) if coveragedir else None
+    coverage_logfile = coverage.get_filename(
+        coveragedir, node_number) if coveragedir else None
 
     return coverage.AuthServiceProxyWrapper(proxy, url, coverage_logfile)
 
@@ -370,7 +388,8 @@ def initialize_datadir(dirname, n, chain, disable_autoconnect=True):
     datadir = get_datadir_path(dirname, n)
     if not os.path.isdir(datadir):
         os.makedirs(datadir)
-    write_config(os.path.join(datadir, "koyotecoin.conf"), n=n, chain=chain, disable_autoconnect=disable_autoconnect)
+    write_config(os.path.join(datadir, "koyotecoin.conf"), n=n,
+                 chain=chain, disable_autoconnect=disable_autoconnect)
     os.makedirs(os.path.join(datadir, 'stderr'), exist_ok=True)
     os.makedirs(os.path.join(datadir, 'stdout'), exist_ok=True)
     return datadir
@@ -486,7 +505,8 @@ def find_output(node, txid, amount, *, blockhash=None):
     for i in range(len(txdata["vout"])):
         if txdata["vout"][i]["value"] == amount:
             return i
-    raise RuntimeError("find_output txid %s : %s not found" % (txid, str(amount)))
+    raise RuntimeError("find_output txid %s : %s not found" %
+                       (txid, str(amount)))
 
 
 def chain_transaction(node, parent_txids, vouts, value, fee, num_outputs):
@@ -496,10 +516,10 @@ def chain_transaction(node, parent_txids, vouts, value, fee, num_outputs):
 
     Returns a tuple with the txid and the amount sent per output.
     """
-    send_value = howler_round((value - fee)/num_outputs)
+    send_value = howloshi_round((value - fee)/num_outputs)
     inputs = []
     for (txid, vout) in zip(parent_txids, vouts):
-        inputs.append({'txid' : txid, 'vout' : vout})
+        inputs.append({'txid': txid, 'vout': vout})
     outputs = {}
     for _ in range(num_outputs):
         outputs[node.getnewaddress()] = send_value
@@ -507,7 +527,8 @@ def chain_transaction(node, parent_txids, vouts, value, fee, num_outputs):
     signedtx = node.signrawtransactionwithwallet(rawtx)
     txid = node.sendrawtransaction(signedtx['hex'])
     fulltx = node.getrawtransaction(txid, 1)
-    assert len(fulltx['vout']) == num_outputs  # make sure we didn't generate a change output
+    # make sure we didn't generate a change output
+    assert len(fulltx['vout']) == num_outputs
     return (txid, send_value)
 
 
@@ -517,7 +538,8 @@ def chain_transaction(node, parent_txids, vouts, value, fee, num_outputs):
 def gen_return_txouts():
     from .messages import CTxOut
     from .script import CScript, OP_RETURN
-    txouts = [CTxOut(nValue=0, scriptPubKey=CScript([OP_RETURN, b'\x01'*67437]))]
+    txouts = [CTxOut(nValue=0, scriptPubKey=CScript(
+        [OP_RETURN, b'\x01'*67437]))]
     assert_equal(sum([len(txout.serialize()) for txout in txouts]), 67456)
     return txouts
 
@@ -557,7 +579,9 @@ def find_vout_for_address(node, txid, addr):
     for i in range(len(tx["vout"])):
         if addr == tx["vout"][i]["scriptPubKey"]["address"]:
             return i
-    raise RuntimeError("Vout not found for address: txid=%s, addr=%s" % (txid, addr))
+    raise RuntimeError(
+        "Vout not found for address: txid=%s, addr=%s" % (txid, addr))
+
 
 def modinv(a, n):
     """Compute the modular inverse of a modulo n using the extended Euclidean
@@ -575,6 +599,7 @@ def modinv(a, n):
     if t1 < 0:
         t1 += n
     return t1
+
 
 class TestFrameworkUtil(unittest.TestCase):
     def test_modinv(self):

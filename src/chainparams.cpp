@@ -96,7 +96,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
 
-        consensus.nMinimumChainWork = uint256S("0x00");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100010");
         consensus.defaultAssumeValid = uint256S("0x0000000054ce0f4dcc03b139ad9efa188650ea14d0421c845642571eaedc2431");
 
         /**
@@ -197,7 +197,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
 
-        consensus.nMinimumChainWork = uint256S("0x00");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100010");
         consensus.defaultAssumeValid = uint256S("0x0000000054ce0f4dcc03b139ad9efa188650ea14d0421c845642571eaedc2431");
 
         pchMessageStart[0] = 0xf1;
@@ -269,7 +269,7 @@ public:
             // Hardcoded nodes can be removed once there are more DNS seeds
             vSeeds.emplace_back("seed.sig.test.kyc.genisyskernel.dev."); // Eduardo Doege
 
-            consensus.nMinimumChainWork = uint256S("0x00");
+            consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100010");
             consensus.defaultAssumeValid = uint256S("0x0000000054ce0f4dcc03b139ad9efa188650ea14d0421c845642571eaedc2431");
             m_assumed_blockchain_size = 1;
             m_assumed_chain_state_size = 0;

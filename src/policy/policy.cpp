@@ -27,19 +27,19 @@
 CAmount GetDustThreshold(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
 {
     // "Dust" is defined in terms of dustRelayFee,
-    // which has units howlers-per-kilobyte.
+    // which has units howloshis-per-kilobyte.
     // If you'd pay more in fees than the value of the output
     // to spend something, then we consider it dust.
     // A typical spendable non-segwit txout is 34 bytes big, and will
     // need a CTxIn of at least 148 bytes to spend:
     // so dust is a spendable txout less than
-    // 182*dustRelayFee/1000 (in howlers).
-    // 546 howlers at the default rate of 3000 howl/kvB.
+    // 182*dustRelayFee/1000 (in howloshis).
+    // 546 howloshis at the default rate of 3000 howl/kvB.
     // A typical spendable segwit P2WPKH txout is 31 bytes big, and will
     // need a CTxIn of at least 67 bytes to spend:
     // so dust is a spendable txout less than
-    // 98*dustRelayFee/1000 (in howlers).
-    // 294 howlers at the default rate of 3000 howl/kvB.
+    // 98*dustRelayFee/1000 (in howloshis).
+    // 294 howloshis at the default rate of 3000 howl/kvB.
     if (txout.scriptPubKey.IsUnspendable())
         return 0;
 
@@ -70,7 +70,7 @@ bool IsDust(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
 
 bool IsStandard(const CScript& scriptPubKey, const std::optional<unsigned>& max_datacarrier_bytes, TxoutType& whichType)
 {
-    std::vector<std::vector<unsigned char> > vSolutions;
+    std::vector<std::vector<unsigned char>> vSolutions;
     whichType = Solver(scriptPubKey, vSolutions);
 
     if (whichType == TxoutType::NONSTANDARD) {
@@ -109,8 +109,7 @@ bool IsStandardTx(const CTransaction& tx, const std::optional<unsigned>& max_dat
         return false;
     }
 
-    for (const CTxIn& txin : tx.vin)
-    {
+    for (const CTxIn& txin : tx.vin) {
         // Biggest 'standard' txin involving only keys is a 15-of-15 P2SH
         // multisig with compressed keys (remember the 520 byte limit on
         // redeemScript size). That works out to a (15*(33+1))+3=513 byte
@@ -184,7 +183,7 @@ bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
     for (unsigned int i = 0; i < tx.vin.size(); i++) {
         const CTxOut& prev = mapInputs.AccessCoin(tx.vin[i].prevout).out;
 
-        std::vector<std::vector<unsigned char> > vSolutions;
+        std::vector<std::vector<unsigned char>> vSolutions;
         TxoutType whichType = Solver(prev.scriptPubKey, vSolutions);
         if (whichType == TxoutType::NONSTANDARD || whichType == TxoutType::WITNESS_UNKNOWN) {
             // WITNESS_UNKNOWN failures are typically also caught with a policy
@@ -193,7 +192,7 @@ bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
             // validation.
             return false;
         } else if (whichType == TxoutType::SCRIPTHASH) {
-            std::vector<std::vector<unsigned char> > stack;
+            std::vector<std::vector<unsigned char>> stack;
             // convert the scriptSig into a stack, so we can inspect the redeemScript
             if (!EvalScript(stack, tx.vin[i].scriptSig, SCRIPT_VERIFY_NONE, BaseSignatureChecker(), SigVersion::BASE))
                 return false;
@@ -214,21 +213,20 @@ bool IsWitnessStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
     if (tx.IsCoinBase())
         return true; // Coinbases are skipped
 
-    for (unsigned int i = 0; i < tx.vin.size(); i++)
-    {
+    for (unsigned int i = 0; i < tx.vin.size(); i++) {
         // We don't care if witness for this input is empty, since it must not be bloated.
         // If the script is invalid without witness, it would be caught sooner or later during validation.
         if (tx.vin[i].scriptWitness.IsNull())
             continue;
 
-        const CTxOut &prev = mapInputs.AccessCoin(tx.vin[i].prevout).out;
+        const CTxOut& prev = mapInputs.AccessCoin(tx.vin[i].prevout).out;
 
         // get the scriptPubKey corresponding to this input:
         CScript prevScript = prev.scriptPubKey;
 
         bool p2sh = false;
         if (prevScript.IsPayToScriptHash()) {
-            std::vector <std::vector<unsigned char> > stack;
+            std::vector<std::vector<unsigned char>> stack;
             // If the scriptPubKey is P2SH, we try to extract the redeemScript casually by converting the scriptSig
             // into a stack. We do not check IsPushOnly nor compare the hash as these will be done later anyway.
             // If the check fails at this stage, we know that this txid must be a bad one.
@@ -273,7 +271,7 @@ bool IsWitnessStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
             if (stack.size() >= 2) {
                 // Script path spend (2 or more stack elements after removing optional annex)
                 const auto& control_block = SpanPopBack(stack);
-                SpanPopBack(stack); // Ignore script
+                SpanPopBack(stack);                      // Ignore script
                 if (control_block.empty()) return false; // Empty control block is invalid
                 if ((control_block[0] & TAPROOT_LEAF_MASK) == TAPROOT_LEAF_TAPSCRIPT) {
                     // Leaf version 0xc0 (aka Tapscript, see BIP 342)

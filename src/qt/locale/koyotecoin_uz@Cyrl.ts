@@ -595,7 +595,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">йўқ</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
         <translation type="unfinished">Ҳар бир кирим +/- %1 сатоши(лар) билан ўзгариши мумкин.</translation>
     </message>
     <message>

@@ -17,20 +17,20 @@
 FUZZ_TARGET(fee_rate)
 {
     FuzzedDataProvider fuzzed_data_provider(buffer.data(), buffer.size());
-    const CAmount howlers_per_k = ConsumeMoney(fuzzed_data_provider);
-    const CFeeRate fee_rate{howlers_per_k};
+    const CAmount howloshis_per_k = ConsumeMoney(fuzzed_data_provider);
+    const CFeeRate fee_rate{howloshis_per_k};
 
     (void)fee_rate.GetFeePerK();
     const auto bytes = fuzzed_data_provider.ConsumeIntegral<uint32_t>();
-    if (!MultiplicationOverflow(int64_t{bytes}, howlers_per_k)) {
+    if (!MultiplicationOverflow(int64_t{bytes}, howloshis_per_k)) {
         (void)fee_rate.GetFee(bytes);
     }
     (void)fee_rate.ToString();
 
-    const CAmount another_howlers_per_k = ConsumeMoney(fuzzed_data_provider);
-    CFeeRate larger_fee_rate{another_howlers_per_k};
+    const CAmount another_howloshis_per_k = ConsumeMoney(fuzzed_data_provider);
+    CFeeRate larger_fee_rate{another_howloshis_per_k};
     larger_fee_rate += fee_rate;
-    if (howlers_per_k != 0 && another_howlers_per_k != 0) {
+    if (howloshis_per_k != 0 && another_howloshis_per_k != 0) {
         assert(fee_rate < larger_fee_rate);
         assert(!(fee_rate > larger_fee_rate));
         assert(!(fee_rate == larger_fee_rate));

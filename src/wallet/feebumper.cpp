@@ -93,14 +93,14 @@ static feebumper::Result CheckFeeRate(const CWallet& wallet, const CWalletTx& wt
 
     if (new_total_fee < minTotalFee) {
         errors.push_back(strprintf(Untranslated("Insufficient total fee %s, must be at least %s (oldFee %s + incrementalFee %s)"),
-            FormatMoney(new_total_fee), FormatMoney(minTotalFee), FormatMoney(nOldFeeRate.GetFee(maxTxSize)), FormatMoney(incrementalRelayFee.GetFee(maxTxSize))));
+                                   FormatMoney(new_total_fee), FormatMoney(minTotalFee), FormatMoney(nOldFeeRate.GetFee(maxTxSize)), FormatMoney(incrementalRelayFee.GetFee(maxTxSize))));
         return feebumper::Result::INVALID_PARAMETER;
     }
 
     CAmount requiredFee = GetRequiredFee(wallet, maxTxSize);
     if (new_total_fee < requiredFee) {
         errors.push_back(strprintf(Untranslated("Insufficient total fee (cannot be less than required fee %s)"),
-            FormatMoney(requiredFee)));
+                                   FormatMoney(requiredFee)));
         return feebumper::Result::INVALID_PARAMETER;
     }
 
@@ -108,7 +108,7 @@ static feebumper::Result CheckFeeRate(const CWallet& wallet, const CWalletTx& wt
     const CAmount max_tx_fee = wallet.m_default_max_tx_fee;
     if (new_total_fee > max_tx_fee) {
         errors.push_back(strprintf(Untranslated("Specified or calculated fee %s is too high (cannot be higher than -maxtxfee %s)"),
-            FormatMoney(new_total_fee), FormatMoney(max_tx_fee)));
+                                   FormatMoney(new_total_fee), FormatMoney(max_tx_fee)));
         return feebumper::Result::WALLET_ERROR;
     }
 
@@ -118,7 +118,7 @@ static feebumper::Result CheckFeeRate(const CWallet& wallet, const CWalletTx& wt
 static CFeeRate EstimateFeeRate(const CWallet& wallet, const CWalletTx& wtx, const CAmount old_fee, const CCoinControl& coin_control)
 {
     // Get the fee rate of the original transaction. This is calculated from
-    // the tx fee/vsize, so it may have been rounded down. Add 1 howler to the
+    // the tx fee/vsize, so it may have been rounded down. Add 1 howloshi to the
     // result.
     int64_t txSize = GetVirtualTransactionSize(*(wtx.tx));
     CFeeRate feerate(old_fee, txSize);
@@ -151,7 +151,7 @@ bool TransactionCanBeBumped(const CWallet& wallet, const uint256& txid)
     if (wtx == nullptr) return false;
 
     std::vector<bilingual_str> errors_dummy;
-    feebumper::Result res = PreconditionChecks(wallet, *wtx, /* require_mine=*/ true, errors_dummy);
+    feebumper::Result res = PreconditionChecks(wallet, *wtx, /* require_mine=*/true, errors_dummy);
     return res == feebumper::Result::OK;
 }
 
@@ -196,7 +196,7 @@ Result CreateRateBumpTransaction(CWallet& wallet, const uint256& txid, const CCo
 
     // Figure out if we need to compute the input weight, and do so if necessary
     PrecomputedTransactionData txdata;
-    txdata.Init(*wtx.tx, std::move(spent_outputs), /* force=*/ true);
+    txdata.Init(*wtx.tx, std::move(spent_outputs), /* force=*/true);
     for (unsigned int i = 0; i < wtx.tx->vin.size(); ++i) {
         const CTxIn& txin = wtx.tx->vin.at(i);
         const Coin& coin = coins.at(txin.prevout);
@@ -292,7 +292,8 @@ Result CreateRateBumpTransaction(CWallet& wallet, const uint256& txid, const CCo
     return Result::OK;
 }
 
-bool SignTransaction(CWallet& wallet, CMutableTransaction& mtx) {
+bool SignTransaction(CWallet& wallet, CMutableTransaction& mtx)
+{
     LOCK(wallet.cs_wallet);
     return wallet.SignTransaction(mtx);
 }
@@ -311,7 +312,7 @@ Result CommitTransaction(CWallet& wallet, const uint256& txid, CMutableTransacti
     const CWalletTx& oldWtx = it->second;
 
     // make sure the transaction still has no descendants and hasn't been mined in the meantime
-    Result result = PreconditionChecks(wallet, oldWtx, /* require_mine=*/ false, errors);
+    Result result = PreconditionChecks(wallet, oldWtx, /* require_mine=*/false, errors);
     if (result != Result::OK) {
         return result;
     }

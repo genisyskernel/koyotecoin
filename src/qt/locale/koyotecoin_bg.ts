@@ -1108,7 +1108,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Този етикет става червен ако някой получател получи количество, по-малко от текущия праг на прах</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
         <translation type="unfinished">Може да варира с +/- %1 байт(а).</translation>
     </message>
     <message>

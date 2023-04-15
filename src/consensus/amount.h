@@ -9,13 +9,13 @@
 
 #include <cstdint>
 
-/** Amount in howlers (Can be negative) */
+/** Amount in howloshis (Can be negative) */
 typedef int64_t CAmount;
 
-/** The amount of howlers in one KYC. */
+/** The amount of howloshis in one KYC. */
 static constexpr CAmount COIN = 100000000;
 
-/** No amount larger than this (in howler) is valid.
+/** No amount larger than this (in howloshi) is valid.
  *
  * Note that this constant is *not* the total money supply, which in Koyotecoin
  * currently happens to be less than 10,000,000 KYC for various reasons, but

@@ -1094,7 +1094,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     </message>
     <message>
         <location line="+5"/>
-        <source>Can vary +/- %1 howler(s) per input.</source>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3766,7 +3766,7 @@ For more information on using this console, type %6.
         <location line="+51"/>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction&apos;s virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 howlers per kvB&quot; for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of &quot;100 howloshis per kvB&quot; for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

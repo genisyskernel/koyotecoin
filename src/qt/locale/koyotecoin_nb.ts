@@ -1509,8 +1509,8 @@ Kunne ikke gjenopprette sikkerhetskopi av lommebok.</translation>
         <translation type="unfinished">Denne merkelappen blir rød hvis en mottaker får mindre enn gjeldende støvterskel.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Kan variere +/- %1 howler(er) per input.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Kan variere +/- %1 howloshi(er) per input.</translation>
     </message>
     <message>
         <source>(no label)</source>

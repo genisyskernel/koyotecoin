@@ -18,7 +18,7 @@ from test_framework.util import (
     assert_greater_than,
     assert_greater_than_or_equal,
     assert_raises_rpc_error,
-    howler_round,
+    howloshi_round,
 )
 from test_framework.wallet import MiniWallet
 
@@ -38,7 +38,7 @@ def small_txpuzzle_randfee(
     # Exponentially distributed from 1-128 * fee_increment
     rand_fee = float(fee_increment) * (1.1892 ** random.randint(0, 28))
     # Total fee ranges from min_fee to min_fee + 127*fee_increment
-    fee = min_fee - fee_increment + howler_round(rand_fee)
+    fee = min_fee - fee_increment + howloshi_round(rand_fee)
     utxos_to_spend = []
     total_in = Decimal("0.00000000")
     while total_in <= (amount + fee) and len(conflist) > 0:
@@ -50,7 +50,8 @@ def small_txpuzzle_randfee(
         total_in += t["value"]
         utxos_to_spend.append(t)
     if total_in <= amount + fee:
-        raise RuntimeError(f"Insufficient funds: need {amount + fee}, have {total_in}")
+        raise RuntimeError(
+            f"Insufficient funds: need {amount + fee}, have {total_in}")
     tx = wallet.create_self_transfer_multi(
         utxos_to_spend=utxos_to_spend,
         fee_per_output=0,
@@ -59,8 +60,10 @@ def small_txpuzzle_randfee(
     tx.vout.append(deepcopy(tx.vout[0]))
     tx.vout[1].nValue = int(amount * COIN)
 
-    txid = from_node.sendrawtransaction(hexstring=tx.serialize().hex(), maxfeerate=0)
-    unconflist.append({"txid": txid, "vout": 0, "value": total_in - amount - fee})
+    txid = from_node.sendrawtransaction(
+        hexstring=tx.serialize().hex(), maxfeerate=0)
+    unconflist.append(
+        {"txid": txid, "vout": 0, "value": total_in - amount - fee})
     unconflist.append({"txid": txid, "vout": 1, "value": amount})
 
     return (tx.serialize().hex(), fee)
@@ -171,7 +174,8 @@ class EstimateFeeTest(KoyotecoinTestFramework):
                 tx_kbytes = (len(txhex) // 2) / 1000.0
                 self.fees_per_kb.append(float(fee) / tx_kbytes)
             self.sync_mempools(wait=0.1)
-            mined = mining_node.getblock(self.generate(mining_node, 1)[0], True)["tx"]
+            mined = mining_node.getblock(
+                self.generate(mining_node, 1)[0], True)["tx"]
             # update which txouts are confirmed
             newmem = []
             for utx in self.memutxo:
@@ -305,7 +309,8 @@ class EstimateFeeTest(KoyotecoinTestFramework):
 
         self.log.info("Restarting node with fresh estimation")
         self.stop_node(0)
-        fee_dat = os.path.join(self.nodes[0].datadir, self.chain, "fee_estimates.dat")
+        fee_dat = os.path.join(
+            self.nodes[0].datadir, self.chain, "fee_estimates.dat")
         os.remove(fee_dat)
         self.start_node(0)
         self.connect_nodes(0, 1)

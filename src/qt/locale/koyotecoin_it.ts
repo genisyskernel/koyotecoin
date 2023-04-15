@@ -1677,8 +1677,8 @@ Non in grado di ripristinare il backup del portafoglio.</translation>
         <translation type="unfinished">Questa etichetta diventa rossa se uno qualsiasi dei destinatari riceve un importo inferiore alla soglia minima di polvere.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Può variare di +/- %1 howler per input.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Può variare di +/- %1 howloshi per input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -3501,10 +3501,10 @@ Per ulteriori informazioni su come usare la console, premi %6.
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
         <translation type="unfinished">Specifica una tariffa personalizzata per kB (1.000 byte) della dimensione virtuale della transazione
 
-Nota: poiché la commissione è calcolata su base per byte, una commissione di "100 howler per kB" per una dimensione di transazione di 500 byte (metà di 1 kB) alla fine produrrà una commissione di soli 50 howler.</translation>
+Nota: poiché la commissione è calcolata su base per byte, una commissione di "100 howloshi per kB" per una dimensione di transazione di 500 byte (metà di 1 kB) alla fine produrrà una commissione di soli 50 howloshi.</translation>
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for koyotecoin transactions than the network can process.</source>

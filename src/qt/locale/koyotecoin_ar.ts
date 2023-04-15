@@ -1420,7 +1420,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">يتحول هذا الملصق إلى اللون الأحمر إذا تلقى أي مستلم كمية أصغر من عتبة الغبار الحالية.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
         <translation type="unfinished">يمكن أن يختلف +/- %1 من ساتوشي(s) لكل إدخال.</translation>
     </message>
     <message>

@@ -1718,8 +1718,8 @@ Impossible de restaurer la sauvegarde du portefeuille.</translation>
         <translation type="unfinished">Cette étiquette devient rouge si un destinataire reçoit un montant inférieur au seuil actuel de poussière.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Peut varier +/- %1 howler(s) par entrée.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Peut varier +/- %1 howloshi(s) par entrée.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -3555,10 +3555,10 @@ Pour plus de précisions sur cette console, tapez %6.
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
         <translation type="unfinished">Indiquer des frais personnalisés par Ko (1 000 octets) de la taille virtuelle de la transaction.
 
-Note : Les frais étant calculés par octet, un taux de frais de « 100 howlers par Kov » pour une transaction d’une taille de 500 octets (la moitié de 1 Kov) donneront des frais de seulement 50 howlers.</translation>
+Note : Les frais étant calculés par octet, un taux de frais de « 100 howloshis par Kov » pour une transaction d’une taille de 500 octets (la moitié de 1 Kov) donneront des frais de seulement 50 howloshis.</translation>
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for koyotecoin transactions than the network can process.</source>

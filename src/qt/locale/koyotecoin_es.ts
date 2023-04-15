@@ -1785,8 +1785,8 @@ No es posible restaurar la copia de seguridad del monedero.</translation>
         <translation type="unfinished">Esta etiqueta se vuelve roja si algún receptor recibe un importe inferior al umbral actual establecido para el polvo.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 howler(s) per input.</source>
-        <translation type="unfinished">Puede variar en +/- %1 howler(s) por entrada.</translation>
+        <source>Can vary +/- %1 howloshi(s) per input.</source>
+        <translation type="unfinished">Puede variar en +/- %1 howloshi(s) por entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -3656,10 +3656,10 @@ Escribe %5 para ver un resumen de los comandos disponibles. Para más informaci�
     <message>
         <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
 
-Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howlers per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howlers.</source>
+Note:  Since the fee is calculated on a per-byte basis, a fee rate of "100 howloshis per kvB" for a transaction size of 500 virtual bytes (half of 1 kvB) would ultimately yield a fee of only 50 howloshis.</source>
         <translation type="unfinished">Especifica una comisión personalizada por kB (1.000 bytes) del tamaño virtual de la transacción.
 
-Nota: Dado que la comisión se calcula por cada byte, una tasa de «100 howlers por kvB» para una transacción de 500 bytes virtuales (la mitad de 1 kvB), supondría finalmente una comisión de sólo 50 howlers.</translation>
+Nota: Dado que la comisión se calcula por cada byte, una tasa de «100 howloshis por kvB» para una transacción de 500 bytes virtuales (la mitad de 1 kvB), supondría finalmente una comisión de sólo 50 howloshis.</translation>
     </message>
     <message>
         <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for koyotecoin transactions than the network can process.</source>

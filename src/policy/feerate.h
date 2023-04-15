@@ -15,7 +15,7 @@
 #include <string>
 #include <type_traits>
 
-const std::string CURRENCY_UNIT = "KYC"; // One formatted unit
+const std::string CURRENCY_UNIT = "KYC";  // One formatted unit
 const std::string CURRENCY_ATOM = "howl"; // One indivisible minimum value unit
 
 /* Used to determine type of fee estimation requested */
@@ -24,44 +24,45 @@ enum class FeeEstimateMode {
     ECONOMICAL,   //!< Force estimateSmartFee to use non-conservative estimates
     CONSERVATIVE, //!< Force estimateSmartFee to use conservative estimates
     KYC_KVB,      //!< Use KYC/kvB fee rate unit
-    HOWL_VB,       //!< Use howl/vB fee rate unit
+    HOWL_VB,      //!< Use howl/vB fee rate unit
 };
 
 /**
- * Fee rate in howlers per kilovirtualbyte: CAmount / kvB
+ * Fee rate in howloshis per kilovirtualbyte: CAmount / kvB
  */
 class CFeeRate
 {
 private:
-    /** Fee rate in howl/kvB (howlers per 1000 virtualbytes) */
+    /** Fee rate in howl/kvB (howloshis per 1000 virtualbytes) */
     CAmount nHowloshisPerK;
 
 public:
-    /** Fee rate of 0 howlers per kvB */
-    CFeeRate() : nHowloshisPerK(0) { }
-    template<typename I>
-    explicit CFeeRate(const I _nHowloshisPerK): nHowloshisPerK(_nHowloshisPerK) {
+    /** Fee rate of 0 howloshis per kvB */
+    CFeeRate() : nHowloshisPerK(0) {}
+    template <typename I>
+    explicit CFeeRate(const I _nHowloshisPerK) : nHowloshisPerK(_nHowloshisPerK)
+    {
         // We've previously had bugs creep in from silent double->int conversion...
         static_assert(std::is_integral<I>::value, "CFeeRate should be used without floats");
     }
 
     /**
-     * Construct a fee rate from a fee in howlers and a vsize in vB.
+     * Construct a fee rate from a fee in howloshis and a vsize in vB.
      *
-     * param@[in]   nFeePaid    The fee paid by a transaction, in howlers
+     * param@[in]   nFeePaid    The fee paid by a transaction, in howloshis
      * param@[in]   num_bytes   The vsize of a transaction, in vbytes
      */
     CFeeRate(const CAmount& nFeePaid, uint32_t num_bytes);
 
     /**
-     * Return the fee in howlers for the given vsize in vbytes.
-     * If the calculated fee would have fractional howlers, then the
-     * returned fee will always be rounded up to the nearest howler.
+     * Return the fee in howloshis for the given vsize in vbytes.
+     * If the calculated fee would have fractional howloshis, then the
+     * returned fee will always be rounded up to the nearest howloshi.
      */
     CAmount GetFee(uint32_t num_bytes) const;
 
     /**
-     * Return the fee in howlers for a vsize of 1000 vbytes
+     * Return the fee in howloshis for a vsize of 1000 vbytes
      */
     CAmount GetFeePerK() const { return GetFee(1000); }
     friend bool operator<(const CFeeRate& a, const CFeeRate& b) { return a.nHowloshisPerK < b.nHowloshisPerK; }
@@ -70,7 +71,11 @@ public:
     friend bool operator<=(const CFeeRate& a, const CFeeRate& b) { return a.nHowloshisPerK <= b.nHowloshisPerK; }
     friend bool operator>=(const CFeeRate& a, const CFeeRate& b) { return a.nHowloshisPerK >= b.nHowloshisPerK; }
     friend bool operator!=(const CFeeRate& a, const CFeeRate& b) { return a.nHowloshisPerK != b.nHowloshisPerK; }
-    CFeeRate& operator+=(const CFeeRate& a) { nHowloshisPerK += a.nHowloshisPerK; return *this; }
+    CFeeRate& operator+=(const CFeeRate& a)
+    {
+        nHowloshisPerK += a.nHowloshisPerK;
+        return *this;
+    }
     std::string ToString(const FeeEstimateMode& fee_estimate_mode = FeeEstimateMode::KYC_KVB) const;
 
     SERIALIZE_METHODS(CFeeRate, obj) { READWRITE(obj.nHowloshisPerK); }
