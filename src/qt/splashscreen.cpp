@@ -87,20 +87,24 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     titleTextWidth = GUIUtil::TextWidth(fm, titleText);
     pixPaint.drawText(pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight, paddingTop, titleText);
 
-    pixPaint.setFont(QFont(font, 20 * fontFactor));
+    QFont boldFontVersion = QFont(font, 25 * fontFactor);
+    boldFontVersion.setWeight(QFont::Bold);
+    pixPaint.setFont(boldFontVersion);
 
     // if the version string is too long, reduce size
     fm = pixPaint.fontMetrics();
     int versionTextWidth = GUIUtil::TextWidth(fm, versionText);
     if (versionTextWidth > titleTextWidth + paddingRight - 10) {
-        pixPaint.setFont(QFont(font, 15 * fontFactor));
+        QFont boldFontVersionSmall = QFont(font, 15 * fontFactor);
+        boldFontVersionSmall.setWeight(QFont::Bold);
+        pixPaint.setFont(boldFontVersionSmall);
         titleVersionVSpace -= 5;
     }
     pixPaint.drawText(pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight + 2, paddingTop + titleVersionVSpace, versionText);
 
     // draw copyright stuff
     {
-        QFont boldFontCopyright = QFont(font, 15 * fontFactor);
+        QFont boldFontCopyright = QFont(font, 10 * fontFactor);
         boldFontCopyright.setWeight(QFont::Bold);
         pixPaint.setFont(boldFontCopyright);
         const int x = pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight;
