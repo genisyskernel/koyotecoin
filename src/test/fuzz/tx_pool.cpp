@@ -149,7 +149,7 @@ FUZZ_TARGET_INIT(tx_pool_standard, initialize_tx_pool)
     outpoints_rbf = outpoints_supply;
 
     // The sum of the values of all spendable outpoints
-    constexpr CAmount SUPPLY_TOTAL{COINBASE_MATURITY * 50 * COIN};
+    constexpr CAmount SUPPLY_TOTAL{COINBASE_MATURITY * 25 * COIN};
 
     SetMempoolConstraints(*node.args, fuzzed_data_provider);
     CTxMemPool tx_pool_{MakeMempool(fuzzed_data_provider, node)};
@@ -229,7 +229,7 @@ FUZZ_TARGET_INIT(tx_pool_standard, initialize_tx_pool)
             const auto& txid = fuzzed_data_provider.ConsumeBool() ?
                                    tx->GetHash() :
                                    PickValue(fuzzed_data_provider, outpoints_rbf).hash;
-            const auto delta = fuzzed_data_provider.ConsumeIntegralInRange<CAmount>(-50 * COIN, +50 * COIN);
+            const auto delta = fuzzed_data_provider.ConsumeIntegralInRange<CAmount>(-25 * COIN, +25 * COIN);
             tx_pool.PrioritiseTransaction(txid, delta);
         }
 
@@ -243,7 +243,7 @@ FUZZ_TARGET_INIT(tx_pool_standard, initialize_tx_pool)
         // Make sure ProcessNewPackage on one transaction works.
         // The result is not guaranteed to be the same as what is returned by ATMP.
         const auto result_package = WITH_LOCK(::cs_main,
-                                    return ProcessNewPackage(chainstate, tx_pool, {tx}, true));
+                                              return ProcessNewPackage(chainstate, tx_pool, {tx}, true));
         // If something went wrong due to a package-specific policy, it might not return a
         // validation result for the transaction.
         if (result_package.m_state.GetResult() != PackageValidationResult::PCKG_POLICY) {
@@ -343,7 +343,7 @@ FUZZ_TARGET_INIT(tx_pool, initialize_tx_pool)
             const auto& txid = fuzzed_data_provider.ConsumeBool() ?
                                    mut_tx.GetHash() :
                                    PickValue(fuzzed_data_provider, txids);
-            const auto delta = fuzzed_data_provider.ConsumeIntegralInRange<CAmount>(-50 * COIN, +50 * COIN);
+            const auto delta = fuzzed_data_provider.ConsumeIntegralInRange<CAmount>(-25 * COIN, +25 * COIN);
             tx_pool.PrioritiseTransaction(txid, delta);
         }
 
