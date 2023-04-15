@@ -82,9 +82,9 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
         fontFactor = fontFactor * 176 / titleTextWidth;
     }
 
-    QFont FontTitle = QFont(font, 35 * fontFactor)
-                          FontTitle.setWeight(QFont::Bold)
-                              pixPaint.setFont(FontTitle);
+    QFont FontTitle = QFont(font, 35 * fontFactor);
+    FontTitle.setWeight(QFont::Bold);
+    pixPaint.setFont(FontTitle);
     fm = pixPaint.fontMetrics();
     titleTextWidth = GUIUtil::TextWidth(fm, titleText);
     pixPaint.drawText(pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight, paddingTop, titleText);
