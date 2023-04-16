@@ -80,7 +80,7 @@ std::string FormatSubVersion(const std::string& name, int nClientVersion, const 
 std::string CopyrightHoldersSplashScreen(const std::string& strPrefix)
 {
     const auto copyright_devs = strprintf(_(COPYRIGHT_HOLDERS).translated, COPYRIGHT_HOLDERS_SUBSTITUTION);
-    std::string strCopyrightHolders = strPrefix + copyright_devs;
+    std::string strCopyrightHolders = "\n" + strPrefix + "The Koyotecoin Core";
 
     // Make sure Koyotecoin Core copyright is not removed by accident
     if (copyright_devs.find("Koyotecoin Core") == std::string::npos) {
