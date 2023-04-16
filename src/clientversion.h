@@ -10,7 +10,7 @@
 
 #if defined(HAVE_CONFIG_H)
 #include <config/koyotecoin-config.h>
-#endif //HAVE_CONFIG_H
+#endif // HAVE_CONFIG_H
 
 // Check that required client information is defined
 #if !defined(CLIENT_VERSION_MAJOR) || !defined(CLIENT_VERSION_MINOR) || !defined(CLIENT_VERSION_BUILD) || !defined(CLIENT_VERSION_IS_RELEASE) || !defined(COPYRIGHT_YEAR)
@@ -18,7 +18,7 @@
 #endif
 
 //! Copyright string used in Windows .rc files
-#define COPYRIGHT_STR "2009-" STRINGIZE(COPYRIGHT_YEAR) " " COPYRIGHT_HOLDERS_FINAL
+#define COPYRIGHT_STR "2023-" STRINGIZE(COPYRIGHT_YEAR) " " COPYRIGHT_HOLDERS_FINAL
 
 /**
  * koyotecoind-res.rc includes this file, but it cannot cope with real c++ code.
@@ -32,9 +32,7 @@
 #include <vector>
 
 static const int CLIENT_VERSION =
-                             10000 * CLIENT_VERSION_MAJOR
-                         +     100 * CLIENT_VERSION_MINOR
-                         +       1 * CLIENT_VERSION_BUILD;
+    10000 * CLIENT_VERSION_MAJOR + 100 * CLIENT_VERSION_MINOR + 1 * CLIENT_VERSION_BUILD;
 
 extern const std::string CLIENT_NAME;
 
