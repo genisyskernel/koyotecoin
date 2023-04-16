@@ -32,7 +32,7 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     : QWidget(), curAlignment(0)
 {
     // set reference point, paddings
-    int paddingRight = 100;
+    int paddingRight = 30;
     int paddingTop = 50;
     int titleVersionVSpace = 20;
     int titleCopyrightVSpace = 45;
@@ -97,7 +97,6 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     int versionTextWidth = GUIUtil::TextWidth(fm, versionText);
     if (versionTextWidth > titleTextWidth + paddingRight - 10) {
         QFont FontVersionSmall = QFont(font, 15 * fontFactor);
-        ;
         pixPaint.setFont(FontVersionSmall);
         titleVersionVSpace -= 5;
     }
@@ -105,7 +104,7 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
 
     // draw copyright stuff
     {
-        QFont boldFontCopyright = QFont(font, 10 * fontFactor);
+        QFont boldFontCopyright = QFont(font, 15 * fontFactor);
         boldFontCopyright.setWeight(QFont::Bold);
         pixPaint.setFont(boldFontCopyright);
         const int x = pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight;
