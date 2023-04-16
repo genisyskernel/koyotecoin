@@ -34,8 +34,8 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     // set reference point, paddings
     int paddingRight = 30;
     int paddingTop = 50;
-    int titleVersionVSpace = 20;
-    int titleCopyrightVSpace = 45;
+    int titleVersionVSpace = 25;
+    int titleCopyrightVSpace = 50;
 
     float fontFactor = 1.0;
     float devicePixelRatio = 1.0;
@@ -110,7 +110,7 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
         const int x = pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight;
         const int y = paddingTop + titleCopyrightVSpace;
         QRect copyrightRect(x, y, pixmap.width() - x - paddingRight, pixmap.height() - y);
-        pixPaint.drawText(copyrightRect, Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, copyrightText);
+        pixPaint.drawText(copyrightRect, Qt::AlignLeft | Qt::AlignTop | Qt::TextSingleLine, copyrightText);
     }
 
     // draw additional text if special network
