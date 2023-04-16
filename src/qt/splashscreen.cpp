@@ -34,8 +34,8 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
     // set reference point, paddings
     int paddingRight = 50;
     int paddingTop = 50;
-    int titleVersionVSpace = 17;
-    int titleCopyrightVSpace = 40;
+    int titleVersionVSpace = 20;
+    int titleCopyrightVSpace = 45;
 
     float fontFactor = 1.0;
     float devicePixelRatio = 1.0;
@@ -105,7 +105,7 @@ SplashScreen::SplashScreen(const NetworkStyle* networkStyle)
 
     // draw copyright stuff
     {
-        QFont boldFontCopyright = QFont(font, 12 * fontFactor);
+        QFont boldFontCopyright = QFont(font, 10 * fontFactor);
         boldFontCopyright.setWeight(QFont::Bold);
         pixPaint.setFont(boldFontCopyright);
         const int x = pixmap.width() / devicePixelRatio - titleTextWidth - paddingRight;
