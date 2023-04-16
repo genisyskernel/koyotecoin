@@ -40,6 +40,7 @@ extern const std::string CLIENT_NAME;
 std::string FormatFullVersion();
 std::string FormatSubVersion(const std::string& name, int nClientVersion, const std::vector<std::string>& comments);
 
+std::string CopyrightHoldersSplashScreen(const std::string& strPrefix);
 std::string CopyrightHolders(const std::string& strPrefix);
 
 /** Returns licensing information (for -version) */
