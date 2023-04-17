@@ -97,6 +97,7 @@ Koyotecoin-Qt.app
 
 # Qt Creator
 Makefile.am.user
+*.ui.autosave
 
 # Unit-tests
 Makefile.test
