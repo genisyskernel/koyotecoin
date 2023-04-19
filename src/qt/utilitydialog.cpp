@@ -49,11 +49,11 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
         // Replace newlines with HTML breaks
         licenseInfoHTML.replace("\n", "<br>");
 
-        ui->aboutMessage->setTextFormat(Qt::RichText);
+        // ui->aboutMessage->setTextFormat(Qt::RichText);
         // ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
         ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
-        ui->aboutMessage->setWordWrap(true);
+        // ui->aboutMessage->setWordWrap(true);
         ui->helpMessage->setVisible(false);
     } else {
         setWindowTitle(tr("Command-line options"));
