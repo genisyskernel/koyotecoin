@@ -51,13 +51,14 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
     licenseInfoHTML.replace("\n", "<br>");
 
     // ui->aboutMessage->setTextFormat(Qt::RichText);
-    ui->aboutMessage->acceptRichText(True);
+    ui->aboutMessage->acceptRichText(true);
     // ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
     ui->aboutMessage->setText(version + "<br><br><br>" + licenseInfoHTML);
     //
-    QGroupBox groupBox(ui->aboutMessage->document());
-    groupBox.setFlat(true);
+    // Tests
+    // QGroupBox groupBox(ui->QDialog->document());
+    // groupBox.setFlat(true);
 
     // ui->aboutMessage->setWordWrap(true);
     // ui->helpMessage->setVisible(false);
