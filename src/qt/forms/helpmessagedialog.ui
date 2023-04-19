@@ -69,7 +69,7 @@ QGroupBox#groupBox {border:0;}</string>
            <number>20</number>
           </property>
           <property name="bottomMargin">
-           <number>40</number>
+           <number>35</number>
           </property>
           <item>
            <widget class="QLabel" name="aboutLogo">
@@ -176,7 +176,10 @@ QGroupBox#groupBox {border:0;}</string>
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">QTextEdit#aboutMessage { padding-left:10; padding-top:10; padding-bottom:10; padding-right:10}</string>
+             <string notr="true">QTextEdit#aboutMessage { padding-left:5; padding-top:5; padding-bottom:5; padding-right:5}</string>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
             </property>
             <property name="lineWidth">
              <number>1</number>
