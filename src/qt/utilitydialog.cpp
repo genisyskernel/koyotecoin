@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include <QCloseEvent>
+#include <QGroupBox>
 #include <QLabel>
 #include <QMainWindow>
 #include <QRegularExpression>
@@ -49,10 +50,14 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
     // Replace newlines with HTML breaks
     licenseInfoHTML.replace("\n", "<br>");
 
-    // ui->aboutMessage->setTextFormat(Qt::RichText);
+    ui->aboutMessage->setTextFormat(Qt::RichText);
     // ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
-    ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
+    ui->aboutMessage->setText(version + "<br><br><br>" + licenseInfoHTML);
+    //
+    QGroupBox groupBox(ui->HelpMessageDialog->document());
+    groupBox.setFlat(true);
+
     // ui->aboutMessage->setWordWrap(true);
     // ui->helpMessage->setVisible(false);
 

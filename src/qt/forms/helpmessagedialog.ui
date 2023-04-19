@@ -42,6 +42,9 @@
        <property name="title">
         <string/>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <property name="topMargin">
          <number>0</number>
@@ -130,6 +133,9 @@
        <property name="title">
         <string/>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <widget class="QTextEdit" name="aboutMessage">
@@ -138,6 +144,15 @@
             <width>16777215</width>
             <height>16777215</height>
            </size>
+          </property>
+          <property name="lineWidth">
+           <number>1</number>
+          </property>
+          <property name="lineWrapMode">
+           <enum>QTextEdit::WidgetWidth</enum>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -152,18 +167,21 @@
        <property name="title">
         <string/>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <property name="spacing">
          <number>10</number>
         </property>
         <property name="leftMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="topMargin">
          <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
