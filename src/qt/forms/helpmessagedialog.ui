@@ -162,6 +162,9 @@ QGroupBox#groupBox {border:0;}</string>
         <property name="spacing">
          <number>6</number>
         </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>

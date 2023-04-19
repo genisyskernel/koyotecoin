@@ -53,7 +53,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
     // ui->aboutMessage->setTextFormat(Qt::RichText);
     // ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
-    ui->aboutMessage->setText(version + "<br><br><br><br><br><br>" + licenseInfoHTML);
+    ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML + "<br><br><br>");
     //
     // Tests
     // QGroupBox groupBox(ui->QDialog->document());
