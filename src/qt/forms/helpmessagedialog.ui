@@ -215,7 +215,7 @@ QGroupBox#groupBox {border:0;}</string>
          <number>5</number>
         </property>
         <property name="rightMargin">
-         <number>9</number>
+         <number>0</number>
         </property>
         <property name="bottomMargin">
          <number>5</number>

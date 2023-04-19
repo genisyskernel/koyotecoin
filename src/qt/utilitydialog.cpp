@@ -36,7 +36,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
 {
     ui->setupUi(this);
 
-    QString version = QString{PACKAGE_NAME} + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
+    QString version = QString{PACKAGE_NAME} + " " + tr("version") + " " + "<br><br><br>" + QString::fromStdString(FormatFullVersion());
 
     // if (about) {
     setWindowTitle(tr("About %1").arg(PACKAGE_NAME));
@@ -53,7 +53,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
     // ui->aboutMessage->setTextFormat(Qt::RichText);
     // ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
-    ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML + "<br><br><br>");
+    ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
     //
     // Tests
     // QGroupBox groupBox(ui->QDialog->document());
