@@ -54,11 +54,11 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
         text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
         ui->aboutMessage->setText(version + "<br><br>" + licenseInfoHTML);
         // ui->aboutMessage->setWordWrap(true);
-        ui->helpMessage->setVisible(false);
+        // ui->helpMessage->setVisible(false);
     } else {
         setWindowTitle(tr("Command-line options"));
         QString header = "Usage:  koyotecoin-qt [command-line options]                     \n";
-        QTextCursor cursor(ui->helpMessage->document());
+        // QTextCursor cursor(ui->helpMessage->document());
         cursor.insertText(version);
         cursor.insertBlock();
         cursor.insertText(header);
@@ -98,7 +98,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
             }
         }
 
-        ui->helpMessage->moveCursor(QTextCursor::Start);
+        // ui->helpMessage->moveCursor(QTextCursor::Start);
         // ui->scrollArea->setVisible(false);
         ui->aboutLogo->setVisible(false);
     }
