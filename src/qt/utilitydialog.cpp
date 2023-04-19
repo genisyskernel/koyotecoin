@@ -55,7 +55,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget* parent, bool about) : QDialog(pare
     text = version + "\n" + QString::fromStdString(FormatParagraph(licenseInfo));
     ui->aboutMessage->setText(version + "<br><br><br>" + licenseInfoHTML);
     //
-    QGroupBox groupBox(ui->HelpMessageDialog->document());
+    QGroupBox groupBox(ui->aboutMessage->document());
     groupBox.setFlat(true);
 
     // ui->aboutMessage->setWordWrap(true);
